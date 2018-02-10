@@ -2,5 +2,5 @@ import XCTest
 @testable import FirebladeMathTests
 
 XCTMain([
-    testCase(FirebladeMathTests.allTests),
+    testCase(FirebladeMathTests.allTests)
 ])
