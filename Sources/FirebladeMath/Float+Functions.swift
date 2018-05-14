@@ -93,7 +93,7 @@ public func cosh(_ float: Float32) -> Float32 { return simd.coshf(float) }
 ///
 /// - Parameter radians: an angle in radians.
 /// - Returns:  the argument converted to degrees.
-//TODO:public func degrees(_ radians: Float32) -> Float32 { return radians * radToDeg.float }
+public func degrees(_ radians: Float32) -> Float32 { return radians * kRadiansToDegree32 }
 
 /// Computes the distance between the arguments.
 ///
@@ -101,7 +101,7 @@ public func cosh(_ float: Float32) -> Float32 { return simd.coshf(float) }
 ///   - x: a float argument.
 ///   - y: a float argument.
 /// - Returns: the distance between the arguments.
-public func distance(_ x: Float32, _ y: Float32) -> Float32 { return abs(x-y) }
+public func distance(_ x: Float32, _ y: Float32) -> Float32 { return abs(x - y) }
 
 /// Computes the dot product of the arguments.
 /// For scalar components `dot(x, y)` is equivalent to `x*y`.
@@ -109,7 +109,7 @@ public func distance(_ x: Float32, _ y: Float32) -> Float32 { return abs(x-y) }
 ///   - x: a float argument.
 ///   - y: a float argument.
 /// - Returns: the dot product of the arguments.
-public func dot(_ x: Float32, _ y: Float32) -> Float32 { return x*y }
+public func dot(_ x: Float32, _ y: Float32) -> Float32 { return x * y }
 
 ///  Computes the e (Euler's number, 2.7182818) raised to the given power arg.
 ///
@@ -137,7 +137,7 @@ public func exp2(_ power: Float32) -> Float32 { return simd.exp2f(power) }
 ///  ''n'' if dot(''i'', ''nref'') < 0.
 ///  ''-n'' otherwise.
 public func faceforward(n: Float32, i: Float32, nref: Float32) -> Float32 {
-	let dot: Float32 = i*nref
+	let dot: Float32 = i * nref
 	if dot < 0.0 {
 		return n
 	} else if isNaN(dot) {
@@ -247,8 +247,13 @@ public func mod(_ x: Float32, _ y: Float32) -> Float32 { return simd.fmodf(x, y)
 ///   NaN otherwise.
 public func normalize(_ x: Float32) -> Float32 {
 	// FIXME: is this the expected behaviour?
-	if x > 0 { return 1 } else if x < 0 { return -1 } else { return Float32.nan }
-
+	if x > 0 {
+        return 1
+    } else if x < 0 {
+        return -1
+    } else {
+        return Float32.nan
+    }
 }
 
 /// Computes the value of base raised to the power exponent.
@@ -269,7 +274,7 @@ public func pow2(_ exponent: Float32) -> Float32 { return simd.powf(2, exponent)
 ///
 /// - Parameter degrees: an angle (in degrees)
 /// - Returns: the argument converted to radians.
-//TODO:public func radians(_ degrees: Float32) -> Float32 { return degrees*degToRad.float }
+public func radians(_ degrees: Float32) -> Float32 { return degrees * kDegreeToRadians32 }
 
 /// Reflects the incident vector ''i'' with respect to the normal vector ''n''.
 /// This function is equivalent to `i - 2*dot(n, i)*n`.
@@ -278,7 +283,7 @@ public func pow2(_ exponent: Float32) -> Float32 { return simd.powf(2, exponent)
 ///   - i: the incident vector.
 ///   - n: the normal, must be normalized to achieve the desired result.
 /// - Returns: the reflection vector.
-public func reflect(i: Float32, n: Float32) -> Float32 { return i - 2*(n*i)*n }
+public func reflect(i: Float32, n: Float32) -> Float32 { return i - 2 * (n * i) * n }
 
 /// Refracts the incident vector ''i'' with respect to the normal vector ''n''
 /// using the ratio of indices of refraction ''eta''.
@@ -289,9 +294,13 @@ public func reflect(i: Float32, n: Float32) -> Float32 { return i - 2*(n*i)*n }
 ///   - eta: the ratio of indices of refration.
 /// - Returns: the refraction vector.
 public func refract(i: Float32, n: Float32, eta: Float32) -> Float32 {
-	let ni: Float32 = n*i
-	let k: Float32 = 1 - eta*eta*(1 - ni*ni)
-	if (k < 0) { return Float32(0.0) } else { return eta*i - (eta*ni + sqrt(k))*n }
+	let nTi: Float32 = n * i
+	let frac: Float32 = 1 - eta * eta * (1 - nTi * nTi)
+	if frac < 0 {
+        return Float32(0.0)
+    } else {
+        return eta * i - (eta * nTi + sqrt(frac)) * n
+    }
 }
 
 /// Computes the nearest integer value to arg (in floating-point format), rounding halfway cases away from zero, regardless of the current rounding mode.

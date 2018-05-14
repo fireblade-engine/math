@@ -94,7 +94,7 @@ public func cosh(_ double: Float64) -> Float64 { return simd.cosh(double) }
 ///
 /// - Parameter radians: an angle in radians.
 /// - Returns:  the argument converted to degrees.
-//TODO:public func degrees(_ radians: Float64) -> Float64 { return radians * radToDeg.double }
+public func degrees(_ radians: Float64) -> Float64 { return radians * kRadiansToDegree64 }
 
 /// Computes the distance between the arguments.
 ///
@@ -102,7 +102,7 @@ public func cosh(_ double: Float64) -> Float64 { return simd.cosh(double) }
 ///   - x: a double argument.
 ///   - y: a double argument.
 /// - Returns: the distance between the arguments.
-public func distance(_ x: Float64, _ y: Float64) -> Float64 { return abs(x-y) }
+public func distance(_ x: Float64, _ y: Float64) -> Float64 { return abs(x - y) }
 
 /// Computes the dot product of the arguments.
 /// For scalar components `dot(x, y)` is equivalent to `x*y`.
@@ -110,7 +110,7 @@ public func distance(_ x: Float64, _ y: Float64) -> Float64 { return abs(x-y) }
 ///   - x: a double argument.
 ///   - y: a double argument.
 /// - Returns: the dot product of the arguments.
-public func dot(_ x: Float64, _ y: Float64) -> Float64 { return x*y }
+public func dot(_ x: Float64, _ y: Float64) -> Float64 { return x * y }
 
 ///  Computes the e (Euler's number, 2.7182818) raised to the given power arg.
 ///
@@ -138,7 +138,7 @@ public func exp2(_ power: Float64) -> Float64 { return simd.exp2(power) }
 ///  ''n'' if dot(''i'', ''nref'') < 0.
 ///  ''-n'' otherwise.
 public func faceforward(n: Float64, i: Float64, nref: Float64) -> Float64 {
-	let dot: Float64 = i*nref
+	let dot: Float64 = i * nref
 	if dot < 0.0 {
 		return n
 	} else if isNaN(dot) {
@@ -248,7 +248,13 @@ public func mod(_ x: Float64, _ y: Float64) -> Float64 { return simd.fmod(x, y) 
 ///   NaN otherwise.
 public func normalize(_ x: Float64) -> Float64 {
 	// FIXME: is this the expected behaviour?
-	if x > 0 { return 1 } else if x < 0 { return -1 } else { return Float64.nan }
+	if x > 0 {
+        return 1
+    } else if x < 0 {
+        return -1
+    } else {
+        return Float64.nan
+    }
 
 }
 
@@ -270,7 +276,7 @@ public func pow2(_ exponent: Float64) -> Float64 { return simd.pow(2, exponent) 
 ///
 /// - Parameter degrees: an angle (in degrees)
 /// - Returns: the argument converted to radians.
-//TODO:public func radians(_ degrees: Float64) -> Float64 { return degrees*degToRad.double }
+public func radians(_ degrees: Float64) -> Float64 { return degrees * kDegreeToRadians64 }
 
 /// Reflects the incident vector ''i'' with respect to the normal vector ''n''.
 /// This function is equivalent to `i - 2*dot(n, i)*n`.
@@ -279,7 +285,7 @@ public func pow2(_ exponent: Float64) -> Float64 { return simd.pow(2, exponent) 
 ///   - i: the incident vector.
 ///   - n: the normal, must be normalized to achieve the desired result.
 /// - Returns: the reflection vector.
-public func reflect(i: Float64, n: Float64) -> Float64 { return i - 2*(n*i)*n }
+public func reflect(i: Float64, n: Float64) -> Float64 { return i - 2 * (n * i) * n }
 
 /// Refracts the incident vector ''i'' with respect to the normal vector ''n''
 /// using the ratio of indices of refraction ''eta''.
@@ -290,9 +296,13 @@ public func reflect(i: Float64, n: Float64) -> Float64 { return i - 2*(n*i)*n }
 ///   - eta: the ratio of indices of refration.
 /// - Returns: the refraction vector.
 public func refract(i: Float64, n: Float64, eta: Float64) -> Float64 {
-	let ni: Float64 = n*i
-	let k: Float64 = 1 - eta*eta*(1 - ni*ni)
-	if (k < 0) { return Float64(0.0) } else { return eta*i - (eta*ni + sqrt(k))*n }
+	let nTi: Float64 = n * i
+	let frac: Float64 = 1 - eta * eta * (1 - nTi * nTi)
+	if frac < 0 {
+        return Float64(0.0)
+    } else {
+        return eta * i - (eta * nTi + sqrt(frac)) * n
+    }
 }
 
 /// Computes the nearest integer value to arg (in floating-point format), rounding halfway cases away from zero, regardless of the current rounding mode.
