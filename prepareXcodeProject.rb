@@ -16,7 +16,7 @@
 
 require 'xcodeproj'
 
-path_to_project = "FirebladeMath.xcodeproj"
+path_to_project = Dir.glob('*.xcodeproj').first
 
 project = Xcodeproj::Project.open(path_to_project)
 

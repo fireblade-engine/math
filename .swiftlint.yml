@@ -35,7 +35,7 @@ opt_in_rules:
   - joined_default_parameter
   - let_var_whitespace
   - literal_expression_end_indentation
-  - lower_acl_than_parent
+  #- lower_acl_than_parent
   - multiline_arguments
   - multiline_parameters
   - nimble_operator
