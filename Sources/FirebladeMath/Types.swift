@@ -24,6 +24,8 @@ public typealias Vec4f = float4
 public typealias Mat3x3f = float3x3
 public typealias Mat4x4f = float4x4
 
+public typealias Quat4f = vector_float4
+
 public typealias AngleDegree = Float
 public typealias AngleRadians = Float
 
