@@ -30,13 +30,13 @@ extension Vec4f: VectorBase {
 public protocol MatrixBase {
     associatedtype Matrix
 
-    static var identitiy: Matrix { get }
+    static var identity: Matrix { get }
 }
 
 extension Mat3x3f: MatrixBase {
-    public static let identitiy: Mat3x3f = Mat3x3f(1)
+    public static let identity: Mat3x3f = Mat3x3f(1)
 }
 
 extension Mat4x4f: MatrixBase {
-    public static let identitiy: Mat4x4f = Mat4x4f(1)
+    public static let identity: Mat4x4f = Mat4x4f(1)
 }

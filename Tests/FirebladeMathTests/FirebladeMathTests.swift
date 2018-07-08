@@ -1,5 +1,5 @@
-import XCTest
 @testable import FirebladeMath
+import XCTest
 
 class FirebladeMathTests: XCTestCase {
 
@@ -7,6 +7,6 @@ class FirebladeMathTests: XCTestCase {
 
 		let resMat: Mat4x4f = Mat4x4f(diagonal: Vec4f(2)) * Mat4x4f(diagonal: Vec4f(3))
 
-		XCTAssert(resMat != Mat4x4f.init(diagonal: Vec4f(1)))
+		XCTAssert(resMat != Mat4x4f(diagonal: Vec4f(1)))
 	}
 }
