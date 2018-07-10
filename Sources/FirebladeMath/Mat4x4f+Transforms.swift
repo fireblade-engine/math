@@ -101,6 +101,25 @@ private extension Mat4x4f {
 
         return mat
     }
+
+    init(position: Vec3f, scale: Vec3f, orientation: Quat4f) {
+        // Ordering:
+        //    1. Scale
+        //    2. Rotate
+        //    3. Translate
+
+        let rot: Mat3x3f = simd_matrix3x3(orientation)
+        var mat: Mat4x4f = Mat4x4f.identity
+
+        mat[0][0] = scale.x * rot[0][0]; mat[0][1] = scale.y * rot[0][1]; mat[0][2] = scale.z * rot[0][2]; mat[0][3] = position.x
+        mat[1][0] = scale.x * rot[1][0]; mat[1][1] = scale.y * rot[1][1]; mat[1][2] = scale.z * rot[1][2]; mat[1][3] = position.y
+        mat[2][0] = scale.x * rot[2][0]; mat[2][1] = scale.y * rot[2][1]; mat[2][2] = scale.z * rot[2][2]; mat[2][3] = position.z
+
+        // No projection term
+        mat[3][0] = 0; mat[3][1] = 0; mat[3][2] = 0; mat[3][3] = 1
+
+        self = mat
+    }
 }
 
 // FIXME: --- refactor
