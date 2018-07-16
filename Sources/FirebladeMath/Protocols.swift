@@ -40,3 +40,14 @@ extension Mat3x3f: MatrixBase {
 extension Mat4x4f: MatrixBase {
     public static let identity: Mat4x4f = Mat4x4f(1)
 }
+
+// MARK: - Quaternion base
+public protocol QuaternionBase {
+    associatedtype Quaternion
+
+    static var identity: Quaternion { get }
+}
+
+extension Quat4f: QuaternionBase {
+    public static let identity: Quat4f = Quat4f(0, 0, 0, 1)
+}
