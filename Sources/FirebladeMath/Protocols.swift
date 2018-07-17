@@ -25,6 +25,12 @@ extension Vec4f: VectorBase {
     public static let zero: Vec4f = Vec4f(0)
 }
 
+public extension Vec3f {
+    static let axisX: Vec3f = [1, 0, 0]
+    static let axisY: Vec3f = [0, 1, 0]
+    static let axisZ: Vec3f = [0, 0, 1]
+}
+
 // MARK: - Matrix Base
 
 public protocol MatrixBase {
