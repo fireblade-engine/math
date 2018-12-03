@@ -35,6 +35,27 @@ public extension Mat4x4f {
         }
     }
 
+    /// Constructs a view matrix that is positioned at `eye` and looks toward `center`,
+    /// with the `up` pointing up.
+    ///
+    /// - Parameters:
+    ///   - eye: eye position
+    ///   - center: look point
+    ///   - up: up vector
+    /// - Returns: view matrix
+    static func lookAt(eye: Vec3f, center: Vec3f, up: Vec3f) -> Mat4x4f {
+
+        let z: Vec3f = normalize(eye - center)
+        let x: Vec3f = normalize(cross(up, z))
+        let y: Vec3f = cross(z, x)
+        let t: Vec3f = Vec3f(-dot(x, eye), -dot(y, eye), -dot(z, eye))
+
+        return Mat4x4f(columns: (Vec4f(x.x, y.x, z.x, 0.0),
+                                 Vec4f(x.y, y.y, z.y, 0.0),
+                                 Vec4f(x.z, y.z, z.z, 0.0),
+                                 Vec4f(t.x, t.y, t.z, 1.0)))
+    }
+
     static func rotation(radians: Float, axis: Vec3f) -> Mat4x4f {
         let unitAxis: Vec3f = normalize(axis)
         let cost: Float = cos(radians)
@@ -47,13 +68,6 @@ public extension Mat4x4f {
                                  Vec4f(x * y * cosi - z * sint, cost + y * y * cosi, z * y * cosi + x * sint, 0),
                                  Vec4f(x * z * cosi + y * sint, y * z * cosi - x * sint, cost + z * z * cosi, 0),
                                  Vec4f(                  0, 0, 0, 1)))
-    }
-
-    static func translation(_ position: Vec3f) -> Mat4x4f {
-        return Mat4x4f(columns: (Vec4f(1, 0, 0, 0),
-                                 Vec4f(0, 1, 0, 0),
-                                 Vec4f(0, 0, 1, 0),
-                                 Vec4f(position.x, position.y, position.z, 1)))
     }
 
     init(position: Vec3f, scale: Vec3f, orientation: Quat4f) {
@@ -71,6 +85,10 @@ public extension Mat4x4f {
         mat[3][0] = position.x; mat[3][1] = position.y; mat[3][2] = position.z; mat[3][3] = 1
 
         self = mat
+    }
+
+    var translation: Vec3f {
+        return Vec3f(columns.3.x, columns.3.y, columns.3.z)
     }
 }
 
