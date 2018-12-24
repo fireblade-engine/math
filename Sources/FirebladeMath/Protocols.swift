@@ -11,18 +11,52 @@ public protocol VectorBase {
     associatedtype Vector
 
     static var zero: Vector { get }
+    static var one: Vector { get }
+}
+
+extension Vec2u: VectorBase {
+    public static let zero = Vec2u(0)
+    public static let one = Vec2u(1)
+}
+
+extension Vec3u: VectorBase {
+    public static let zero = Vec3u(0)
+    public static let one = Vec3u(1)
+}
+
+extension Vec4u: VectorBase {
+    public static let zero = Vec4u(0)
+    public static let one = Vec4u(1)
+}
+
+extension Vec2i: VectorBase {
+    public static let zero = Vec2i(0)
+    public static let one = Vec2i(1)
+}
+
+extension Vec3i: VectorBase {
+    public static let zero = Vec3i(0)
+    public static let one = Vec3i(1)
+}
+
+extension Vec4i: VectorBase {
+    public static let zero = Vec4i(0)
+    public static let one = Vec4i(1)
 }
 
 extension Vec2f: VectorBase {
     public static let zero = Vec2f(0)
+    public static let one = Vec2f(1)
 }
 
 extension Vec3f: VectorBase {
     public static let zero = Vec3f(0)
+    public static let one = Vec3f(1)
 }
 
 extension Vec4f: VectorBase {
     public static let zero = Vec4f(0)
+    public static let one = Vec4f(1)
 }
 
 public extension Vec3f {

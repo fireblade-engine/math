@@ -6,7 +6,7 @@
 //  Copyright © 2018 Fireblade. All rights reserved.
 //
 
-import simd
+@_exported import simd
 
 public let kCoordinateSystem: CoordinateSystem = .rightHanded
 public let kDepthClipSpace: DepthClipSpaceCoordinates = .zeroToOne
@@ -17,10 +17,19 @@ public let kDegreeToRadians64 = Float64.pi / 180.0
 public let kRadiansToDegree32: Float32 = 180.0 / Float32.pi
 public let kRadiansToDegree64: Float64 = 180.0 / Float64.pi
 
+public typealias Vec2u = uint2
+public typealias Vec3u = uint3
+public typealias Vec4u = uint4
+
+public typealias Vec2i = int2
+public typealias Vec3i = int3
+public typealias Vec4i = int4
+
 public typealias Vec2f = float2
 public typealias Vec3f = float3
 public typealias Vec4f = float4
 
+public typealias Mat2x2f = float2x2
 public typealias Mat3x3f = float3x3
 public typealias Mat4x4f = float4x4
 
