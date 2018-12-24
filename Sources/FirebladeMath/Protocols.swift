@@ -14,15 +14,15 @@ public protocol VectorBase {
 }
 
 extension Vec2f: VectorBase {
-    public static let zero: Vec2f = Vec2f(0)
+    public static let zero = Vec2f(0)
 }
 
 extension Vec3f: VectorBase {
-    public static let zero: Vec3f = Vec3f(0)
+    public static let zero = Vec3f(0)
 }
 
 extension Vec4f: VectorBase {
-    public static let zero: Vec4f = Vec4f(0)
+    public static let zero = Vec4f(0)
 }
 
 public extension Vec3f {
@@ -40,11 +40,11 @@ public protocol MatrixBase {
 }
 
 extension Mat3x3f: MatrixBase {
-    public static let identity: Mat3x3f = Mat3x3f(1)
+    public static let identity = Mat3x3f(1)
 }
 
 extension Mat4x4f: MatrixBase {
-    public static let identity: Mat4x4f = Mat4x4f(1)
+    public static let identity = Mat4x4f(1)
 }
 
 // MARK: - Quaternion base
@@ -55,5 +55,5 @@ public protocol QuaternionBase {
 }
 
 extension Quat4f: QuaternionBase {
-    public static let identity: Quat4f = Quat4f(0, 0, 0, 1)
+    public static let identity = Quat4f(0, 0, 0, 1)
 }

@@ -255,7 +255,6 @@ public func normalize(_ x: Float64) -> Float64 {
     } else {
         return Float64.nan
     }
-
 }
 
 /// Computes the value of base raised to the power exponent.

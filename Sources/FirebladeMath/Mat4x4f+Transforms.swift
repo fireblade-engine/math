@@ -10,7 +10,6 @@ import simd
 
 // SEE: https://github.com/g-truc/glm/blob/master/glm/gtc/matrix_transform.inl
 public extension Mat4x4f {
-
     /// Creates a perspective projection matrix
     ///
     /// - Parameters:
@@ -30,11 +29,12 @@ public extension Mat4x4f {
         switch kCoordinateSystem {
         case .leftHanded:
             return perspectiveProjectionLH(fovy: fovy, aspect: aspect, zNear: zNear, zFar: zFar)
+
         case .rightHanded:
             return perspectiveProjectionRH(fovy: fovy, aspect: aspect, zNear: zNear, zFar: zFar)
         }
     }
-
+    // swiftlint:disable identifier_name
     /// Constructs a view matrix that is positioned at `eye` and looks toward `center`,
     /// with the `up` pointing up.
     ///
@@ -44,16 +44,20 @@ public extension Mat4x4f {
     ///   - up: up vector
     /// - Returns: view matrix
     static func lookAt(eye: Vec3f, center: Vec3f, up: Vec3f) -> Mat4x4f {
-
         let z: Vec3f = normalize(eye - center)
         let x: Vec3f = normalize(cross(up, z))
         let y: Vec3f = cross(z, x)
-        let t: Vec3f = Vec3f(-dot(x, eye), -dot(y, eye), -dot(z, eye))
+        let t = Vec3f(-dot(x, eye), -dot(y, eye), -dot(z, eye))
 
-        return Mat4x4f(columns: (Vec4f(x.x, y.x, z.x, 0.0),
-                                 Vec4f(x.y, y.y, z.y, 0.0),
-                                 Vec4f(x.z, y.z, z.z, 0.0),
-                                 Vec4f(t.x, t.y, t.z, 1.0)))
+        return Mat4x4f(
+            columns:
+            (
+                Vec4f(x.x, y.x, z.x, 0.0),
+                Vec4f(x.y, y.y, z.y, 0.0),
+                Vec4f(x.z, y.z, z.z, 0.0),
+                Vec4f(t.x, t.y, t.z, 1.0)
+            )
+        )
     }
 
     static func rotation(radians: Float, axis: Vec3f) -> Mat4x4f {
@@ -64,10 +68,15 @@ public extension Mat4x4f {
         let x: Float = unitAxis.x
         let y: Float = unitAxis.y
         let z: Float = unitAxis.z
-        return Mat4x4f(columns: (Vec4f(    cost + x * x * cosi, y * x * cosi + z * sint, z * x * cosi - y * sint, 0),
-                                 Vec4f(x * y * cosi - z * sint, cost + y * y * cosi, z * y * cosi + x * sint, 0),
-                                 Vec4f(x * z * cosi + y * sint, y * z * cosi - x * sint, cost + z * z * cosi, 0),
-                                 Vec4f(                  0, 0, 0, 1)))
+        return Mat4x4f(
+            columns:
+            (
+                Vec4f(    cost + x * x * cosi, y * x * cosi + z * sint, z * x * cosi - y * sint, 0),
+                Vec4f(x * y * cosi - z * sint, cost + y * y * cosi, z * y * cosi + x * sint, 0),
+                Vec4f(x * z * cosi + y * sint, y * z * cosi - x * sint, cost + z * z * cosi, 0),
+                Vec4f(                  0, 0, 0, 1)
+            )
+        )
     }
 
     init(position: Vec3f, scale: Vec3f, orientation: Quat4f) {
@@ -77,7 +86,7 @@ public extension Mat4x4f {
         //    3. Translate
 
         let rot: Mat3x3f = simd_matrix3x3(orientation)
-        var mat: Mat4x4f = Mat4x4f.identity
+        var mat = Mat4x4f.identity
 
         mat[0][0] = scale.x * rot[0][0]; mat[0][1] = scale.y * rot[0][1]; mat[0][2] = scale.z * rot[0][2]; mat[0][3] = 0
         mat[1][0] = scale.x * rot[1][0]; mat[1][1] = scale.y * rot[1][1]; mat[1][2] = scale.z * rot[1][2]; mat[1][3] = 0
@@ -96,7 +105,7 @@ public extension Mat4x4f {
 
 private extension Mat4x4f {
     static func perspectiveProjectionLH(fovy: AngleRadians, aspect: Float, zNear: Float, zFar: Float) -> Mat4x4f {
-        var mat: Mat4x4f = Mat4x4f(0.0)
+        var mat = Mat4x4f(0.0)
 
         let tanHalfFovy: Float = tan(fovy * 0.5)
 
@@ -108,6 +117,7 @@ private extension Mat4x4f {
         case .zeroToOne:
             mat[2][2] = zFar / (zFar - zNear)
             mat[3][2] = -(zFar * zNear) / (zFar - zNear)
+
         case .negOneToOne:
             mat[2][2] = (zFar + zNear) / (zFar - zNear)
             mat[3][2] = -(zFar * zNear * 2.0) / (zFar - zNear)
@@ -117,7 +127,7 @@ private extension Mat4x4f {
     }
 
     static func perspectiveProjectionRH(fovy: AngleRadians, aspect: Float, zNear: Float, zFar: Float) -> Mat4x4f {
-        var mat: Mat4x4f = Mat4x4f(0.0)
+        var mat = Mat4x4f(0.0)
 
         let tanHalfFovy: Float = tan(fovy * 0.5)
 
@@ -129,6 +139,7 @@ private extension Mat4x4f {
         case .zeroToOne:
             mat[2][2] = zFar / (zNear - zFar)
             mat[3][2] = -(zFar * zNear) / (zFar - zNear)
+
         case .negOneToOne:
             mat[2][2] = -(zFar + zNear) / (zFar - zNear)
             mat[3][2] = -(zFar * zNear * 2.0) / (zFar - zNear)
@@ -136,7 +147,6 @@ private extension Mat4x4f {
 
         return mat
     }
-
 }
 
 // FIXME: --- refactor
