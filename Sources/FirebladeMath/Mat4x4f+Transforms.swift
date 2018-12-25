@@ -96,8 +96,36 @@ public extension Mat4x4f {
         self = mat
     }
 
-    var translation: Vec3f {
-        return Vec3f(columns.3.x, columns.3.y, columns.3.z)
+    @inlinable var position: Vec3f {
+        get {
+            return Vec3f(columns.3.x, columns.3.y, columns.3.z)
+        }
+        set {
+            columns.3.x = newValue.x
+            columns.3.y = newValue.y
+            columns.3.z = newValue.z
+        }
+    }
+
+    @inlinable var scale: Vec3f {
+        get {
+            let sx: Float = length(float3(columns.0.x, columns.0.y, columns.0.z))
+            let sy: Float = length(float3(columns.1.x, columns.1.y, columns.1.z))
+            let sz: Float = length(float3(columns.2.x, columns.2.y, columns.2.z))
+            return Vec3f(sx, sy, sz)
+        }
+        set {
+            self = Mat4x4f(position: position, scale: newValue, orientation: orientation)
+        }
+    }
+
+    @inlinable var orientation: Quat4f {
+        get {
+            return simd_quaternion(self)
+        }
+        set {
+            self = Mat4x4f(position: position, scale: scale, orientation: newValue)
+        }
     }
 }
 
