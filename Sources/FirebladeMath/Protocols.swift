@@ -8,48 +8,48 @@
 // MARK: - Vector Base
 
 public extension Vec2u {
-    static let zero = Vec2u(0)
-    static let one = Vec2u(1)
+    static let zero = Vec2u(repeating: 0)
+    static let one = Vec2u(repeating: 1)
 }
 
 public extension Vec3u {
-    static let zero = Vec3u(0)
-    static let one = Vec3u(1)
+    static let zero = Vec3u(repeating: 0)
+    static let one = Vec3u(repeating: 1)
 }
 
 public extension Vec4u {
-    static let zero = Vec4u(0)
-    static let one = Vec4u(1)
+    static let zero = Vec4u(repeating: 0)
+    static let one = Vec4u(repeating: 1)
 }
 
 public extension Vec2i {
-    static let zero = Vec2i(0)
-    static let one = Vec2i(1)
+    static let zero = Vec2i(repeating: 0)
+    static let one = Vec2i(repeating: 1)
 }
 
 public extension Vec3i {
-    static let zero = Vec3i(0)
-    static let one = Vec3i(1)
+    static let zero = Vec3i(repeating: 0)
+    static let one = Vec3i(repeating: 1)
 }
 
 public extension Vec4i {
-    static let zero = Vec4i(0)
-    static let one = Vec4i(1)
+    static let zero = Vec4i(repeating: 0)
+    static let one = Vec4i(repeating: 1)
 }
 
 public extension Vec2f {
-    static let zero = Vec2f(0)
-    static let one = Vec2f(1)
+    static let zero = Vec2f(repeating: 0)
+    static let one = Vec2f(repeating: 1)
 }
 
 public extension Vec3f {
-    static let zero = Vec3f(0)
-    static let one = Vec3f(1)
+    static let zero = Vec3f(repeating: 0)
+    static let one = Vec3f(repeating: 1)
 }
 
 public extension Vec4f {
-    static let zero = Vec4f(0)
-    static let one = Vec4f(1)
+    static let zero = Vec4f(repeating: 0)
+    static let one = Vec4f(repeating: 1)
 }
 
 public extension Vec3f {

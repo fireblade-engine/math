@@ -17,17 +17,17 @@ public let kDegreeToRadians64 = Float64.pi / 180.0
 public let kRadiansToDegree32: Float32 = 180.0 / Float32.pi
 public let kRadiansToDegree64: Float64 = 180.0 / Float64.pi
 
-public typealias Vec2u = uint2
-public typealias Vec3u = uint3
-public typealias Vec4u = uint4
+public typealias Vec2u = SIMD2<UInt> //uint2
+public typealias Vec3u = SIMD3<UInt> //uint3
+public typealias Vec4u = SIMD4<UInt> //uint4
 
-public typealias Vec2i = int2
-public typealias Vec3i = int3
-public typealias Vec4i = int4
+public typealias Vec2i = SIMD2<Int> //int2
+public typealias Vec3i = SIMD3<Int> //int3
+public typealias Vec4i = SIMD4<Int> //int4
 
-public typealias Vec2f = float2
-public typealias Vec3f = float3
-public typealias Vec4f = float4
+public typealias Vec2f = SIMD2<Float> //float2
+public typealias Vec3f = SIMD3<Float> //float3
+public typealias Vec4f = SIMD4<Float> //float4
 
 public typealias Mat2x2f = float2x2
 public typealias Mat3x3f = float3x3

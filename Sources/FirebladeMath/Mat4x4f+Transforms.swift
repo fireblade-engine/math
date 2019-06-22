@@ -109,9 +109,9 @@ public extension Mat4x4f {
 
     @inlinable var scale: Vec3f {
         get {
-            let sx: Float = length(float3(columns.0.x, columns.0.y, columns.0.z))
-            let sy: Float = length(float3(columns.1.x, columns.1.y, columns.1.z))
-            let sz: Float = length(float3(columns.2.x, columns.2.y, columns.2.z))
+            let sx: Float = length(Vec3f(columns.0.x, columns.0.y, columns.0.z))
+            let sy: Float = length(Vec3f(columns.1.x, columns.1.y, columns.1.z))
+            let sz: Float = length(Vec3f(columns.2.x, columns.2.y, columns.2.z))
             return Vec3f(sx, sy, sz)
         }
         set {
