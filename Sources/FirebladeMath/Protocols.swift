@@ -53,9 +53,9 @@ public extension Vec4f {
 }
 
 public extension Vec3f {
-    static let axisX: Vec3f = [1, 0, 0]
-    static let axisY: Vec3f = [0, 1, 0]
-    static let axisZ: Vec3f = [0, 0, 1]
+    static let axisX: Vec3f = simd_normalize([1, 0, 0])
+    static let axisY: Vec3f = simd_normalize([0, 1, 0])
+    static let axisZ: Vec3f = simd_normalize([0, 0, 1])
 }
 
 // MARK: - Matrix Base

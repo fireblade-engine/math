@@ -78,12 +78,56 @@ public extension Mat4x4f {
             )
         )
     }
+    
+    init(scale: Vec3f) {
+        self.init([Vec4f(scale.x, 0, 0, 0),
+                   Vec4f(0, scale.y, 0, 0),
+                   Vec4f(0, 0, scale.z, 0),
+                   Vec4f(0, 0, 0, 1)])
+    }
+    
+    init(translation: Vec3f) {
+        self.init(Vec4f(1, 0, 0, 0),
+                  Vec4f(0, 1, 0, 0),
+                  Vec4f(0, 0, 1, 0),
+                  Vec4f(translation, 1))
+    }
+    
+    init(rotationEuler eulerAngles: Vec3f) {
+        let sx = sin(eulerAngles.x)
+        let cx = cos(eulerAngles.x)
+        let sy = sin(eulerAngles.y)
+        let cy = cos(eulerAngles.y)
+        let sz = sin(eulerAngles.z)
+        let cz = cos(eulerAngles.z)
+        let columns = [ Vec4f(           cy*cz, cy*sz, -sy, 0),
+                        Vec4f(cz*sx*sy - cx*sz, cx*cz + sx*sy*sz, cy*sx, 0),
+                        Vec4f(cx*cz*sy + sx*sz, -cz*sx + cx*sy*sz, cx*cy, 0),
+                        Vec4f(               0, 0, 0, 1) ]
+        self.init(columns)
+    }
 
-    init(position: Vec3f, scale: Vec3f, orientation: Quat4f) {
+    init(orientation: Quat4f) {
+        self = simd_matrix4x4(orientation)
+    }
+    
+    
+    init(translation: Vec3f, scale: Vec3f, orientation: Quat4f) {
         // Ordering:
         //    1. Scale
         //    2. Rotate
         //    3. Translate
+
+        // TRS
+        self = Mat4x4f(translation: translation) * Mat4x4f(orientation: orientation) * Mat4x4f(scale: scale)
+        // SRT
+        //self = Mat4x4f(scale: scale) * Mat4x4f(orientation: orientation) * Mat4x4f(translation: translation)
+        
+        
+        
+        /*
+ 
+        simd_matrix4x4(orientation)
 
         let rot: Mat3x3f = simd_matrix3x3(orientation)
         var mat = Mat4x4f.identity
@@ -94,28 +138,33 @@ public extension Mat4x4f {
         mat[3][0] = position.x; mat[3][1] = position.y; mat[3][2] = position.z; mat[3][3] = 1
 
         self = mat
+ 
+         */
     }
 
+    @inlinable var upperLeft: Mat3x3f {
+        return Mat3x3f(self[0].xyz,
+                       self[1].xyz,
+                       self[2].xyz)
+    }
+    
     @inlinable var position: Vec3f {
         get {
-            return Vec3f(columns.3.x, columns.3.y, columns.3.z)
+            return Vec3f(columns.3)
         }
         set {
-            columns.3.x = newValue.x
-            columns.3.y = newValue.y
-            columns.3.z = newValue.z
+            self = Mat4x4f(translation: newValue)
         }
     }
-
+    
     @inlinable var scale: Vec3f {
         get {
-            let sx: Float = length(Vec3f(columns.0.x, columns.0.y, columns.0.z))
-            let sy: Float = length(Vec3f(columns.1.x, columns.1.y, columns.1.z))
-            let sz: Float = length(Vec3f(columns.2.x, columns.2.y, columns.2.z))
-            return Vec3f(sx, sy, sz)
+           return Vec3f(columns.0.length,
+                        columns.1.length,
+                        columns.2.length)
         }
         set {
-            self = Mat4x4f(position: position, scale: newValue, orientation: orientation)
+            self = Mat4x4f(scale: newValue)
         }
     }
 
@@ -124,7 +173,7 @@ public extension Mat4x4f {
             return simd_quaternion(self)
         }
         set {
-            self = Mat4x4f(position: position, scale: scale, orientation: newValue)
+            self = simd_matrix4x4(newValue)
         }
     }
 }
