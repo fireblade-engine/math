@@ -26,42 +26,40 @@ class FirebladeMathTests: XCTestCase {
         XCTAssertEqual(rVec3, vec3)
         XCTAssertEqual(rVec4, vec4)
     }
-    
+
     func testScale() {
-        var mat = Mat4x4f.identity
-        
-        mat.orientation *= .init(angle: radians(90), axis: .axisX)
-        
-        XCTAssertEqual(mat.scale.x, 1.0, accuracy: 1.0e-9)
-        XCTAssertEqual(mat.scale.y, 1.0, accuracy: 1.0e-9)
-        XCTAssertEqual(mat.scale.z, 1.0, accuracy: 1.0e-9)
-    }
-    
-    func testScaling() {
-        let refMat = unsafeBitCast(GLKMatrix4MakeScale(1.2, 3.4, 5.6), to: float4x4.self)
-        let mat = Mat4x4f.init(translation: .zero, scale: Vec3f(1.2, 3.4, 5.6), orientation: .identity)
+        let refMat = unsafeBitCast(GLKMatrix4MakeScale(1.2, 3.4, 5.6), to: Mat4x4f.self)
+        let mat = Mat4x4f(scale: Vec3f(1.2, 3.4, 5.6))
         XCTAssertEqual(mat, refMat)
+        
+        XCTAssertEqual(mat.scale, Vec3f(1.2, 3.4, 5.6))
     }
     
     func testTranslation() {
-        let refMat = unsafeBitCast(GLKMatrix4MakeTranslation(1.2, 3.4, 5.6), to: float4x4.self)
-        let mat = Mat4x4f(translation: Vec3f(1.2, 3.4, 5.6), scale: .one, orientation: .identity)
+        let refMat = unsafeBitCast(GLKMatrix4MakeTranslation(1.2, 3.4, 5.6), to: Mat4x4f.self)
+        let mat = Mat4x4f(translation: Vec3f(1.2, 3.4, 5.6))
         XCTAssertEqual(mat, refMat)
+        
+        XCTAssertEqual(mat.translation, Vec3f(1.2, 3.4, 5.6))
     }
     
     func testRotation() {
-        let a = Mat4x4f(rotationEuler: Vec3f(33, 0, 0))
-        let b = Mat4x4f(orientation: Quat4f(angle: radians(33), axis: .axisX))
+        let refMat = unsafeBitCast(GLKMatrix4MakeRotation(radians(33), 1, 0, 0), to: Mat4x4f.self)
+        let mat = Mat4x4f(rotationEuler: Vec3f(radians(33), 0, 0))
+        let mat2 = Mat4x4f(angle: radians(33), axis: .axisX)
         
-        XCTAssertEqual(a, b)
-    }
-    
-    func testRotationX() {
-        let refMat = unsafeBitCast(GLKMatrix4RotateX(GLKMatrix4Identity, 35), to: float4x4.self)
-        let mat = Mat4x4f(translation: .zero, scale: .one, orientation: Quat4f(angle: radians(35), axis: .axisX))
         XCTAssertEqual(mat, refMat)
+        XCTAssertEqual(mat2, refMat)
+        
+        XCTAssertEqual(mat.rotationEuler, Vec3f(radians(33), 0, 0))
+        XCTAssertEqual(mat2.rotationEuler, Vec3f(radians(33), 0, 0))
     }
     
+    func testAxis() {
+        XCTAssertEqual(Vec3f.axisX, Vec3f(1,0,0))
+        XCTAssertEqual(Vec3f.axisY, Vec3f(0,1,0))
+        XCTAssertEqual(Vec3f.axisZ, Vec3f(0,0,1))
+    }
     
 }
 

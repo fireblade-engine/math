@@ -33,7 +33,7 @@ public typealias Mat2x2f = float2x2
 public typealias Mat3x3f = float3x3
 public typealias Mat4x4f = float4x4
 
-public typealias Quat4f = simd_quatf
+//public typealias Quat4f = simd_quatf
 
 public typealias AngleDegree = Float
 public typealias AngleRadians = Float
