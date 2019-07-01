@@ -77,7 +77,7 @@ extension Mat4x4f: MatrixBase {
 }
 
 // MARK: - Quaternion base
-/*public protocol QuaternionBase {
+public protocol QuaternionBase {
     associatedtype Quaternion
 
     static var identity: Quaternion { get }
@@ -86,4 +86,3 @@ extension Mat4x4f: MatrixBase {
 extension Quat4f: QuaternionBase {
     public static let identity = Quat4f(0, 0, 0, 1)
 }
-*/

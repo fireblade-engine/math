@@ -25,11 +25,11 @@ public extension Mat4x4f {
     }
 
     init(angle: AngleRadians, axis: Vec3f) {
-        self.init(rotationEuler: angle * axis)
+        self.init(orientation: Quat4f(angle: angle, axis: axis))
     }
 
     /// Euler angles in radians.
-    init(rotationEuler eulerAngles: Vec3f) {
+    init(eulerAngles: Vec3f) {
         let sx = sin(eulerAngles.x)
         let cx = cos(eulerAngles.x)
         let sy = sin(eulerAngles.y)
@@ -41,6 +41,10 @@ public extension Mat4x4f {
                     Vec4f(cz * sx * sy - cx * sz, cx * cz + sx * sy * sz, cy * sx, 0),
                     Vec4f(cx * cz * sy + sx * sz, -cz * sx + cx * sy * sz, cx * cy, 0),
                     Vec4f(               0, 0, 0, 1) ])
+    }
+
+    init(orientation: Quat4f) {
+        self.init(orientation)
     }
 
     @inlinable var upperLeft: Mat3x3f {
@@ -59,8 +63,12 @@ public extension Mat4x4f {
                      columns.2.length)
     }
 
-    @inlinable var rotationEuler: Vec3f {
+    @inlinable var eulerAngles: Vec3f {
         return upperLeft.rotationEuler
+    }
+
+    @inlinable var orientation: Quat4f {
+        return simd_quaternion(self)
     }
 
     /// Creates a perspective projection matrix

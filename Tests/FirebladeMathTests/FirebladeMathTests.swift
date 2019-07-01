@@ -45,14 +45,14 @@ class FirebladeMathTests: XCTestCase {
     
     func testRotation() {
         let refMat = unsafeBitCast(GLKMatrix4MakeRotation(radians(33), 1, 0, 0), to: Mat4x4f.self)
-        let mat = Mat4x4f(rotationEuler: Vec3f(radians(33), 0, 0))
+        let mat = Mat4x4f(eulerAngles: Vec3f(radians(33), 0, 0))
         let mat2 = Mat4x4f(angle: radians(33), axis: .axisX)
         
         XCTAssertEqual(mat, refMat)
         XCTAssertEqual(mat2, refMat)
         
-        XCTAssertEqual(mat.rotationEuler, Vec3f(radians(33), 0, 0))
-        XCTAssertEqual(mat2.rotationEuler, Vec3f(radians(33), 0, 0))
+        XCTAssertEqual(mat.eulerAngles, Vec3f(radians(33), 0, 0))
+        XCTAssertEqual(mat2.eulerAngles, Vec3f(radians(33), 0, 0))
     }
     
     func testAxis() {
@@ -61,6 +61,12 @@ class FirebladeMathTests: XCTestCase {
         XCTAssertEqual(Vec3f.axisZ, Vec3f(0,0,1))
     }
     
+    
+    func testQuat() {
+        let refMat = unsafeBitCast(GLKMatrix4MakeRotation(radians(33), 1, 0, 0), to: Mat4x4f.self)
+        let mat = Mat4x4f(orientation: Quat4f(angle: radians(33), axis: .axisX))
+        XCTAssertEqual(mat, refMat)
+    }
 }
 
 
