@@ -53,6 +53,21 @@ public extension Mat4x4f {
                        self[2].xyz)
     }
 
+    /// The direction along the x-axis.
+    @inlinable var right: Vec3f {
+        return columns.0.xyz
+    }
+
+    /// The direction along the y-axis.
+    @inlinable var up: Vec3f {
+        return columns.1.xyz
+    }
+
+    /// The direction along the z-axis.
+    @inlinable var forward: Vec3f {
+        return columns.2.xyz
+    }
+
     @inlinable var translation: Vec3f {
         return columns.3.xyz
     }
@@ -119,6 +134,19 @@ public extension Mat4x4f {
                 Vec4f(t.x, t.y, t.z, 1.0)
             )
         )
+    }
+
+    /// https://www.scratchapixel.com/lessons/mathematics-physics-for-computer-graphics/lookat-function
+    /// https://learnopengl.com/Getting-started/Camera
+    static func lookAt(from: Vec3f, to: Vec3f, upAxis: Vec3f = .axisY) -> Mat4x4f {
+        let forward: Vec3f = normalize(from - to)
+        let right: Vec3f = cross(normalize(upAxis), forward)
+        let up: Vec3f = cross(forward, right)
+
+        return Mat4x4f(Vec4f(forward, 0),
+                       Vec4f(right, 0),
+                       Vec4f(up, 0),
+                       Vec4f(from, 1))
     }
 
     /*
