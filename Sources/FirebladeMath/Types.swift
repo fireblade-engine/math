@@ -11,32 +11,35 @@
 public let kCoordinateSystem: CoordinateSystem = .rightHanded
 public let kDepthClipSpace: DepthClipSpaceCoordinates = .zeroToOne
 
-public let kDegreeToRadians32 = Float32.pi / 180.0
 public let kDegreeToRadians64 = Float64.pi / 180.0
+public let kDegreeToRadians32 = Float32(kDegreeToRadians64)
 
-public let kRadiansToDegree32: Float32 = 180.0 / Float32.pi
 public let kRadiansToDegree64: Float64 = 180.0 / Float64.pi
+public let kRadiansToDegree32 = Float32(kRadiansToDegree64)
 
-public typealias Vec2u = SIMD2<UInt> //uint2
-public typealias Vec3u = SIMD3<UInt> //uint3
-public typealias Vec4u = SIMD4<UInt> //uint4
+public typealias Mat3x3d = simd_double3x3
+public typealias Mat3x3f = simd_float3x3
 
-public typealias Vec2i = SIMD2<Int> //int2
-public typealias Vec3i = SIMD3<Int> //int3
-public typealias Vec4i = SIMD4<Int> //int4
+public typealias Mat4x4d = simd_double4x4
+public typealias Mat4x4f = simd_float4x4
 
-public typealias Vec2f = SIMD2<Float> //float2
-public typealias Vec3f = SIMD3<Float> //float3
-public typealias Vec4f = SIMD4<Float> //float4
-
-public typealias Mat2x2f = float2x2
-public typealias Mat3x3f = float3x3
-public typealias Mat4x4f = float4x4
-
+public typealias Quat4d = simd_quatd
 public typealias Quat4f = simd_quatf
 
-public typealias AngleDegree = Float
-public typealias AngleRadians = Float
+public typealias Vec2d = SIMD2<Double>
+public typealias Vec2f = SIMD2<Float>
+public typealias Vec2i = SIMD2<Int>
+public typealias Vec2u = SIMD2<UInt>
+
+public typealias Vec3d = SIMD3<Double>
+public typealias Vec3f = SIMD3<Float>
+public typealias Vec3i = SIMD3<Int>
+public typealias Vec3u = SIMD3<UInt>
+
+public typealias Vec4d = SIMD4<Double>
+public typealias Vec4f = SIMD4<Float>
+public typealias Vec4i = SIMD4<Int>
+public typealias Vec4u = SIMD4<UInt>
 
 public enum CoordinateSystem {
     case leftHanded

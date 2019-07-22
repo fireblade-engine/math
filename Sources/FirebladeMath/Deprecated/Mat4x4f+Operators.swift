@@ -6,7 +6,7 @@
 //
 
 import simd
-
+/*
 infix operator * : MultiplicationPrecedence
 
 public extension Mat4x4f {
@@ -14,3 +14,4 @@ public extension Mat4x4f {
 		return matrix_multiply(lhs, rhs)
 	}
 }
+*/

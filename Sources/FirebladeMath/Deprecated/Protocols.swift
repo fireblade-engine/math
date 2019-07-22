@@ -67,7 +67,7 @@ public protocol MatrixBase {
 }
 
 // swiftlint:disable explicit_top_level_acl
-
+/*
 extension Mat3x3f: MatrixBase {
     public static let identity = Mat3x3f(1)
 }
@@ -75,7 +75,7 @@ extension Mat3x3f: MatrixBase {
 extension Mat4x4f: MatrixBase {
     public static let identity = Mat4x4f(1)
 }
-
+*/
 // MARK: - Quaternion base
 public protocol QuaternionBase {
     associatedtype Quaternion
