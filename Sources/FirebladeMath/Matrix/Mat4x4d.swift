@@ -5,7 +5,7 @@
 //  Created by Christian Treffs on 22.07.19.
 //
 
-// MARK: - Mat4x4d
+public typealias Mat4x4d = simd_double4x4
 
 extension Mat4x4d {
     /*
@@ -31,4 +31,8 @@ extension Mat4x4d {
      )
      }
      */
+}
+
+extension Mat4x4d: IdentitiyProviding {
+    public static let identity = Mat4x4d(diagonal: .one)
 }

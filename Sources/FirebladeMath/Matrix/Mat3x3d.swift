@@ -5,7 +5,8 @@
 //  Created by Christian Treffs on 22.07.19.
 //
 
-// MARK: - Mat3x3d
+public typealias Mat3x3d = simd_double3x3
+
 extension Mat3x3d {
     /*/// Create rotation matrix using an angle and a rotation axis.
      ///
@@ -33,4 +34,8 @@ extension Mat3x3d {
      }
      
      */
+}
+
+extension Mat3x3d: IdentitiyProviding {
+    public static let identity = Mat3x3d(diagonal: .one)
 }

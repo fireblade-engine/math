@@ -7,6 +7,8 @@
 
 import simd
 
+public typealias Mat4x4f = simd_float4x4
+
 extension Mat4x4f {
     public init(_ array: [Float]) {
         precondition(array.count == 16, "Matrix need exactly 16 values")
@@ -116,9 +118,11 @@ extension Mat4x4f {
 }
 
 // MARK: - static functions
-extension Mat4x4f {
+extension Mat4x4f: IdentitiyProviding {
     public static let identity = Mat4x4f(diagonal: .one)
+}
 
+extension Mat4x4f {
     @inlinable public static func look(from eyePosition: Vec3f, at lookAtPosition: Vec3f, up: Vec3f) -> Mat4x4f {
         // see: <GLKit.framework/.../Headers/GLKMatrix4.h>
         let ev: Vec3f = eyePosition

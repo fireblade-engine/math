@@ -5,6 +5,8 @@
 //  Created by Christian Treffs on 22.07.19.
 //
 
+public typealias Mat3x3f = simd_float3x3
+
 extension Mat3x3f {
     public init(_ array: [Float]) {
         precondition(array.count == 9, "Matrix need exactly 9 values")
@@ -38,4 +40,15 @@ extension Mat3x3f {
                    cos + cosp * v.z * v.z)
         )
     }
+
+    @inlinable public var rotationEuler: Vec3f {
+        let rotX = atan2( self[1][2], self[2][2])
+        let rotY = atan2(-self[0][2], hypot(self[1][2], self[2][2]))
+        let rotZ = atan2( self[0][1], self[0][0])
+        return Vec3f(rotX, rotY, rotZ)
+    }
+}
+
+extension Mat3x3f: IdentitiyProviding {
+    public static let identity = Mat3x3f(diagonal: .one)
 }
