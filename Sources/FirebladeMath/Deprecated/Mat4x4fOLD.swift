@@ -6,8 +6,6 @@
 //  Copyright © 2018 Fireblade. All rights reserved.
 //
 
-import simd
-import VectorMath
 /*
 // SEE: https://github.com/g-truc/glm/blob/master/glm/gtc/matrix_transform.inl
 public extension Mat4x4f {
