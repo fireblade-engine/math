@@ -77,6 +77,14 @@ extension Mat4x4f {
                   Vec4f(matrix4x4.columns.2),
                   Vec4f(matrix4x4.columns.3))
     }
+
+    public init(eulerAngles angles: Vec3f) {
+        self.init(upperLeft: Mat3x3f(eulerAngles: angles))
+    }
+
+    public init(yaw: Float, pitch: Float, roll: Float) {
+        self.init(Quat4f(yaw: yaw, pitch: pitch, roll: roll))
+    }
 }
 
 // MARK: - computed properties

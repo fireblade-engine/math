@@ -251,6 +251,57 @@ class Mat4x4fTests: XCTestCase {
         let mat = Mat4x4f(translation: vec)
         XCTAssertEqual(mat.translation, vec)
     }
+    
+    func testEuler() {
+        let vec = Vec3f(rnd(3))
+        let node = SCNNode()
+        node.simdPivot = .identity
+        
+        /// SceneKit applies these rotations relative to the node’s simdPivot property
+        /// in the reverse order of the components: first roll, then yaw, then pitch
+        /// in radians
+        node.simdEulerAngles = vec
+        
+        
+        let mat = Mat4x4f(eulerAngles: vec)
+        
+        let refMat = Mat4x4f(rotation: vec.z, axis: .axisZ) * Mat4x4f(rotation: vec.y, axis: .axisY) * Mat4x4f(rotation: vec.x, axis: .axisX)
+        
+        XCTAssertEqual(mat[0][0], node.simdTransform[0][0])
+        XCTAssertEqual(mat[0][1], node.simdTransform[0][1])
+        XCTAssertEqual(mat[0][2], node.simdTransform[0][2])
+        XCTAssertEqual(mat[0][3], node.simdTransform[0][3])
+        XCTAssertEqual(mat[1][0], node.simdTransform[1][0])
+        XCTAssertEqual(mat[1][1], node.simdTransform[1][1])
+        XCTAssertEqual(mat[1][2], node.simdTransform[1][2])
+        XCTAssertEqual(mat[1][3], node.simdTransform[1][3])
+        XCTAssertEqual(mat[2][0], node.simdTransform[2][0])
+        XCTAssertEqual(mat[2][1], node.simdTransform[2][1])
+        XCTAssertEqual(mat[2][2], node.simdTransform[2][2])
+        XCTAssertEqual(mat[2][3], node.simdTransform[2][3])
+        XCTAssertEqual(mat[3][0], node.simdTransform[3][0])
+        XCTAssertEqual(mat[3][1], node.simdTransform[3][1])
+        XCTAssertEqual(mat[3][2], node.simdTransform[3][2])
+        XCTAssertEqual(mat[3][3], node.simdTransform[3][3])
+        
+        XCTAssertEqual(refMat[0][0], node.simdTransform[0][0], accuracy: 1e-6)
+        XCTAssertEqual(refMat[0][1], node.simdTransform[0][1], accuracy: 1e-6)
+        XCTAssertEqual(refMat[0][2], node.simdTransform[0][2], accuracy: 1e-6)
+        XCTAssertEqual(refMat[0][3], node.simdTransform[0][3], accuracy: 1e-6)
+        XCTAssertEqual(refMat[1][0], node.simdTransform[1][0], accuracy: 1e-6)
+        XCTAssertEqual(refMat[1][1], node.simdTransform[1][1], accuracy: 1e-6)
+        XCTAssertEqual(refMat[1][2], node.simdTransform[1][2], accuracy: 1e-6)
+        XCTAssertEqual(refMat[1][3], node.simdTransform[1][3], accuracy: 1e-6)
+        XCTAssertEqual(refMat[2][0], node.simdTransform[2][0], accuracy: 1e-6)
+        XCTAssertEqual(refMat[2][1], node.simdTransform[2][1], accuracy: 1e-6)
+        XCTAssertEqual(refMat[2][2], node.simdTransform[2][2], accuracy: 1e-6)
+        XCTAssertEqual(refMat[2][3], node.simdTransform[2][3], accuracy: 1e-6)
+        XCTAssertEqual(refMat[3][0], node.simdTransform[3][0], accuracy: 1e-6)
+        XCTAssertEqual(refMat[3][1], node.simdTransform[3][1], accuracy: 1e-6)
+        XCTAssertEqual(refMat[3][2], node.simdTransform[3][2], accuracy: 1e-6)
+        XCTAssertEqual(refMat[3][3], node.simdTransform[3][3], accuracy: 1e-6)
+        
+    }
 }
 
 
