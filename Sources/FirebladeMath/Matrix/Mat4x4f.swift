@@ -96,7 +96,11 @@ extension Mat4x4f {
     }
 
     @inlinable public var scale: Vec3f {
-        return Vec3f(columns.0[0], columns.1[1], columns.2[2])
+        let sx = columns.0.length
+        let sy = columns.1.length
+        let sz = columns.2.length
+
+        return Vec3f(sx, sy, sz)
     }
 
     @inlinable public var translation: Vec3f {

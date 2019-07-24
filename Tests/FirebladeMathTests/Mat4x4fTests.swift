@@ -8,6 +8,7 @@
 import XCTest
 import simd
 import GLKit
+import SceneKit
 import FirebladeMath
 
 func rnd(_ count: Int, in range: ClosedRange<Float> = -1e-9...1e9) -> [Float] {
@@ -226,9 +227,23 @@ class Mat4x4fTests: XCTestCase {
     }
     
     func testGetScale() {
+        let node = SCNNode()
+        
         let vec = Vec3f(rnd(3))
+        node.simdScale = vec
+        XCTAssertEqual(node.simdScale, vec)
+        
         let mat = Mat4x4f(scale: vec)
+        node.simdTransform = mat
         XCTAssertEqual(mat.scale, vec)
+        XCTAssertEqual(node.simdScale, vec)
+        XCTAssertEqual(mat.scale, node.simdScale)
+        
+        let mat2 = Mat4x4f(rotation: radians(35), axis: .axisY) * mat
+        node.simdTransform = mat2
+        XCTAssertEqual(mat2.scale, vec)
+        XCTAssertEqual(node.simdScale, vec)
+        XCTAssertEqual(mat2.scale, node.simdScale)
     }
     
     func testGetTranslation() {
