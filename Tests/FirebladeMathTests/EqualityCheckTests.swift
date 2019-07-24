@@ -24,7 +24,7 @@ class EqualityCheckTests: XCTestCase {
                                                GLKVector4(v: (9,10,11,12)),
                                                GLKVector4(v: (13,14,15,16)))
         
-        XCTAssertEqual(mat.floatArray, glkMat.floatArray)
+        XCTAssertEqual(mat.array, glkMat.array)
         XCTAssertTrue(mat == glkMat)
     }
     
@@ -51,7 +51,7 @@ class EqualityCheckTests: XCTestCase {
                                        m43: 15,
                                        m44: 16)
         
-        XCTAssertEqual(mat.floatArray, caMat.floatArray)
+        XCTAssertEqual(mat.array, caMat.array)
         XCTAssertTrue(mat == caMat)
     }
     

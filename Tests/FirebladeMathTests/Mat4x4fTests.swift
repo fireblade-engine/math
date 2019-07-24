@@ -19,7 +19,7 @@ class Mat4x4fTests: XCTestCase {
     func testIdentity() {
         let glkIdentity = GLKMatrix4Identity
         let identity: Mat4x4f = .identity
-        XCTAssertEqual(identity.floatArray, glkIdentity.floatArray)
+        XCTAssertEqual(identity.array, glkIdentity.array)
     }
     
     func testArrayInit() {
@@ -28,7 +28,7 @@ class Mat4x4fTests: XCTestCase {
         
         let mat = Mat4x4f(f)
         
-        XCTAssertEqual(mat.floatArray, glkMat.floatArray)
+        XCTAssertEqual(mat.array, glkMat.array)
     }
     
     func testVectorColumnsInit() {
@@ -37,7 +37,7 @@ class Mat4x4fTests: XCTestCase {
         
         let mat = Mat4x4f(columns: Vec4f(f[0...3]), Vec4f(f[4...7]), Vec4f(f[8...11]), Vec4f(f[12...15]))
         
-        XCTAssertEqual(mat.floatArray, glkMat.floatArray)
+        XCTAssertEqual(mat.array, glkMat.array)
     }
     
     func testTranslationInit() {
@@ -46,7 +46,7 @@ class Mat4x4fTests: XCTestCase {
         
         let mat = Mat4x4f(translation: vec)
         
-        XCTAssertEqual(mat.floatArray, glkMat.floatArray)
+        XCTAssertEqual(mat.array, glkMat.array)
     }
     
     func testScaleInit() {
@@ -55,7 +55,7 @@ class Mat4x4fTests: XCTestCase {
         
         let mat = Mat4x4f(scale: vec)
         
-        XCTAssertEqual(mat.floatArray, glkMat.floatArray)
+        XCTAssertEqual(mat.array, glkMat.array)
     }
     
     func testRotationInit() {
@@ -66,7 +66,7 @@ class Mat4x4fTests: XCTestCase {
         
         let matRot = Mat4x4f(rotation: radians(angle), axis: axis)
         
-        for (a, b) in zip(matRot.floatArray, glkRot.floatArray) {
+        for (a, b) in zip(matRot.array, glkRot.array) {
             XCTAssertEqual(a, b, accuracy: 1e-6)
         }
         //XCTAssertEqual(matRot.floatArray, glkRot.floatArray)
@@ -88,7 +88,7 @@ class Mat4x4fTests: XCTestCase {
         
         let mat = Mat4x4f(orientation: quad)
         
-        for (a, b) in zip(mat.floatArray, glkMat.floatArray) {
+        for (a, b) in zip(mat.array, glkMat.array) {
             XCTAssertEqual(a, b, accuracy: 1e-6)
         }
     }
@@ -104,7 +104,7 @@ class Mat4x4fTests: XCTestCase {
         
         let mat: Mat4x4f = .look(from: eye, at: center, up: up)
         
-        for (a, b) in zip(mat.floatArray, glkMat.floatArray) {
+        for (a, b) in zip(mat.array, glkMat.array) {
             XCTAssertEqual(a, b, accuracy: 1e-5) // FIXME: unstable due to varying resolution depending on input
         }
         //XCTAssertEqual(mat.floatArray, glkMat.floatArray)
@@ -124,7 +124,7 @@ class Mat4x4fTests: XCTestCase {
         
         let mat: Mat4x4f = .perspective(fovy: fovy, width: width, height: height, zNear: zNear, zFar: zFar)
         
-        for (a, b) in zip(mat.floatArray, glkMat.floatArray) {
+        for (a, b) in zip(mat.array, glkMat.array) {
             XCTAssertEqual(a, b)
         }
     }
@@ -141,7 +141,7 @@ class Mat4x4fTests: XCTestCase {
         
         let mat: Mat4x4f = .orthographic(left: left, right: right, bottom: bottom, top: top, zNear: zNear, zFar: zFar)
         
-        for (a, b) in zip(mat.floatArray, glkMat.floatArray) {
+        for (a, b) in zip(mat.array, glkMat.array) {
             XCTAssertEqual(a, b)
         }
     }
@@ -195,7 +195,7 @@ class Mat4x4fTests: XCTestCase {
         var mat = Mat4x4f(floats)
         mat.translate(by: vec)
         
-        XCTAssertEqual(mat.floatArray, glkMat.floatArray)
+        XCTAssertEqual(mat.array, glkMat.array)
     }
     
     func testScaleBy() {
@@ -207,7 +207,7 @@ class Mat4x4fTests: XCTestCase {
         var mat = Mat4x4f(floats)
         mat.scale(by: vec)
         
-        XCTAssertEqual(mat.floatArray, glkMat.floatArray)
+        XCTAssertEqual(mat.array, glkMat.array)
     }
     
     func testRotateBy() {
@@ -219,7 +219,7 @@ class Mat4x4fTests: XCTestCase {
         var mat = Mat4x4f(floats)
         mat.rotate(by: rads, axis: vec)
         
-        for (a, b) in zip(mat.floatArray, glkMat.floatArray) {
+        for (a, b) in zip(mat.array, glkMat.array) {
             XCTAssertEqual(a, b, accuracy: 1e-4) // FIXME: needs more accuracy
         }
         //XCTAssertEqual(mat.floatArray, glkMat.floatArray)

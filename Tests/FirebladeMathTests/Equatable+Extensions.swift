@@ -9,8 +9,8 @@ import simd
 import GLKit
 import QuartzCore
 
-protocol FloatArrayEquatable: Equatable {
-    var floatArray: [Float] { get }
+protocol DoubleArrayEquatable: Equatable {
+    var array: [Double] { get }
 }
 
 extension GLKMatrix4 {
@@ -19,33 +19,34 @@ extension GLKMatrix4 {
     }
 }
 
-extension FloatArrayEquatable {
+
+extension DoubleArrayEquatable {
     public static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.floatArray == rhs.floatArray
+        return lhs.array == rhs.array
     }
 }
 
-extension simd_float4x4: FloatArrayEquatable {
-    @inlinable var floatArray: [Float] {
-        return [columns.0, columns.1, columns.2, columns.3].flatMap { $0 }
+extension simd_float4x4: DoubleArrayEquatable {
+    @inlinable var array: [Double] {
+        return [columns.0, columns.1, columns.2, columns.3].map { SIMD4<Double>($0) }.flatMap { $0 }
     }
 }
 
-extension GLKMatrix4: FloatArrayEquatable {
-    @inlinable var floatArray: [Float] {
+extension GLKMatrix4: DoubleArrayEquatable {
+    @inlinable var array: [Double] {
         return [m00, m01, m02, m03,
                 m10, m11, m12, m13,
                 m20, m21, m22, m23,
-                m30, m31, m32, m33]
+                m30, m31, m32, m33].map { Double($0) }
     }
 }
 
-extension CATransform3D: FloatArrayEquatable {
-    @inlinable var floatArray: [Float] {
+extension CATransform3D: DoubleArrayEquatable {
+    @inlinable var array: [Double] {
         return [m11, m12, m13, m14,
                 m21, m22, m23, m24,
                 m31, m32, m33, m34,
-                m41, m42, m43, m44].map { Float($0) }
+                m41, m42, m43, m44].map { Double($0) }
     }
 }
 
