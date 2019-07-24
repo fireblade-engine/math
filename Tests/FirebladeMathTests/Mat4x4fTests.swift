@@ -224,6 +224,18 @@ class Mat4x4fTests: XCTestCase {
         }
         //XCTAssertEqual(mat.floatArray, glkMat.floatArray)
     }
+    
+    func testGetScale() {
+        let vec = Vec3f(rnd(3))
+        let mat = Mat4x4f(scale: vec)
+        XCTAssertEqual(mat.scale, vec)
+    }
+    
+    func testGetTranslation() {
+        let vec = Vec3f(rnd(3))
+        let mat = Mat4x4f(translation: vec)
+        XCTAssertEqual(mat.translation, vec)
+    }
 }
 
 

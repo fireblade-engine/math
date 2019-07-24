@@ -94,6 +94,14 @@ extension Mat4x4f {
     @inlinable public var determinant: Float {
         return simd.simd_determinant(self)
     }
+
+    @inlinable public var scale: Vec3f {
+        return Vec3f(columns.0[0], columns.1[1], columns.2[2])
+    }
+
+    @inlinable public var translation: Vec3f {
+        return Vec3f(columns.3[0], columns.3[1], columns.3[2])
+    }
 }
 
 // MARK: - mutating operations
