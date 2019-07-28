@@ -178,7 +178,8 @@ extension Quat4f {
         return atan2(2.0 * (x * y + w * z), w * w + x * x - y * y - z * z)
     }
 
-    @inlinable public var eulerAngles: (yaw: Float, pitch: Float, roll: Float) {
+    /// x: yaw, y: pitch, z: roll
+    @inlinable public var eulerAngles: Vec3f {
         /// https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
 
         let sinr_cosp: Float = +2.0 * (w * x + y * z)
@@ -199,16 +200,15 @@ extension Quat4f {
         let cosy_cosp: Float = +1.0 - 2.0 * (y * y + z * z)
         let roll = atan2(siny_cosp, cosy_cosp)
 
-        return (yaw: yaw, pitch: pitch, roll: roll)
+        return Vec3f(yaw, pitch, roll)
     }
 }
 
 extension Quat4f {
-    @inlinable public var angle2: Float {
-        return 2.0 * atan2(simd_length(self.vector.xyz), self.vector.w)
-    }
-
-    @inlinable public var angle3: Float {
+    /// Returns the rotation angle of the quaternion in radians.
+    ///
+    /// NOTE: DO NOT USE simd_angle() or .angle on the quaternion since it will always produce `3.1415927`
+    @inlinable public var rotationAngle: Float {
         /// https://github.com/OGRECave/ogre/blob/master/OgreMain/src/OgreQuaternion.cpp#L126
 
         // The quaternion representing the rotation is
@@ -233,6 +233,10 @@ extension Quat4f {
     /// The normalized axis (a 3-element vector) around which the action of the quaternion `q` rotates.
     @inlinable public var axis: Vec3f {
         return simd_axis(self)
+    }
+
+    @inlinable public var rotationAxis: Vec3f {
+        return self.axis
     }
 
     /// The conjugate of the quaternion `q`.

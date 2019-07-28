@@ -219,7 +219,8 @@ extension Mat4x4f {
         return Vec3f(yaw, pitch, roll)
     }*/
 
-    @inlinable public var eulerAngles: Vec3f {
+    // FIXME: order of angles is wrong
+    @inlinable internal var _eulerAngles: Vec3f {
         // https://github.com/JOML-CI/JOML/blob/master/src/org/joml/Matrix3f.java#L4158
         let m12: Float = self[1][2]
         let m22: Float = self[2][2]
@@ -234,11 +235,16 @@ extension Mat4x4f {
         return Vec3f(x, y, z)
     }
 
-    @inlinable public var rotationAngles: Vec3f {
-        let rotX = atan2( self[1][2], self[2][2])
-        let rotY = atan2(-self[0][2], hypot(self[1][2], self[2][2]))
-        let rotZ = atan2( self[0][1], self[0][0])
-        return Vec3f(rotX, rotY, rotZ)
+    // FIXME: order of angles is wrong
+    @inlinable internal var _rotationAngles: Vec3f {
+            let rotX = atan2( self[1][2], self[2][2])
+            let rotY = atan2(-self[0][2], hypot(self[1][2], self[2][2]))
+            let rotZ = atan2( self[0][1], self[0][0])
+            return Vec3f(rotX, rotY, rotZ)
+        }
+
+    @inlinable public var eulerAngles: Vec3f {
+        return Quat4f(self).eulerAngles
     }
 }
 

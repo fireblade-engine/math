@@ -231,15 +231,28 @@ class Mat4x4fTests: XCTestCase {
         
         let mat = Mat4x4f(scale: vec)
         node.simdTransform = mat
-        XCTAssertEqual(mat.scale, vec)
-        XCTAssertEqual(node.simdScale, vec)
-        XCTAssertEqual(mat.scale, node.simdScale)
+        XCTAssertEqual(mat.scale.x, vec.x)
+        XCTAssertEqual(mat.scale.y, vec.y)
+        XCTAssertEqual(mat.scale.z, vec.z)
+        XCTAssertEqual(node.simdScale.x, vec.x)
+        XCTAssertEqual(node.simdScale.y, vec.y)
+        XCTAssertEqual(node.simdScale.z, vec.z)
+        
+        XCTAssertEqual(mat.scale.x, node.simdScale.x)
+        XCTAssertEqual(mat.scale.y, node.simdScale.y)
+        XCTAssertEqual(mat.scale.z, node.simdScale.z)
         
         let mat2 = Mat4x4f(rotation: radians(35), axis: .axisY) * mat
         node.simdTransform = mat2
-        XCTAssertEqual(mat2.scale, vec)
-        XCTAssertEqual(node.simdScale, vec)
-        XCTAssertEqual(mat2.scale, node.simdScale)
+        XCTAssertEqual(mat2.scale.x, vec.x)
+        XCTAssertEqual(mat2.scale.y, vec.y)
+        XCTAssertEqual(mat2.scale.z, vec.z)
+        XCTAssertEqual(node.simdScale.x, vec.x)
+        XCTAssertEqual(node.simdScale.y, vec.y)
+        XCTAssertEqual(node.simdScale.z, vec.z)
+        XCTAssertEqual(mat2.scale.x, node.simdScale.x)
+        XCTAssertEqual(mat2.scale.y, node.simdScale.y)
+        XCTAssertEqual(mat2.scale.z, node.simdScale.z)
     }
     
     func testGetTranslation() {
@@ -277,8 +290,9 @@ class Mat4x4fTests: XCTestCase {
         XCTAssertEqual(mat[3][2], node.simdTransform[3][2])
         XCTAssertEqual(mat[3][3], node.simdTransform[3][3])
         
-        
         XCTAssertEqual(mat.eulerAngles, node.simdEulerAngles)
+        XCTAssertEqual(mat.eulerAngles, normalize(vec))
+        
         XCTAssertEqual(mat.eulerAnglesXYZ, node.simdEulerAngles)
         XCTAssertEqual(mat.eulerAnglesXZY, node.simdEulerAngles)
         XCTAssertEqual(mat.eulerAnglesYXZ, node.simdEulerAngles)
