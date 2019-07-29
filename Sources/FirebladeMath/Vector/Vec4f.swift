@@ -5,7 +5,8 @@
 //  Created by Christian Treffs on 23.07.19.
 //
 
-import simd.vector
+import func simd.simd_length
+import func simd.simd_normalize
 
 public typealias Vec4f = SIMD4<Float>
 
@@ -14,11 +15,11 @@ extension Vec4f {
         return Vec3f(x, y, z)
     }
 
-    @inlinable var length: Float {
+    @inlinable public var length: Float {
         return simd_length(self)
     }
 
-    @inlinable var normalized: Self {
+    @inlinable public var normalized: Self {
         return simd_normalize(self)
     }
 }

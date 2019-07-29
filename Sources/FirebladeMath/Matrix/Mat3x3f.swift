@@ -5,7 +5,8 @@
 //  Created by Christian Treffs on 22.07.19.
 //
 
-import simd.matrix
+import struct simd.matrix.simd_float3x3
+import func simd.normalize
 
 public typealias Mat3x3f = simd_float3x3
 
@@ -26,20 +27,20 @@ extension Mat3x3f {
     public init(rotation angleRadians: Float, axis: Vec3f) {
         // see: <GLKit.framework/.../Headers/GLKMatrix4.h>
         let v: Vec3f = normalize(axis)
-        let cos: Float = cosf(angleRadians)
-        let cosp: Float = 1.0 - cos
-        let sin: Float = sinf(angleRadians)
+        let _cos: Float = cos(angleRadians)
+        let _cosp: Float = 1.0 - _cos
+        let _sin: Float = sin(angleRadians)
 
         self.init(
-            Vec3f( cos + cosp * v.x * v.x,
-                   cosp * v.x * v.y + v.z * sin,
-                   cosp * v.x * v.z - v.y * sin),
-            Vec3f( cosp * v.x * v.y - v.z * sin,
-                   cos + cosp * v.y * v.y,
-                   cosp * v.y * v.z + v.x * sin),
-            Vec3f( cosp * v.x * v.z + v.y * sin,
-                   cosp * v.y * v.z - v.x * sin,
-                   cos + cosp * v.z * v.z)
+            Vec3f( _cos + _cosp * v.x * v.x,
+                   _cosp * v.x * v.y + v.z * _sin,
+                   _cosp * v.x * v.z - v.y * _sin),
+            Vec3f( _cosp * v.x * v.y - v.z * _sin,
+                   _cos + _cosp * v.y * v.y,
+                   _cosp * v.y * v.z + v.x * _sin),
+            Vec3f( _cosp * v.x * v.z + v.y * _sin,
+                   _cosp * v.y * v.z - v.x * _sin,
+                   _cos + _cosp * v.z * v.z)
         )
     }
 

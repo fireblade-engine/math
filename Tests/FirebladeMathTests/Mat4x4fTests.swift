@@ -5,10 +5,23 @@
 //  Created by Christian Treffs on 21.07.19.
 //
 
-import XCTest
-import GLKit
-import SceneKit
 import FirebladeMath
+
+import class XCTest.XCTestCase
+import func XCTest.XCTAssertEqual
+
+import class SceneKit.SCNNode
+
+import func GLKit.GLKMatrix4MakeLookAt
+import func GLKit.GLKMatrix4MakeOrtho
+import func GLKit.GLKMatrix4MakePerspective
+import func GLKit.GLKMatrix4MakeWithQuaternion
+import func GLKit.GLKMatrix4Rotate
+import func GLKit.GLKMatrix4Scale
+import func GLKit.GLKMatrix4Translate
+import struct GLKit.GLKMatrix4
+import struct GLKit.GLKQuaternion
+import var GLKit.GLKMatrix4Identity
 
 class Mat4x4fTests: XCTestCase {
     
@@ -290,7 +303,7 @@ class Mat4x4fTests: XCTestCase {
         XCTAssertEqual(mat[3][3], node.simdTransform[3][3])
         
         XCTAssertEqual(mat.eulerAngles, node.simdEulerAngles)
-        XCTAssertEqual(mat.eulerAngles, normalize(vec))
+        XCTAssertEqual(mat.eulerAngles, vec.normalized)
         
         XCTAssertEqual(mat.eulerAnglesXYZ, node.simdEulerAngles)
         XCTAssertEqual(mat.eulerAnglesXZY, node.simdEulerAngles)

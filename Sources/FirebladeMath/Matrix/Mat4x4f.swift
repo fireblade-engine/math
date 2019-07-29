@@ -5,7 +5,15 @@
 //  Created by Christian Treffs on 22.07.19.
 //
 
-import simd.matrix
+import struct simd.matrix.simd_float4x4
+import func simd.simd_inverse
+import func simd.simd_determinant
+import func simd.simd_quaternion
+import func simd.normalize
+import func simd.cross
+import func simd.dot
+import func simd.simd_mul
+import func simd.matrix_multiply
 
 public typealias Mat4x4f = simd_float4x4
 
@@ -133,19 +141,19 @@ extension Mat4x4f {
 extension Mat4x4f {
     @discardableResult
     @inlinable public mutating func translate(by vec: Vec3f) -> Mat4x4f {
-        self *= Mat4x4f(translation: vec)
+        self = simd_mul(self, Mat4x4f(translation: vec))
         return self
     }
 
     @discardableResult
     @inlinable public mutating func scale(by vec: Vec3f) -> Mat4x4f {
-        self *= Mat4x4f(scale: vec)
+        self = simd_mul(self, Mat4x4f(scale: vec))
         return self
     }
 
     @discardableResult
     @inlinable public mutating func rotate(by angleRadians: Float, axis: Vec3f) -> Mat4x4f {
-        self *= Mat4x4f(rotation: angleRadians, axis: axis)
+        self = simd_mul(self, Mat4x4f(rotation: angleRadians, axis: axis))
         return self
     }
 }
@@ -183,7 +191,7 @@ extension Mat4x4f {
         precondition(zFar > zNear, "zFar must be greater than zNear and greater than 0.0")
 
         let aspect: Float = width / height
-        let cotan: Float = 1.0 / tanf(fovyRadians / 2.0)
+        let cotan: Float = 1.0 / tan(fovyRadians / 2.0)
 
         let m00: Float = cotan / aspect
         let m11: Float = cotan
@@ -242,6 +250,50 @@ extension Mat4x4f {
 
     @inlinable public var eulerAnglesZYX: Vec3f {
         return upperLeft.eulerAnglesZYX
+    }
+}
+
+// MARK: - operators
+extension Mat4x4f {
+    /*
+     matrix_multiply(_ __x: simd_float4, _ __y: simd_float4x4) -> simd_float4
+     matrix_multiply(_ __x: simd_float4x4, _ __y: simd_float4) -> simd_float4
+     matrix_multiply(_ __x: simd_float4x4, _ __y: simd_float4x4) -> simd_float4x4
+     matrix_scale(_ __a: Float, _ __x: simd_float4x4) -> simd_float4x4
+     simd_add(_ __x: simd_float4x4, _ __y: simd_float4x4) -> simd_float4x4
+     simd_almost_equal_elements(_ __x: simd_float4x4, _ __y: simd_float4x4, _ __tol: Float) -> simd_bool
+     simd_almost_equal_elements_relative(_ __x: simd_float4x4, _ __y: simd_float4x4, _ __tol: Float) -> simd_bool
+     simd_determinant(_ __x: simd_float4x4) -> Float
+     simd_diagonal_matrix(_ __x: simd_float4) -> simd_float4x4
+     simd_equal(_ __x: simd_float4x4, _ __y: simd_float4x4) -> simd_bool
+     simd_inverse(_ __x: simd_float4x4) -> simd_float4x4
+     simd_linear_combination(_ __a: Float, _ __x: simd_float4x4, _ __b: Float, _ __y: simd_float4x4) -> simd_float4x4
+     simd_matrix(_ col0: simd_float4, _ col1: simd_float4, _ col2: simd_float4, _ col3: simd_float4) -> simd_float4x4
+     simd_matrix4x4(_ q: simd_quatf) -> simd_float4x4
+     simd_matrix_from_rows(_ row0: simd_float4, _ row1: simd_float4, _ row2: simd_float4, _ row3: simd_float4) -> simd_float4x4
+     simd_mul(_ __a: Float, _ __x: simd_float4x4) -> simd_float4x4
+     simd_mul(_ __x: simd_float4, _ __y: simd_float4x4) -> simd_float4
+     simd_mul(_ __x: simd_float4x4, _ __y: simd_float4) -> simd_float4
+     simd_mul(_ __x: simd_float4x4, _ __y: simd_float4x4) -> simd_float4x4
+     simd_sub(_ __x: simd_float4x4, _ __y: simd_float4x4) -> simd_float4x4
+     simd_transpose(_ __x: simd_float4x4) -> simd_float4x4
+     matrix_identity_float4x4: simd_float4x4
+     
+     */
+    public static func * (lhs: Mat4x4f, rhs: Mat4x4f) -> Mat4x4f {
+        return simd_mul(lhs, rhs)
+    }
+
+    public static func * (lhs: Float, rhs: Mat4x4f) -> Mat4x4f {
+        return simd_mul(lhs, rhs)
+    }
+
+    public static func * (lhs: Vec4f, rhs: Mat4x4f) -> Vec4f {
+        return simd_mul(lhs, rhs)
+    }
+
+    public static func * (lhs: Mat4x4f, rhs: Vec4f) -> Vec4f {
+        return simd_mul(lhs, rhs)
     }
 }
 

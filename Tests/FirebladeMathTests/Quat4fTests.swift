@@ -6,9 +6,15 @@
 //
 
 import FirebladeMath
-import XCTest
+
+import class XCTest.XCTestCase
+import func XCTest.XCTAssertEqual
+import func XCTest.XCTAssertNotEqual
+
+import class SceneKit.SCNNode
+
+
 import GLKit
-import SceneKit
 
 class Quat4fTests: XCTestCase {
     

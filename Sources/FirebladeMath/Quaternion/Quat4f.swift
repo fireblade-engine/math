@@ -5,7 +5,15 @@
 //  Created by Christian Treffs on 23.07.19.
 //
 
-import simd.quaternion
+import struct simd.quaternion.simd_quatf
+import func simd.simd_quaternion
+import func Darwin.copysign
+import func simd.simd_axis
+import func simd.simd_conjugate
+import func simd.simd_imag
+import func simd.simd_real
+import func simd.simd_length
+import func simd.simd_inverse
 
 public typealias Quat4f = simd_quatf
 

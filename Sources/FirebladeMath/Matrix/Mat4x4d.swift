@@ -5,7 +5,7 @@
 //  Created by Christian Treffs on 22.07.19.
 //
 
-import simd.matrix
+import struct simd.matrix.simd_double4x4
 
 public typealias Mat4x4d = simd_double4x4
 

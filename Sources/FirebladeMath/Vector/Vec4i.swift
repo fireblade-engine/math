@@ -5,8 +5,6 @@
 //  Created by Christian Treffs on 23.07.19.
 //
 
-import simd.vector
-
 public typealias Vec4i = SIMD4<Int>
 
 extension Vec4i {

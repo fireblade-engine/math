@@ -5,7 +5,7 @@
 //  Created by Christian Treffs on 23.07.19.
 //
 
-import simd.quaternion
+import struct simd.quaternion.simd_quatd
 
 public typealias Quat4d = simd_quatd
 

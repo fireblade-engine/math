@@ -5,13 +5,21 @@
 //  Created by Christian Treffs on 03.10.17.
 //
 
-import simd
+import Darwin
+import func simd.simd_clamp
+import func simd.simd_fract
+import func simd.simd_mix
+import func simd.simd_smoothstep
+import func simd.sign
+import func simd.rsqrt
+import func simd.sqrt
+import func simd.step
 
 /// Computes the absolute value of a floating point value arg.
 ///
 /// - Parameter double: 	floating point value
 /// - Returns: If successful, returns the absolute value of arg (|arg|). The value returned is exact and does not depend on any rounding modes.
-public func abs(_ double: Float64) -> Float64 { return simd.fabs(double) }
+public func abs(_ double: Float64) -> Float64 { return Darwin.fabs(double) }
 
 /// Computes the principal value of the arc cosine of arg.
 ///
@@ -19,7 +27,7 @@ public func abs(_ double: Float64) -> Float64 { return simd.fabs(double) }
 /// - Returns: If no errors occur, the arc cosine of arg (arccos(arg)) in the range [0 ; π], is returned.
 ///			   If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 ///				If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func acos(_ double: Float64) -> Float64 { return simd.acos(double) }
+public func acos(_ double: Float64) -> Float64 { return Darwin.acos(double) }
 
 ///  Computes the inverse hyperbolic cosine of arg.
 ///
@@ -27,7 +35,7 @@ public func acos(_ double: Float64) -> Float64 { return simd.acos(double) }
 /// - Returns: If no errors occur, the inverse hyperbolic cosine of arg (cosh-1
 ///	(arg), or arcosh(arg)) on the interval [0, +∞], is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
-public func acosh(_ double: Float64) -> Float64 { return simd.acosh(double) }
+public func acosh(_ double: Float64) -> Float64 { return Darwin.acosh(double) }
 
 /// Computes the principal values of the arc sine of arg.
 ///
@@ -35,21 +43,27 @@ public func acosh(_ double: Float64) -> Float64 { return simd.acosh(double) }
 /// - Returns: If no errors occur, the arc sine of arg (arcsin(arg)) in the range [-π/2;+π/2], is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func asin(_ double: Float64) -> Float64 { return simd.asin(double) }
+public func asin(_ double: Float64) -> Float64 { return Darwin.asin(double) }
 
 /// Computes the inverse hyperbolic sine of arg.
 ///
 /// - Parameter double: floating point value representing the area of a hyperbolic sector
 /// - Returns: If no errors occur, the inverse hyperbolic sine of arg (sinh^-1(arg), or arsinh(arg)), is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func asinh(_ double: Float64) -> Float64 { return simd.asinh(double) }
+public func asinh(_ double: Float64) -> Float64 { return Darwin.asinh(double) }
 
 /// Computes the principal value of the arc tangent of arg.
 ///
 /// - Parameter double: floating point value
 /// - Returns: If no errors occur, the arc tangent of arg (arctan(arg)) in the range [-π/2;+π/2] radians, is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func atan(_ double: Float64) -> Float64 { return simd.atan(double) }
+public func atan(_ double: Float64) -> Float64 { return Darwin.atan(double) }
+
+///  The atan2() function computes the principal value of the arc tangent of y/x,
+///  using the signs of both arguments to determine the quadrant of the return value.
+/// - Parameter y: y
+/// - Parameter x: x
+public func atan2(_ y: Float64, _ x: Float64) -> Float64 { return Darwin.atan2(y, x) }
 
 /// Computes the inverse hyperbolic tangent of arg.
 ///
@@ -58,13 +72,13 @@ public func atan(_ double: Float64) -> Float64 { return simd.atan(double) }
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a pole error occurs, ±HUGE_VAL, ±HUGE_VALF, or ±HUGE_VALL is returned (with the correct sign).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func atanh(_ double: Float64) -> Float64 { return simd.atanh(double) }
+public func atanh(_ double: Float64) -> Float64 { return Darwin.atanh(double) }
 
 /// Computes the smallest integer value not less than arg.
 ///
 /// - Parameter double: 	floating point value
 /// - Returns: If no errors occur, the smallest integer value not less than arg, that is ⌈arg⌉, is returned.
-public func ceil(_ double: Float64) -> Float64 { return simd.ceil(double) }
+public func ceil(_ double: Float64) -> Float64 { return Darwin.ceil(double) }
 
 /// x clamped to the range [min, max].
 /// Note that if you want to clamp all lanes to the same range, you can use a scalar value for min and max.
@@ -81,14 +95,14 @@ public func clamp(_ x: Float64, _ min: Float64, _ max: Float64) -> Float64 { ret
 /// - Returns: If no errors occur, the cosine of arg (cos(arg)) in the range [-1 ; +1], is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func cos(_ doubleAngleRadians: Float64) -> Float64 { return simd.cos(doubleAngleRadians) }
+public func cos(_ doubleAngleRadians: Float64) -> Float64 { return Darwin.cos(doubleAngleRadians) }
 
 /// Computes the hyperbolic cosine of arg.
 ///
 /// - Parameter double: floating point value representing a hyperbolic angle
 /// - Returns: If no errors occur, the hyperbolic cosine of arg (cosh(arg), or (e^arg+e^-arg)/2) is returned.
 /// If a range error due to overflow occurs, +HUGE_VAL, +HUGE_VALF, or +HUGE_VALL is returned.
-public func cosh(_ double: Float64) -> Float64 { return simd.cosh(double) }
+public func cosh(_ double: Float64) -> Float64 { return Darwin.cosh(double) }
 
 /// Converts radians to degrees.
 ///
@@ -118,7 +132,7 @@ public func dot(_ x: Float64, _ y: Float64) -> Float64 { return x * y }
 /// - Returns: If no errors occur, the base-e exponential of arg (e^arg) is returned.
 /// If a range error due to overflow occurs, +HUGE_VAL, +HUGE_VALF, or +HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func exp(_ power: Float64) -> Float64 { return simd.exp(power) }
+public func exp(_ power: Float64) -> Float64 { return Darwin.exp(power) }
 
 /// Computes 2 raised to the given power n.
 ///
@@ -126,7 +140,7 @@ public func exp(_ power: Float64) -> Float64 { return simd.exp(power) }
 /// - Returns: If no errors occur, the base-2 exponential of n (2^n) is returned.
 /// If a range error due to overflow occurs, +HUGE_VAL, +HUGE_VALF, or +HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func exp2(_ power: Float64) -> Float64 { return simd.exp2(power) }
+public func exp2(_ power: Float64) -> Float64 { return Darwin.exp2(power) }
 
 /// Flips the normal vector ''n'' to face the direction opposite to the incident vector ''i''
 ///
@@ -152,7 +166,7 @@ public func faceforward(n: Float64, i: Float64, nref: Float64) -> Float64 {
 ///
 /// - Parameter double: floating point value
 /// - Returns: If no errors occur, the largest integer value not greater than arg, that is ⌊arg⌋, is returned.
-public func floor(_ double: Float64) -> Float64 { return simd.floor(double) }
+public func floor(_ double: Float64) -> Float64 { return Darwin.floor(double) }
 
 /// The "fractional part" of x, lying in the range [0, 1).
 /// floor(x) + fract(x) is *approximately* equal to x.
@@ -191,7 +205,7 @@ public func length(_ double: Float64) -> Float64 { return abs(double) }
 /// - Returns: If no errors occur, the natural (base-e) logarithm of arg (ln(arg) or log_e(arg)) is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a pole error occurs, -HUGE_VAL, -HUGE_VALF, or -HUGE_VALL is returned.
-public func log(_ double: Float64) -> Float64 { return simd.log(double) }
+public func log(_ double: Float64) -> Float64 { return Darwin.log(double) }
 
 ///  Computes the base 2 logarithm of arg.
 ///
@@ -199,7 +213,7 @@ public func log(_ double: Float64) -> Float64 { return simd.log(double) }
 /// - Returns: If no errors occur, the base-2 logarithm of arg (log_2(arg) or lb(arg)) is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a pole error occurs, -HUGE_VAL, -HUGE_VALF, or -HUGE_VALL is returned.
-public func log2(_ double: Float64) -> Float64 { return simd.log2(double) }
+public func log2(_ double: Float64) -> Float64 { return Darwin.log2(double) }
 
 /// Computes the common (base-10) logarithm of arg.
 ///
@@ -207,7 +221,7 @@ public func log2(_ double: Float64) -> Float64 { return simd.log2(double) }
 /// - Returns: If no errors occur, the common (base-10) logarithm of arg (log_10(arg) or lg(arg)) is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a pole error occurs, -HUGE_VAL, -HUGE_VALF, or -HUGE_VALL is returned.
-public func log10(_ double: Float64) -> Float64 { return simd.log10(double) }
+public func log10(_ double: Float64) -> Float64 { return Darwin.log10(double) }
 
 /// Returns the larger of two floating point arguments, treating NaNs as missing data (between a NaN and a numeric value, the numeric value is chosen).
 ///
@@ -215,7 +229,7 @@ public func log10(_ double: Float64) -> Float64 { return simd.log10(double) }
 ///   - x: floating point value
 ///   - y: floating point value
 /// - Returns: If successful, returns the larger of two floating point values. The value returned is exact and does not depend on any rounding modes.
-public func max(_ x: Float64, _ y: Float64) -> Float64 { return simd.fmax(x, y) }
+public func max(_ x: Float64, _ y: Float64) -> Float64 { return Darwin.fmax(x, y) }
 
 /// Returns the smaller of two floating point arguments, treating NaNs as missing data (between a NaN and a numeric value, the numeric value is chosen).
 ///
@@ -223,7 +237,7 @@ public func max(_ x: Float64, _ y: Float64) -> Float64 { return simd.fmax(x, y) 
 ///   - x: floating point value
 ///   - y: floating point value
 /// - Returns: If successful, returns the smaller of two floating point values. The value returned is exact and does not depend on any rounding modes.
-public func min(_ x: Float64, _ y: Float64) -> Float64 { return simd.fmin(x, y) }
+public func min(_ x: Float64, _ y: Float64) -> Float64 { return Darwin.fmin(x, y) }
 
 /// Linearly interpolates between x and y, taking the value x when t=0 and y when t=1
 public func mix(interpolate x: Float64, y: Float64, t: Float64) -> Float64 { return simd.simd_mix(x, y, t) }
@@ -237,7 +251,7 @@ public func mix(interpolate x: Float64, y: Float64, t: Float64) -> Float64 { ret
 /// - Returns: If successful, returns the floating-point remainder of the division x/y as defined above.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func mod(_ x: Float64, _ y: Float64) -> Float64 { return simd.fmod(x, y) }
+public func mod(_ x: Float64, _ y: Float64) -> Float64 { return Darwin.fmod(x, y) }
 
 /// Returns the normalized value of the argument.
 ///
@@ -266,10 +280,10 @@ public func normalize(_ x: Float64) -> Float64 {
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a pole error or a range error due to overflow occurs, ±HUGE_VAL, ±HUGE_VALF, or ±HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func pow(_ base: Float64, _ exponent: Float64) -> Float64 { return simd.pow(base, exponent) }
+public func pow(_ base: Float64, _ exponent: Float64) -> Float64 { return Darwin.pow(base, exponent) }
 
 /// Computes the value of base 2 raised to the power exponent.
-public func pow2(_ exponent: Float64) -> Float64 { return simd.pow(2, exponent) }
+public func pow2(_ exponent: Float64) -> Float64 { return Darwin.pow(2, exponent) }
 
 /// Converts degress to radians.
 ///
@@ -308,13 +322,13 @@ public func refract(i: Float64, n: Float64, eta: Float64) -> Float64 {
 ///
 /// - Parameter double: 	floating point value
 /// - Returns: If no errors occur, the nearest integer value to arg, rounding halfway cases away from zero, is returned.
-public func round(_ double: Float64) -> Float64 { return simd.round(double) }
+public func round(_ double: Float64) -> Float64 { return Darwin.round(double) }
 
 /// Computes the nearest integer value to arg (in integer format), rounding halfway cases away from zero, regardless of the current rounding mode.
 ///
 /// - Parameter double: 	floating point value
 /// - Returns: If no errors occur, the nearest integer value to arg, rounding halfway cases away from zero, is returned.
-public func round(_ double: Float64) -> Int32 { return Int32(simd.lround(double)) }
+public func round(_ double: Float64) -> Int32 { return Int32(Darwin.lround(double)) }
 
 /// Returns -1 if `x < 0`, +1 if `x > 0`, and 0 otherwise (`sign(NaN)` is 0).
 public func sign(_ double: Float64) -> Float64 { return simd.sign(double) }
@@ -325,7 +339,7 @@ public func sign(_ double: Float64) -> Float64 { return simd.sign(double) }
 /// - Returns: If no errors occur, the sine of arg (sin(arg)) in the range [-1 ; +1], is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func sin(_ floatAngleRadians: Float64) -> Float64 { return simd.sin(floatAngleRadians) }
+public func sin(_ floatAngleRadians: Float64) -> Float64 { return Darwin.sin(floatAngleRadians) }
 
 /// Computes hyperbolic sine of arg.
 ///
@@ -333,7 +347,7 @@ public func sin(_ floatAngleRadians: Float64) -> Float64 { return simd.sin(float
 /// - Returns: If no errors occur, the hyperbolic sine of arg (sinh(arg), or (e^arg*-e-arg)/2) is returned.
 /// If a range error due to overflow occurs, ±HUGE_VAL, ±HUGE_VALF, or ±HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func sinh(_ double: Float64) -> Float64 { return simd.sinh(double) }
+public func sinh(_ double: Float64) -> Float64 { return Darwin.sinh(double) }
 
 /// Interpolates smoothly between 0 at edge0 and 1 at edge1
 /// You can use a scalar value for edge0 and edge1 if you want to clamp all lanes at the same points.
@@ -351,7 +365,7 @@ public func rsqrt(_ double: Float64) -> Float64 { return simd.rsqrt(double) }
 /// - Returns: If no errors occur, square root of arg (√arg), is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func sqrt(_ double: Float64) -> Float64 { return simd.sqrt(double) }
+public func sqrt(_ double: Float64) -> Float64 { return Darwin.sqrt(double) }
 
 /// Returns 0.0 if x < edge, and 1.0 otherwise.
 public func step(_ x: Float64, edge: Float64) -> Float64 { return simd.step(x, edge: edge) }
@@ -362,17 +376,22 @@ public func step(_ x: Float64, edge: Float64) -> Float64 { return simd.step(x, e
 /// - Returns: If no errors occur, the tangent of arg (tan(arg)) is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func tan(_ double: Float64) -> Float64 { return simd.tan(double) }
+public func tan(_ double: Float64) -> Float64 { return Darwin.tan(double) }
 
 /// Computes the hyperbolic tangent of arg.
 ///
 /// - Parameter double: 	floating point value representing a hyperbolic angle
 /// - Returns: If no errors occur, the hyperbolic tangent of arg (tanh(arg), or (e^arg*-e^-arg)/(e^arg*+e^-arg)) is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func tanh(_ double: Float64) -> Float64 { return simd.tanh(double) }
+public func tanh(_ double: Float64) -> Float64 { return Darwin.tanh(double) }
 
 /// Computes the nearest integer not greater in magnitude than arg.
 ///
 /// - Parameter double: 	floating point value
 /// - Returns: If no errors occur, the nearest integer value not greater in magnitude than arg (in other words, arg rounded towards zero), is returned.
-public func trunc(_ double: Float64) -> Float64 { return simd.trunc(double) }
+public func trunc(_ double: Float64) -> Float64 { return Darwin.trunc(double) }
+
+/// Returns the hypotenuse of a right-angled triangle whose legs are x and y.
+/// - Parameter x: x
+/// - Parameter y: y
+public func hypot(_ x: Float64, _ y: Float64) -> Float64 { Darwin.hypot(x, y) }

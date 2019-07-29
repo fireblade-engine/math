@@ -5,13 +5,24 @@
 //  Created by Christian Treffs on 23.07.19.
 //
 
-import simd.vector
+import func simd.simd_length
+import func simd.simd_normalize
 
 public typealias Vec3f = SIMD3<Float>
 
 extension Vec3f {
     public static let zero = Vec3f(repeating: 0)
     public static let one = Vec3f(repeating: 1)
+}
+
+extension Vec3f {
+    @inlinable public var length: Float {
+        return simd_length(self)
+    }
+
+    @inlinable public var normalized: Self {
+        return simd_normalize(self)
+    }
 }
 
 extension Vec3f {
