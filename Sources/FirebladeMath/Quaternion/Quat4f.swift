@@ -14,6 +14,9 @@ import func simd.simd_imag
 import func simd.simd_real
 import func simd.simd_length
 import func simd.simd_inverse
+import func simd.simd_normalize
+import func simd.simd_mul
+import func simd.simd_act
 
 public typealias Quat4f = simd_quatf
 
@@ -273,7 +276,58 @@ extension Quat4f {
     }
 
     /// The unit quaternion obtained by normalizing `q`.
-    /*@inlinable public var normalized: Quat4f {
+    @inlinable public var normalized: Quat4f {
         return simd_normalize(self)
-    }*/
+    }
+}
+
+// MARK: - operators
+extension Quat4f {
+    /*
+     simd_act(_ q: simd_quatf, _ v: simd_float3) -> simd_float3
+     simd_add(_ p: simd_quatf, _ q: simd_quatf) -> simd_quatf
+     simd_angle(_ q: simd_quatf) -> Float
+     simd_axis(_ q: simd_quatf) -> simd_float3
+     simd_bezier(_ q0: simd_quatf, _ q1: simd_quatf, _ q2: simd_quatf, _ q3: simd_quatf, _ t: Float) -> simd_quatf
+     simd_conjugate(_ q: simd_quatf) -> simd_quatf
+     simd_dot(_ p: simd_quatf, _ q: simd_quatf) -> Float
+     simd_imag(_ q: simd_quatf) -> simd_float3
+     simd_inverse(_ q: simd_quatf) -> simd_quatf
+     simd_length(_ q: simd_quatf) -> Float
+     simd_mul(_ a: Float, _ q: simd_quatf) -> simd_quatf
+     simd_mul(_ p: simd_quatf, _ q: simd_quatf) -> simd_quatf
+     simd_mul(_ q: simd_quatf, _ a: Float) -> simd_quatf
+     simd_negate(_ q: simd_quatf) -> simd_quatf
+     simd_normalize(_ q: simd_quatf) -> simd_quatf
+     simd_quaternion(_ angle: Float, _ axis: simd_float3) -> simd_quatf
+     simd_quaternion(_ from: simd_float3, _ to: simd_float3) -> simd_quatf
+     simd_quaternion(_ ix: Float, _ iy: Float, _ iz: Float, _ r: Float) -> simd_quatf
+     simd_quaternion(_ matrix: simd_float3x3) -> simd_quatf
+     simd_quaternion(_ matrix: simd_float4x4) -> simd_quatf
+     simd_quaternion(_ xyzr: simd_float4) -> simd_quatf
+     simd_quaternion(_ xyzr: UnsafePointer<Float>!) -> simd_quatf
+     simd_real(_ q: simd_quatf) -> Float
+     simd_slerp(_ q0: simd_quatf, _ q1: simd_quatf, _ t: Float) -> simd_quatf
+     simd_slerp_longest(_ q0: simd_quatf, _ q1: simd_quatf, _ t: Float) -> simd_quatf
+     simd_spline(_ q0: simd_quatf, _ q1: simd_quatf, _ q2: simd_quatf, _ q3: simd_quatf, _ t: Float) -> simd_quatf
+     simd_sub(_ p: simd_quatf, _ q: simd_quatf) -> simd_quatf
+     */
+
+    public static func * (lhs: Float, rhs: Quat4f) -> Quat4f {
+        return simd_mul(lhs, rhs)
+    }
+
+    public static func * (lhs: Quat4f, rhs: Float) -> Quat4f {
+        return simd_mul(lhs, rhs)
+    }
+
+    /// Returns the product of two quaternions.
+    public static func * (lhs: Quat4f, rhs: Quat4f) -> Quat4f {
+        return simd_mul(lhs, rhs)
+    }
+
+    /// Returns a vector rotated by a quaternion.
+    public static func * (lhs: Quat4f, rhs: Vec3f) -> Vec3f {
+        return simd_act(lhs, rhs)
+    }
 }
