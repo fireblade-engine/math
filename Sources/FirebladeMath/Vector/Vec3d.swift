@@ -5,6 +5,8 @@
 //  Created by Christian Treffs on 23.07.19.
 //
 
+import simd.vector
+
 public typealias Vec3d = SIMD3<Double>
 
 extension Vec3d {

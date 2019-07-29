@@ -5,6 +5,8 @@
 //  Created by Christian Treffs on 23.07.19.
 //
 
+import simd.quaternion
+
 public typealias Quat4d = simd_quatd
 
 extension Quat4d: IdentitiyProviding {

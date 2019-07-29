@@ -5,7 +5,7 @@
 //  Created by Christian Treffs on 23.07.19.
 //
 
-import simd
+import simd.vector
 
 public typealias Vec4f = SIMD4<Float>
 

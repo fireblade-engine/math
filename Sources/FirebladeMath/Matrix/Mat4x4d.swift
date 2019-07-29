@@ -5,6 +5,8 @@
 //  Created by Christian Treffs on 22.07.19.
 //
 
+import simd.matrix
+
 public typealias Mat4x4d = simd_double4x4
 
 extension Mat4x4d {

@@ -5,13 +5,13 @@
 //  Created by Christian Treffs on 22.07.19.
 //
 
-import simd
+import simd.matrix
 
 public typealias Mat4x4f = simd_float4x4
 
 extension Mat4x4f {
     public init(_ array: [Float]) {
-        precondition(array.count == 16, "Matrix need exactly 16 values")
+        precondition(array.count == 16, "Mat4x4f needs exactly 16 values")
         self.init(SIMD4<Float>(array[0], array[1], array[2], array[3]),
                   SIMD4<Float>(array[4], array[5], array[6], array[7]),
                   SIMD4<Float>(array[8], array[9], array[10], array[11]),
@@ -123,125 +123,6 @@ extension Mat4x4f {
     @inlinable public var quaternion: Quat4f {
         return simd_quaternion(self)
     }
-
-    /*
-     @inlinable public var eulerAngles: Vec3f {
-     
-     let a11: Float = self[0][0]
-     let a22: Float = self[1][1]
-     let a33: Float = self[2][2]
-     
-     let a32: Float = self[2][1]
-     let a23: Float = self[1][2]
-     
-     let a13: Float = self[0][2]
-     let a31: Float = self[2][0]
-     
-     let a21: Float = self[1][0]
-     let a12: Float = self[0][1]
-     
-     let θ: Float = acos((a11+a22+a33-1.0) / 2.0)
-     
-     let sinθ2: Float = 2 * sin(θ)
-     
-     let e1: Float = (a32 - a23) / sinθ2
-     
-     let e2: Float = (a13 - a31) / sinθ2
-     
-     let e3: Float = (a21 - a12) / sinθ2
-     
-     return Vec3f(e1, e2, e3)
-     }
-     */
-
-    /*
-     @inlinable public var eulerAngles: Vec3f {
-     let sy: Float = sqrt(self[0][0] * self[0][0] + self[1][0] * self[1][0])
-     
-     let singular: Bool = sy < 1e-6; // If
-     
-     let x: Float, y: Float, z: Float
-     if !singular
-     {
-     x = atan2(self[2][1] , self[2][2])
-     y = atan2(-self[2][0], sy)
-     z = atan2(self[1][0], self[0][0])
-     }
-     else
-     {
-     x = atan2(-self[1][2], self[1][1])
-     y = atan2(-self[2][0], sy)
-     z = 0
-     }
-     return Vec3f(x, y, z)
-     }
-     */
-
-    /*
-    @inlinable public var eulerAngles: Vec3f {
-        /// https://www.geometrictools.com/Documentation/EulerAngles.pdf
-        
-        let thetaX: Float, thetaY: Float, thetaZ: Float
-        
-        if self[0][2] < 1.0 {
-            if self[0][2] > -1.0 {
-                thetaX = atan2(-self[1][2],self[2][2])
-                thetaY = asin(self[0][2])
-                thetaZ = atan2(-self[0][1],self[0][0])
-            }
-            else  { // r02 = −1
-                
-                thetaX = -atan2(self[1][0],self[1][1])
-                thetaY = -.pi / 2.0
-                thetaZ = 0
-            }
-            
-        }
-        else  { // r02 = +1
-            
-            thetaX = atan2(self[1][0],self[1][1])
-            thetaY = .pi / 2.0
-            thetaZ = 0
-            
-        }
-        return Vec3f(thetaX, thetaY, thetaZ)
-    }
-    */
-
-    /*
-    @inlinable public var eulerAngles: Vec3f {
-        /// see: https://stackoverflow.com/a/37558238
-        let yaw: Float = atan2(self[1][0],self[0][0])
-        let sq = sqrt((self[2][1] * self[2][1]) + (self[2][2] * self[2][2]))
-        let pitch: Float = atan2(-self[2][0],sq)
-        let roll: Float = atan2(self[2][1],self[2][2])
-        
-        return Vec3f(yaw, pitch, roll)
-    }*/
-
-    // FIXME: order of angles is wrong
-    @inlinable internal var _eulerAngles: Vec3f {
-        // https://github.com/JOML-CI/JOML/blob/master/src/org/joml/Matrix3f.java#L4158
-        let m12: Float = self[1][2]
-        let m22: Float = self[2][2]
-        let m02: Float = self[0][2]
-
-        let m01: Float = self[0][1]
-        let m00: Float = self[0][0]
-
-        let x = atan2(m12, m22)
-        let y = atan2(-m02, sqrt(m12 * m12 + m22 * m22))
-        let z = atan2(m01, m00)
-        return Vec3f(x, y, z)
-    }
-
-    // FIXME: order of angles is wrong
-    @inlinable internal var _rotationAngles: Vec3f {
-            let rotX = atan2( self[1][2], self[2][2])
-            let rotY = atan2(-self[0][2], hypot(self[1][2], self[2][2]))
-            let rotZ = atan2( self[0][1], self[0][0])
-            return Vec3f(rotX, rotY, rotZ)
-        }
 
     @inlinable public var eulerAngles: Vec3f {
         return Quat4f(self).eulerAngles
@@ -394,4 +275,123 @@ extension Mat4x4f {
      }
      
      */
+
+    /*
+     @inlinable public var eulerAngles: Vec3f {
+     
+     let a11: Float = self[0][0]
+     let a22: Float = self[1][1]
+     let a33: Float = self[2][2]
+     
+     let a32: Float = self[2][1]
+     let a23: Float = self[1][2]
+     
+     let a13: Float = self[0][2]
+     let a31: Float = self[2][0]
+     
+     let a21: Float = self[1][0]
+     let a12: Float = self[0][1]
+     
+     let θ: Float = acos((a11+a22+a33-1.0) / 2.0)
+     
+     let sinθ2: Float = 2 * sin(θ)
+     
+     let e1: Float = (a32 - a23) / sinθ2
+     
+     let e2: Float = (a13 - a31) / sinθ2
+     
+     let e3: Float = (a21 - a12) / sinθ2
+     
+     return Vec3f(e1, e2, e3)
+     }
+     */
+
+    /*
+     @inlinable public var eulerAngles: Vec3f {
+     let sy: Float = sqrt(self[0][0] * self[0][0] + self[1][0] * self[1][0])
+     
+     let singular: Bool = sy < 1e-6; // If
+     
+     let x: Float, y: Float, z: Float
+     if !singular
+     {
+     x = atan2(self[2][1] , self[2][2])
+     y = atan2(-self[2][0], sy)
+     z = atan2(self[1][0], self[0][0])
+     }
+     else
+     {
+     x = atan2(-self[1][2], self[1][1])
+     y = atan2(-self[2][0], sy)
+     z = 0
+     }
+     return Vec3f(x, y, z)
+     }
+     */
+
+    /*
+    @inlinable public var eulerAngles: Vec3f {
+        /// https://www.geometrictools.com/Documentation/EulerAngles.pdf
+        
+        let thetaX: Float, thetaY: Float, thetaZ: Float
+        
+        if self[0][2] < 1.0 {
+            if self[0][2] > -1.0 {
+                thetaX = atan2(-self[1][2],self[2][2])
+                thetaY = asin(self[0][2])
+                thetaZ = atan2(-self[0][1],self[0][0])
+            }
+            else  { // r02 = −1
+                
+                thetaX = -atan2(self[1][0],self[1][1])
+                thetaY = -.pi / 2.0
+                thetaZ = 0
+            }
+            
+        }
+        else  { // r02 = +1
+            
+            thetaX = atan2(self[1][0],self[1][1])
+            thetaY = .pi / 2.0
+            thetaZ = 0
+            
+        }
+        return Vec3f(thetaX, thetaY, thetaZ)
+    }
+    */
+
+    /*
+    @inlinable public var eulerAngles: Vec3f {
+        /// see: https://stackoverflow.com/a/37558238
+        let yaw: Float = atan2(self[1][0],self[0][0])
+        let sq = sqrt((self[2][1] * self[2][1]) + (self[2][2] * self[2][2]))
+        let pitch: Float = atan2(-self[2][0],sq)
+        let roll: Float = atan2(self[2][1],self[2][2])
+        
+        return Vec3f(yaw, pitch, roll)
+    }*/
+
+    // FIXME: order of angles is wrong
+    @inlinable internal var _eulerAngles: Vec3f {
+        // https://github.com/JOML-CI/JOML/blob/master/src/org/joml/Matrix3f.java#L4158
+        let m12: Float = self[1][2]
+        let m22: Float = self[2][2]
+        let m02: Float = self[0][2]
+
+        let m01: Float = self[0][1]
+        let m00: Float = self[0][0]
+
+        let x = atan2(m12, m22)
+        let y = atan2(-m02, sqrt(m12 * m12 + m22 * m22))
+        let z = atan2(m01, m00)
+        return Vec3f(x, y, z)
+    }
+
+    // FIXME: order of angles is wrong
+    @inlinable internal var _rotationAngles: Vec3f {
+            let rotX = atan2( self[1][2], self[2][2])
+            let rotY = atan2(-self[0][2], hypot(self[1][2], self[2][2]))
+            let rotZ = atan2( self[0][1], self[0][0])
+            return Vec3f(rotX, rotY, rotZ)
+        }
 }

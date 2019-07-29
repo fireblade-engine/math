@@ -5,6 +5,8 @@
 //  Created by Christian Treffs on 22.07.19.
 //
 
+import simd.matrix
+
 public typealias Mat3x3d = simd_double3x3
 
 extension Mat3x3d {

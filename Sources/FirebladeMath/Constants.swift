@@ -11,10 +11,10 @@ public let kDegreeToRadians32 = Float32(kDegreeToRadians64)
 public let kRadiansToDegree64: Float64 = 180.0 / Float64.pi
 public let kRadiansToDegree32 = Float32(kRadiansToDegree64)
 
-extension Float {
-    public static let halfPi = Float(Double.halfPi)
+extension Float32 {
+    public static let halfPi = Float32(Double.halfPi)
 }
 
-extension Double {
-    public static let halfPi: Double = .pi * 0.5
+extension Float64 {
+    public static let halfPi: Float64 = .pi * 0.5
 }

@@ -5,7 +5,7 @@
 //  Created by Christian Treffs on 15.06.19.
 //
 
-import simd
+import simd.vector
 
 extension SIMD2: Sequence {
     public __consuming func makeIterator() -> IndexingIterator<[Scalar]> {
