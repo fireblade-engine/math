@@ -10,7 +10,6 @@ import FirebladeMath
 import GLKit
 import SceneKit
 import QuartzCore
-import simd
 
 /*
 class MatrixTests: XCTestCase {

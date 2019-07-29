@@ -5,7 +5,6 @@
 //  Created by Christian Treffs on 21.07.19.
 //
 
-import simd
 import GLKit
 import QuartzCore
 

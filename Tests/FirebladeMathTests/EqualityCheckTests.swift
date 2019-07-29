@@ -6,7 +6,6 @@
 //
 
 import XCTest
-import simd
 import GLKit
 import QuartzCore
 

@@ -4,6 +4,7 @@
 //
 //  Created by Christian Treffs on 03.10.17.
 //
+
 import simd
 
 /// Computes the absolute value of a floating point value arg.
