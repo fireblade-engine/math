@@ -274,11 +274,6 @@ extension Quat4f {
     @inlinable public var length: Float {
         return simd_length(self)
     }
-
-    /// The unit quaternion obtained by normalizing `q`.
-    @inlinable public var normalized: Quat4f {
-        return simd_normalize(self)
-    }
 }
 
 // MARK: - operators
