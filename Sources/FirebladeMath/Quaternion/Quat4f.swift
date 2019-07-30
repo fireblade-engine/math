@@ -325,4 +325,8 @@ extension Quat4f {
     public static func * (lhs: Quat4f, rhs: Vec3f) -> Vec3f {
         return simd_act(lhs, rhs)
     }
+
+    public static func *= (lhs: inout Quat4f, rhs: Quat4f) {
+        lhs = simd_mul(lhs, rhs)
+    }
 }

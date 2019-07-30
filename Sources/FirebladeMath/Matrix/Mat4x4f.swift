@@ -295,6 +295,10 @@ extension Mat4x4f {
     public static func * (lhs: Mat4x4f, rhs: Vec4f) -> Vec4f {
         return simd_mul(lhs, rhs)
     }
+
+    public static func *= (lhs: inout Mat4x4f, rhs: Mat4x4f) {
+        lhs = simd_mul(lhs, rhs)
+    }
 }
 
 // MARK: - unused
