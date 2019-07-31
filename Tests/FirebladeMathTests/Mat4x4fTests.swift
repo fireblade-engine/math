@@ -98,7 +98,7 @@ class Mat4x4fTests: XCTestCase {
         let mat = Mat4x4f(orientation: quad)
         
         for (a, b) in zip(mat.array, glkMat.array) {
-            XCTAssertEqual(a, b, accuracy: 1e-6)
+            XCTAssertEqual(a, b, accuracy: 1e-7)
         }
     }
     

@@ -41,8 +41,11 @@ extension Mat4x4f {
         self.init(upperLeft: Mat3x3f(rotation: angleRadians, axis: axis))
     }
 
+    /// Creates a new matrix from the specified quarternion.
+    /// Quaternion will be normalized.
     public init(orientation quaternion: Quat4f) {
-        // see: <GLKit.framework/.../Headers/GLKMatrix4.h>
+        self.init(quaternion.normalized)
+        /*// see: <GLKit.framework/.../Headers/GLKMatrix4.h>
         let nQuat: Vec4f = quaternion.normalized.vector
 
         let x: Float = nQuat[0]
@@ -69,7 +72,7 @@ extension Mat4x4f {
                   1.0 - _2x * x - _2y * y,
                   0.0),
             Vec4f(0.0, 0.0, 0.0, 1.0)
-        )
+        )*/
     }
 
     public init(upperLeft matrix3x3: Mat3x3f) {

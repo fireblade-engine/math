@@ -22,6 +22,10 @@ extension Vec4f {
     @inlinable public var normalized: Self {
         return simd_normalize(self)
     }
+
+    @inlinable public var isNaN: Bool {
+        return x.isNaN || y.isNaN || z.isNaN || w.isNaN
+    }
 }
 
 extension Vec4f {

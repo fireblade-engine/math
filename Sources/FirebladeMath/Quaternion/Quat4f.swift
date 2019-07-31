@@ -274,6 +274,10 @@ extension Quat4f {
     @inlinable public var length: Float {
         return simd_length(self)
     }
+
+    @inlinable public var isNaN: Bool {
+        return x.isNaN || y.isNaN || z.isNaN || w.isNaN
+    }
 }
 
 // MARK: - operators
