@@ -35,6 +35,7 @@ extension Quat4f {
         self = simd_quaternion(vector)
     }
 
+    /*
     /// Construct a quaternion that rotates from one vector to another.
     /// - Parameter from: A normalized three-element vector.
     /// - Parameter to: A normalized three-element vector.
@@ -44,7 +45,7 @@ extension Quat4f {
     ///  arbitrary rotation axis is chosen, and the angle is pi radians.
     public init(from: Vec3f, to: Vec3f) {
         self = simd_quaternion(from, to)
-    }
+    }*/
 
     /// Construct a quaternion from a 4x4 rotation `matrix`.
     /// - Parameter matrix: A rotation matrix
