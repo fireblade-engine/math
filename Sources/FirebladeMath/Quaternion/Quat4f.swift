@@ -267,9 +267,9 @@ extension Quat4f {
     }
 
     /// The (multiplicative) inverse of the quaternion `q`.
-    @inlinable public var inverse: Quat4f {
+    /*@inlinable public var inverse: Quat4f {
         return simd_inverse(self)
-    }
+    }*/
 
     /// The length of the quaternion `q`.
     @inlinable public var length: Float {
