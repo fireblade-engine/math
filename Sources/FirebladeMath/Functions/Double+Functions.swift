@@ -19,7 +19,7 @@ import func simd.step
 #endif
 
 #if os(macOS) || os(iOS) || os(tvOS)
-import Darwin
+import Darwin.C.math
 #elseif os(Linux)
 import Glibc
 #else

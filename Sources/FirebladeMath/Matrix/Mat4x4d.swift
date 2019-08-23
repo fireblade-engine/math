@@ -9,7 +9,8 @@
 import struct simd.matrix.simd_double4x4
 public typealias Mat4x4d = simd_double4x4
 #else
-#error("can not import simd")
+import struct SGLMath.Matrix4x4
+public typealias Mat4x4d = SGLMath.Matrix4x4<Float64>
 #endif
 
 extension Mat4x4d {

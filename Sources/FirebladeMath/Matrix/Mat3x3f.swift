@@ -10,7 +10,8 @@ import struct simd.matrix.simd_float3x3
 import func simd.normalize
 public typealias Mat3x3f = simd_float3x3
 #else
-#error("can not import simd")
+import struct SGLMath.Matrix3x3
+public typealias Mat3x3f = SGLMath.Matrix3x3<Float32>
 #endif
 
 extension Mat3x3f {

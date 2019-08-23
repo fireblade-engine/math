@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SGLMath",
+        "repositoryURL": "https://gitlab.com/fireblade/swiftgl-math.git",
+        "state": {
+          "branch": null,
+          "revision": "6c274154b325c2317100432ff2932586188836d9",
+          "version": "2.3.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

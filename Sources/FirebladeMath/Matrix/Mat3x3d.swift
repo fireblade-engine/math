@@ -9,7 +9,8 @@
 import struct simd.matrix.simd_double3x3
 public typealias Mat3x3d = simd_double3x3
 #else
-#error("can not import simd")
+import struct SGLMath.Matrix3x3
+public typealias Mat3x3d = SGLMath.Matrix3x3<Float64>
 #endif
 
 extension Mat3x3d {
