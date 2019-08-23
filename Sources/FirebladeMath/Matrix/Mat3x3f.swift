@@ -5,10 +5,13 @@
 //  Created by Christian Treffs on 22.07.19.
 //
 
+#if canImport(simd)
 import struct simd.matrix.simd_float3x3
 import func simd.normalize
-
 public typealias Mat3x3f = simd_float3x3
+#else
+#error("can not import simd")
+#endif
 
 extension Mat3x3f {
     public init(_ array: [Float]) {

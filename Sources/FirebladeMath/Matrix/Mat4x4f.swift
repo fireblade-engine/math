@@ -5,6 +5,7 @@
 //  Created by Christian Treffs on 22.07.19.
 //
 
+#if canImport(simd)
 import struct simd.matrix.simd_float4x4
 import func simd.simd_inverse
 import func simd.simd_determinant
@@ -16,6 +17,9 @@ import func simd.simd_mul
 import func simd.matrix_multiply
 
 public typealias Mat4x4f = simd_float4x4
+#else
+#error("can not import simd")
+#endif
 
 extension Mat4x4f {
     public init(_ array: [Float]) {

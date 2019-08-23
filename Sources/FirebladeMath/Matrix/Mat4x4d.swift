@@ -5,9 +5,12 @@
 //  Created by Christian Treffs on 22.07.19.
 //
 
+#if canImport(simd)
 import struct simd.matrix.simd_double4x4
-
 public typealias Mat4x4d = simd_double4x4
+#else
+#error("can not import simd")
+#endif
 
 extension Mat4x4d {
     /*

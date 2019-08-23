@@ -5,9 +5,12 @@
 //  Created by Christian Treffs on 22.07.19.
 //
 
+#if canImport(simd)
 import struct simd.matrix.simd_double3x3
-
 public typealias Mat3x3d = simd_double3x3
+#else
+#error("can not import simd")
+#endif
 
 extension Mat3x3d {
     /*/// Create rotation matrix using an angle and a rotation axis.
