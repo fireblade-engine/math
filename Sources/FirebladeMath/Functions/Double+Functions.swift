@@ -5,6 +5,7 @@
 //  Created by Christian Treffs on 03.10.17.
 //
 
+#if canImport(simd)
 import func simd.simd_clamp
 import func simd.simd_fract
 import func simd.simd_mix
@@ -13,6 +14,9 @@ import func simd.sign
 import func simd.rsqrt
 import func simd.sqrt
 import func simd.step
+#else
+#error("no module simd")
+#endif
 
 #if os(macOS) || os(iOS) || os(tvOS)
 import Darwin
