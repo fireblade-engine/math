@@ -9,7 +9,8 @@
 import struct simd.quaternion.simd_quatd
 public typealias Quat4d = simd_quatd
 #else
-#error("can not import simd")
+import struct SGLMath.Quaternion
+public typealias Quat4d = Quaternion<Float64>
 #endif
 
 extension Quat4d: IdentitiyProviding {
