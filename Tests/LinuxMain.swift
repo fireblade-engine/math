@@ -1,6 +1,8 @@
-@testable import FirebladeMathTests
 import XCTest
 
-XCTMain([
-    testCase(FirebladeMathTests.allTests)
-])
+import FirebladeMathTests
+
+var tests = [XCTestCaseEntry]()
+tests += FirebladeMathTests.__allTests()
+
+XCTMain(tests)

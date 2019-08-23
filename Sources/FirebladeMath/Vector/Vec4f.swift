@@ -19,7 +19,7 @@ extension Vec4f {
         return simd_length(self)
     }
 
-    @inlinable public var normalized: Self {
+    @inlinable public var normalized: Vec4f {
         return simd_normalize(self)
     }
 
@@ -32,3 +32,13 @@ extension Vec4f {
     public static let zero = Vec4f(repeating: 0)
     public static let one = Vec4f(repeating: 1)
 }
+
+#if swift(<5.1)
+
+extension Vec4f {
+    public init(_ vec: Vec3f, _ w: Float) {
+        self.init(vec.x, vec.y, vec.z, w)
+    }
+}
+
+#endif

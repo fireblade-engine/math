@@ -20,7 +20,7 @@ extension Vec3f {
         return simd_length(self)
     }
 
-    @inlinable public var normalized: Self {
+    @inlinable public var normalized: Vec3f {
         return simd_normalize(self)
     }
 

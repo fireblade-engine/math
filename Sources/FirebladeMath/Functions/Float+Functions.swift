@@ -394,4 +394,4 @@ public func trunc(_ float: Float32) -> Float32 { return Darwin.truncf(float) }
 /// Returns the hypotenuse of a right-angled triangle whose legs are x and y.
 /// - Parameter x: x
 /// - Parameter y: y
-public func hypot(_ x: Float32, _ y: Float32) -> Float32 { Darwin.hypotf(x, y) }
+public func hypot(_ x: Float32, _ y: Float32) -> Float32 { return Darwin.hypotf(x, y) }
