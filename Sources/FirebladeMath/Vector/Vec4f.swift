@@ -5,8 +5,12 @@
 //  Created by Christian Treffs on 23.07.19.
 //
 
+#if canImport(simd)
 import func simd.simd_length
 import func simd.simd_normalize
+#else
+#error("can not import simd")
+#endif
 
 public typealias Vec4f = SIMD4<Float>
 
