@@ -3,11 +3,11 @@
     "pins": [
       {
         "package": "SGLMath",
-        "repositoryURL": "https://gitlab.com/fireblade/swiftgl-math.git",
+        "repositoryURL": "https://github.com/SwiftGL/Math.git",
         "state": {
           "branch": null,
-          "revision": "6c274154b325c2317100432ff2932586188836d9",
-          "version": "2.3.0"
+          "revision": "8bdd2e542f28828d0c224c1ea8e046c6f652ec40",
+          "version": "3.0.0"
         }
       }
     ]

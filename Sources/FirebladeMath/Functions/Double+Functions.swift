@@ -5,22 +5,9 @@
 //  Created by Christian Treffs on 03.10.17.
 //
 
-#if canImport(simd)
-import func simd.simd_clamp
-import func simd.simd_fract
-import func simd.simd_mix
-import func simd.simd_smoothstep
-import func simd.sign
-import func simd.rsqrt
-import func simd.sqrt
-import func simd.step
-#else
-#error("no module simd")
-#endif
-
-#if os(macOS) || os(iOS) || os(tvOS)
+#if canImport(Darwin)
 import Darwin.C.math
-#elseif os(Linux)
+#elseif canImport(Glibc)
 import Glibc
 #else
 #error("unsupported platform")
@@ -139,15 +126,6 @@ public func ceil(_ double: Float64) -> Float64 {
     #endif
 }
 
-/// x clamped to the range [min, max].
-/// Note that if you want to clamp all lanes to the same range, you can use a scalar value for min and max.
-/// - Parameters:
-///   - x: value to be clamped
-///   - min: min range bound
-///   - max: max range bound
-/// - Returns: x clamped to the range [min, max]
-public func clamp(_ x: Float64, _ min: Float64, _ max: Float64) -> Float64 { return simd.simd_clamp(x, min, max) }
-
 /// Computes the cosine of arg (measured in radians).
 ///
 /// - Parameter double: floating point value representing angle in radians
@@ -188,14 +166,6 @@ public func degrees(_ radians: Float64) -> Float64 { return radians * kRadiansTo
 ///   - y: a double argument.
 /// - Returns: the distance between the arguments.
 public func distance(_ x: Float64, _ y: Float64) -> Float64 { return abs(x - y) }
-
-/// Computes the dot product of the arguments.
-/// For scalar components `dot(x, y)` is equivalent to `x*y`.
-/// - Parameters:
-///   - x: a double argument.
-///   - y: a double argument.
-/// - Returns: the dot product of the arguments.
-public func dot(_ x: Float64, _ y: Float64) -> Float64 { return x * y }
 
 ///  Computes the e (Euler's number, 2.7182818) raised to the given power arg.
 ///
@@ -257,14 +227,6 @@ public func floor(_ double: Float64) -> Float64 {
     #endif
 }
 
-/// The "fractional part" of x, lying in the range [0, 1).
-/// floor(x) + fract(x) is *approximately* equal to x.
-/// If x is positive and finite, then the two values are exactly equal.
-///
-/// - Parameter double: floating point value
-/// - Returns: The "fractional part" of x
-public func fract(_ double: Float64) -> Float64 { return simd.simd_fract(double) }
-
 /// Returns true if Float64.infinity == arg.
 ///
 /// - Parameter double: floating point value
@@ -281,12 +243,6 @@ public func isNegativeInfinity(_ double: Float64) -> Bool { return double.floati
 public func isNegativeZero(_ double: Float64) -> Bool { return double.floatingPointClass == .negativeZero }
 public func isPositiveInfinity(_ double: Float64) -> Bool { return double.floatingPointClass == .positiveInfinity }
 public func isPositiveZero(_ double: Float64) -> Bool { return double.floatingPointClass == .positiveZero }
-
-/// Computes the length of the argument.
-/// For scalar components `length(x)` is equivalent to `abs(x)`.
-/// - Parameter double: a double argument
-/// - Returns: the distance between the argument and the origin.
-public func length(_ double: Float64) -> Float64 { return abs(double) }
 
 /// Computes the natural (base e) logarithm of arg.
 ///
@@ -345,9 +301,6 @@ public func max(_ x: Float64, _ y: Float64) -> Float64 { return fmax(x, y) }
 ///   - y: floating point value
 /// - Returns: If successful, returns the smaller of two floating point values. The value returned is exact and does not depend on any rounding modes.
 public func min(_ x: Float64, _ y: Float64) -> Float64 { return fmin(x, y) }
-
-/// Linearly interpolates between x and y, taking the value x when t=0 and y when t=1
-public func mix(interpolate x: Float64, y: Float64, t: Float64) -> Float64 { return simd.simd_mix(x, y, t) }
 
 /// Computes the floating-point remainder of the division operation x/y.
 /// The floating-point remainder of the division operation x/y calculated by this function is exactly the value x - n*y, where n is x/y with its fractional part truncated.
@@ -437,27 +390,6 @@ public func refract(i: Float64, n: Float64, eta: Float64) -> Float64 {
     }
 }
 
-/// Computes the nearest integer value to arg (in floating-point format), rounding halfway cases away from zero, regardless of the current rounding mode.
-///
-/// - Parameter double: 	floating point value
-/// - Returns: If no errors occur, the nearest integer value to arg, rounding halfway cases away from zero, is returned.
-public func round(_ double: Float64) -> Float64 {
-    #if os(macOS) || os(iOS) || os(tvOS)
-    return Darwin.round(double)
-    #elseif os(Linux)
-    return Glibc.round(double)
-    #endif
-}
-
-/// Computes the nearest integer value to arg (in integer format), rounding halfway cases away from zero, regardless of the current rounding mode.
-///
-/// - Parameter double: 	floating point value
-/// - Returns: If no errors occur, the nearest integer value to arg, rounding halfway cases away from zero, is returned.
-public func round(_ double: Float64) -> Int32 { return Int32(lround(double)) }
-
-/// Returns -1 if `x < 0`, +1 if `x > 0`, and 0 otherwise (`sign(NaN)` is 0).
-public func sign(_ double: Float64) -> Float64 { return simd.sign(double) }
-
 /// Computes the sine of arg (measured in radians).
 ///
 /// - Parameter double: floating point value representing an angle in radians
@@ -486,16 +418,6 @@ public func sinh(_ double: Float64) -> Float64 {
     #endif
 }
 
-/// Interpolates smoothly between 0 at edge0 and 1 at edge1
-/// You can use a scalar value for edge0 and edge1 if you want to clamp all lanes at the same points.
-public func smoothstep(interpolate edge0: Float64, edge1: Float64, x: Float64) -> Float64 { return simd.simd_smoothstep(edge0, edge1, x) }
-
-/// Reciprocal square root.
-///
-/// - Parameter double: floating point value
-/// - Returns: 1 / sqrt(arg)
-public func rsqrt(_ double: Float64) -> Float64 { return simd.rsqrt(double) }
-
 /// Computes square root of arg.
 ///
 /// - Parameter double: 	floating point value
@@ -509,9 +431,6 @@ public func sqrt(_ double: Float64) -> Float64 {
     return Glibc.sqrt(double)
     #endif
 }
-
-/// Returns 0.0 if x < edge, and 1.0 otherwise.
-public func step(_ x: Float64, edge: Float64) -> Float64 { return simd.step(x, edge: edge) }
 
 /// Computes the tangent of arg (measured in radians).
 ///
