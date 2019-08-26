@@ -30,6 +30,6 @@ public func exp(_ power: Float64) -> Float64 {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.exp(power)
     #elseif os(Linux)
-    return Glibc.cosh(double)
+    return Glibc.exp(power)
     #endif
 }
