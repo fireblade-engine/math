@@ -1,6 +1,6 @@
 //
 //  SIMD4+Extensions.swift
-//  
+//
 //
 //  Created by Christian Treffs on 25.08.19.
 //
@@ -17,13 +17,11 @@ extension SIMD4 {
     }
 }
 
-extension SIMD4 where Scalar: FloatingPoint {
+extension SIMD4 where Scalar: FirebladeMath.FloatingPointScalar {
     @inlinable public var isNaN: Bool {
         return x.isNaN || y.isNaN || z.isNaN || w.isNaN
     }
-}
 
-extension SIMD4 where Scalar: Numeric {
     @inlinable public var length: Scalar {
         return FirebladeMath.length(self)
     }

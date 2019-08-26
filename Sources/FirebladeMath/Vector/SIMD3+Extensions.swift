@@ -1,6 +1,6 @@
 //
 //  SIMD3.swift
-//  
+//
 //
 //  Created by Christian Treffs on 25.08.19.
 //
@@ -11,13 +11,11 @@ extension SIMD3: Sequence {
     }
 }
 
-extension SIMD3 where Scalar: FloatingPoint {
+extension SIMD3 where Scalar: FirebladeMath.FloatingPointScalar {
     @inlinable public var isNaN: Bool {
         return x.isNaN || y.isNaN || z.isNaN
     }
-}
 
-extension SIMD3 where Scalar: Numeric {
     @inlinable public var length: Scalar {
         return FirebladeMath.length(self)
     }

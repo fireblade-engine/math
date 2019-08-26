@@ -1,6 +1,6 @@
 //
 //  Quat4f.swift
-//  
+//
 //
 //  Created by Christian Treffs on 23.07.19.
 //
@@ -40,16 +40,16 @@ extension Quat4f {
     }
 
     /*
-    /// Construct a quaternion that rotates from one vector to another.
-    /// - Parameter from: A normalized three-element vector.
-    /// - Parameter to: A normalized three-element vector.
-    ///
-    /// The rotation axis is `simd_cross(from, to)`. If `from` and
-    /// `to` point in opposite directions (to within machine precision), an
-    ///  arbitrary rotation axis is chosen, and the angle is pi radians.
-    public init(from: Vec3f, to: Vec3f) {
-        self = simd_quaternion(from, to)
-    }*/
+     /// Construct a quaternion that rotates from one vector to another.
+     /// - Parameter from: A normalized three-element vector.
+     /// - Parameter to: A normalized three-element vector.
+     ///
+     /// The rotation axis is `simd_cross(from, to)`. If `from` and
+     /// `to` point in opposite directions (to within machine precision), an
+     ///  arbitrary rotation axis is chosen, and the angle is pi radians.
+     public init(from: Vec3f, to: Vec3f) {
+     self = simd_quaternion(from, to)
+     }*/
 
     /// Construct a quaternion from a 4x4 rotation `matrix`.
     /// - Parameter matrix: A rotation matrix
@@ -79,20 +79,20 @@ extension Quat4f {
      let upSin: Float = sin(yaw / 2)
      let atLeftCos: Float = atCos * leftCos
      let atLeftSin: Float = atSin * leftSin
-     
+
      let X: Float = atSin * leftCos * upCos + atCos * leftSin * upSin
      let Y: Float = atCos * leftSin * upCos - atSin * leftCos * upSin
      let Z: Float = atLeftCos * upSin + atLeftSin * upCos
      let W: Float = atLeftCos * upCos - atLeftSin * upSin
-     
+
      self.init(ix: X, iy: Y, iz: Z, r: W)
      }
      */
 
     /*
-    public init(yaw: Float, pitch: Float, roll: Float) {
-        self = Quat4f(angle: yaw, axis: .axisY) * Quat4f(angle: pitch, axis: .axisX) * Quat4f(angle: roll, axis: .axisZ)
-    }*/
+     public init(yaw: Float, pitch: Float, roll: Float) {
+     self = Quat4f(angle: yaw, axis: .axisY) * Quat4f(angle: pitch, axis: .axisX) * Quat4f(angle: roll, axis: .axisZ)
+     }*/
 
     public init(yaw: Float, pitch: Float, roll: Float) {
         /// https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
@@ -272,8 +272,8 @@ extension Quat4f {
 
     /// The (multiplicative) inverse of the quaternion `q`.
     /*@inlinable public var inverse: Quat4f {
-        return simd_inverse(self)
-    }*/
+     return simd_inverse(self)
+     }*/
 
     /// The length of the quaternion `q`.
     @inlinable public var length: Float {

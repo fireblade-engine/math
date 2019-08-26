@@ -1,6 +1,6 @@
 //
 //  Mat4x4f.swift
-//  
+//
 //
 //  Created by Christian Treffs on 22.07.19.
 //
@@ -51,33 +51,33 @@ extension Mat4x4f {
     public init(orientation quaternion: Quat4f) {
         self.init(quaternion.normalized)
         /*// see: <GLKit.framework/.../Headers/GLKMatrix4.h>
-        let nQuat: Vec4f = quaternion.normalized.vector
+         let nQuat: Vec4f = quaternion.normalized.vector
 
-        let x: Float = nQuat[0]
-        let y: Float = nQuat[1]
-        let z: Float = nQuat[2]
-        let w: Float = nQuat[3]
+         let x: Float = nQuat[0]
+         let y: Float = nQuat[1]
+         let z: Float = nQuat[2]
+         let w: Float = nQuat[3]
 
-        let _2x: Float = x + x
-        let _2y: Float = y + y
-        let _2z: Float = z + z
-        let _2w: Float = w + w
+         let _2x: Float = x + x
+         let _2y: Float = y + y
+         let _2z: Float = z + z
+         let _2w: Float = w + w
 
-        self.init(
-            Vec4f(1.0 - _2y * y - _2z * z,
-                  _2x * y + _2w * z,
-                  _2x * z - _2w * y,
-                  0.0),
-            Vec4f(_2x * y - _2w * z,
-                  1.0 - _2x * x - _2z * z,
-                  _2y * z + _2w * x,
-                  0.0),
-            Vec4f(_2x * z + _2w * y,
-                  _2y * z - _2w * x,
-                  1.0 - _2x * x - _2y * y,
-                  0.0),
-            Vec4f(0.0, 0.0, 0.0, 1.0)
-        )*/
+         self.init(
+         Vec4f(1.0 - _2y * y - _2z * z,
+         _2x * y + _2w * z,
+         _2x * z - _2w * y,
+         0.0),
+         Vec4f(_2x * y - _2w * z,
+         1.0 - _2x * x - _2z * z,
+         _2y * z + _2w * x,
+         0.0),
+         Vec4f(_2x * z + _2w * y,
+         _2y * z - _2w * x,
+         1.0 - _2x * x - _2y * y,
+         0.0),
+         Vec4f(0.0, 0.0, 0.0, 1.0)
+         )*/
     }
 
     public init(upperLeft matrix3x3: Mat3x3f) {
@@ -286,7 +286,7 @@ extension Mat4x4f {
      simd_sub(_ __x: simd_float4x4, _ __y: simd_float4x4) -> simd_float4x4
      simd_transpose(_ __x: simd_float4x4) -> simd_float4x4
      matrix_identity_float4x4: simd_float4x4
-     
+
      */
     public static func * (lhs: Mat4x4f, rhs: Mat4x4f) -> Mat4x4f {
         return simd_mul(lhs, rhs)
@@ -314,58 +314,58 @@ extension Mat4x4f {
     /*
      @inlinable public static func projectionPerspective2(fovy fovyRadians: Float, width: Float, height: Float, zNear: Float, zFar: Float) -> Mat4x4f {
      // see: https://github.com/EpicGames/UnrealEngine/blob/master/Engine/Source/Runtime/Core/Public/Math/PerspectiveMatrix.h#L81
-     
+
      precondition(fovyRadians > 0.0, "Field of view must be greater than 0.0")
      precondition(width > 0.0, "Width must be greater than 0.0")
      precondition(height > 0.0, "Height must be greater than 0.0")
      precondition(zNear > 0.0, "zNear must be greater than 0.0")
      precondition(zFar > zNear, "zFar must be greater than zNear and greater than 0.0")
-     
+
      let cotan: Float = tanf(fovyRadians / 2.0)
-     
-     
+
+
      let m00: Float = 1.0 / cotan
      let m11: Float = width / cotan / height
      let m22: Float = zFar / (zFar - zNear)
      let m23: Float = 1.0
      let m32: Float = -zNear * zFar / (zFar - zNear)
      let m33: Float = 0.0
-     
-     
+
+
      return Mat4x4f(Vec4f(m00, 0, 0, 0),
      Vec4f(0, m11, 0, 0),
      Vec4f(0, 0, m22, m23),
      Vec4f(0, 0, m32, m33))
      }
-     
+
      */
 
     /*
      @inlinable public var eulerAngles: Vec3f {
-     
+
      let a11: Float = self[0][0]
      let a22: Float = self[1][1]
      let a33: Float = self[2][2]
-     
+
      let a32: Float = self[2][1]
      let a23: Float = self[1][2]
-     
+
      let a13: Float = self[0][2]
      let a31: Float = self[2][0]
-     
+
      let a21: Float = self[1][0]
      let a12: Float = self[0][1]
-     
+
      let θ: Float = acos((a11+a22+a33-1.0) / 2.0)
-     
+
      let sinθ2: Float = 2 * sin(θ)
-     
+
      let e1: Float = (a32 - a23) / sinθ2
-     
+
      let e2: Float = (a13 - a31) / sinθ2
-     
+
      let e3: Float = (a21 - a12) / sinθ2
-     
+
      return Vec3f(e1, e2, e3)
      }
      */
@@ -373,9 +373,9 @@ extension Mat4x4f {
     /*
      @inlinable public var eulerAngles: Vec3f {
      let sy: Float = sqrt(self[0][0] * self[0][0] + self[1][0] * self[1][0])
-     
+
      let singular: Bool = sy < 1e-6; // If
-     
+
      let x: Float, y: Float, z: Float
      if !singular
      {
@@ -394,46 +394,46 @@ extension Mat4x4f {
      */
 
     /*
-    @inlinable public var eulerAngles: Vec3f {
-        /// https://www.geometrictools.com/Documentation/EulerAngles.pdf
-        
-        let thetaX: Float, thetaY: Float, thetaZ: Float
-        
-        if self[0][2] < 1.0 {
-            if self[0][2] > -1.0 {
-                thetaX = atan2(-self[1][2],self[2][2])
-                thetaY = asin(self[0][2])
-                thetaZ = atan2(-self[0][1],self[0][0])
-            }
-            else  { // r02 = −1
-                
-                thetaX = -atan2(self[1][0],self[1][1])
-                thetaY = -.pi / 2.0
-                thetaZ = 0
-            }
-            
-        }
-        else  { // r02 = +1
-            
-            thetaX = atan2(self[1][0],self[1][1])
-            thetaY = .pi / 2.0
-            thetaZ = 0
-            
-        }
-        return Vec3f(thetaX, thetaY, thetaZ)
-    }
-    */
+     @inlinable public var eulerAngles: Vec3f {
+     /// https://www.geometrictools.com/Documentation/EulerAngles.pdf
+
+     let thetaX: Float, thetaY: Float, thetaZ: Float
+
+     if self[0][2] < 1.0 {
+     if self[0][2] > -1.0 {
+     thetaX = atan2(-self[1][2],self[2][2])
+     thetaY = asin(self[0][2])
+     thetaZ = atan2(-self[0][1],self[0][0])
+     }
+     else  { // r02 = −1
+
+     thetaX = -atan2(self[1][0],self[1][1])
+     thetaY = -.pi / 2.0
+     thetaZ = 0
+     }
+
+     }
+     else  { // r02 = +1
+
+     thetaX = atan2(self[1][0],self[1][1])
+     thetaY = .pi / 2.0
+     thetaZ = 0
+
+     }
+     return Vec3f(thetaX, thetaY, thetaZ)
+     }
+     */
 
     /*
-    @inlinable public var eulerAngles: Vec3f {
-        /// see: https://stackoverflow.com/a/37558238
-        let yaw: Float = atan2(self[1][0],self[0][0])
-        let sq = sqrt((self[2][1] * self[2][1]) + (self[2][2] * self[2][2]))
-        let pitch: Float = atan2(-self[2][0],sq)
-        let roll: Float = atan2(self[2][1],self[2][2])
-        
-        return Vec3f(yaw, pitch, roll)
-    }*/
+     @inlinable public var eulerAngles: Vec3f {
+     /// see: https://stackoverflow.com/a/37558238
+     let yaw: Float = atan2(self[1][0],self[0][0])
+     let sq = sqrt((self[2][1] * self[2][1]) + (self[2][2] * self[2][2]))
+     let pitch: Float = atan2(-self[2][0],sq)
+     let roll: Float = atan2(self[2][1],self[2][2])
+
+     return Vec3f(yaw, pitch, roll)
+     }*/
 
     // FIXME: order of angles is wrong
     @inlinable internal var _eulerAngles: Vec3f {
@@ -453,9 +453,9 @@ extension Mat4x4f {
 
     // FIXME: order of angles is wrong
     @inlinable internal var _rotationAngles: Vec3f {
-            let rotX = atan2( self[1][2], self[2][2])
-            let rotY = atan2(-self[0][2], hypot(self[1][2], self[2][2]))
-            let rotZ = atan2( self[0][1], self[0][0])
-            return Vec3f(rotX, rotY, rotZ)
-        }
+        let rotX = atan2( self[1][2], self[2][2])
+        let rotY = atan2(-self[0][2], hypot(self[1][2], self[2][2]))
+        let rotZ = atan2( self[0][1], self[0][0])
+        return Vec3f(rotX, rotY, rotZ)
+    }
 }

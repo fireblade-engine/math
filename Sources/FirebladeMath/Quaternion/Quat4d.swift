@@ -1,6 +1,6 @@
 //
 //  Quad4d.swift
-//  
+//
 //
 //  Created by Christian Treffs on 23.07.19.
 //

@@ -1,6 +1,6 @@
 //
 //  Mat3x3f.swift
-//  
+//
 //
 //  Created by Christian Treffs on 22.07.19.
 //

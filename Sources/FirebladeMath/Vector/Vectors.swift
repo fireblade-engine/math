@@ -1,6 +1,6 @@
 //
 //  Vectors.swift
-//  
+//
 //
 //  Created by Christian Treffs on 25.08.19.
 //
