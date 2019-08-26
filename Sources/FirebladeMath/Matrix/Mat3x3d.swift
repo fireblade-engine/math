@@ -4,6 +4,14 @@
 //
 //  Created by Christian Treffs on 22.07.19.
 //
+extension Mat3x3d {
+    public init(_ values: [Double]) {
+        precondition(values.count == 9, "Matrix needs exactly 9 values")
+        self.init([Vec3d(values[0...2]),
+                   Vec3d(values[3...5]),
+                   Vec3d(values[6...8])])
+    }
+}
 
 extension Mat3x3d {
     /*/// Create rotation matrix using an angle and a rotation axis.

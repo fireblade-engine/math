@@ -6,13 +6,15 @@
 //
 
 extension Mat3x3f {
-    public init(_ array: [Float]) {
-        precondition(array.count == 9, "Matrix need exactly 9 values")
-        self.init(SIMD3<Float>(array[0], array[1], array[2]),
-                  SIMD3<Float>(array[3], array[4], array[5]),
-                  SIMD3<Float>(array[6], array[7], array[8]))
+    public init(_ values: [Float]) {
+        precondition(values.count == 9, "Matrix needs exactly 9 values")
+        self.init([Vec3f(values[0...2]),
+                   Vec3f(values[3...5]),
+                   Vec3f(values[6...8])])
     }
+}
 
+extension Mat3x3f {
     public init(rotation angleRadians: Float, axis: Vec3f) {
         // see: <GLKit.framework/.../Headers/GLKMatrix4.h>
         let v: Vec3f = normalize(axis)

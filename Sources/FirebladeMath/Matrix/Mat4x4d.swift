@@ -6,6 +6,18 @@
 //
 
 extension Mat4x4d {
+    public init(_ values: [Double]) {
+        precondition(values.count == 16, "Matrix needs exactly 16 values.")
+        self.init([
+            Vec4d(values[0...3]),
+            Vec4d(values[4...7]),
+            Vec4d(values[8...11]),
+            Vec4d(values[12...15])
+        ])
+    }
+}
+
+extension Mat4x4d {
     /*
      @inlinable public static func look(from eyePosition: Vec3d, at lookAtPosition: Vec3d, up: Vec3d) -> Mat4x4d {
      // see: https://github.com/EpicGames/UnrealEngine/blob/master/Engine/Source/Runtime/Core/Public/Math/Matrix.inl#L814

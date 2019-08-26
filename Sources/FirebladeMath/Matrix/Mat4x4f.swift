@@ -16,12 +16,12 @@ import func simd.matrix_multiply
 
 #endif
 extension Mat4x4f {
-    public init(_ array: [Float]) {
-        precondition(array.count == 16, "Mat4x4f needs exactly 16 values")
-        self.init(SIMD4<Float>(array[0], array[1], array[2], array[3]),
-                  SIMD4<Float>(array[4], array[5], array[6], array[7]),
-                  SIMD4<Float>(array[8], array[9], array[10], array[11]),
-                  SIMD4<Float>(array[12], array[13], array[14], array[15]))
+    public init(_ values: [Float]) {
+        precondition(values.count == 16, "Matrix needs exactly 16 values")
+        self.init(Vec4f(values[0...3]),
+                  Vec4f(values[4...7]),
+                  Vec4f(values[8...11]),
+                  Vec4f(values[12...15]))
     }
 
     public init(columns columnA: Vec4f, _ columnB: Vec4f, _ columnC: Vec4f, _ columnD: Vec4f) {
@@ -43,34 +43,6 @@ extension Mat4x4f {
     /// Quaternion will be normalized.
     public init(orientation quaternion: Quat4f) {
         self.init(quaternion.normalized)
-        /*// see: <GLKit.framework/.../Headers/GLKMatrix4.h>
-         let nQuat: Vec4f = quaternion.normalized.vector
-
-         let x: Float = nQuat[0]
-         let y: Float = nQuat[1]
-         let z: Float = nQuat[2]
-         let w: Float = nQuat[3]
-
-         let _2x: Float = x + x
-         let _2y: Float = y + y
-         let _2z: Float = z + z
-         let _2w: Float = w + w
-
-         self.init(
-         Vec4f(1.0 - _2y * y - _2z * z,
-         _2x * y + _2w * z,
-         _2x * z - _2w * y,
-         0.0),
-         Vec4f(_2x * y - _2w * z,
-         1.0 - _2x * x - _2z * z,
-         _2y * z + _2w * x,
-         0.0),
-         Vec4f(_2x * z + _2w * y,
-         _2y * z - _2w * x,
-         1.0 - _2x * x - _2y * y,
-         0.0),
-         Vec4f(0.0, 0.0, 0.0, 1.0)
-         )*/
     }
 
     public init(upperLeft matrix3x3: Mat3x3f) {
