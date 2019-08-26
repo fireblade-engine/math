@@ -11,7 +11,6 @@ import func simd.simd_inverse
 import func simd.simd_determinant
 import func simd.simd_quaternion
 import func simd.normalize
-import func simd.cross
 import func simd.dot
 import func simd.simd_mul
 import func simd.matrix_multiply
