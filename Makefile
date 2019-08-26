@@ -4,12 +4,10 @@ lint:
 genLinuxTests:
 	swift test --generate-linuxmain
 
-test:
-	genLinuxTests
+test: genLinuxTests
 	swift test
 
 clean:
-	
 	swift package reset
 	rm -rdf .build/
 	rm Package.resolved
@@ -29,4 +27,4 @@ resolve:
 
 genXcodeOpen: genXcode
 	open *.xcodeproj
-	
+
