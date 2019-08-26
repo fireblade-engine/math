@@ -14,7 +14,7 @@ public func multiply(_ lhs: Float, _ rhs: Quat4f) -> Quat4f {
     #if canImport(simd)
     return simd.simd_mul(lhs, rhs)
     #else
-    #error("not implemented yet")
+    fatalError("not implemented yet")
     #endif
 }
 
@@ -22,7 +22,7 @@ public func multiply(_ lhs: Quat4f, _ rhs: Float) -> Quat4f {
     #if canImport(simd)
     return simd.simd_mul(lhs, rhs)
     #else
-    #error("not implemented yet")
+    fatalError("not implemented yet")
     #endif
 }
 
@@ -31,7 +31,7 @@ public func multiply (_ lhs: Quat4f, _ rhs: Quat4f) -> Quat4f {
     #if canImport(simd)
     return simd.simd_mul(lhs, rhs)
     #else
-    #error("not implemented yet")
+    fatalError("not implemented yet")
     #endif
 }
 
@@ -40,6 +40,6 @@ public func act(_ lhs: Quat4f, _ rhs: Vec3f) -> Vec3f {
     #if canImport(simd)
     return simd.simd_act(lhs, rhs)
     #else
-    #error("not implemented yet")
+    fatalError("not implemented yet")
     #endif
 }
