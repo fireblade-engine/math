@@ -13,7 +13,7 @@ extension Mat3x3d {
 }
 
 extension Mat3x3f {
-    @inlinable public init(diagonal: Double) {
+    @inlinable public init(diagonal: Float) {
         self.init(diagonal)
     }
 }
@@ -25,7 +25,7 @@ extension Mat4x4d {
 }
 
 extension Mat4x4f {
-    @inlinable public init(diagonal: Double) {
+    @inlinable public init(diagonal: Float) {
         self.init(diagonal)
     }
 }
