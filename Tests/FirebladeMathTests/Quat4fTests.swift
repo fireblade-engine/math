@@ -10,15 +10,28 @@ import FirebladeMath
 import class XCTest.XCTestCase
 import func XCTest.XCTAssertEqual
 import func XCTest.XCTAssertNotEqual
+import func XCTest.XCTAssertNotNil
 
+#if canImport(SceneKit)
 import class SceneKit.SCNNode
+#endif
 
-
+#if canImport(GLKit)
 import GLKit
+#endif
 
 class Quat4fTests: XCTestCase {
     
-    func testVectorInit() {
+    func testQuatBasicProperties() {
+        let q: Quat4f = Quat4f(0,1,2,3)
+        XCTAssertNotNil(q)
+        XCTAssertNotNil(q.x)
+        XCTAssertNotNil(q.y)
+        XCTAssertNotNil(q.z)
+        XCTAssertNotNil(q.w)
+    }
+    
+    func testQuatInit() {
         let vec: Vec4f = Vec4f(rnd(4))
         
         let glkQuat = GLKQuaternionMake(vec.x, vec.y, vec.z, vec.w)

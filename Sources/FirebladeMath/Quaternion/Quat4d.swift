@@ -5,14 +5,23 @@
 //  Created by Christian Treffs on 23.07.19.
 //
 
-#if canImport(simd)
-import struct simd.quaternion.simd_quatd
-public typealias Quat4d = simd_quatd
-#else
-import struct SGLMath.Quaternion
-public typealias Quat4d = Quaternion<Float64>
-#endif
-
 extension Quat4d {
-    public static let identity = Quat4d(ix: 0, iy: 0, iz: 0, r: 1)
+    public init(_ x: Double, _ y: Double, _ z: Double, _ w: Double) {
+        #if canImport(simd)
+        self.init(ix: x, iy: y, iz: z, r: w)
+        #else
+        self.init([x, y, z, w])
+        #endif
+    }
+}
+
+extension Quat4d: ExpressibleByArrayLiteral {
+    public init(arrayLiteral elements: Double...) {
+        precondition(elements.count == 4, "Quaternion needs to be initialized with exactly 4 elements")
+        #if canImport(simd)
+        self.init(ix: elements[0], iy: elements[1], iz: elements[2], r: elements[3])
+        #else
+        self.init(elements)
+        #endif
+    }
 }

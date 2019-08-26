@@ -18,14 +18,28 @@ import func simd.simd_normalize
 import func simd.simd_quaternion
 import func simd.simd_real
 import struct simd.quaternion.simd_quatf
-public typealias Quat4f = simd_quatf
-#else
-import struct SGLMath.Quaternion
-public typealias Quat4f = Quaternion<Float32>
+
 #endif
 
 extension Quat4f {
-    public static let identity = Quat4f(ix: 0, iy: 0, iz: 0, r: 1)
+    public init(_ x: Float, _ y: Float, _ z: Float, _ w: Float) {
+        #if canImport(simd)
+        self.init(ix: x, iy: y, iz: z, r: w)
+        #else
+        self.init([x, y, z, w])
+        #endif
+    }
+}
+
+extension Quat4f: ExpressibleByArrayLiteral {
+    public init(arrayLiteral elements: Float...) {
+        precondition(elements.count == 4, "Quaternion needs to be initialized with exactly 4 elements")
+        #if canImport(simd)
+        self.init(ix: elements[0], iy: elements[1], iz: elements[2], r: elements[3])
+        #else
+        self.init(elements)
+        #endif
+    }
 }
 
 extension Quat4f {
@@ -61,14 +75,6 @@ extension Quat4f {
         self = simd_quaternion(matrix)
     }
 
-    /// Constructs a quaternion from four scalar values.
-    /// - Parameter x: The first component of the imaginary (vector) part.
-    /// - Parameter y: The second component of the imaginary (vector) part.
-    /// - Parameter z: The third component of the imaginary (vector) part.
-    /// - Parameter w: The real (scalar) part.
-    public init(_ x: Float, _ y: Float, _ z: Float, _ w: Float) {
-        self = simd_quaternion(x, y, z, w)
-    }
     /*
      public init(yaw: Float, pitch: Float, roll: Float) {
      let atCos: Float = cos(roll / 2)
