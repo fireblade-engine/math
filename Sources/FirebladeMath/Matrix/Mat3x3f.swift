@@ -86,10 +86,6 @@ extension Mat3x3f {
     }
 }
 
-extension Mat3x3f: IdentitiyProviding {
-    public static let identity = Mat3x3f(diagonal: .one)
-}
-
 // MARK: - euler
 extension Mat3x3f {
     @inlinable public var eulerAnglesXYZ: Vec3f {

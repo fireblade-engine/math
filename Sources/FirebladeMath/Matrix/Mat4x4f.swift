@@ -167,9 +167,6 @@ extension Mat4x4f {
 }
 
 // MARK: - static functions
-extension Mat4x4f: IdentitiyProviding {
-    public static let identity = Mat4x4f(diagonal: .one)
-}
 
 extension Mat4x4f {
     @inlinable public static func look(from eyePosition: Vec3f, at lookAtPosition: Vec3f, up: Vec3f) -> Mat4x4f {

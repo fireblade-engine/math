@@ -13,6 +13,6 @@ import struct SGLMath.Quaternion
 public typealias Quat4d = Quaternion<Float64>
 #endif
 
-extension Quat4d: IdentitiyProviding {
+extension Quat4d {
     public static let identity = Quat4d(ix: 0, iy: 0, iz: 0, r: 1)
 }

@@ -38,7 +38,3 @@ extension Mat4x4d {
      }
      */
 }
-
-extension Mat4x4d: IdentitiyProviding {
-    public static let identity = Mat4x4d(diagonal: .one)
-}

@@ -24,7 +24,7 @@ import struct SGLMath.Quaternion
 public typealias Quat4f = Quaternion<Float32>
 #endif
 
-extension Quat4f: IdentitiyProviding {
+extension Quat4f {
     public static let identity = Quat4f(ix: 0, iy: 0, iz: 0, r: 1)
 }
 

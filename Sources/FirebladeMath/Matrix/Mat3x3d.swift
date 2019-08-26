@@ -41,7 +41,3 @@ extension Mat3x3d {
 
      */
 }
-
-extension Mat3x3d: IdentitiyProviding {
-    public static let identity = Mat3x3d(diagonal: .one)
-}
