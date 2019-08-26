@@ -5,14 +5,6 @@
 //  Created by Christian Treffs on 22.07.19.
 //
 
-#if canImport(simd)
-import struct simd.matrix.simd_double4x4
-public typealias Mat4x4d = simd_double4x4
-#else
-import struct SGLMath.Matrix4x4
-public typealias Mat4x4d = SGLMath.Matrix4x4<Float64>
-#endif
-
 extension Mat4x4d {
     /*
      @inlinable public static func look(from eyePosition: Vec3d, at lookAtPosition: Vec3d, up: Vec3d) -> Mat4x4d {

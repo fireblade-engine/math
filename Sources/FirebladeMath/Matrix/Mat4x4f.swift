@@ -6,7 +6,7 @@
 //
 
 #if canImport(simd)
-import struct simd.matrix.simd_float4x4
+
 import func simd.simd_inverse
 import func simd.simd_determinant
 import func simd.simd_quaternion
@@ -16,12 +16,7 @@ import func simd.dot
 import func simd.simd_mul
 import func simd.matrix_multiply
 
-public typealias Mat4x4f = simd_float4x4
-#else
-import struct SGLMath.Matrix4x4
-public typealias Mat4x4f = SGLMath.Matrix4x4<Float32>
 #endif
-
 extension Mat4x4f {
     public init(_ array: [Float]) {
         precondition(array.count == 16, "Mat4x4f needs exactly 16 values")

@@ -5,14 +5,6 @@
 //  Created by Christian Treffs on 22.07.19.
 //
 
-#if canImport(simd)
-import struct simd.matrix.simd_double3x3
-public typealias Mat3x3d = simd_double3x3
-#else
-import struct SGLMath.Matrix3x3
-public typealias Mat3x3d = SGLMath.Matrix3x3<Float64>
-#endif
-
 extension Mat3x3d {
     /*/// Create rotation matrix using an angle and a rotation axis.
      ///
