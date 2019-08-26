@@ -13,12 +13,6 @@ extension Mat3x3f {
                   SIMD3<Float>(array[6], array[7], array[8]))
     }
 
-    public init(_ matrix3x3d: Mat3x3d) {
-        self.init(Vec3f(matrix3x3d.columns.0),
-                  Vec3f(matrix3x3d.columns.1),
-                  Vec3f(matrix3x3d.columns.2))
-    }
-
     public init(rotation angleRadians: Float, axis: Vec3f) {
         // see: <GLKit.framework/.../Headers/GLKMatrix4.h>
         let v: Vec3f = normalize(axis)

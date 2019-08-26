@@ -225,11 +225,6 @@ extension Quat4f {
 
         // The quaternion representing the rotation is
         //   q = cos(A/2)+sin(A/2)*(x*i+y*j+z*k)
-        let x: Float = vector.x
-        let y: Float = vector.y
-        let z: Float = vector.z
-        let w: Float = vector.w
-
         let angle: Float
         let fSqrLength: Float = x * x + y * y + z * z
         if ( fSqrLength > 0.0 ) {

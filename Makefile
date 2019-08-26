@@ -28,3 +28,4 @@ resolve:
 genXcodeOpen: genXcode
 	open *.xcodeproj
 
+precommit: lint genLinuxTests
