@@ -6,15 +6,12 @@
 //
 
 #if canImport(simd)
-import func Darwin.C.copysign
 
 import func simd.simd_axis
 import func simd.simd_conjugate
 
 import func simd.simd_inverse
-import func simd.simd_length
 
-import func simd.simd_normalize
 import func simd.simd_quaternion
 
 import struct simd.quaternion.simd_quatf
@@ -258,43 +255,10 @@ extension Quat4f {
 
     /// The length of the quaternion `q`.
     @inlinable public var length: Float {
-        return simd_length(self)
+        return FirebladeMath.length(self)
     }
 
     @inlinable public var isNaN: Bool {
         return x.isNaN || y.isNaN || z.isNaN || w.isNaN
     }
-}
-
-// MARK: - operators
-extension Quat4f {
-    /*
-     simd_act(_ q: simd_quatf, _ v: simd_float3) -> simd_float3
-     simd_add(_ p: simd_quatf, _ q: simd_quatf) -> simd_quatf
-     simd_angle(_ q: simd_quatf) -> Float
-     simd_axis(_ q: simd_quatf) -> simd_float3
-     simd_bezier(_ q0: simd_quatf, _ q1: simd_quatf, _ q2: simd_quatf, _ q3: simd_quatf, _ t: Float) -> simd_quatf
-     simd_conjugate(_ q: simd_quatf) -> simd_quatf
-     simd_dot(_ p: simd_quatf, _ q: simd_quatf) -> Float
-     simd_imag(_ q: simd_quatf) -> simd_float3
-     simd_inverse(_ q: simd_quatf) -> simd_quatf
-     simd_length(_ q: simd_quatf) -> Float
-     simd_mul(_ a: Float, _ q: simd_quatf) -> simd_quatf
-     simd_mul(_ p: simd_quatf, _ q: simd_quatf) -> simd_quatf
-     simd_mul(_ q: simd_quatf, _ a: Float) -> simd_quatf
-     simd_negate(_ q: simd_quatf) -> simd_quatf
-     simd_normalize(_ q: simd_quatf) -> simd_quatf
-     simd_quaternion(_ angle: Float, _ axis: simd_float3) -> simd_quatf
-     simd_quaternion(_ from: simd_float3, _ to: simd_float3) -> simd_quatf
-     simd_quaternion(_ ix: Float, _ iy: Float, _ iz: Float, _ r: Float) -> simd_quatf
-     simd_quaternion(_ matrix: simd_float3x3) -> simd_quatf
-     simd_quaternion(_ matrix: simd_float4x4) -> simd_quatf
-     simd_quaternion(_ xyzr: simd_float4) -> simd_quatf
-     simd_quaternion(_ xyzr: UnsafePointer<Float>!) -> simd_quatf
-     simd_real(_ q: simd_quatf) -> Float
-     simd_slerp(_ q0: simd_quatf, _ q1: simd_quatf, _ t: Float) -> simd_quatf
-     simd_slerp_longest(_ q0: simd_quatf, _ q1: simd_quatf, _ t: Float) -> simd_quatf
-     simd_spline(_ q0: simd_quatf, _ q1: simd_quatf, _ q2: simd_quatf, _ q3: simd_quatf, _ t: Float) -> simd_quatf
-     simd_sub(_ p: simd_quatf, _ q: simd_quatf) -> simd_quatf
-     */
 }

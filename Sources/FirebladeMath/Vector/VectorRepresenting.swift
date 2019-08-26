@@ -5,6 +5,8 @@
 //  Created by Christian Treffs on 26.08.19.
 //
 
+#if canImport(simd)
+
 public protocol VectorRepresenting {
     associatedtype ScalarElement: FirebladeMath.Scalar
 
@@ -22,3 +24,5 @@ extension SIMD3: VectorRepresenting where Scalar: FirebladeMath.Scalar {
 extension SIMD4: VectorRepresenting where Scalar: FirebladeMath.Scalar {
     public typealias ScalarElement = Scalar
 }
+
+#endif

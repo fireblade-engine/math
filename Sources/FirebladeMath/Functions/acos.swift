@@ -5,6 +5,7 @@ import Glibc
 #else
 #error("unsupported platform")
 #endif
+
 /// Computes the principal value of the arc cosine of arg.
 ///
 /// - Parameter float: floating point value

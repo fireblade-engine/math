@@ -7,6 +7,8 @@
 
 #if canImport(simd)
 import func simd.simd_length
+import struct simd.simd_quatf
+import struct simd.simd_quatd
 #endif
 
 #if canImport(SGLMath)
@@ -34,6 +36,12 @@ import func SGLMath.length
     return simd_length(x)
 }
 @inlinable public func length(_ x: SIMD4<Float>) -> Float {
+    return simd_length(x)
+}
+@inlinable public func length(_ x: simd_quatf) -> Float {
+    return simd_length(x)
+}
+@inlinable public func length(_ x: simd_quatd) -> Double {
     return simd_length(x)
 }
 #endif

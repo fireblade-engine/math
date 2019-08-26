@@ -5,6 +5,8 @@
 //  Created by Christian Treffs on 26.08.19.
 //
 
+#if canImport(simd)
+
 public protocol MatrixRepresenting {
     associatedtype VectorElement: VectorRepresenting
 
@@ -14,6 +16,7 @@ public protocol MatrixRepresenting {
 
     static var identity: Self { get }
 
+    // TODO: var columns: [VectorElement] { get }
     // TODO: var inverted: Self { get }
     var determinant: VectorElement.ScalarElement { get }
 }
@@ -33,3 +36,5 @@ extension Mat4x4d: MatrixRepresenting {
 extension Mat4x4f: MatrixRepresenting {
     public typealias VectorElement = Vec4f
 }
+
+#endif
