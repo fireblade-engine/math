@@ -15,13 +15,20 @@ extension Quat4d {
     }
 }
 
+#if canImport(simd)
 extension Quat4d: ExpressibleByArrayLiteral {
     public init(arrayLiteral elements: Double...) {
         precondition(elements.count == 4, "Quaternion needs to be initialized with exactly 4 elements")
-        #if canImport(simd)
         self.init(ix: elements[0], iy: elements[1], iz: elements[2], r: elements[3])
-        #else
-        self.init(elements)
-        #endif
     }
 }
+#endif
+
+#if canImport(simd)
+extension Quat4d {
+    @inlinable public var x: Double { return self.imag.x }
+    @inlinable public var y: Double { return self.imag.y }
+    @inlinable public var z: Double { return self.imag.z }
+    @inlinable public var w: Double { return self.real }
+}
+#endif

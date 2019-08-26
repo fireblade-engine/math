@@ -23,12 +23,23 @@ import GLKit
 class Quat4fTests: XCTestCase {
     
     func testQuatBasicProperties() {
-        let q: Quat4f = Quat4f(0,1,2,3)
-        XCTAssertNotNil(q)
-        XCTAssertNotNil(q.x)
-        XCTAssertNotNil(q.y)
-        XCTAssertNotNil(q.z)
-        XCTAssertNotNil(q.w)
+        let qf: Quat4f = Quat4f(0,1,2,3)
+        let qd: Quat4d = Quat4d(0,1,2,3)
+        XCTAssertNotNil(qd)
+        XCTAssertNotNil(qd.x)
+        XCTAssertNotNil(qd.y)
+        XCTAssertNotNil(qd.z)
+        XCTAssertNotNil(qd.w)
+        XCTAssertNotNil(qf)
+        XCTAssertNotNil(qf.x)
+        XCTAssertNotNil(qf.y)
+        XCTAssertNotNil(qf.z)
+        XCTAssertNotNil(qf.w)
+    }
+    
+    func testExpressibleByArrayLiteral() {
+        XCTAssertNotNil(Quat4f(arrayLiteral: 1,2,3,4))
+        XCTAssertNotNil(Quat4d(arrayLiteral: 1,2,3,4))
     }
     
     func testQuatInit() {

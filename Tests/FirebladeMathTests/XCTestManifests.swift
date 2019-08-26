@@ -101,6 +101,7 @@ extension Quat4fTests {
     // to regenerate.
     static let __allTests__Quat4fTests = [
         ("testAngleAndAxis", testAngleAndAxis),
+        ("testExpressibleByArrayLiteral", testExpressibleByArrayLiteral),
         ("testGetYawPitchRoll", testGetYawPitchRoll),
         ("testInitYawPitchRoll", testInitYawPitchRoll),
         ("testQuatBasicProperties", testQuatBasicProperties),

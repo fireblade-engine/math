@@ -31,16 +31,23 @@ extension Quat4f {
     }
 }
 
+#if canImport(simd)
 extension Quat4f: ExpressibleByArrayLiteral {
     public init(arrayLiteral elements: Float...) {
         precondition(elements.count == 4, "Quaternion needs to be initialized with exactly 4 elements")
-        #if canImport(simd)
         self.init(ix: elements[0], iy: elements[1], iz: elements[2], r: elements[3])
-        #else
-        self.init(elements)
-        #endif
     }
 }
+#endif
+
+#if canImport(simd)
+extension Quat4f {
+    @inlinable public var x: Float { return self.imag.x }
+    @inlinable public var y: Float { return self.imag.y }
+    @inlinable public var z: Float { return self.imag.z }
+    @inlinable public var w: Float { return self.real }
+}
+#endif
 
 extension Quat4f {
     /// Constructs a quaternion from a four-element vector.
@@ -116,23 +123,6 @@ extension Quat4f {
         let z: Float = sy * cp * cr - cy * sp * sr
 
         self.init(x, y, z, w)
-    }
-}
-extension Quat4f {
-    @inlinable public var x: Float {
-        return self.imag.x
-    }
-
-    @inlinable public var y: Float {
-        return self.imag.y
-    }
-
-    @inlinable public var z: Float {
-        return self.imag.z
-    }
-
-    @inlinable public var w: Float {
-        return self.real
     }
 }
 extension Quat4f {
