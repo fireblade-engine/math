@@ -6,16 +6,7 @@
 //
 
 #if canImport(simd)
-import simd
-#endif
-
-#if canImport(SGLMath)
-// types
-import struct SGLMath.Vector2
-import struct SGLMath.Vector3
-import struct SGLMath.Vector4
-
-import func SGLMath.clamp
+import func simd.simd_clamp
 #endif
 
 #if canImport(simd)

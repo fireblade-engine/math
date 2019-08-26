@@ -6,7 +6,7 @@
 //
 
 #if canImport(simd)
-import simd
+import func simd.simd_dot
 #endif
 
 #if canImport(SGLMath)

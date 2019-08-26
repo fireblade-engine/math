@@ -6,7 +6,7 @@
 //
 
 #if canImport(simd)
-import simd
+import func simd.simd_sign
 #endif
 
 #if canImport(simd)

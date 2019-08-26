@@ -13,9 +13,9 @@ import Glibc
 /// If a range error due to overflow occurs, ±HUGE_VAL, ±HUGE_VALF, or ±HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func sinh(_ float: Float32) -> Float32 {
-    #if os(macOS) || os(iOS) || os(tvOS)
+    #if canImport(Darwin)
     return Darwin.sinhf(float)
-    #elseif os(Linux)
+    #elseif canImport(Glibc)
     return Glibc.sinhf(float)
     #endif
 }
@@ -27,9 +27,9 @@ public func sinh(_ float: Float32) -> Float32 {
 /// If a range error due to overflow occurs, ±HUGE_VAL, ±HUGE_VALF, or ±HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func sinh(_ double: Float64) -> Float64 {
-    #if os(macOS) || os(iOS) || os(tvOS)
+    #if canImport(Darwin)
     return Darwin.sinh(double)
-    #elseif os(Linux)
+    #elseif canImport(Glibc)
     return Glibc.sinh(double)
     #endif
 }
