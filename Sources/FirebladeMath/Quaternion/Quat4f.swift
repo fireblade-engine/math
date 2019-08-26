@@ -7,16 +7,16 @@
 
 #if canImport(simd)
 import func Darwin.C.copysign
-import func simd.simd_act
+
 import func simd.simd_axis
 import func simd.simd_conjugate
-import func simd.simd_imag
+
 import func simd.simd_inverse
 import func simd.simd_length
-import func simd.simd_mul
+
 import func simd.simd_normalize
 import func simd.simd_quaternion
-import func simd.simd_real
+
 import struct simd.quaternion.simd_quatf
 
 #endif
@@ -251,16 +251,6 @@ extension Quat4f {
         return simd_conjugate(self)
     }
 
-    /// The imaginary (vector) part of the quaternion `q`.
-    @inlinable public var imag: Vec3f {
-        return simd_imag(self)
-    }
-
-    /// The real (scalar) part of the quaternion `q`.
-    @inlinable public var real: Float {
-        return simd_real(self)
-    }
-
     /// The (multiplicative) inverse of the quaternion `q`.
     /*@inlinable public var inverse: Quat4f {
      return simd_inverse(self)
@@ -307,26 +297,4 @@ extension Quat4f {
      simd_spline(_ q0: simd_quatf, _ q1: simd_quatf, _ q2: simd_quatf, _ q3: simd_quatf, _ t: Float) -> simd_quatf
      simd_sub(_ p: simd_quatf, _ q: simd_quatf) -> simd_quatf
      */
-
-    public static func * (lhs: Float, rhs: Quat4f) -> Quat4f {
-        return simd_mul(lhs, rhs)
-    }
-
-    public static func * (lhs: Quat4f, rhs: Float) -> Quat4f {
-        return simd_mul(lhs, rhs)
-    }
-
-    /// Returns the product of two quaternions.
-    public static func * (lhs: Quat4f, rhs: Quat4f) -> Quat4f {
-        return simd_mul(lhs, rhs)
-    }
-
-    /// Returns a vector rotated by a quaternion.
-    public static func * (lhs: Quat4f, rhs: Vec3f) -> Vec3f {
-        return simd_act(lhs, rhs)
-    }
-
-    public static func *= (lhs: inout Quat4f, rhs: Quat4f) {
-        lhs = simd_mul(lhs, rhs)
-    }
 }
