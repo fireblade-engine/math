@@ -103,8 +103,9 @@ extension Quat4fTests {
         ("testAngleAndAxis", testAngleAndAxis),
         ("testGetYawPitchRoll", testGetYawPitchRoll),
         ("testInitYawPitchRoll", testInitYawPitchRoll),
+        ("testQuatBasicProperties", testQuatBasicProperties),
+        ("testQuatInit", testQuatInit),
         ("testSIMDQuatAngleBug", testSIMDQuatAngleBug),
-        ("testVectorInit", testVectorInit),
     ]
 }
 
