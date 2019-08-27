@@ -13,11 +13,7 @@ import Glibc
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func tan(_ float: Float32) -> Float32 {
-    #if os(macOS) || os(iOS) || os(tvOS)
-    return Darwin.tanf(float)
-    #elseif os(Linux)
-    return Glibc.tanf(float)
-    #endif
+    return tanf(float)
 }
 
 /// Computes the tangent of arg (measured in radians).

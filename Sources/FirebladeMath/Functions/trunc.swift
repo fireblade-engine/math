@@ -11,11 +11,7 @@ import Glibc
 /// - Parameter float:     floating point value
 /// - Returns: If no errors occur, the nearest integer value not greater in magnitude than arg (in other words, arg rounded towards zero), is returned.
 public func trunc(_ float: Float32) -> Float32 {
-    #if os(macOS) || os(iOS) || os(tvOS)
-    return Darwin.truncf(float)
-    #elseif os(Linux)
-    return Glibc.truncf(float)
-    #endif
+    return truncf(float)
 }
 
 /// Computes the nearest integer not greater in magnitude than arg.

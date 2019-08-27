@@ -18,8 +18,6 @@ import struct SGLMath.Vector4
 import func SGLMath.dot
 #endif
 
-// MARK: - dot
-
 #if canImport(simd)
 @inlinable public func dot(_ x: SIMD2<Double>, _ y: SIMD2<Double>) -> Double {
     return simd_dot(x, y)

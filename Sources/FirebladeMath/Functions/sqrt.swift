@@ -5,6 +5,7 @@ import Glibc
 #else
 #error("unsupported platform")
 #endif
+import SGLMath
 
 /// Computes square root of arg.
 ///
@@ -13,11 +14,7 @@ import Glibc
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func sqrt(_ float: Float32) -> Float32 {
-    #if os(macOS) || os(iOS) || os(tvOS)
-    return Darwin.sqrtf(float)
-    #elseif os(Linux)
-    return Glibc.sqrtf(float)
-    #endif
+    return sqrtf(float)
 }
 
 /// Computes square root of arg.
