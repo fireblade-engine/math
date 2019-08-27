@@ -111,7 +111,11 @@ extension Quat4f {
     }
 
     @inlinable public var rotationAxis: Vec3f {
+        #if canImport(simd)
         return self.axis
+        #else
+        fatalError("implementation missing")
+        #endif
     }
 
     /// The (multiplicative) inverse of the quaternion `q`.
