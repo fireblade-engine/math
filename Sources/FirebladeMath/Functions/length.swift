@@ -15,6 +15,7 @@ import struct simd.simd_quatd
 import struct SGLMath.Vector2
 import struct SGLMath.Vector3
 import struct SGLMath.Vector4
+import struct SGLMath.Quaternion
 
 import func SGLMath.length
 #endif
@@ -60,4 +61,8 @@ import func SGLMath.length
 
 @inlinable public func length<S>(_ x: SIMD4<S>) -> S where S: FloatingPointScalar {
     return SGLMath.length(Vector4<S>(x))
+}
+
+@inlinable public func length<S>(_ x: Quaternion<S>) -> S where S: FloatingPointScalar {
+    return SGLMath.length(Vector4<S>(x.x, x.y, x.z, x.w))
 }
