@@ -31,6 +31,12 @@ extension Matrix3x3 where Element: Scalar {
                   Vector3<Element>(0, diagonal.y, 0),
                   Vector3<Element>(0, 0, diagonal.z))
     }
+
+    @inlinable public var columns: (SIMD3<Element>, SIMD3<Element>, SIMD3<Element>) {
+        return (SIMD3<Element>(elements[0...2]),
+                SIMD3<Element>(elements[3...5]),
+                SIMD3<Element>(elements[6...8]))
+    }
 }
 
 extension Matrix4x4 where Element: Scalar {
@@ -56,5 +62,12 @@ extension Matrix4x4 where Element: Scalar {
                   Vector4<Element>(0, diagonal.y, 0, 0),
                   Vector4<Element>(0, 0, diagonal.z, 0),
                   Vector4<Element>(0, 0, 0, diagonal.w))
+    }
+
+    @inlinable public var columns: (SIMD4<Element>, SIMD4<Element>, SIMD4<Element>, SIMD4<Element>) {
+        return (SIMD4<Element>(elements[0...3]),
+                SIMD4<Element>(elements[4...7]),
+                SIMD4<Element>(elements[8...11]),
+                SIMD4<Element>(elements[12...15]))
     }
 }
