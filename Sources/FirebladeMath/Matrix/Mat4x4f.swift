@@ -30,10 +30,20 @@ extension Mat4x4f {
 import struct SGLMath.Vector4
 extension Mat4x4f {
     public init(_ columns: [Vec4f]) {
-        self.init(Vector4<Float>(columns[0]),
-                  Vector4<Float>(columns[1]),
-                  Vector4<Float>(columns[2]),
-                  Vector4<Float>(columns[3]))
+        self.init(columns[0],
+                  columns[1],
+                  columns[2],
+                  columns[3])
+    }
+
+    public init(_ column1: Vec4f,
+                _ column2: Vec4f,
+                _ column3: Vec4f,
+                _ column4: Vec4f) {
+        self.init(Vector4<Float>(column1),
+                  Vector4<Float>(column2),
+                  Vector4<Float>(column3),
+                  Vector4<Float>(column4))
     }
 }
 #endif

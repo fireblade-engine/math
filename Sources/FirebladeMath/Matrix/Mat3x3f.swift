@@ -18,9 +18,17 @@ extension Mat3x3f {
 import struct SGLMath.Vector3
 extension Mat3x3f {
     public init(_ columns: [Vec3f]) {
-        self.init(Vector3<Float>(columns[0]),
-                  Vector3<Float>(columns[1]),
-                  Vector3<Float>(columns[2]))
+        self.init(columns[0],
+                  columns[1],
+                  columns[2])
+    }
+
+    public init(_ column1: Vec3f,
+                _ column2: Vec3f,
+                _ column3: Vec3f) {
+        self.init(Vector3<Float>(column1),
+                  Vector3<Float>(column2),
+                  Vector3<Float>(column3))
     }
 }
 #endif
