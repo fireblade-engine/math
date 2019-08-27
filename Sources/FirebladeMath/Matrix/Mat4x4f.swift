@@ -5,17 +5,6 @@
 //  Created by Christian Treffs on 22.07.19.
 //
 
-#if canImport(simd)
-
-import func simd.simd_inverse
-import func simd.simd_determinant
-import func simd.simd_quaternion
-import func simd.normalize
-import func simd.dot
-import func simd.matrix_multiply
-
-#endif
-
 extension Mat4x4f {
     public init(_ values: [Float]) {
         precondition(values.count == 16, "Matrix needs exactly 16 values")
@@ -40,12 +29,6 @@ extension Mat4x4f {
 
     public init(rotation angleRadians: Float, axis: Vec3f) {
         self.init(upperLeft: Mat3x3f(rotation: angleRadians, axis: axis))
-    }
-
-    /// Creates a new matrix from the specified quarternion.
-    /// Quaternion will be normalized.
-    public init(orientation quaternion: Quat4f) {
-        self.init(quaternion.normalized)
     }
 
     public init(upperLeft matrix3x3: Mat3x3f) {
@@ -79,14 +62,6 @@ extension Mat4x4f {
                        Vec3f(columns.2.xyz))
     }
 
-    @inlinable public var inverted: Mat4x4f {
-        return simd.simd_inverse(self)
-    }
-
-    @inlinable public var determinant: Float {
-        return simd.simd_determinant(self)
-    }
-
     @inlinable public var scale: Vec3f {
         let sx = columns.0.length
         let sy = columns.1.length
@@ -97,15 +72,6 @@ extension Mat4x4f {
 
     @inlinable public var translation: Vec3f {
         return Vec3f(columns.3[0], columns.3[1], columns.3[2])
-    }
-
-    /// Construct a quaternion from a 4x4 rotation `matrix`.
-    ///
-    /// The last row and column of the matrix are ignored. This
-    /// function is equivalent to calling simd_quaternion with the upper-left 3x3
-    /// submatrix.
-    @inlinable public var quaternion: Quat4f {
-        return simd_quaternion(self)
     }
 
     @inlinable public var eulerAngles: Vec3f {
