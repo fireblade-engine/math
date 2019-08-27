@@ -13,6 +13,16 @@ extension Mat3x3d {
     }
 }
 
+#if !canImport(simd)
+extension Mat3x3d {
+    public init(_ columns: [Vec3d]) {
+        self.init(columns[0],
+                  columns[1],
+                  columns[2])
+    }
+}
+#endif
+
 extension Mat3x3d {
     /*/// Create rotation matrix using an angle and a rotation axis.
      ///

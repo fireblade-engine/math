@@ -14,6 +14,16 @@ extension Mat3x3f {
     }
 }
 
+#if !canImport(simd)
+extension Mat3x3f {
+    public init(_ columns: [Vec3f]) {
+        self.init(columns[0],
+                  columns[1],
+                  columns[2])
+    }
+}
+#endif
+
 extension Mat3x3f {
     public init(rotation angleRadians: Float, axis: Vec3f) {
         // see: <GLKit.framework/.../Headers/GLKMatrix4.h>

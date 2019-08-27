@@ -17,6 +17,17 @@ extension Mat4x4d {
     }
 }
 
+#if !canImport(simd)
+extension Mat4x4d {
+    public init(_ columns: [Vec4d]) {
+        self.init(columns[0],
+                  columns[1],
+                  columns[2],
+                  columns[3])
+    }
+}
+#endif
+
 extension Mat4x4d {
     /*
      @inlinable public static func look(from eyePosition: Vec3d, at lookAtPosition: Vec3d, up: Vec3d) -> Mat4x4d {

@@ -15,15 +15,29 @@ import func simd.dot
 import func simd.matrix_multiply
 
 #endif
+
 extension Mat4x4f {
     public init(_ values: [Float]) {
         precondition(values.count == 16, "Matrix needs exactly 16 values")
-        self.init(Vec4f(values[0...3]),
-                  Vec4f(values[4...7]),
-                  Vec4f(values[8...11]),
-                  Vec4f(values[12...15]))
+        self.init([Vec4f(values[0...3]),
+                   Vec4f(values[4...7]),
+                   Vec4f(values[8...11]),
+                   Vec4f(values[12...15])])
     }
+}
 
+#if !canImport(simd)
+extension Mat4x4f {
+    public init(_ columns: [Vec4f]) {
+        self.init(columns[0],
+                  columns[1],
+                  columns[2],
+                  columns[3])
+    }
+}
+#endif
+
+extension Mat4x4f {
     public init(columns columnA: Vec4f, _ columnB: Vec4f, _ columnC: Vec4f, _ columnD: Vec4f) {
         self.init(columnA, columnB, columnC, columnD)
     }
