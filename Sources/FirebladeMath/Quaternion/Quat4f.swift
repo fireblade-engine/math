@@ -5,105 +5,7 @@
 //  Created by Christian Treffs on 23.07.19.
 //
 
-#if canImport(simd)
-
-import func simd.simd_axis
-import func simd.simd_conjugate
-
-import func simd.simd_inverse
-
-import func simd.simd_quaternion
-
-import struct simd.quaternion.simd_quatf
-
-#endif
-
 extension Quat4f {
-    public init(_ x: Float, _ y: Float, _ z: Float, _ w: Float) {
-        #if canImport(simd)
-        self.init(ix: x, iy: y, iz: z, r: w)
-        #else
-        self.init([x, y, z, w])
-        #endif
-    }
-}
-
-#if canImport(simd)
-extension Quat4f: ExpressibleByArrayLiteral {
-    public init(arrayLiteral elements: Float...) {
-        precondition(elements.count == 4, "Quaternion needs to be initialized with exactly 4 elements")
-        self.init(ix: elements[0], iy: elements[1], iz: elements[2], r: elements[3])
-    }
-}
-#endif
-
-#if canImport(simd)
-extension Quat4f {
-    @inlinable public var x: Float { return self.imag.x }
-    @inlinable public var y: Float { return self.imag.y }
-    @inlinable public var z: Float { return self.imag.z }
-    @inlinable public var w: Float { return self.real }
-}
-#endif
-
-extension Quat4f {
-    /// Constructs a quaternion from a four-element vector.
-    /// - Parameter vector: A four-element vector.
-    ///
-    /// Note that the imaginary (vector) part of the quaternion comes
-    /// from lanes 0, 1, and 2 of the vector, and the real (scalar) part comes from
-    /// lane 3.
-    public init(_ vector: Vec4f) {
-        self = simd_quaternion(vector)
-    }
-
-    /*
-     /// Construct a quaternion that rotates from one vector to another.
-     /// - Parameter from: A normalized three-element vector.
-     /// - Parameter to: A normalized three-element vector.
-     ///
-     /// The rotation axis is `simd_cross(from, to)`. If `from` and
-     /// `to` point in opposite directions (to within machine precision), an
-     ///  arbitrary rotation axis is chosen, and the angle is pi radians.
-     public init(from: Vec3f, to: Vec3f) {
-     self = simd_quaternion(from, to)
-     }*/
-
-    /// Construct a quaternion from a 4x4 rotation `matrix`.
-    /// - Parameter matrix: A rotation matrix
-    ///
-    /// The last row and column of the matrix are ignored. This
-    /// function is equivalent to calling simd_quaternion with the upper-left 3x3
-    /// submatrix
-    public init(rotation matrix: Mat4x4f) {
-        self = simd_quaternion(matrix)
-    }
-
-    /*
-     public init(yaw: Float, pitch: Float, roll: Float) {
-     let atCos: Float = cos(roll / 2)
-     let atSin: Float = sin(roll / 2)
-     let leftCos: Float = cos(pitch / 2)
-     let leftSin: Float = sin(pitch / 2)
-     let upCos: Float = cos(yaw / 2)
-     let upSin: Float = sin(yaw / 2)
-     let atLeftCos: Float = atCos * leftCos
-     let atLeftSin: Float = atSin * leftSin
-
-     let X: Float = atSin * leftCos * upCos + atCos * leftSin * upSin
-     let Y: Float = atCos * leftSin * upCos - atSin * leftCos * upSin
-     let Z: Float = atLeftCos * upSin + atLeftSin * upCos
-     let W: Float = atLeftCos * upCos - atLeftSin * upSin
-
-     self.init(ix: X, iy: Y, iz: Z, r: W)
-     }
-     */
-
-    /*
-     public init(yaw: Float, pitch: Float, roll: Float) {
-     self = Quat4f(angle: yaw, axis: .axisY) * Quat4f(angle: pitch, axis: .axisX) * Quat4f(angle: roll, axis: .axisZ)
-     }*/
-
     public init(yaw: Float, pitch: Float, roll: Float) {
         /// https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
         // Abbreviations for the various angular functions
@@ -121,8 +23,7 @@ extension Quat4f {
 
         self.init(x, y, z, w)
     }
-}
-extension Quat4f {
+
     /// Calculate the local yaw element of this quaternion in radians.
     ///
     /// Returns the 'intuitive' result that is, if you projected the local Z of the quaternion onto the ZX plane,
@@ -133,15 +34,6 @@ extension Quat4f {
     /// Yaw is used when driving a car.
     @inlinable public var yaw: Float {
         /// https://github.com/OGRECave/ogre/blob/master/OgreMain/src/OgreQuaternion.cpp#L508
-        //let fTx: Float  = 2.0*x
-        //let fTy: Float  = 2.0*y
-        //let fTz: Float  = 2.0*z
-        //let fTwy: Float = fTy*w
-        //let fTxx: Float = fTx*x
-        //let fTxz: Float = fTz*x
-        //let fTyy: Float = fTy*y
-        //return atan2(fTxz+fTwy, 1.0-(fTxx+fTyy))
-
         return asin(-2 * (x * z - w * y))
     }
 
@@ -155,14 +47,6 @@ extension Quat4f {
     /// Pitch is used when flying a jet down or up, or when driving up hill or down.
     @inlinable public var pitch: Float {
         /// https://github.com/OGRECave/ogre/blob/master/OgreMain/src/OgreQuaternion.cpp#L484
-        //let fTx: Float  = 2.0*x
-        //let fTz: Float  = 2.0*z
-        //let fTwx: Float = fTx*w
-        //let fTxx: Float = fTx*x
-        //let fTyz: Float = fTz*y
-        //let fTzz: Float = fTz*z
-        //return atan2(fTyz+fTwx, 1.0-(fTxx+fTzz))
-
         return atan2(2.0 * (y * z + w * x), w * w - x * x - y * y + z * z)
     }
 
@@ -176,14 +60,6 @@ extension Quat4f {
     /// Roll is literally what happens to your car when you take a curve too fast!
     @inlinable public var roll: Float {
         /// https://github.com/OGRECave/ogre/blob/master/OgreMain/src/OgreQuaternion.cpp#L459
-        //let fTy: Float  = 2.0*y
-        //let fTz: Float  = 2.0*z
-        //let fTwz: Float = fTz*w
-        //let fTxy: Float = fTy*x
-        //let fTyy: Float = fTy*y
-        //let fTzz: Float = fTz*z
-        //return atan2(fTxy+fTwz, 1.0-(fTyy+fTzz))
-
         return atan2(2.0 * (x * y + w * z), w * w + x * x - y * y - z * z)
     }
 
@@ -234,18 +110,8 @@ extension Quat4f {
         return angle
     }
 
-    /// The normalized axis (a 3-element vector) around which the action of the quaternion `q` rotates.
-    @inlinable public var axis: Vec3f {
-        return simd_axis(self)
-    }
-
     @inlinable public var rotationAxis: Vec3f {
         return self.axis
-    }
-
-    /// The conjugate of the quaternion `q`.
-    @inlinable public var conjugate: Quat4f {
-        return simd_conjugate(self)
     }
 
     /// The (multiplicative) inverse of the quaternion `q`.
