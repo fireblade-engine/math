@@ -14,11 +14,12 @@ extension Mat3x3d {
 }
 
 #if !canImport(simd)
+import struct SGLMath.Vector3
 extension Mat3x3d {
     public init(_ columns: [Vec3d]) {
-        self.init(columns[0],
-                  columns[1],
-                  columns[2])
+        self.init(Vector3<Double>(columns[0]),
+                  Vector3<Double>(columns[1]),
+                  Vector3<Double>(columns[2]))
     }
 }
 #endif

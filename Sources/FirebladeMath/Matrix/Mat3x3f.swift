@@ -15,11 +15,12 @@ extension Mat3x3f {
 }
 
 #if !canImport(simd)
+import struct SGLMath.Vector3
 extension Mat3x3f {
     public init(_ columns: [Vec3f]) {
-        self.init(columns[0],
-                  columns[1],
-                  columns[2])
+        self.init(Vector3<Float>(columns[0]),
+                  Vector3<Float>(columns[1]),
+                  Vector3<Float>(columns[2]))
     }
 }
 #endif

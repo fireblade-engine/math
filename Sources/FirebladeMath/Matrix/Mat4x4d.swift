@@ -18,12 +18,13 @@ extension Mat4x4d {
 }
 
 #if !canImport(simd)
+import struct SGLMath.Vector4
 extension Mat4x4d {
     public init(_ columns: [Vec4d]) {
-        self.init(columns[0],
-                  columns[1],
-                  columns[2],
-                  columns[3])
+        self.init(Vector4<Double>(columns[0]),
+                  Vector4<Double>(columns[1]),
+                  Vector4<Double>(columns[2]),
+                  Vector4<Double>(columns[3]))
     }
 }
 #endif
