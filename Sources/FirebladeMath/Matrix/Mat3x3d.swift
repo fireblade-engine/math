@@ -25,9 +25,9 @@ extension Mat3x3d {
     public init(_ column1: Vec3d,
                 _ column2: Vec3d,
                 _ column3: Vec3d) {
-        self.init(Vector3<Float>(column1),
-                  Vector3<Float>(column2),
-                  Vector3<Float>(column3))
+        self.init(Vector3<Double>(column1),
+                  Vector3<Double>(column2),
+                  Vector3<Double>(column3))
     }
 }
 #endif
