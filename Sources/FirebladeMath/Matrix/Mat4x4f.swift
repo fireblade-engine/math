@@ -26,28 +26,6 @@ extension Mat4x4f {
     }
 }
 
-#if !canImport(simd)
-import struct SGLMath.Vector4
-extension Mat4x4f {
-    public init(_ columns: [Vec4f]) {
-        self.init(columns[0],
-                  columns[1],
-                  columns[2],
-                  columns[3])
-    }
-
-    public init(_ column1: Vec4f,
-                _ column2: Vec4f,
-                _ column3: Vec4f,
-                _ column4: Vec4f) {
-        self.init(Vector4<Float>(column1),
-                  Vector4<Float>(column2),
-                  Vector4<Float>(column3),
-                  Vector4<Float>(column4))
-    }
-}
-#endif
-
 extension Mat4x4f {
     public init(columns columnA: Vec4f, _ columnB: Vec4f, _ columnC: Vec4f, _ columnD: Vec4f) {
         self.init(columnA, columnB, columnC, columnD)

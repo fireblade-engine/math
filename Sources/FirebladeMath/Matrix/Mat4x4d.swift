@@ -17,28 +17,6 @@ extension Mat4x4d {
     }
 }
 
-#if !canImport(simd)
-import struct SGLMath.Vector4
-extension Mat4x4d {
-    public init(_ columns: [Vec4d]) {
-        self.init(columns[0],
-                  columns[1],
-                  columns[2],
-                  columns[3])
-    }
-
-    public init(_ column1: Vec4d,
-                _ column2: Vec4d,
-                _ column3: Vec4d,
-                _ column4: Vec4d) {
-        self.init(Vector4<Double>(column1),
-                  Vector4<Double>(column2),
-                  Vector4<Double>(column3),
-                  Vector4<Double>(column4))
-    }
-}
-#endif
-
 extension Mat4x4d {
     /*
      @inlinable public static func look(from eyePosition: Vec3d, at lookAtPosition: Vec3d, up: Vec3d) -> Mat4x4d {

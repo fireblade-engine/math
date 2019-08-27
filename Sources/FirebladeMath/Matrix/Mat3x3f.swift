@@ -14,25 +14,6 @@ extension Mat3x3f {
     }
 }
 
-#if !canImport(simd)
-import struct SGLMath.Vector3
-extension Mat3x3f {
-    public init(_ columns: [Vec3f]) {
-        self.init(columns[0],
-                  columns[1],
-                  columns[2])
-    }
-
-    public init(_ column1: Vec3f,
-                _ column2: Vec3f,
-                _ column3: Vec3f) {
-        self.init(Vector3<Float>(column1),
-                  Vector3<Float>(column2),
-                  Vector3<Float>(column3))
-    }
-}
-#endif
-
 extension Mat3x3f {
     public init(rotation angleRadians: Float, axis: Vec3f) {
         // see: <GLKit.framework/.../Headers/GLKMatrix4.h>
