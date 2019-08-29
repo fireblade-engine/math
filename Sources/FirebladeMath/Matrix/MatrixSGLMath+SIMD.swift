@@ -64,6 +64,7 @@ extension Matrix4x4 where Element: Scalar {
                   Vector4<Element>(0, 0, 0, diagonal.w))
     }
 
+    // swiftlint:disable large_tuple
     @inlinable public var columns: (SIMD4<Element>, SIMD4<Element>, SIMD4<Element>, SIMD4<Element>) {
         return (SIMD4<Element>(elements[0...3]),
                 SIMD4<Element>(elements[4...7]),

@@ -19,12 +19,12 @@ import func SGLMath.fract
 #endif
 
 #if canImport(simd)
-public func fract(_ v: Double) -> Double {
-    return simd_fract(v)
+public func fract(_ value: Double) -> Double {
+    return simd_fract(value)
 }
 
-public func fract(_ v: Float) -> Float {
-    return simd_fract(v)
+public func fract(_ value: Float) -> Float {
+    return simd_fract(value)
 }
 
 #endif
@@ -36,7 +36,7 @@ public func fract(_ v: Float) -> Float {
 /// - Parameters:
 ///     - v: floating point value
 /// - Returns: The "fractional part" of x
-public func fract<S>(_ v: S) -> S where S: FloatingPointScalar {
+public func fract<S>(_ value: S) -> S where S: FloatingPointScalar {
     // FIXME: return SGLMath.fract(v)
     fatalError("not implemented")
 }

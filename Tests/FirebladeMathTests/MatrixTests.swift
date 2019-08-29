@@ -7,9 +7,7 @@
 
 import XCTest
 import FirebladeMath
-import GLKit
-import SceneKit
-import QuartzCore
+
 
 /*
 class MatrixTests: XCTestCase {

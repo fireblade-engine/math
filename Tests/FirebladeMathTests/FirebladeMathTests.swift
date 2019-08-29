@@ -1,6 +1,6 @@
 @testable import FirebladeMath
 import XCTest
-import GLKit
+
 /*
 
 class FirebladeMathTests: XCTestCase {

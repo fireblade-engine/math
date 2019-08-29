@@ -17,6 +17,16 @@ extension Mat4x4d {
     }
 }
 
+extension Mat4x4d: Sequence {
+    public __consuming func makeIterator() -> IndexingIterator<[Double]> {
+        return [columns.0, columns.1, columns.2, columns.3].flatMap { $0 }.makeIterator()
+    }
+
+    @inlinable public var elements: [Double] {
+        return [Double](self)
+    }
+}
+
 extension Mat4x4d {
     /*
      @inlinable public static func look(from eyePosition: Vec3d, at lookAtPosition: Vec3d, up: Vec3d) -> Mat4x4d {

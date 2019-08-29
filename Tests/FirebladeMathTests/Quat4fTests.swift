@@ -12,13 +12,6 @@ import func XCTest.XCTAssertEqual
 import func XCTest.XCTAssertNotEqual
 import func XCTest.XCTAssertNotNil
 
-#if canImport(SceneKit)
-import class SceneKit.SCNNode
-#endif
-
-#if canImport(GLKit)
-import GLKit
-#endif
 
 class Quat4fTests: XCTestCase {
     

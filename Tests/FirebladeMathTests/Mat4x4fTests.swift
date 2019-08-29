@@ -10,61 +10,73 @@ import FirebladeMath
 import class XCTest.XCTestCase
 import func XCTest.XCTAssertEqual
 
-import class SceneKit.SCNNode
-
-import func GLKit.GLKMatrix4MakeLookAt
-import func GLKit.GLKMatrix4MakeOrtho
-import func GLKit.GLKMatrix4MakePerspective
-import func GLKit.GLKMatrix4MakeWithQuaternion
-import func GLKit.GLKMatrix4Rotate
-import func GLKit.GLKMatrix4Scale
-import func GLKit.GLKMatrix4Translate
-import struct GLKit.GLKMatrix4
-import struct GLKit.GLKQuaternion
-import var GLKit.GLKMatrix4Identity
-
 class Mat4x4fTests: XCTestCase {
     
     func testIdentity() {
-        let glkIdentity = GLKMatrix4Identity
         let identity: Mat4x4f = .identity
-        XCTAssertEqual(identity.array, glkIdentity.array)
+        let values: [Float] = [1,0,0,0,
+                               0,1,0,0,
+                               0,0,1,0,
+                               0,0,0,1]
+        XCTAssertEqual(identity.elements, values)
     }
     
-    func testArrayInit() {
-        let f = rnd(16)
-        let glkMat = GLKMatrix4(f)
-        
-        let mat = Mat4x4f(f)
-        
-        XCTAssertEqual(mat.array, glkMat.array)
+    func testInitArrayValues() {
+        let values: [Float] = rnd(16)
+        let mat = Mat4x4f(values)
+        XCTAssertEqual(mat.elements, values)
     }
     
-    func testVectorColumnsInit() {
-        let f = rnd(16)
-        let glkMat = GLKMatrix4(f)
+    func testInitVectorColumns() {
+        let values: [Float] = rnd(16)
         
-        let mat = Mat4x4f(columns: Vec4f(f[0...3]), Vec4f(f[4...7]), Vec4f(f[8...11]), Vec4f(f[12...15]))
+        let a = Vec4f(values[0...3])
+        let b = Vec4f(values[4...7])
+        let c = Vec4f(values[8...11])
+        let d = Vec4f(values[12...15])
         
-        XCTAssertEqual(mat.array, glkMat.array)
+        let mat = Mat4x4f(a, b, c, d)
+        
+        XCTAssertEqual(mat.elements, values)
+    }
+    
+    func testInitDiagonal() {
+        let vec = Vec4f(rnd(4))
+        
+        let values: [Float] = [vec.x,0,0,0,
+                               0,vec.y,0,0,
+                               0,0,vec.z,0,
+                               0,0,0,vec.w]
+        
+        let mat = Mat4x4f(diagonal: vec)
+        
+        XCTAssertEqual(mat.elements, values)
     }
     
     func testTranslationInit() {
         let vec = Vec3f(rnd(3))
-        let glkMat = GLKMatrix4Translate(GLKMatrix4Identity, vec.x, vec.y, vec.z)
         
         let mat = Mat4x4f(translation: vec)
         
-        XCTAssertEqual(mat.array, glkMat.array)
+        let values: [Float] = [1,0,0,vec.x,
+                               0,1,0,vec.y,
+                               0,0,1,vec.z,
+                               0,0,0,1]
+        
+        XCTAssertEqual(mat.elements, values)
     }
     
     func testScaleInit() {
         let vec = Vec3f(rnd(3))
-        let glkMat = GLKMatrix4Scale(GLKMatrix4Identity, vec.x, vec.y, vec.z)
         
         let mat = Mat4x4f(scale: vec)
         
-        XCTAssertEqual(mat.array, glkMat.array)
+        let values: [Float] = [vec.x,0,0,0,
+                               0,vec.y,0,0,
+                               0,0,vec.z,0,
+                               0,0,0,1]
+        
+        XCTAssertEqual(mat.elements, values)
     }
     
     func testRotationInit() {
@@ -74,6 +86,8 @@ class Mat4x4fTests: XCTestCase {
         let glkRot = GLKMatrix4Rotate(GLKMatrix4Identity, radians(angle), axis.x, axis.y, axis.z)
         
         let matRot = Mat4x4f(rotation: radians(angle), axis: axis)
+        
+        
         
         for (a, b) in zip(matRot.array, glkRot.array) {
             XCTAssertEqual(a, b, accuracy: 1e-6)
@@ -169,35 +183,12 @@ class Mat4x4fTests: XCTestCase {
         XCTAssertEqual(mat3x3, mat3x3exp)
     }
     
-    func testDiagonal() {
-        let vec = Vec4f(rnd(4))
-        let mat = Mat4x4f(diagonal: vec)
-        
-        XCTAssertEqual(mat[0][0], vec.x)
-        XCTAssertEqual(mat[0][1], 0)
-        XCTAssertEqual(mat[0][2], 0)
-        XCTAssertEqual(mat[0][3], 0)
-        
-        XCTAssertEqual(mat[1][0], 0)
-        XCTAssertEqual(mat[1][1], vec.y)
-        XCTAssertEqual(mat[1][2], 0)
-        XCTAssertEqual(mat[1][3], 0)
-        
-        XCTAssertEqual(mat[2][0], 0)
-        XCTAssertEqual(mat[2][1], 0)
-        XCTAssertEqual(mat[2][2], vec.z)
-        XCTAssertEqual(mat[2][3], 0)
-        
-        XCTAssertEqual(mat[3][0], 0)
-        XCTAssertEqual(mat[3][1], 0)
-        XCTAssertEqual(mat[3][2], 0)
-        XCTAssertEqual(mat[3][3], vec.w)
-    }
     
     func testTranslateBy() {
         let floats = rnd(16)
         let vec: Vec3f = Vec3f(rnd(3))
         
+        let refMat = matrixTranslate(by: vec)
         let glkMat = GLKMatrix4Translate(GLKMatrix4(floats), vec.x, vec.y, vec.z)
         
         
@@ -284,7 +275,7 @@ class Mat4x4fTests: XCTestCase {
         node.simdEulerAngles = vec
         
         let mat = Mat4x4f(eulerAngles: vec)
-                
+        
         XCTAssertEqual(mat[0][0], node.simdTransform[0][0])
         XCTAssertEqual(mat[0][1], node.simdTransform[0][1])
         XCTAssertEqual(mat[0][2], node.simdTransform[0][2])

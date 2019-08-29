@@ -67,9 +67,9 @@ extension Quat4f {
     @inlinable public var eulerAngles: Vec3f {
         /// https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
 
-        let sinr_cosp: Float = +2.0 * (w * x + y * z)
-        let cosr_cosp: Float = +1.0 - 2.0 * (x * x + y * y)
-        let pitch: Float = atan2(sinr_cosp, cosr_cosp)
+        let sinrcosp: Float = +2.0 * (w * x + y * z)
+        let cosrcosp: Float = +1.0 - 2.0 * (x * x + y * y)
+        let pitch: Float = atan2(sinrcosp, cosrcosp)
 
         // y-axis rotation
         let sinp: Float = +2.0 * (w * y - z * x)
@@ -81,9 +81,9 @@ extension Quat4f {
         }
 
         // z-axis rotation
-        let siny_cosp: Float = +2.0 * (w * z + x * y)
-        let cosy_cosp: Float = +1.0 - 2.0 * (y * y + z * z)
-        let roll = atan2(siny_cosp, cosy_cosp)
+        let sinycosp: Float = +2.0 * (w * z + x * y)
+        let cosycosp: Float = +1.0 - 2.0 * (y * y + z * z)
+        let roll = atan2(sinycosp, cosycosp)
 
         return Vec3f(yaw, pitch, roll)
     }

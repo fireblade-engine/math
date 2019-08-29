@@ -14,24 +14,34 @@ extension Mat3x3f {
     }
 }
 
+extension Mat3x3f: Sequence {
+    public __consuming func makeIterator() -> IndexingIterator<[Float]> {
+        return [columns.0, columns.1, columns.2].flatMap { $0 }.makeIterator()
+    }
+
+    @inlinable public var elements: [Float] {
+        return [Float](self)
+    }
+}
+
 extension Mat3x3f {
     public init(rotation angleRadians: Float, axis: Vec3f) {
         // see: <GLKit.framework/.../Headers/GLKMatrix4.h>
         let v: Vec3f = normalize(axis)
-        let _cos: Float = cos(angleRadians)
-        let _cosp: Float = 1.0 - _cos
-        let _sin: Float = sin(angleRadians)
+        let icos: Float = cos(angleRadians)
+        let icosp: Float = 1.0 - icos
+        let isin: Float = sin(angleRadians)
 
         self.init(
-            Vec3f( _cos + _cosp * v.x * v.x,
-                   _cosp * v.x * v.y + v.z * _sin,
-                   _cosp * v.x * v.z - v.y * _sin),
-            Vec3f( _cosp * v.x * v.y - v.z * _sin,
-                   _cos + _cosp * v.y * v.y,
-                   _cosp * v.y * v.z + v.x * _sin),
-            Vec3f( _cosp * v.x * v.z + v.y * _sin,
-                   _cosp * v.y * v.z - v.x * _sin,
-                   _cos + _cosp * v.z * v.z)
+            Vec3f( icos + icosp * v.x * v.x,
+                   icosp * v.x * v.y + v.z * isin,
+                   icosp * v.x * v.z - v.y * isin),
+            Vec3f( icosp * v.x * v.y - v.z * isin,
+                   icos + icosp * v.y * v.y,
+                   icosp * v.y * v.z + v.x * isin),
+            Vec3f( icosp * v.x * v.z + v.y * isin,
+                   icosp * v.y * v.z - v.x * isin,
+                   icos + icosp * v.z * v.z)
         )
     }
 
@@ -105,8 +115,8 @@ extension Mat3x3f {
         let yaw: Float
         let pitch: Float = asin(-self[0][1])
         let roll: Float
-        if ( pitch < radians(.halfPi) ) {
-            if ( pitch > radians(-.halfPi) ) {
+        if pitch < radians(.halfPi) {
+            if pitch > radians(-.halfPi) {
                 yaw = atan2(self[2][1], self[1][1])
                 roll = atan2(self[0][2], self[0][0])
             } else {
@@ -129,8 +139,8 @@ extension Mat3x3f {
         let yaw: Float
         let pitch: Float = asin(-self[1][2])
         let roll: Float
-        if ( pitch < radians(.halfPi) ) {
-            if ( pitch > radians(-.halfPi) ) {
+        if  pitch < radians(.halfPi) {
+            if pitch > radians(-.halfPi) {
                 yaw = atan2(self[0][2], self[2][2])
                 roll = atan2(self[1][0], self[1][1])
             } else {
@@ -153,8 +163,8 @@ extension Mat3x3f {
         let yaw: Float
         let pitch: Float = asin(self[2][1])
         let roll: Float
-        if ( pitch < radians(.halfPi) ) {
-            if ( pitch > radians(-.halfPi) ) {
+        if  pitch < radians(.halfPi) {
+            if pitch > radians(-.halfPi) {
                 yaw = atan2(-self[0][1], self[1][1])
                 roll = atan2(-self[2][0], self[2][2])
             } else {
@@ -177,8 +187,8 @@ extension Mat3x3f {
         let yaw: Float
         let pitch: Float = asin(-self[2][0])
         let roll: Float
-        if ( pitch < radians(.halfPi) ) {
-            if ( pitch > radians(-.halfPi) ) {
+        if pitch < radians(.halfPi) {
+            if pitch > radians(-.halfPi) {
                 yaw = atan2(self[1][0], self[0][0])
                 roll = atan2(self[2][1], self[2][2])
             } else {
@@ -193,7 +203,6 @@ extension Mat3x3f {
             roll = radians(0.0);  // any angle works
             yaw = fRpY - roll
         }
-
         return Vec3f(yaw, pitch, roll)
     }
 }

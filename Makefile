@@ -17,7 +17,7 @@ cleanArtifacts:
 	swift package clean
 
 genXcode:
-	swift package generate-xcodeproj
+	swift package generate-xcodeproj --enable-code-coverage --skip-extra-files
 
 latest:
 	swift package update

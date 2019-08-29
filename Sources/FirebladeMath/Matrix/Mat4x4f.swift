@@ -15,6 +15,16 @@ extension Mat4x4f {
     }
 }
 
+extension Mat4x4f: Sequence {
+    public __consuming func makeIterator() -> IndexingIterator<[Float]> {
+        return [columns.0, columns.1, columns.2, columns.3].flatMap { $0 }.makeIterator()
+    }
+
+    @inlinable public var elements: [Float] {
+        return [Float](self)
+    }
+}
+
 extension Mat4x4f {
     public init(columns columnA: Vec4f, _ columnB: Vec4f, _ columnC: Vec4f, _ columnD: Vec4f) {
         self.init(columnA, columnB, columnC, columnD)
@@ -82,19 +92,22 @@ extension Mat4x4f {
 // MARK: - mutating operations
 extension Mat4x4f {
     @discardableResult
-    @inlinable public mutating func translate(by vec: Vec3f) -> Mat4x4f {
+    @inlinable
+    public mutating func translate(by vec: Vec3f) -> Mat4x4f {
         self = multiply(self, Mat4x4f(translation: vec))
         return self
     }
 
     @discardableResult
-    @inlinable public mutating func scale(by vec: Vec3f) -> Mat4x4f {
+    @inlinable
+    public mutating func scale(by vec: Vec3f) -> Mat4x4f {
         self = multiply(self, Mat4x4f(scale: vec))
         return self
     }
 
     @discardableResult
-    @inlinable public mutating func rotate(by angleRadians: Float, axis: Vec3f) -> Mat4x4f {
+    @inlinable
+    public mutating func rotate(by angleRadians: Float, axis: Vec3f) -> Mat4x4f {
         self = multiply(self, Mat4x4f(rotation: angleRadians, axis: axis))
         return self
     }
@@ -103,7 +116,8 @@ extension Mat4x4f {
 // MARK: - static functions
 
 extension Mat4x4f {
-    @inlinable public static func look(from eyePosition: Vec3f, at lookAtPosition: Vec3f, up: Vec3f) -> Mat4x4f {
+    @inlinable
+    public static func look(from eyePosition: Vec3f, at lookAtPosition: Vec3f, up: Vec3f) -> Mat4x4f {
         // see: <GLKit.framework/.../Headers/GLKMatrix4.h>
         let ev: Vec3f = eyePosition
         let cv: Vec3f = lookAtPosition
@@ -121,7 +135,8 @@ extension Mat4x4f {
         )
     }
 
-    @inlinable public static func perspective(fovy fovyRadians: Float, width: Float, height: Float, zNear: Float, zFar: Float) -> Mat4x4f {
+    @inlinable
+    public static func perspective(fovy fovyRadians: Float, width: Float, height: Float, zNear: Float, zFar: Float) -> Mat4x4f {
         // see: <GLKit.framework/.../Headers/GLKMatrix4.h>
         precondition(fovyRadians > 0.0, "Field of view must be greater than 0.0")
         precondition(width > 0.0, "Width must be greater than 0.0")
@@ -152,7 +167,8 @@ extension Mat4x4f {
     /// - Parameter top: The top coordinate of the projection volume in eye coordinates.
     /// - Parameter zNear: The near coordinate of the projection volume in eye coordinates.
     /// - Parameter zFar: The far coordinate of the projection volume in eye coordinates.
-    @inlinable public static func orthographic(left: Float, right: Float, bottom: Float, top: Float, zNear: Float, zFar: Float) -> Mat4x4f {
+    @inlinable
+    public static func orthographic(left: Float, right: Float, bottom: Float, top: Float, zNear: Float, zFar: Float) -> Mat4x4f {
         let ral: Float = right + left
         let rsl: Float = right - left
         let tab: Float = top + bottom
@@ -319,7 +335,7 @@ extension Mat4x4f {
      }*/
 
     // FIXME: order of angles is wrong
-    @inlinable internal var _eulerAngles: Vec3f {
+    @inlinable internal var eulerAngles2: Vec3f {
         // https://github.com/JOML-CI/JOML/blob/master/src/org/joml/Matrix3f.java#L4158
         let m12: Float = self[1][2]
         let m22: Float = self[2][2]
@@ -335,7 +351,7 @@ extension Mat4x4f {
     }
 
     // FIXME: order of angles is wrong
-    @inlinable internal var _rotationAngles: Vec3f {
+    @inlinable internal var rotationAngles2: Vec3f {
         let rotX = atan2( self[1][2], self[2][2])
         let rotY = atan2(-self[0][2], hypot(self[1][2], self[2][2]))
         let rotZ = atan2( self[0][1], self[0][0])

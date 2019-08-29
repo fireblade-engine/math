@@ -13,6 +13,16 @@ extension Mat3x3d {
     }
 }
 
+extension Mat3x3d: Sequence {
+    public __consuming func makeIterator() -> IndexingIterator<[Double]> {
+        return [columns.0, columns.1, columns.2].flatMap { $0 }.makeIterator()
+    }
+
+    @inlinable public var elements: [Double] {
+        return [Double](self)
+    }
+}
+
 extension Mat3x3d {
     /*/// Create rotation matrix using an angle and a rotation axis.
      ///
