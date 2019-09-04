@@ -13,6 +13,12 @@ extension Mat3x3d {
     }
 }
 
+extension Mat3x3d: ExpressibleByArrayLiteral {
+    public init(arrayLiteral elements: Double...) {
+        self.init(elements)
+    }
+}
+
 extension Mat3x3d: Sequence {
     public __consuming func makeIterator() -> IndexingIterator<[Double]> {
         return [columns.0, columns.1, columns.2].flatMap { $0 }.makeIterator()

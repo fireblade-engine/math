@@ -17,6 +17,12 @@ extension Mat4x4d {
     }
 }
 
+extension Mat4x4d: ExpressibleByArrayLiteral {
+    public init(arrayLiteral elements: Double...) {
+        self.init(elements)
+    }
+}
+
 extension Mat4x4d: Sequence {
     public __consuming func makeIterator() -> IndexingIterator<[Double]> {
         return [columns.0, columns.1, columns.2, columns.3].flatMap { $0 }.makeIterator()

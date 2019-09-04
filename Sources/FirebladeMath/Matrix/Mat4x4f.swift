@@ -15,6 +15,12 @@ extension Mat4x4f {
     }
 }
 
+extension Mat4x4f: ExpressibleByArrayLiteral {
+    public init(arrayLiteral elements: Float...) {
+        self.init(elements)
+    }
+}
+
 extension Mat4x4f: Sequence {
     public __consuming func makeIterator() -> IndexingIterator<[Float]> {
         return [columns.0, columns.1, columns.2, columns.3].flatMap { $0 }.makeIterator()
