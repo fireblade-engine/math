@@ -19,7 +19,7 @@ extension GLKMatrix4: CustomStringConvertible, CustomDebugStringConvertible {
                 } else {
                     return String(format: "%.6f", v)
                 }
-        }
+            }
         .joined(separator: ",")
         .trimmingCharacters(in: .whitespacesAndNewlines)
     }

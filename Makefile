@@ -10,6 +10,7 @@ test: genLinuxTests
 
 clean:
 	swift package reset
+	rm -rdf .swiftpm/xcode
 	rm -rdf .build/
 	rm Package.resolved
 	rm .DS_Store
