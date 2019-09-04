@@ -35,7 +35,7 @@ final class FunctionTests: XCTestCase {
         XCTAssertNotNil(FirebladeMath.atan(Float(123)))
     }
     func test_atan2() {
-        XCTAssertNotNil(FirebladeMath.atan2(Double(123),Double(123)))
+        XCTAssertNotNil(FirebladeMath.atan2(Double(123), Double(123)))
         XCTAssertNotNil(FirebladeMath.atan2(Float(123), Float(123)))
     }
     func test_atanh() {
@@ -67,13 +67,13 @@ final class FunctionTests: XCTestCase {
         XCTAssertNotNil(FirebladeMath.distance(Float(123), Float(123)))
     }
     func test_dot() {
-        XCTAssertNotNil(FirebladeMath.dot(SIMD2<Double>(1,2), SIMD2<Double>(3,4)))
-        XCTAssertNotNil(FirebladeMath.dot(SIMD3<Double>(1,2,3), SIMD3<Double>(4,5,6)))
-        XCTAssertNotNil(FirebladeMath.dot(SIMD4<Double>(1,2,3,4), SIMD4<Double>(5,6,7,8)))
-        
-        XCTAssertNotNil(FirebladeMath.dot(SIMD2<Float>(1,2), SIMD2<Float>(3,4)))
-        XCTAssertNotNil(FirebladeMath.dot(SIMD3<Float>(1,2,3), SIMD3<Float>(4,5,6)))
-        XCTAssertNotNil(FirebladeMath.dot(SIMD4<Float>(1,2,3,4), SIMD4<Float>(5,6,7,8)))
+        XCTAssertNotNil(FirebladeMath.dot(SIMD2<Double>(1, 2), SIMD2<Double>(3, 4)))
+        XCTAssertNotNil(FirebladeMath.dot(SIMD3<Double>(1, 2, 3), SIMD3<Double>(4, 5, 6)))
+        XCTAssertNotNil(FirebladeMath.dot(SIMD4<Double>(1, 2, 3, 4), SIMD4<Double>(5, 6, 7, 8)))
+
+        XCTAssertNotNil(FirebladeMath.dot(SIMD2<Float>(1, 2), SIMD2<Float>(3, 4)))
+        XCTAssertNotNil(FirebladeMath.dot(SIMD3<Float>(1, 2, 3), SIMD3<Float>(4, 5, 6)))
+        XCTAssertNotNil(FirebladeMath.dot(SIMD4<Float>(1, 2, 3, 4), SIMD4<Float>(5, 6, 7, 8)))
     }
     func test_exp() {
         XCTAssertNotNil(FirebladeMath.exp(Double(123)))
@@ -120,14 +120,13 @@ final class FunctionTests: XCTestCase {
         XCTAssertNotNil(FirebladeMath.isPositiveZero(Float(123)))
     }
     func test_length() {
-        XCTAssertNotNil(FirebladeMath.length(SIMD2<Double>(1,2)))
-        XCTAssertNotNil(FirebladeMath.length(SIMD3<Double>(1,2,3)))
-        XCTAssertNotNil(FirebladeMath.length(SIMD4<Double>(1,2,3,4)))
-        
-        XCTAssertNotNil(FirebladeMath.length(SIMD2<Float>(1,2)))
-        XCTAssertNotNil(FirebladeMath.length(SIMD3<Float>(1,2,3)))
-        XCTAssertNotNil(FirebladeMath.length(SIMD4<Float>(1,2,3,4)))
-        
+        XCTAssertNotNil(FirebladeMath.length(SIMD2<Double>(1, 2)))
+        XCTAssertNotNil(FirebladeMath.length(SIMD3<Double>(1, 2, 3)))
+        XCTAssertNotNil(FirebladeMath.length(SIMD4<Double>(1, 2, 3, 4)))
+
+        XCTAssertNotNil(FirebladeMath.length(SIMD2<Float>(1, 2)))
+        XCTAssertNotNil(FirebladeMath.length(SIMD3<Float>(1, 2, 3)))
+        XCTAssertNotNil(FirebladeMath.length(SIMD4<Float>(1, 2, 3, 4)))
     }
     func test_log() {
         XCTAssertNotNil(FirebladeMath.log(Double(123)))
@@ -142,7 +141,7 @@ final class FunctionTests: XCTestCase {
         XCTAssertNotNil(FirebladeMath.log10(Float(123)))
     }
     func test_max() {
-        XCTAssertNotNil(FirebladeMath.max(Double(123),Double(123)))
+        XCTAssertNotNil(FirebladeMath.max(Double(123), Double(123)))
         XCTAssertNotNil(FirebladeMath.max(Float(123), Float(123)))
     }
     func test_min() {
@@ -158,13 +157,13 @@ final class FunctionTests: XCTestCase {
         XCTAssertNotNil(FirebladeMath.mod(Float(123), Float(123)))
     }
     func test_normalize() {
-        XCTAssertNotNil(FirebladeMath.normalize(SIMD2<Double>(1,2)))
-        XCTAssertNotNil(FirebladeMath.normalize(SIMD3<Double>(1,2,3)))
-        XCTAssertNotNil(FirebladeMath.normalize(SIMD4<Double>(1,2,3,4)))
-        
-        XCTAssertNotNil(FirebladeMath.normalize(SIMD2<Float>(1,2)))
-        XCTAssertNotNil(FirebladeMath.normalize(SIMD3<Float>(1,2,3)))
-        XCTAssertNotNil(FirebladeMath.normalize(SIMD4<Float>(1,2,3,4)))
+        XCTAssertNotNil(FirebladeMath.normalize(SIMD2<Double>(1, 2)))
+        XCTAssertNotNil(FirebladeMath.normalize(SIMD3<Double>(1, 2, 3)))
+        XCTAssertNotNil(FirebladeMath.normalize(SIMD4<Double>(1, 2, 3, 4)))
+
+        XCTAssertNotNil(FirebladeMath.normalize(SIMD2<Float>(1, 2)))
+        XCTAssertNotNil(FirebladeMath.normalize(SIMD3<Float>(1, 2, 3)))
+        XCTAssertNotNil(FirebladeMath.normalize(SIMD4<Float>(1, 2, 3, 4)))
     }
     func test_pow() {
         XCTAssertNotNil(FirebladeMath.pow(Double(123), Double(2)))

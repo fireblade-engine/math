@@ -1,7 +1,6 @@
 included:
   - Sources
-excluded:
-  - Tests
+  - Tests  
 line_length: 200
 number_separator:
   minimum_length: 5

@@ -12,7 +12,6 @@ extension Float64 {
     public static let halfPi: Float64 = .pi * 0.5
 }
 
-
 /// Converts degress to radians.
 ///
 /// - Parameter degrees: an angle (in degrees)
@@ -24,8 +23,6 @@ public func radians(_ degrees: Float32) -> Float32 { return degrees * kDegreeToR
 /// - Parameter degrees: an angle (in degrees)
 /// - Returns: the argument converted to radians.
 public func radians(_ degrees: Float64) -> Float64 { return degrees * kDegreeToRadians64 }
-
-
 
 public func rnd(_ count: Int, in range: ClosedRange<Float> = -1e-9...1e9) -> [Float] {
     return (0..<count).map { _ in Float.random(in: range) }

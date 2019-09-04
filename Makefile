@@ -3,6 +3,7 @@ lint:
 
 genLinuxTests:
 	swift test --generate-linuxmain
+	swiftlint autocorrect --format --path Tests/
 
 test: genLinuxTests
 	swift test

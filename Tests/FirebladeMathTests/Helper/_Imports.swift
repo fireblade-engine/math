@@ -5,7 +5,6 @@
 //  Created by Christian Treffs on 27.08.19.
 //
 
-
 import class SceneKit.SCNNode
 
 import func GLKit.GLKMatrix4MakeLookAt
@@ -20,6 +19,5 @@ import struct GLKit.GLKMatrix4
 import struct GLKit.GLKQuaternion
 import struct GLKit.GLKVector4
 import var GLKit.GLKMatrix4Identity
-
 
 import struct QuartzCore.CATransform3D

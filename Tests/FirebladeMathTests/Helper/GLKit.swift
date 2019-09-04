@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Christian Treffs on 29.08.19.
 //
@@ -26,17 +26,17 @@ func == (lhs: Mat4x4f, rhs: GLKMatrix4) -> Bool {
         lhs[0][1] == rhs.m01 &&
         lhs[0][2] == rhs.m02 &&
         lhs[0][3] == rhs.m03 &&
-        
+
         lhs[1][0] == rhs.m10 &&
         lhs[1][1] == rhs.m11 &&
         lhs[1][2] == rhs.m12 &&
         lhs[1][3] == rhs.m13 &&
-        
+
         lhs[2][0] == rhs.m20 &&
         lhs[2][1] == rhs.m21 &&
         lhs[2][2] == rhs.m22 &&
         lhs[2][3] == rhs.m23 &&
-        
+
         lhs[3][0] == rhs.m30 &&
         lhs[3][1] == rhs.m31 &&
         lhs[3][2] == rhs.m32 &&
@@ -47,11 +47,11 @@ func == (lhs: Mat3x3f, rhs: GLKMatrix3) -> Bool {
     return lhs[0][0] == rhs.m00 &&
         lhs[0][1] == rhs.m01 &&
         lhs[0][2] == rhs.m02 &&
-        
+
         lhs[1][0] == rhs.m10 &&
         lhs[1][1] == rhs.m11 &&
         lhs[1][2] == rhs.m12 &&
-        
+
         lhs[2][0] == rhs.m20 &&
         lhs[2][1] == rhs.m21 &&
         lhs[2][2] == rhs.m22
@@ -78,9 +78,9 @@ func == (lhs: Vec2f, rhs: GLKVector2) -> Bool {
 func validateEquality() {
     XCTAssertTrue(Mat4x4f.identity == GLKMatrix4Identity)
     XCTAssertTrue(Mat3x3f.identity == GLKMatrix3Identity)
-    XCTAssertTrue(Vec4f(1,2,3,4) == GLKVector4(v:(1.0,2.0,3.0,4.0)))
-    XCTAssertTrue(Vec3f(1,2,3) == GLKVector3(v:(1.0,2.0,3.0)))
-    XCTAssertTrue(Vec2f(1,2) == GLKVector2(v:(1.0,2.0)))
+    XCTAssertTrue(Vec4f(1, 2, 3, 4) == GLKVector4(v: (1.0, 2.0, 3.0, 4.0)))
+    XCTAssertTrue(Vec3f(1, 2, 3) == GLKVector3(v: (1.0, 2.0, 3.0)))
+    XCTAssertTrue(Vec2f(1, 2) == GLKVector2(v: (1.0, 2.0)))
 }
 
 #endif

@@ -1,6 +1,6 @@
 //
 //  Base.swift
-//  
+//
 //
 //  Created by Christian Treffs on 26.07.19.
 //
