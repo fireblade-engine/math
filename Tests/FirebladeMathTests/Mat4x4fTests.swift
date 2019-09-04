@@ -236,42 +236,41 @@ class Mat4x4fTests: XCTestCase {
         XCTAssertEqualArray(mat.elements, values, accuracy: 1e-6)
     }
 
+    func testLookAt() {
+        let eye: Vec3f = [10, 45, -3]
+        let center: Vec3f = [4, 6.4, 0.45]
+        let up: Vec3f = .axisY
+
+        let values: [Float] = [
+            -0.498_471, -0.853_298, 0.153_000, 0.000_000,
+            0.000_000, 0.176_490, 0.984_302, 0.000_000,
+            -0.866_906, 0.490_646, -0.087_975, 0.000_000,
+            2.383_993, 2.062_865, -46.087_540, 1.000_000
+        ]
+
+        let mat: Mat4x4f = .look(from: eye, at: center, up: up)
+
+        XCTAssertEqualArray(mat.elements, values, accuracy: 1e-6)
+    }
+
+    func testPerspective() {
+        let values: [Float] = [
+            0.697_798, 0.000_000, 0.000_000, 0.000_000,
+            0.000_000, 1.116_477, 0.000_000, 0.000_000,
+            0.000_000, 0.000_000, -1.000_020, -1.000_000,
+            0.000_000, 0.000_000, -0.002_000, 0.000_000
+        ]
+
+        let mat: Mat4x4f = .perspective(fovy: radians(83.7),
+                                        width: 2880.0,
+                                        height: 1800.0,
+                                        zNear: 0.001,
+                                        zFar: 100.0)
+
+        XCTAssertEqualArray(mat.elements, values, accuracy: 1e-6)
+    }
+
     /*
-     func testLookAt() {
-     let eye: Vec3f = Vec3f(rnd(3, in: -100.0...100.0))
-     let center: Vec3f = Vec3f(rnd(3, in: -100.0...100.0))
-     let up: Vec3f = [Vec3f.axisX, Vec3f.axisY, Vec3f.axisZ].randomElement()!
-
-     let glkMat = GLKMatrix4MakeLookAt(eye.x, eye.y, eye.z,
-     center.x, center.y, center.z,
-     up.x, up.y, up.z)
-
-     let mat: Mat4x4f = .look(from: eye, at: center, up: up)
-
-     for (a, b) in zip(mat.array, glkMat.array) {
-     XCTAssertEqual(a, b, accuracy: 1e-5) // FIXME: unstable due to varying resolution depending on input
-     }
-     //XCTAssertEqual(mat.floatArray, glkMat.floatArray)
-     }
-
-     func testPerspective() {
-
-     let fovy: Float = radians(rnd(1, in: 0.1...360)[0])
-
-     let width: Float = rnd(1, in: 1...10000)[0]
-     let height: Float = rnd(1, in: 1...10000)[0]
-     let aspect: Float = width / height
-     let zNear: Float = rnd(1, in: 0.0001...50.0)[0]
-     let zFar: Float = rnd(1, in: 50.0001...3000)[0]
-
-     let glkMat = GLKMatrix4MakePerspective(fovy, aspect, zNear, zFar)
-
-     let mat: Mat4x4f = .perspective(fovy: fovy, width: width, height: height, zNear: zNear, zFar: zFar)
-
-     for (a, b) in zip(mat.array, glkMat.array) {
-     XCTAssertEqual(a, b)
-     }
-     }
 
      func testOrthographic() {
      let left: Float = rnd(1)[0]

@@ -23,3 +23,9 @@ let t0 = GLKMatrix4Translate(m0, 7.56, 33.44, 98.32)
 let s0 = GLKMatrix4Scale(m0, 3.23, 0.543, -4.5)
 
 let r0 = GLKMatrix4Rotate(m0, radians(91), 0, 1, 1)
+
+let look = GLKMatrix4MakeLookAt(10.0, 45.0, -3.0,
+                                4.0, 6.4, 0.45,
+                                0.0, 1.0, 0.0)
+
+let perspective = GLKMatrix4MakePerspective(radians(83.7), 2880.0 / 1800.0, 0.001, 100.0)
