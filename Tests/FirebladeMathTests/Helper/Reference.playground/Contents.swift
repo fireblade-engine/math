@@ -29,3 +29,7 @@ let look = GLKMatrix4MakeLookAt(10.0, 45.0, -3.0,
                                 0.0, 1.0, 0.0)
 
 let perspective = GLKMatrix4MakePerspective(radians(83.7), 2880.0 / 1800.0, 0.001, 100.0)
+
+let width: Float = 2880.0
+let height: Float = 1800.0
+let ortho = GLKMatrix4MakeOrtho(-width / 2.0, width / 2.0, -height / 2.0, height / 2.0, 0.001, 100.0)

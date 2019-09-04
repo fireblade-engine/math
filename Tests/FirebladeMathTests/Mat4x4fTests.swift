@@ -270,106 +270,24 @@ class Mat4x4fTests: XCTestCase {
         XCTAssertEqualArray(mat.elements, values, accuracy: 1e-6)
     }
 
-    /*
+    func testOrthographic() {
+        let width: Float = 2880.0
+        let height: Float = 1800.0
 
-     func testOrthographic() {
-     let left: Float = rnd(1)[0]
-     let right: Float = rnd(1)[0]
-     let bottom: Float = rnd(1)[0]
-     let top: Float = rnd(1)[0]
-     let zNear: Float = rnd(1, in: 0.0001...50.0)[0]
-     let zFar: Float = rnd(1, in: 50.0001...3000)[0]
+        let values: [Float] = [
+            0.000_694, 0.000_000, 0.000_000, 0.000_000,
+            0.000_000, 0.001_111, 0.000_000, 0.000_000,
+            0.000_000, 0.000_000, -0.020_000, 0.000_000,
+            -0.000_000, -0.000_000, -1.000_020, 1.000_000
+        ]
 
-     let glkMat = GLKMatrix4MakeOrtho(left, right, bottom, top, zNear, zFar)
+        let mat: Mat4x4f = .orthographic(left: -width / 2.0,
+                                         right: width / 2.0,
+                                         bottom: -height / 2.0,
+                                         top: height / 2.0,
+                                         zNear: 0.001,
+                                         zFar: 100.0)
 
-     let mat: Mat4x4f = .orthographic(left: left, right: right, bottom: bottom, top: top, zNear: zNear, zFar: zFar)
-
-     for (a, b) in zip(mat.array, glkMat.array) {
-     XCTAssertEqual(a, b)
-     }
-     }
-
-
-
-
-
-     func testGetScale() {
-     let node = SCNNode()
-
-     let vec = Vec3f(rnd(3))
-     node.simdScale = vec
-     XCTAssertEqual(node.simdScale, vec)
-
-     let mat = Mat4x4f(scale: vec)
-     node.simdTransform = mat
-     XCTAssertEqual(mat.scale.x, vec.x)
-     XCTAssertEqual(mat.scale.y, vec.y)
-     XCTAssertEqual(mat.scale.z, vec.z)
-     XCTAssertEqual(node.simdScale.x, vec.x)
-     XCTAssertEqual(node.simdScale.y, vec.y)
-     XCTAssertEqual(node.simdScale.z, vec.z)
-
-     XCTAssertEqual(mat.scale.x, node.simdScale.x)
-     XCTAssertEqual(mat.scale.y, node.simdScale.y)
-     XCTAssertEqual(mat.scale.z, node.simdScale.z)
-
-     let mat2 = Mat4x4f(rotation: radians(35), axis: .axisY) * mat
-     node.simdTransform = mat2
-     XCTAssertEqual(mat2.scale.x, vec.x)
-     XCTAssertEqual(mat2.scale.y, vec.y)
-     XCTAssertEqual(mat2.scale.z, vec.z)
-     XCTAssertEqual(node.simdScale.x, vec.x)
-     XCTAssertEqual(node.simdScale.y, vec.y)
-     XCTAssertEqual(node.simdScale.z, vec.z)
-     XCTAssertEqual(mat2.scale.x, node.simdScale.x)
-     XCTAssertEqual(mat2.scale.y, node.simdScale.y)
-     XCTAssertEqual(mat2.scale.z, node.simdScale.z)
-     }
-
-     func testGetTranslation() {
-     let vec = Vec3f(rnd(3))
-     let mat = Mat4x4f(translation: vec)
-     XCTAssertEqual(mat.translation, vec)
-     }
-
-     func testEuler() {
-     let vec = Vec3f(1, 2, 3)
-     let node = SCNNode()
-     node.simdPivot = .identity
-
-     /// SceneKit applies these rotations relative to the node’s simdPivot property
-     /// in the reverse order of the components: first roll, then yaw, then pitch
-     /// in radians
-     node.simdEulerAngles = vec
-
-     let mat = Mat4x4f(eulerAngles: vec)
-
-     XCTAssertEqual(mat[0][0], node.simdTransform[0][0])
-     XCTAssertEqual(mat[0][1], node.simdTransform[0][1])
-     XCTAssertEqual(mat[0][2], node.simdTransform[0][2])
-     XCTAssertEqual(mat[0][3], node.simdTransform[0][3])
-     XCTAssertEqual(mat[1][0], node.simdTransform[1][0])
-     XCTAssertEqual(mat[1][1], node.simdTransform[1][1])
-     XCTAssertEqual(mat[1][2], node.simdTransform[1][2])
-     XCTAssertEqual(mat[1][3], node.simdTransform[1][3])
-     XCTAssertEqual(mat[2][0], node.simdTransform[2][0])
-     XCTAssertEqual(mat[2][1], node.simdTransform[2][1])
-     XCTAssertEqual(mat[2][2], node.simdTransform[2][2])
-     XCTAssertEqual(mat[2][3], node.simdTransform[2][3])
-     XCTAssertEqual(mat[3][0], node.simdTransform[3][0])
-     XCTAssertEqual(mat[3][1], node.simdTransform[3][1])
-     XCTAssertEqual(mat[3][2], node.simdTransform[3][2])
-     XCTAssertEqual(mat[3][3], node.simdTransform[3][3])
-
-     XCTAssertEqual(mat.eulerAngles, node.simdEulerAngles)
-     XCTAssertEqual(mat.eulerAngles, vec.normalized)
-
-     XCTAssertEqual(mat.eulerAnglesXYZ, node.simdEulerAngles)
-     XCTAssertEqual(mat.eulerAnglesXZY, node.simdEulerAngles)
-     XCTAssertEqual(mat.eulerAnglesYXZ, node.simdEulerAngles)
-     XCTAssertEqual(mat.eulerAnglesZXY, node.simdEulerAngles)
-     XCTAssertEqual(mat.eulerAnglesZYX, node.simdEulerAngles)
-
-     }
-     */
+        XCTAssertEqualArray(mat.elements, values, accuracy: 1e-6)
+    }
 }
