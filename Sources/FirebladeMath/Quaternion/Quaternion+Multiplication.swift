@@ -8,6 +8,8 @@
 #if canImport(simd)
 import func simd.simd_mul
 import func simd.simd_act
+import func simd.simd_sub
+import func simd.simd_add
 #endif
 
 public func multiply(_ lhs: Float, _ rhs: Quat4f) -> Quat4f {
@@ -32,6 +34,32 @@ public func multiply (_ lhs: Quat4f, _ rhs: Quat4f) -> Quat4f {
     return simd.simd_mul(lhs, rhs)
     #else
     fatalError("not implemented yet")
+    #endif
+}
+
+public func add(_ lhs: Quat4f, _ rhs: Quat4f) -> Quat4f {
+    #if canImport(simd)
+    return simd.simd_add(lhs, rhs)
+    #else
+    return Quat4f(
+        lhs.x + rhs.x,
+        lhs.y + rhs.y,
+        lhs.z + rhs.z,
+        lhs.w + rhs.w
+    )
+    #endif
+}
+
+public func subtract(_ lhs: Quat4f, _ rhs: Quat4f) -> Quat4f {
+    #if canImport(simd)
+    return simd.simd_sub(lhs, rhs)
+    #else
+    return Quat4f(
+        lhs.x - rhs.x,
+        lhs.y - rhs.y,
+        lhs.z - rhs.z,
+        lhs.w - rhs.w
+    )
     #endif
 }
 

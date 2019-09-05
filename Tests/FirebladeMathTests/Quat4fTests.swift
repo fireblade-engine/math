@@ -44,6 +44,30 @@ class Quat4fTests: XCTestCase {
         XCTAssertEqualArray(quat.elements, [vec.x, vec.y, vec.z, vec.w], accuracy: 1e-6)
     }
 
+    func testAngleAxisX() {
+        let angle: Float = radians(33)
+        let quat = Quat4f(angle: angle, axis: .axisX)
+        XCTAssertEqualArray(quat.elements, [0.284_015, 0.000_000, 0.000_000, 0.958_820], accuracy: 1e-6)
+    }
+
+    func testAngleAxisY() {
+        let angle: Float = radians(51)
+        let quat = Quat4f(angle: angle, axis: .axisY)
+        XCTAssertEqualArray(quat.elements, [0.000_000, 0.430_511, 0.000_000, 0.902_585], accuracy: 1e-6)
+    }
+
+    func testAngleAxisZ() {
+        let angle: Float = radians(79)
+        let quat = Quat4f(angle: angle, axis: .axisZ)
+        XCTAssertEqualArray(quat.elements, [0.000_000, 0.000_000, 0.636_078, 0.771_625], accuracy: 1e-6)
+    }
+
+    func testAngleAxisXY() {
+        let angle: Float = radians(123)
+        let quat = Quat4f(angle: angle, axis: [1, 1, 0])
+        XCTAssertEqualArray(quat.elements, [0.878_817, 0.878_817, 0.000_000, 0.477_159], accuracy: 1e-6)
+    }
+
     func testEquality() {
         let q0 = Quat4f(1, 2, 3, 4)
         let q1 = Quat4f(4, 3, 2, 1)
@@ -86,6 +110,28 @@ class Quat4fTests: XCTestCase {
         let qNorm = quat.normalized
         XCTAssertEqualArray(qNorm.elements, [0.133_749, 0.495_848, 0.857_948, 0.013_049], accuracy: 1e-6)
     }
+
+    func testMultipy() {
+        let q0 = Quat4f(1, 2, 3, 4)
+        let q1 = Quat4f(4, 3, 2, 1)
+        let quat = multiply(q0, q1)
+        XCTAssertEqualArray(quat.elements, [12.000_000, 24.000_000, 6.000_000, -12.000_000], accuracy: 1e-6)
+    }
+
+    func testAdd() {
+        let q0 = Quat4f(1, 2, 3, 4)
+        let q1 = Quat4f(4, 3, 2, 1)
+        let quat = FirebladeMath.add(q0, q1)
+        XCTAssertEqualArray(quat.elements, [5.000_000, 5.000_000, 5.000_000, 5.000_000], accuracy: 1e-6)
+    }
+
+    func testSubtract() {
+        let q0 = Quat4f(1, 2, 3, 4)
+        let q1 = Quat4f(4, 3, 2, 1)
+        let quat = subtract(q0, q1)
+        XCTAssertEqualArray(quat.elements, [-3.000_000, -1.000_000, 1.000_000, 3.000_000], accuracy: 1e-6)
+    }
+
     /*
      func testQuatBasicProperties() {
      let qf = Quat4f(0, 1, 2, 3)

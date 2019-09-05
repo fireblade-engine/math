@@ -58,3 +58,16 @@ conj
 
 let qNorm = GLKQuaternionNormalize(q)
 qNorm
+
+let q0 = GLKQuaternion(q: (1, 2, 3, 4))
+let q1 = GLKQuaternion(q: (4, 3, 2, 1))
+
+GLKQuaternionMultiply(q0, q1)
+GLKQuaternionAdd(q0, q1)
+GLKQuaternionSubtract(q0, q1)
+
+GLKQuaternionMakeWithAngleAndAxis(radians(33), 1, 0, 0)
+GLKQuaternionMakeWithAngleAndAxis(radians(51), 0, 1, 0)
+GLKQuaternionMakeWithAngleAndAxis(radians(79), 0, 0, 1)
+
+GLKQuaternionMakeWithAngleAndAxis(radians(123), 1, 1, 0)
