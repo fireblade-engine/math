@@ -132,6 +132,20 @@ class Quat4fTests: XCTestCase {
         XCTAssertEqualArray(quat.elements, [-3.000_000, -1.000_000, 1.000_000, 3.000_000], accuracy: 1e-6)
     }
 
+    func testRotMat3x3() {
+        let angle: Float = radians(33)
+        let rotMat = Mat3x3f(rotation: angle, axis: [1, 0, 1])
+        let quat = Quat4f(rotation: rotMat)
+        XCTAssertEqualArray(quat.elements, [0.200829, 0.000000, 0.200829, 0.958820], accuracy: 1e-6)
+    }
+
+    func testRotMat4x4() {
+        let angle: Float = radians(33)
+        let rotMat = Mat4x4f(rotation: angle, axis: [1, 0, 1])
+        let quat = Quat4f(rotation: rotMat)
+        XCTAssertEqualArray(quat.elements, [0.200829, 0.000000, 0.200829, 0.958820], accuracy: 1e-6)
+    }
+
     /*
      func testQuatBasicProperties() {
      let qf = Quat4f(0, 1, 2, 3)

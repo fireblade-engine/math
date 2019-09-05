@@ -51,8 +51,12 @@ extension Quat4f {
     /// The last row and column of the matrix are ignored. This
     /// function is equivalent to calling simd_quaternion with the upper-left 3x3
     /// submatrix
-    public init(rotation matrix: Mat4x4f) {
-        self = simd.simd_quaternion(matrix)
+    public init(rotation matrix4x4: Mat4x4f) {
+        self = simd.simd_quaternion(matrix4x4)
+    }
+    
+    public init(rotation matrix3x3: Mat3x3f) {
+        self = simd.simd_quaternion(matrix3x3)
     }
 
     #if !canImport(simd)

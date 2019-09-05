@@ -108,6 +108,8 @@ extension Quat4fTests {
         ("testLength", testLength),
         ("testMultipy", testMultipy),
         ("testNormalize", testNormalize),
+        ("testRotMat3x3", testRotMat3x3),
+        ("testRotMat4x4", testRotMat4x4),
         ("testSubtract", testSubtract),
         ("testVectorInit", testVectorInit)
     ]

@@ -71,3 +71,9 @@ GLKQuaternionMakeWithAngleAndAxis(radians(51), 0, 1, 0)
 GLKQuaternionMakeWithAngleAndAxis(radians(79), 0, 0, 1)
 
 GLKQuaternionMakeWithAngleAndAxis(radians(123), 1, 1, 0)
+
+let mat3x3rot = GLKMatrix3MakeRotation(radians(33), 1, 0, 1)
+GLKQuaternionMakeWithMatrix3(mat3x3rot)
+
+let mat4x4rot = GLKMatrix4MakeRotation(radians(33), 1, 0, 1)
+GLKQuaternionMakeWithMatrix4(mat4x4rot)
