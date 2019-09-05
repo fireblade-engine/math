@@ -19,7 +19,7 @@ extension GLKMatrix4: CustomStringConvertible, CustomDebugStringConvertible {
                 } else {
                     return String(format: "%.6f", v)
                 }
-            }
+        }
         .joined(separator: ",")
         .trimmingCharacters(in: .whitespacesAndNewlines)
     }
@@ -43,7 +43,7 @@ extension GLKQuaternion: CustomStringConvertible, CustomDebugStringConvertible {
                 } else {
                     return String(format: "%.6f", v)
                 }
-            }
+        }
         .joined(separator: ",")
         .trimmingCharacters(in: .whitespacesAndNewlines)
     }
@@ -67,7 +67,31 @@ extension GLKVector3: CustomStringConvertible, CustomDebugStringConvertible {
                 } else {
                     return String(format: "%.6f", v)
                 }
-            }
+        }
+        .joined(separator: ",")
+        .trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+}
+
+extension GLKVector4: CustomStringConvertible, CustomDebugStringConvertible {
+    @inlinable public var elements: [Float] {
+        return [v.0, v.1, v.2, v.3]
+    }
+
+    public var description: String {
+        return debugDescription
+    }
+
+    public var debugDescription: String {
+        return elements
+            .enumerated()
+            .map { i, v in
+                if i % 4 == 0 {
+                    return String(format: "\n%.6f", v)
+                } else {
+                    return String(format: "%.6f", v)
+                }
+        }
         .joined(separator: ",")
         .trimmingCharacters(in: .whitespacesAndNewlines)
     }

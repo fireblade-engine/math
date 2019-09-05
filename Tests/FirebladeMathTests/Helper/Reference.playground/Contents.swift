@@ -34,6 +34,15 @@ let width: Float = 2880.0
 let height: Float = 1800.0
 let ortho = GLKMatrix4MakeOrtho(-width / 2.0, width / 2.0, -height / 2.0, height / 2.0, 0.001, 100.0)
 
+let m00 = GLKMatrix4Rotate(GLKMatrix4Identity, radians(51), 1, 0, 1)
+let m01 = GLKMatrix4Translate(GLKMatrix4Identity, 1, 2, 3)
+
+let m10 = GLKMatrix4Multiply(m00, m01)
+let vec4 = GLKVector4Make(78.0, 3.02, -32, 0.093)
+
+let vec4f = GLKMatrix4MultiplyVector4(m10, vec4)
+vec4f.description
+
 // MARK: - Quat4f
 
 let qI = GLKQuaternionIdentity
@@ -79,4 +88,5 @@ GLKQuaternionMakeWithMatrix3(mat3x3rot)
 let mat4x4rot = GLKMatrix4MakeRotation(radians(33), 1, 0, 1)
 GLKQuaternionMakeWithMatrix4(mat4x4rot)
 
-GLKQuaternionRotateVector3(q2, GLKVector3Make(5, 6, 7)) // aka act
+let vvvv = GLKQuaternionRotateVector3(q2, GLKVector3Make(5, 6, 7)) // aka act
+vvvv.description

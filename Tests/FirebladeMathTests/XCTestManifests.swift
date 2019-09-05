@@ -70,6 +70,8 @@ extension Mat4x4fTests {
         ("testInitDiagonal", testInitDiagonal),
         ("testInitVectorColumns", testInitVectorColumns),
         ("testLookAt", testLookAt),
+        ("testMultiply", testMultiply),
+        ("testMultiplyVec4f", testMultiplyVec4f),
         ("testOrthographic", testOrthographic),
         ("testPerspective", testPerspective),
         ("testQuaternionInit", testQuaternionInit),

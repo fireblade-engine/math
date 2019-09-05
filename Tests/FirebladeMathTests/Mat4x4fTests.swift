@@ -290,4 +290,34 @@ class Mat4x4fTests: XCTestCase {
 
         XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
     }
+
+    func testMultiply() {
+        let m0 = Mat4x4f(rotation: radians(51), axis: [1, 0, 1])
+        let m1 = Mat4x4f(translation: [1, 2, 3])
+
+        let values: [Float] = [
+            0.814_660, 0.549_525, 0.185_340, 0.000_000,
+            -0.549_525, 0.629_320, 0.549_525, 0.000_000,
+            0.185_340, -0.549_525, 0.814_660, 0.000_000,
+            0.271_629, 0.159_591, 3.728_371, 1.000_000
+        ]
+
+        var mat: Mat4x4f = multiply(m0, m1)
+        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
+
+        mat = m0 * m1
+        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
+    }
+
+    func testMultiplyVec4f() {
+        let m0 = Mat4x4f(rotation: radians(51), axis: [1, 0, 1])
+        let m1 = Mat4x4f(translation: [1, 2, 3])
+        let mat00 = m0 * m1
+
+        var mat = multiply(mat00, Vec4f(78.0, 3.02, -32, 0.093))
+        XCTAssertEqualElements(mat.elements, [55.978_317, 62.363_155, -9.606_318, 0.093_000], accuracy: 1e-5) // FIXME: would like to have 1e-6
+
+        mat = mat00 * Vec4f(78.0, 3.02, -32, 0.093)
+        XCTAssertEqualElements(mat.elements, [55.978_317, 62.363_155, -9.606_318, 0.093_000], accuracy: 1e-5) // FIXME: would like to have 1e-6
+    }
 }
