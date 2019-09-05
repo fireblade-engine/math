@@ -91,6 +91,7 @@ extension Quat4fTests {
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__Quat4fTests = [
+        ("testAct", testAct),
         ("testAdd", testAdd),
         ("testAngle", testAngle),
         ("testAngleAxisX", testAngleAxisX),
@@ -105,6 +106,7 @@ extension Quat4fTests {
         ("testEquality", testEquality),
         ("testIdentity", testIdentity),
         ("testInverse", testInverse),
+        ("testIsNaN", testIsNaN),
         ("testLength", testLength),
         ("testMultipy", testMultipy),
         ("testNormalize", testNormalize),

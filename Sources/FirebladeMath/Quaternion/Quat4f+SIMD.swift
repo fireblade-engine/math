@@ -54,7 +54,7 @@ extension Quat4f {
     public init(rotation matrix4x4: Mat4x4f) {
         self = simd.simd_quaternion(matrix4x4)
     }
-    
+
     public init(rotation matrix3x3: Mat3x3f) {
         self = simd.simd_quaternion(matrix3x3)
     }

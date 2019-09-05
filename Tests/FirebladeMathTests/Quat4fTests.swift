@@ -78,6 +78,21 @@ class Quat4fTests: XCTestCase {
         XCTAssertFalse(q1 == q0)
     }
 
+    func testIsNaN() {
+        let qNaN1 = Quat4f(.nan, 1.0, 2.0, 3.0)
+        let qNaN2 = Quat4f(0, .nan, 2.0, 3.0)
+        let qNaN3 = Quat4f(0, 1.0, .nan, 3.0)
+        let qNaN4 = Quat4f(0, 2.0, 3.0, .nan)
+        let noNaN = Quat4f(1, 2, 3, 4)
+
+        XCTAssertTrue(qNaN1.isNaN)
+        XCTAssertTrue(qNaN2.isNaN)
+        XCTAssertTrue(qNaN3.isNaN)
+        XCTAssertTrue(qNaN4.isNaN)
+
+        XCTAssertFalse(noNaN.isNaN)
+    }
+
     func testLength() {
         let quat = Quat4f(1.23, 4.56, 7.89, 0.12)
         XCTAssertEqual(quat.length, 9.196_357_7, accuracy: 1e-6)
@@ -114,136 +129,51 @@ class Quat4fTests: XCTestCase {
     func testMultipy() {
         let q0 = Quat4f(1, 2, 3, 4)
         let q1 = Quat4f(4, 3, 2, 1)
-        let quat = multiply(q0, q1)
+        var quat = multiply(q0, q1)
+        XCTAssertEqualArray(quat.elements, [12.000_000, 24.000_000, 6.000_000, -12.000_000], accuracy: 1e-6)
+
+        quat = q0 * q1
         XCTAssertEqualArray(quat.elements, [12.000_000, 24.000_000, 6.000_000, -12.000_000], accuracy: 1e-6)
     }
 
     func testAdd() {
         let q0 = Quat4f(1, 2, 3, 4)
         let q1 = Quat4f(4, 3, 2, 1)
-        let quat = FirebladeMath.add(q0, q1)
+        var quat = FirebladeMath.add(q0, q1)
+        XCTAssertEqualArray(quat.elements, [5.000_000, 5.000_000, 5.000_000, 5.000_000], accuracy: 1e-6)
+
+        quat = q0 + q1
         XCTAssertEqualArray(quat.elements, [5.000_000, 5.000_000, 5.000_000, 5.000_000], accuracy: 1e-6)
     }
 
     func testSubtract() {
         let q0 = Quat4f(1, 2, 3, 4)
         let q1 = Quat4f(4, 3, 2, 1)
-        let quat = subtract(q0, q1)
+        var quat = subtract(q0, q1)
         XCTAssertEqualArray(quat.elements, [-3.000_000, -1.000_000, 1.000_000, 3.000_000], accuracy: 1e-6)
+
+        quat = q0 - q1
+        XCTAssertEqualArray(quat.elements, [-3.000_000, -1.000_000, 1.000_000, 3.000_000], accuracy: 1e-6)
+    }
+
+    func testAct() {
+        let q = Quat4f(1, 2, 3, 4)
+        let v = Vec3f(5, 6, 7)
+        let vec: Vec3f = act(q, v)
+        XCTAssertEqualArray(vec.elements, [1.800_000, 7.600_000, 7.000_000], accuracy: 1e-6)
     }
 
     func testRotMat3x3() {
         let angle: Float = radians(33)
         let rotMat = Mat3x3f(rotation: angle, axis: [1, 0, 1])
         let quat = Quat4f(rotation: rotMat)
-        XCTAssertEqualArray(quat.elements, [0.200829, 0.000000, 0.200829, 0.958820], accuracy: 1e-6)
+        XCTAssertEqualArray(quat.elements, [0.200_829, 0.000_000, 0.200_829, 0.958_820], accuracy: 1e-6)
     }
 
     func testRotMat4x4() {
         let angle: Float = radians(33)
         let rotMat = Mat4x4f(rotation: angle, axis: [1, 0, 1])
         let quat = Quat4f(rotation: rotMat)
-        XCTAssertEqualArray(quat.elements, [0.200829, 0.000000, 0.200829, 0.958820], accuracy: 1e-6)
+        XCTAssertEqualArray(quat.elements, [0.200_829, 0.000_000, 0.200_829, 0.958_820], accuracy: 1e-6)
     }
-
-    /*
-     func testQuatBasicProperties() {
-     let qf = Quat4f(0, 1, 2, 3)
-     let qd = Quat4d(0, 1, 2, 3)
-
-     }
-
-     func testExpressibleByArrayLiteral() {
-     XCTAssertNotNil(Quat4f(arrayLiteral: 1, 2, 3, 4))
-     XCTAssertNotNil(Quat4d(arrayLiteral: 1, 2, 3, 4))
-     }
-
-     func testQuatInit() {
-     let vec: Vec4f = Vec4f(rnd(4))
-
-     let glkQuat = GLKQuaternionMake(vec.x, vec.y, vec.z, vec.w)
-     let quat = Quat4f(vec)
-
-     XCTAssertEqual(quat.vector.x, glkQuat.x)
-     XCTAssertEqual(quat.vector.y, glkQuat.y)
-     XCTAssertEqual(quat.vector.z, glkQuat.z)
-     XCTAssertEqual(quat.vector.w, glkQuat.w)
-
-     }
-
-     func testGetYawPitchRoll() {
-     // prevent gimbal lock
-     let yaw: Float = radians(rndDecimal(1, in: -89...89)[0])
-     let pitch: Float = radians(rndDecimal(1, in: -180...180)[0])
-     let roll: Float = radians(rndDecimal(1, in: -180...180)[0])
-
-     let xQuat = Quat4f(angle: pitch, axis: .axisX)
-     XCTAssertEqual(xQuat.yaw, 0.0)
-     XCTAssertEqual(xQuat.pitch, pitch, accuracy: 1e-6)
-     XCTAssertEqual(xQuat.roll, 0.0)
-
-     let yQuat = Quat4f(angle: yaw, axis: .axisY)
-     XCTAssertEqual(yQuat.yaw, yaw, accuracy: 1e-6)
-     XCTAssertEqual(yQuat.pitch, 0.0)
-     XCTAssertEqual(yQuat.roll, 0.0)
-
-     let zQuat = Quat4f(angle: roll, axis: .axisZ)
-     XCTAssertEqual(zQuat.yaw, 0.0)
-     XCTAssertEqual(zQuat.pitch, 0.0)
-     XCTAssertEqual(zQuat.roll, roll, accuracy: 1e-6)
-     }
-
-     func testInitYawPitchRoll() {
-     // prevent gimbal lock
-     let yawDeg = rndDecimal(1, in: -89...89)[0]
-     let pitchDeg = rndDecimal(1, in: -180...180)[0]
-     let rollDeg = rndDecimal(1, in: -180...180)[0]
-     let vec: Vec3f = Vec3f(yawDeg, pitchDeg, rollDeg)
-
-     let quat = Quat4f(yaw: radians(vec.x), pitch: radians(vec.y), roll: radians(vec.z))
-
-     XCTAssertEqual(quat.yaw, radians(vec.x), accuracy: 1e-6)
-     XCTAssertEqual(quat.pitch, radians(vec.y), accuracy: 1e-6)
-     XCTAssertEqual(quat.roll, radians(vec.z), accuracy: 1e-6)
-
-     XCTAssertEqual(quat.eulerAngles.x, radians(vec.x), accuracy: 1e-6)
-     XCTAssertEqual(quat.eulerAngles.y, radians(vec.y), accuracy: 1e-6)
-     XCTAssertEqual(quat.eulerAngles.z, radians(vec.z), accuracy: 1e-6)
-
-     }
-
-     func testAngleAndAxis() {
-     let axis: Vec3f = Vec3f(rnd(3))
-     let angle: Float = radians(rnd(1)[0])
-
-     let glkQuat = GLKQuaternionMakeWithAngleAndVector3Axis(angle, GLKVector3(v: (axis.x, axis.y, axis.z)))
-
-     let quat = Quat4f(angle: angle, axis: axis)
-
-     XCTAssertEqual(quat.x, glkQuat.x)
-     XCTAssertEqual(quat.y, glkQuat.y)
-     XCTAssertEqual(quat.z, glkQuat.z)
-     XCTAssertEqual(quat.w, glkQuat.w)
-
-     let glkAngle = GLKQuaternionAngle(glkQuat)
-     let glkAxis = GLKQuaternionAxis(glkQuat)
-     XCTAssertEqual(quat.rotationAngle, glkAngle)
-     XCTAssertEqual(quat.rotationAxis.x, glkAxis.x, accuracy: 1e-6)
-     XCTAssertEqual(quat.rotationAxis.y, glkAxis.y, accuracy: 1e-6)
-     XCTAssertEqual(quat.rotationAxis.z, glkAxis.z, accuracy: 1e-6)
-     }
-
-     func testSIMDQuatAngleBug() {
-     let axis: Vec3f = Vec3f(rndDecimal(3))
-     let angle: Float = radians(rndDecimal(1)[0])
-
-     let glkQuat = GLKQuaternionMakeWithAngleAndVector3Axis(angle, GLKVector3(v: (axis.x, axis.y, axis.z)))
-     let quat = Quat4f(angle: angle, axis: axis)
-     let glkAngle = GLKQuaternionAngle(glkQuat)
-
-     XCTAssertEqual(quat.angle, glkAngle) // FIXME: bug in simd?! It's always ~.pi
-     XCTAssertNotEqual(quat.angle, 3.1415927, accuracy: 1e-6)
-     XCTAssertEqual(simd_angle(quat), glkAngle) // FIXME: bug in simd?! It's always ~.pi
-     }
-     */
 }

@@ -64,9 +64,14 @@ public func subtract(_ lhs: Quat4f, _ rhs: Quat4f) -> Quat4f {
 }
 
 /// Returns a vector rotated by a quaternion.
+///
+/// - Parameters:
+///   - lhs: the rotation quaternion (will be normalized).
+///   - rhs: the vector to be rotated.
+/// - Returns: the rotated vector.
 public func act(_ lhs: Quat4f, _ rhs: Vec3f) -> Vec3f {
     #if canImport(simd)
-    return simd.simd_act(lhs, rhs)
+    return simd.simd_act(lhs.normalized, rhs)
     #else
     fatalError("not implemented yet")
     #endif

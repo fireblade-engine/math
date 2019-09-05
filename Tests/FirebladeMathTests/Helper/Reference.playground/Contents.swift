@@ -61,6 +61,7 @@ qNorm
 
 let q0 = GLKQuaternion(q: (1, 2, 3, 4))
 let q1 = GLKQuaternion(q: (4, 3, 2, 1))
+let q2 = GLKQuaternion(q: (1, 2, 3, 1))
 
 GLKQuaternionMultiply(q0, q1)
 GLKQuaternionAdd(q0, q1)
@@ -77,3 +78,5 @@ GLKQuaternionMakeWithMatrix3(mat3x3rot)
 
 let mat4x4rot = GLKMatrix4MakeRotation(radians(33), 1, 0, 1)
 GLKQuaternionMakeWithMatrix4(mat4x4rot)
+
+GLKQuaternionRotateVector3(q2, GLKVector3Make(5, 6, 7)) // aka act

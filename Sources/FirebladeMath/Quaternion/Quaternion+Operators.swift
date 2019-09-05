@@ -26,3 +26,11 @@ public func * (lhs: Quat4f, rhs: Vec3f) -> Vec3f {
 public func *= (lhs: inout Quat4f, rhs: Quat4f) {
     lhs = multiply(lhs, rhs)
 }
+
+public func + (lhs: Quat4f, rhs: Quat4f) -> Quat4f {
+    return add(lhs, rhs)
+}
+
+public func - (lhs: Quat4f, rhs: Quat4f) -> Quat4f {
+    return subtract(lhs, rhs)
+}
