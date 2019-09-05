@@ -23,25 +23,25 @@ class Quat4fTests: XCTestCase {
     func testElementsInit() {
         let vec = Vec4f(rnd(4))
         let quat = Quat4f(vec.x, vec.y, vec.z, vec.w)
-        XCTAssertEqualElements(quat.elements, [vec.x, vec.y, vec.z, vec.w], accuracy: 1e-6)
+        XCTAssertEqualElements(quat.elements, vec.elements, accuracy: 1e-6)
     }
 
     func testVectorInit() {
         let vec = Vec4f(rnd(4))
         let quat = Quat4f(vec)
-        XCTAssertEqualElements(quat.elements, [vec.x, vec.y, vec.z, vec.w], accuracy: 1e-6)
+        XCTAssertEqualElements(quat.elements, vec.elements, accuracy: 1e-6)
     }
 
     func testArrayInit() {
         let vec = Vec4f(rnd(4))
         let quat = Quat4f([vec.x, vec.y, vec.z, vec.w])
-        XCTAssertEqualElements(quat.elements, [vec.x, vec.y, vec.z, vec.w], accuracy: 1e-6)
+        XCTAssertEqualElements(quat.elements, vec.elements, accuracy: 1e-6)
     }
 
     func testArrayLiteralInit() {
         let vec = Vec4f(rnd(4))
         let quat: Quat4f = [vec.x, vec.y, vec.z, vec.w]
-        XCTAssertEqualElements(quat.elements, [vec.x, vec.y, vec.z, vec.w], accuracy: 1e-6)
+        XCTAssertEqualElements(quat.elements, vec.elements, accuracy: 1e-6)
     }
 
     func testAngleAxisX() {

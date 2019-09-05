@@ -5,7 +5,6 @@
 //  Created by Christian Treffs on 26.08.19.
 //
 
-#if canImport(SGLMath)
 import protocol SGLMath.ArithmeticType
 import struct SGLMath.Vector2
 import struct SGLMath.Vector3
@@ -40,5 +39,3 @@ extension Vector4 where T: SIMDScalar & ArithmeticType {
         return SIMD4<T>(x: x, y: y, z: z, w: w)
     }
 }
-
-#endif
