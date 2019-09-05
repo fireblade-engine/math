@@ -55,15 +55,19 @@ extension Quat4f {
         self = simd.simd_quaternion(matrix)
     }
 
+    #if !canImport(simd)
     /// The normalized axis (a 3-element vector) around which the action of the quaternion `q` rotates.
     @inlinable public var axis: Vec3f {
         return simd_axis(self)
     }
+    #endif
 
+    #if !canImport(simd)
     /// The conjugate of the quaternion `q`.
     @inlinable public var conjugate: Quat4f {
         return simd_conjugate(self)
     }
+    #endif
 }
 
 extension Quat4f: ExpressibleByArrayLiteral {

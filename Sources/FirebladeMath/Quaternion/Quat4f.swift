@@ -5,6 +5,23 @@
 //  Created by Christian Treffs on 23.07.19.
 //
 
+extension Quat4f: Sequence {
+    public __consuming func makeIterator() -> IndexingIterator<[Float]> {
+        return [x, y, z, w].makeIterator()
+    }
+
+    @inlinable public var elements: [Float] {
+        return [Float](self)
+    }
+}
+
+extension Quat4f {
+    public init(_ values: [Float]) {
+        precondition(values.count == 4, "Quaternion needs exactly 4 values.")
+        self.init(values[0], values[1], values[2], values[3])
+    }
+}
+
 extension Quat4f {
     public init(yaw: Float, pitch: Float, roll: Float) {
         /// https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
@@ -123,10 +140,12 @@ extension Quat4f {
      return simd_inverse(self)
      }*/
 
+    #if !canImport(simd)
     /// The length of the quaternion `q`.
     @inlinable public var length: Float {
         return FirebladeMath.length(self)
     }
+    #endif
 
     @inlinable public var isNaN: Bool {
         return x.isNaN || y.isNaN || z.isNaN || w.isNaN

@@ -33,3 +33,28 @@ let perspective = GLKMatrix4MakePerspective(radians(83.7), 2880.0 / 1800.0, 0.00
 let width: Float = 2880.0
 let height: Float = 1800.0
 let ortho = GLKMatrix4MakeOrtho(-width / 2.0, width / 2.0, -height / 2.0, height / 2.0, 0.001, 100.0)
+
+// MARK: - Quat4f
+
+let qI = GLKQuaternionIdentity
+qI
+
+let q = GLKQuaternion(q: (1.23, 4.56, 7.89, 0.12))
+q
+
+String(format: "%.7f", GLKQuaternionLength(q))
+
+let axisVec = GLKQuaternionAxis(q)
+axisVec
+
+let angle = GLKQuaternionAngle(q)
+String(format: "%.7f", angle)
+
+let invQ = GLKQuaternionInvert(q)
+invQ
+
+let conj = GLKQuaternionConjugate(q)
+conj
+
+let qNorm = GLKQuaternionNormalize(q)
+qNorm

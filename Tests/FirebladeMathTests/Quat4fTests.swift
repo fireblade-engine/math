@@ -11,28 +11,93 @@ import class XCTest.XCTestCase
 import func XCTest.XCTAssertEqual
 import func XCTest.XCTAssertNotEqual
 import func XCTest.XCTAssertNotNil
+import func XCTest.XCTAssertTrue
+import func XCTest.XCTAssertFalse
 
 class Quat4fTests: XCTestCase {
-    func testQuatBasicProperties() {
-        let qf = Quat4f(0, 1, 2, 3)
-        let qd = Quat4d(0, 1, 2, 3)
-        XCTAssertNotNil(qd)
-        XCTAssertNotNil(qd.x)
-        XCTAssertNotNil(qd.y)
-        XCTAssertNotNil(qd.z)
-        XCTAssertNotNil(qd.w)
-        XCTAssertNotNil(qf)
-        XCTAssertNotNil(qf.x)
-        XCTAssertNotNil(qf.y)
-        XCTAssertNotNil(qf.z)
-        XCTAssertNotNil(qf.w)
+    func testIdentity() {
+        let quat = Quat4f.identity
+        XCTAssertEqualArray(quat.elements, [0, 0, 0, 1], accuracy: 1e-7)
     }
 
-    func testExpressibleByArrayLiteral() {
-        XCTAssertNotNil(Quat4f(arrayLiteral: 1, 2, 3, 4))
-        XCTAssertNotNil(Quat4d(arrayLiteral: 1, 2, 3, 4))
+    func testElementsInit() {
+        let vec = Vec4f(rnd(4))
+        let quat = Quat4f(vec.x, vec.y, vec.z, vec.w)
+        XCTAssertEqualArray(quat.elements, [vec.x, vec.y, vec.z, vec.w], accuracy: 1e-6)
+    }
+
+    func testVectorInit() {
+        let vec = Vec4f(rnd(4))
+        let quat = Quat4f(vec)
+        XCTAssertEqualArray(quat.elements, [vec.x, vec.y, vec.z, vec.w], accuracy: 1e-6)
+    }
+
+    func testArrayInit() {
+        let vec = Vec4f(rnd(4))
+        let quat = Quat4f([vec.x, vec.y, vec.z, vec.w])
+        XCTAssertEqualArray(quat.elements, [vec.x, vec.y, vec.z, vec.w], accuracy: 1e-6)
+    }
+
+    func testArrayLiteralInit() {
+        let vec = Vec4f(rnd(4))
+        let quat: Quat4f = [vec.x, vec.y, vec.z, vec.w]
+        XCTAssertEqualArray(quat.elements, [vec.x, vec.y, vec.z, vec.w], accuracy: 1e-6)
+    }
+
+    func testEquality() {
+        let q0 = Quat4f(1, 2, 3, 4)
+        let q1 = Quat4f(4, 3, 2, 1)
+
+        XCTAssertTrue(q0 == q0)
+        XCTAssertTrue(q1 == q1)
+        XCTAssertFalse(q0 == q1)
+        XCTAssertFalse(q1 == q0)
+    }
+
+    func testLength() {
+        let quat = Quat4f(1.23, 4.56, 7.89, 0.12)
+        XCTAssertEqual(quat.length, 9.196_357_7, accuracy: 1e-6)
+    }
+
+    func testAxis() {
+        let quat = Quat4f(1.23, 4.56, 7.89, 0.12)
+        XCTAssertEqualArray(quat.axis.elements, [0.133_760, 0.495_891, 0.858_021], accuracy: 1e-6)
+    }
+
+    func testAngle() {
+        let quat = Quat4f(1.23, 4.56, 7.89, 0.12)
+        XCTAssertEqual(quat.angle, 2.901_012_9, accuracy: 1e-6)
+    }
+
+    func testInverse() {
+        let quat = Quat4f(1.23, 4.56, 7.89, 0.12)
+        let qInv = quat.inverse
+        XCTAssertEqualArray(qInv.elements, [-0.014_544, -0.053_918, -0.093_292, 0.001_419], accuracy: 1e-6)
+    }
+
+    func testConjugate() {
+        let quat = Quat4f(1.23, 4.56, 7.89, 0.12)
+        let qConj = quat.conjugate
+        XCTAssertEqualArray(qConj.elements, [-1.230_000, -4.560_000, -7.890_000, 0.120_000], accuracy: 1e-6)
+    }
+
+    func testNormalize() {
+        let quat = Quat4f(1.23, 4.56, 7.89, 0.12)
+        let qNorm = quat.normalized
+        XCTAssertEqualArray(qNorm.elements, [0.133_749, 0.495_848, 0.857_948, 0.013_049], accuracy: 1e-6)
     }
     /*
+     func testQuatBasicProperties() {
+     let qf = Quat4f(0, 1, 2, 3)
+     let qd = Quat4d(0, 1, 2, 3)
+
+     }
+
+     func testExpressibleByArrayLiteral() {
+     XCTAssertNotNil(Quat4f(arrayLiteral: 1, 2, 3, 4))
+     XCTAssertNotNil(Quat4d(arrayLiteral: 1, 2, 3, 4))
+     }
+
      func testQuatInit() {
      let vec: Vec4f = Vec4f(rnd(4))
 
