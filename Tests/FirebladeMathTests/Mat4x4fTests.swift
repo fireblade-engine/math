@@ -71,7 +71,7 @@ class Mat4x4fTests: XCTestCase {
             vec.x, vec.y, vec.z, 1.000_000
         ]
 
-        XCTAssertEqualArray(mat.elements, values, accuracy: 1e-6)
+        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
     func testScaleInit() {
@@ -99,7 +99,7 @@ class Mat4x4fTests: XCTestCase {
         ]
 
         let mat = Mat4x4f(rotation: angle, axis: axis)
-        XCTAssertEqualArray(mat.elements, values, accuracy: 1e-6)
+        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
     func testRotationInitY() {
@@ -114,7 +114,7 @@ class Mat4x4fTests: XCTestCase {
         ]
 
         let mat = Mat4x4f(rotation: angle, axis: axis)
-        XCTAssertEqualArray(mat.elements, values, accuracy: 1e-6)
+        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
     func testRotationInitZ() {
@@ -129,7 +129,7 @@ class Mat4x4fTests: XCTestCase {
         ]
 
         let mat = Mat4x4f(rotation: angle, axis: axis)
-        XCTAssertEqualArray(mat.elements, values, accuracy: 1e-6)
+        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
     func testRotationInitXZ() {
@@ -144,7 +144,7 @@ class Mat4x4fTests: XCTestCase {
         ]
 
         let mat = Mat4x4f(rotation: angle, axis: axis)
-        XCTAssertEqualArray(mat.elements, values, accuracy: 1e-6)
+        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
     func testQuaternionInit() {
@@ -159,7 +159,7 @@ class Mat4x4fTests: XCTestCase {
 
         let mat = Mat4x4f(orientation: Quat4f(vec))
 
-        XCTAssertEqualArray(mat.elements, values, accuracy: 1e-6)
+        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
     func testUpperLeft() {
@@ -193,7 +193,7 @@ class Mat4x4fTests: XCTestCase {
 
         mat.translate(by: [7.56, 33.44, 98.32])
 
-        XCTAssertEqualArray(mat.elements, values, accuracy: 1e-6)
+        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
     func testScaleMatrixByVector() {
@@ -213,7 +213,7 @@ class Mat4x4fTests: XCTestCase {
 
         mat.scale(by: [3.23, 0.543, -4.5])
 
-        XCTAssertEqualArray(mat.elements, values, accuracy: 1e-6)
+        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
     func testRotateMatrixByAngleAroundAxes() {
@@ -233,7 +233,7 @@ class Mat4x4fTests: XCTestCase {
 
         mat.rotate(by: radians(91), axis: [0, 1, 1])
 
-        XCTAssertEqualArray(mat.elements, values, accuracy: 1e-6)
+        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
     func testLookAt() {
@@ -250,7 +250,7 @@ class Mat4x4fTests: XCTestCase {
 
         let mat: Mat4x4f = .look(from: eye, at: center, up: up)
 
-        XCTAssertEqualArray(mat.elements, values, accuracy: 1e-6)
+        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
     func testPerspective() {
@@ -267,7 +267,7 @@ class Mat4x4fTests: XCTestCase {
                                         zNear: 0.001,
                                         zFar: 100.0)
 
-        XCTAssertEqualArray(mat.elements, values, accuracy: 1e-6)
+        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
     func testOrthographic() {
@@ -288,6 +288,6 @@ class Mat4x4fTests: XCTestCase {
                                          zNear: 0.001,
                                          zFar: 100.0)
 
-        XCTAssertEqualArray(mat.elements, values, accuracy: 1e-6)
+        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 }
