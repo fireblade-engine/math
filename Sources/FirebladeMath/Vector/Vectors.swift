@@ -5,6 +5,9 @@
 //  Created by Christian Treffs on 25.08.19.
 //
 
+func a() {
+}
+
 public typealias Vec2d = SIMD2<Double>
 public typealias Vec2f = SIMD2<Float>
 public typealias Vec2i = SIMD2<Int>

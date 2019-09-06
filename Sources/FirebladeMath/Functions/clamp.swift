@@ -16,9 +16,9 @@ import func simd.simd_clamp
 ///   - min: min range bound
 ///   - max: max range bound
 /// - Returns: x clamped to the range [min, max]
-public func clamp(_ x: Double, _ min: Double, _ max: Double) -> Double {
+public func clamp(_ x: Double, _ minVal: Double, _ maxVal: Double) -> Double {
     #if USE_SIMD
-    return simd_clamp(x, min, max)
+    return simd_clamp(x, minVal, maxVal)
     #else
     return min(max(x, minVal), maxVal)
     #endif
@@ -31,9 +31,9 @@ public func clamp(_ x: Double, _ min: Double, _ max: Double) -> Double {
 ///   - min: min range bound
 ///   - max: max range bound
 /// - Returns: x clamped to the range [min, max]
-public func clamp(_ x: Float, _ min: Float, _ max: Float) -> Float {
+public func clamp(_ x: Float, _ minVal: Float, _ maxVal: Float) -> Float {
     #if USE_SIMD
-    return simd_clamp(x, min, max)
+    return simd_clamp(x, minVal, maxVal)
     #else
     return min(max(x, minVal), maxVal)
     #endif
