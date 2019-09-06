@@ -5,7 +5,6 @@
 //  Created by Christian Treffs on 06.09.19.
 //
 
-
 extension Mat4x4f {
     @inlinable
     public static func look(from eyePosition: SIMD3<Float>, at lookAtPosition: SIMD3<Float>, up: SIMD3<Float>) -> Mat4x4f {

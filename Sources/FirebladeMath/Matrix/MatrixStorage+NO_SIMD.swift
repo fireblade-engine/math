@@ -6,7 +6,7 @@
 //
 
 // MARK: - Storage3x3
-public struct Storage3x3<Value>: Storage3x3Protocol where Value: Scalar {
+public struct Storage3x3<Value>: Storage3x3Protocol where Value: StorageScalar {
     public typealias Column = SIMD3<Value>
     public typealias _Storage4x4 = Storage4x4<Value>
 
@@ -37,7 +37,7 @@ public struct Storage3x3<Value>: Storage3x3Protocol where Value: Scalar {
 }
 
 // MARK: - Storage4x4
-public struct Storage4x4<Value>: Storage4x4Protocol where Value: Scalar {
+public struct Storage4x4<Value>: Storage4x4Protocol where Value: StorageScalar {
     public typealias Column = SIMD4<Value>
     public typealias _Storage3x3 = Storage3x3<Value>
 

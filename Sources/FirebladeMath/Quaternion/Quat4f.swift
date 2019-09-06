@@ -5,20 +5,14 @@
 //  Created by Christian Treffs on 23.07.19.
 //
 
-extension Quat4f: Sequence {
-    public __consuming func makeIterator() -> IndexingIterator<[Float]> {
-        return [x, y, z, w].makeIterator()
-    }
-
-    @inlinable public var elements: [Float] {
-        return [Float](self)
-    }
-}
-
 extension Quat4f {
-    public init(_ values: [Float]) {
-        precondition(values.count == 4, "Quaternion needs exactly 4 values.")
-        self.init(values[0], values[1], values[2], values[3])
+    @inlinable public var normalized: Quat4f {
+        return FirebladeMath.normalize(self)
+    }
+
+    /// The length of the quaternion `q`.
+    @inlinable public var length: Float {
+        return FirebladeMath.length(self)
     }
 }
 
@@ -37,7 +31,6 @@ extension Quat4f {
         let x: Float = cy * cp * sr - sy * sp * cr
         let y: Float = sy * cp * sr + cy * sp * cr
         let z: Float = sy * cp * cr - cy * sp * sr
-
         self.init(x, y, z, w)
     }
 
@@ -128,7 +121,7 @@ extension Quat4f {
     }
 
     @inlinable public var rotationAxis: Vec3f {
-        #if canImport(simd)
+        #if USE_SIMD
         return self.axis
         #else
         fatalError("implementation missing")
@@ -139,15 +132,4 @@ extension Quat4f {
     /*@inlinable public var inverse: Quat4f {
      return simd_inverse(self)
      }*/
-
-    #if !canImport(simd)
-    /// The length of the quaternion `q`.
-    @inlinable public var length: Float {
-        return FirebladeMath.length(self)
-    }
-    #endif
-
-    @inlinable public var isNaN: Bool {
-        return x.isNaN || y.isNaN || z.isNaN || w.isNaN
-    }
 }

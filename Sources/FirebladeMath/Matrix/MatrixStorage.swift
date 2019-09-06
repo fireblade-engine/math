@@ -5,8 +5,6 @@
 //  Created by Christian Treffs on 05.09.19.
 //
 
-public typealias StorageScalar = AdditiveArithmetic & BinaryFloatingPoint & Codable & Comparable & Equatable & ExpressibleByIntegerLiteral & FloatingPoint & Hashable & SIMDScalar & Strideable
-
 public protocol Storage4x4Protocol: Sequence {
     associatedtype Value: StorageScalar
     associatedtype _Storage3x3: Storage3x3Protocol where _Storage3x3.Value == Value

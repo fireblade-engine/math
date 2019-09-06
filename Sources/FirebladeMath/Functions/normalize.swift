@@ -57,6 +57,22 @@ import func simd.simd_normalize
     #endif
 }
 
+@inlinable public func normalize(_ x: Quat4f) -> Quat4f {
+    #if USE_SIMD
+    return Quat4f(storage: simd.simd_normalize(x.storage))
+    #else
+    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    #endif
+}
+
+@inlinable public func normalize(_ x: Quat4d) -> Quat4d {
+    #if USE_SIMD
+    return Quat4d(storage: simd.simd_normalize(x.storage))
+    #else
+    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    #endif
+}
+
 /*
  @inlinable public func normalize<S>(_ x: SIMD2<S>) -> SIMD2<S> where S: FloatingPointScalar {
  return SGLMath.normalize(Vector2<S>(x)).simd

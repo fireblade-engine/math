@@ -87,9 +87,9 @@ import struct simd.simd_quatd
 /// For scalar components `length(x)` is equivalent to `abs(x)`.
 /// - Parameter float: a float argument
 /// - Returns: the distance between the argument and the origin.
-@inlinable public func length(_ x: simd_quatf) -> Float {
+@inlinable public func length(_ x: Quat4f) -> Float {
     #if USE_SIMD
-    return simd_length(x)
+    return simd_length(x.storage)
     #else
     fatalError("implementation missing \(#function) \(#file):\(#line)")
     #endif
@@ -99,9 +99,9 @@ import struct simd.simd_quatd
 /// For scalar components `length(x)` is equivalent to `abs(x)`.
 /// - Parameter float: a float argument
 /// - Returns: the distance between the argument and the origin.
-@inlinable public func length(_ x: simd_quatd) -> Double {
+@inlinable public func length(_ x: Quat4d) -> Double {
     #if USE_SIMD
-    return simd_length(x)
+    return simd_length(x.storage)
     #else
     fatalError("implementation missing \(#function) \(#file):\(#line)")
     #endif

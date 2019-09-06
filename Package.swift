@@ -2,14 +2,17 @@
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
-
+#if canImport(simd)
 let swiftSettings: [SwiftSetting] = [
     //.define("USE_SIMD", .when(platforms: [.iOS, .macOS, .tvOS, .watchOS])),
     //.define("NO_SIMD", .when(platforms: [.linux])),
+    
+
     .define("USE_SIMD")
+
     //.define("NO_SIMD")
 ]
-
+#endif
 let package = Package(
     name: "FirebladeMath",
     products: [

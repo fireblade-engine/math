@@ -8,13 +8,12 @@
 #if canImport(simd)
 import struct simd.quaternion.simd_quatd
 import struct simd.quaternion.simd_quatf
+#endif
 
-public typealias Quat4d = simd_quatd
-public typealias Quat4f = simd_quatf
-
+#if USE_SIMD
+public typealias Quat4d = Quaternion<simd_quatd>
+public typealias Quat4f = Quaternion<simd_quatf>
 #else
-import struct SGLMath.Quaternion
-
-public typealias Quat4d = Quaternion<Double>
-public typealias Quat4f = Quaternion<Float>
+public typealias Quat4d = Quaternion<QuaternionStorage<Double>>
+public typealias Quat4f = Quaternion<QuaternionStorage<Float>>
 #endif

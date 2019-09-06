@@ -14,25 +14,6 @@ import func simd.simd_conjugate
 import func simd.simd_inverse
 
 extension Quat4f {
-    public init(_ x: Float, _ y: Float, _ z: Float, _ w: Float) {
-        self.init(ix: x, iy: y, iz: z, r: w)
-    }
-
-    @inlinable public var x: Float { return self.imag.x }
-    @inlinable public var y: Float { return self.imag.y }
-    @inlinable public var z: Float { return self.imag.z }
-    @inlinable public var w: Float { return self.real }
-
-    /// Constructs a quaternion from a four-element vector.
-    /// - Parameter vector: A four-element vector.
-    ///
-    /// Note that the imaginary (vector) part of the quaternion comes
-    /// from lanes 0, 1, and 2 of the vector, and the real (scalar) part comes from
-    /// lane 3.
-    public init(_ vector: Vec4f) {
-        self = simd.simd_quaternion(vector)
-    }
-
     /*
      /// Construct a quaternion that rotates from one vector to another.
      /// - Parameter from: A normalized three-element vector.
@@ -52,11 +33,11 @@ extension Quat4f {
     /// function is equivalent to calling simd_quaternion with the upper-left 3x3
     /// submatrix
     public init(rotation matrix4x4: Mat4x4f) {
-        self = simd.simd_quaternion(matrix4x4)
+        self.init(storage: simd.simd_quaternion(matrix4x4.storage))
     }
 
     public init(rotation matrix3x3: Mat3x3f) {
-        self = simd.simd_quaternion(matrix3x3)
+        self.init(storage: simd.simd_quaternion(matrix3x3.storage))
     }
 
     #if !canImport(simd)
@@ -72,12 +53,5 @@ extension Quat4f {
         return simd_conjugate(self)
     }
     #endif
-}
-
-extension Quat4f: ExpressibleByArrayLiteral {
-    public init(arrayLiteral elements: Float...) {
-        precondition(elements.count == 4, "Quaternion needs to be initialized with exactly 4 elements")
-        self.init(ix: elements[0], iy: elements[1], iz: elements[2], r: elements[3])
-    }
 }
 #endif

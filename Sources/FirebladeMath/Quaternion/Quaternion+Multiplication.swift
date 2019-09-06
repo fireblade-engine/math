@@ -14,7 +14,7 @@ import func simd.simd_add
 
 public func multiply(_ lhs: Float, _ rhs: Quat4f) -> Quat4f {
     #if canImport(simd)
-    return simd.simd_mul(lhs, rhs)
+    return Quat4f(storage: simd.simd_mul(lhs, rhs.storage))
     #else
     fatalError("not implemented yet")
     #endif
@@ -22,7 +22,7 @@ public func multiply(_ lhs: Float, _ rhs: Quat4f) -> Quat4f {
 
 public func multiply(_ lhs: Quat4f, _ rhs: Float) -> Quat4f {
     #if canImport(simd)
-    return simd.simd_mul(lhs, rhs)
+    return Quat4f(storage: simd.simd_mul(lhs.storage, rhs))
     #else
     fatalError("not implemented yet")
     #endif
@@ -31,7 +31,7 @@ public func multiply(_ lhs: Quat4f, _ rhs: Float) -> Quat4f {
 /// Returns the product of two quaternions.
 public func multiply (_ lhs: Quat4f, _ rhs: Quat4f) -> Quat4f {
     #if canImport(simd)
-    return simd.simd_mul(lhs, rhs)
+    return Quat4f(storage: simd.simd_mul(lhs.storage, rhs.storage))
     #else
     fatalError("not implemented yet")
     #endif
@@ -39,7 +39,7 @@ public func multiply (_ lhs: Quat4f, _ rhs: Quat4f) -> Quat4f {
 
 public func add(_ lhs: Quat4f, _ rhs: Quat4f) -> Quat4f {
     #if canImport(simd)
-    return simd.simd_add(lhs, rhs)
+    return Quat4f(storage: simd.simd_add(lhs.storage, rhs.storage))
     #else
     return Quat4f(
         lhs.x + rhs.x,
@@ -52,7 +52,7 @@ public func add(_ lhs: Quat4f, _ rhs: Quat4f) -> Quat4f {
 
 public func subtract(_ lhs: Quat4f, _ rhs: Quat4f) -> Quat4f {
     #if canImport(simd)
-    return simd.simd_sub(lhs, rhs)
+    return Quat4f(storage: simd.simd_sub(lhs.storage, rhs.storage))
     #else
     return Quat4f(
         lhs.x - rhs.x,
@@ -71,7 +71,7 @@ public func subtract(_ lhs: Quat4f, _ rhs: Quat4f) -> Quat4f {
 /// - Returns: the rotated vector.
 public func act(_ lhs: Quat4f, _ rhs: Vec3f) -> Vec3f {
     #if canImport(simd)
-    return simd.simd_act(lhs.normalized, rhs)
+    return simd.simd_act(lhs.normalized.storage, rhs)
     #else
     fatalError("not implemented yet")
     #endif
