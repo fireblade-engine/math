@@ -17,11 +17,23 @@ extension SIMD4 {
     }
 }
 
-extension SIMD4 where Scalar: FirebladeMath.FloatingPointScalar {
+extension SIMD4 where Scalar: FloatingPoint {
     @inlinable public var isNaN: Bool {
         return x.isNaN || y.isNaN || z.isNaN || w.isNaN
     }
+}
 
+extension SIMD4 where Scalar == Double {
+    @inlinable public var length: Scalar {
+        return FirebladeMath.length(self)
+    }
+
+    @inlinable public var normalized: SIMD4<Scalar> {
+        return FirebladeMath.normalize(self)
+    }
+}
+
+extension SIMD4 where Scalar == Float {
     @inlinable public var length: Scalar {
         return FirebladeMath.length(self)
     }

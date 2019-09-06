@@ -11,11 +11,23 @@ extension SIMD2: Sequence {
     }
 }
 
-extension SIMD2 where Scalar: FirebladeMath.FloatingPointScalar {
+extension SIMD2 where Scalar: FloatingPoint {
     @inlinable public var isNaN: Bool {
         return x.isNaN || y.isNaN
     }
+}
 
+extension SIMD2 where Scalar == Double {
+    @inlinable public var length: Scalar {
+        return FirebladeMath.length(self)
+    }
+
+    @inlinable public var normalized: SIMD2<Scalar> {
+        return FirebladeMath.normalize(self)
+    }
+}
+
+extension SIMD2 where Scalar == Float {
     @inlinable public var length: Scalar {
         return FirebladeMath.length(self)
     }
