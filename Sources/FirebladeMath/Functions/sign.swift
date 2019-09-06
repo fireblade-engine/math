@@ -9,17 +9,20 @@
 import func simd.simd_sign
 #endif
 
-#if canImport(simd)
+/// Returns -1 if `x < 0`, +1 if `x > 0`, and 0 otherwise (`sign(NaN)` is 0).
 public func sign(_ x: Double) -> Double {
+    #if USE_SIMD
     return simd_sign(x)
+    #else
+    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    #endif
 }
-public func sign(_ x: Float) -> Float {
-    return simd_sign(x)
-}
-// TODO: vector signs
-#endif
 
 /// Returns -1 if `x < 0`, +1 if `x > 0`, and 0 otherwise (`sign(NaN)` is 0).
-public func sign<S>(_ x: S) -> S where S: FloatingPointScalar {
-    return x == 0 ? 0 : x < 0 ? -1 : 1
+public func sign(_ x: Float) -> Float {
+    #if USE_SIMD
+    return simd_sign(x)
+    #else
+    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    #endif
 }

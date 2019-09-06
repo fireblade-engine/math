@@ -9,25 +9,20 @@
 import func simd.simd_fract
 #endif
 
-#if canImport(SGLMath)
-// types
-import struct SGLMath.Vector2
-import struct SGLMath.Vector3
-import struct SGLMath.Vector4
-
-import func SGLMath.fract
-#endif
-
-#if canImport(simd)
+/// The "fractional part" of x, lying in the range [0, 1).
+/// floor(x) + fract(x) is *approximately* equal to x.
+/// If x is positive and finite, then the two values are exactly equal.
+///
+/// - Parameters:
+///     - v: floating point value
+/// - Returns: The "fractional part" of x
 public func fract(_ value: Double) -> Double {
+    #if USE_SIMD
     return simd_fract(value)
+    #else
+    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    #endif
 }
-
-public func fract(_ value: Float) -> Float {
-    return simd_fract(value)
-}
-
-#endif
 
 /// The "fractional part" of x, lying in the range [0, 1).
 /// floor(x) + fract(x) is *approximately* equal to x.
@@ -36,7 +31,10 @@ public func fract(_ value: Float) -> Float {
 /// - Parameters:
 ///     - v: floating point value
 /// - Returns: The "fractional part" of x
-public func fract<S>(_ value: S) -> S where S: FloatingPointScalar {
-    // FIXME: return SGLMath.fract(v)
-    fatalError("not implemented")
+public func fract(_ value: Float) -> Float {
+    #if USE_SIMD
+    return simd_fract(value)
+    #else
+    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    #endif
 }

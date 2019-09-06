@@ -9,50 +9,45 @@
 import func simd.simd_dot
 #endif
 
-#if canImport(SGLMath)
-// types
-import struct SGLMath.Vector2
-import struct SGLMath.Vector3
-import struct SGLMath.Vector4
-
-import func SGLMath.dot
-#endif
-
-#if canImport(simd)
 @inlinable public func dot(_ x: SIMD2<Double>, _ y: SIMD2<Double>) -> Double {
+    #if USE_SIMD
     return simd_dot(x, y)
+    #else
+    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    #endif
 }
 @inlinable public func dot(_ x: SIMD2<Float>, _ y: SIMD2<Float>) -> Float {
+    #if USE_SIMD
     return simd_dot(x, y)
+    #else
+    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    #endif
 }
 @inlinable public func dot(_ x: SIMD3<Double>, _ y: SIMD3<Double>) -> Double {
+    #if USE_SIMD
     return simd_dot(x, y)
+    #else
+    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    #endif
 }
 @inlinable public func dot(_ x: SIMD3<Float>, _ y: SIMD3<Float>) -> Float {
+    #if USE_SIMD
     return simd_dot(x, y)
+    #else
+    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    #endif
 }
 @inlinable public func dot(_ x: SIMD4<Double>, _ y: SIMD4<Double>) -> Double {
+    #if USE_SIMD
     return simd_dot(x, y)
+    #else
+    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    #endif
 }
 @inlinable public func dot(_ x: SIMD4<Float>, _ y: SIMD4<Float>) -> Float {
+    #if USE_SIMD
     return simd_dot(x, y)
-}
-#endif
-
-/// Computes the dot product of the arguments.
-/// For scalar components `dot(x, y)` is equivalent to `x*y`.
-/// - Parameters:
-///   - x: a float argument.
-///   - y: a float argument.
-/// - Returns: the dot product of the arguments.
-@inlinable public func dot<S>(_ x: SIMD2<S>, _ y: SIMD2<S>) -> S where S: FloatingPointScalar {
-    return SGLMath.dot(Vector2<S>(x), Vector2<S>(y))
-}
-
-@inlinable public func dot<S>(_ x: SIMD3<S>, _ y: SIMD3<S>) -> S where S: FloatingPointScalar {
-    return SGLMath.dot(Vector3<S>(x), Vector3<S>(y))
-}
-
-@inlinable public func dot<S>(_ x: SIMD4<S>, _ y: SIMD4<S>) -> S where S: FloatingPointScalar {
-    return SGLMath.dot(Vector4<S>(x), Vector4<S>(y))
+    #else
+    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    #endif
 }

@@ -11,58 +11,98 @@ import struct simd.simd_quatf
 import struct simd.simd_quatd
 #endif
 
-#if canImport(SGLMath)
-import struct SGLMath.Vector2
-import struct SGLMath.Vector3
-import struct SGLMath.Vector4
-import struct SGLMath.Quaternion
-
-import func SGLMath.length
-#endif
-
-#if canImport(simd)
+/// Computes the length of the argument.
+/// For scalar components `length(x)` is equivalent to `abs(x)`.
+/// - Parameter float: a float argument
+/// - Returns: the distance between the argument and the origin.
 @inlinable public func length(_ x: SIMD2<Double>) -> Double {
+    #if USE_SIMD
     return simd_length(x)
+    #else
+    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    #endif
 }
-@inlinable public func length(_ x: SIMD2<Float>) -> Float {
-    return simd_length(x)
-}
-@inlinable public func length(_ x: SIMD3<Double>) -> Double {
-    return simd_length(x)
-}
-@inlinable public func length(_ x: SIMD3<Float>) -> Float {
-    return simd_length(x)
-}
-@inlinable public func length(_ x: SIMD4<Double>) -> Double {
-    return simd_length(x)
-}
-@inlinable public func length(_ x: SIMD4<Float>) -> Float {
-    return simd_length(x)
-}
-@inlinable public func length(_ x: simd_quatf) -> Float {
-    return simd_length(x)
-}
-@inlinable public func length(_ x: simd_quatd) -> Double {
-    return simd_length(x)
-}
-#endif
 
 /// Computes the length of the argument.
 /// For scalar components `length(x)` is equivalent to `abs(x)`.
 /// - Parameter float: a float argument
 /// - Returns: the distance between the argument and the origin.
-@inlinable public func length<S>(_ x: SIMD2<S>) -> S where S: FloatingPointScalar {
-    return SGLMath.length(Vector2<S>(x))
+@inlinable public func length(_ x: SIMD2<Float>) -> Float {
+    #if USE_SIMD
+    return simd_length(x)
+    #else
+    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    #endif
 }
 
-@inlinable public func length<S>(_ x: SIMD3<S>) -> S where S: FloatingPointScalar {
-    return SGLMath.length(Vector3<S>(x))
+/// Computes the length of the argument.
+/// For scalar components `length(x)` is equivalent to `abs(x)`.
+/// - Parameter float: a float argument
+/// - Returns: the distance between the argument and the origin.
+@inlinable public func length(_ x: SIMD3<Double>) -> Double {
+    #if USE_SIMD
+    return simd_length(x)
+    #else
+    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    #endif
 }
 
-@inlinable public func length<S>(_ x: SIMD4<S>) -> S where S: FloatingPointScalar {
-    return SGLMath.length(Vector4<S>(x))
+/// Computes the length of the argument.
+/// For scalar components `length(x)` is equivalent to `abs(x)`.
+/// - Parameter float: a float argument
+/// - Returns: the distance between the argument and the origin.
+@inlinable public func length(_ x: SIMD3<Float>) -> Float {
+    #if USE_SIMD
+    return simd_length(x)
+    #else
+    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    #endif
 }
 
-@inlinable public func length<S>(_ x: Quaternion<S>) -> S where S: FloatingPointScalar {
-    return SGLMath.length(Vector4<S>(x.x, x.y, x.z, x.w))
+/// Computes the length of the argument.
+/// For scalar components `length(x)` is equivalent to `abs(x)`.
+/// - Parameter float: a float argument
+/// - Returns: the distance between the argument and the origin.
+@inlinable public func length(_ x: SIMD4<Double>) -> Double {
+    #if USE_SIMD
+    return simd_length(x)
+    #else
+    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    #endif
+}
+
+/// Computes the length of the argument.
+/// For scalar components `length(x)` is equivalent to `abs(x)`.
+/// - Parameter float: a float argument
+/// - Returns: the distance between the argument and the origin.
+@inlinable public func length(_ x: SIMD4<Float>) -> Float {
+    #if USE_SIMD
+    return simd_length(x)
+    #else
+    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    #endif
+}
+
+/// Computes the length of the argument.
+/// For scalar components `length(x)` is equivalent to `abs(x)`.
+/// - Parameter float: a float argument
+/// - Returns: the distance between the argument and the origin.
+@inlinable public func length(_ x: simd_quatf) -> Float {
+    #if USE_SIMD
+    return simd_length(x)
+    #else
+    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    #endif
+}
+
+/// Computes the length of the argument.
+/// For scalar components `length(x)` is equivalent to `abs(x)`.
+/// - Parameter float: a float argument
+/// - Returns: the distance between the argument and the origin.
+@inlinable public func length(_ x: simd_quatd) -> Double {
+    #if USE_SIMD
+    return simd_length(x)
+    #else
+    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    #endif
 }

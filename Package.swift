@@ -3,6 +3,13 @@
 
 import PackageDescription
 
+let swiftSettings: [SwiftSetting] = [
+    //.define("USE_SIMD", .when(platforms: [.iOS, .macOS, .tvOS, .watchOS])),
+    //.define("NO_SIMD", .when(platforms: [.linux])),
+    .define("USE_SIMD")
+    //.define("NO_SIMD")
+]
+
 let package = Package(
     name: "FirebladeMath",
     products: [
@@ -12,16 +19,18 @@ let package = Package(
             targets: ["FirebladeMath"])
     ],
     dependencies: [
-        .package(url: "https://github.com/SwiftGL/Math.git", from: "3.0.0")
+        //.package(url: "https://github.com/SwiftGL/Math.git", from: "3.0.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "FirebladeMath",
-            dependencies: ["SGLMath"]),
+            dependencies: [],
+            swiftSettings: swiftSettings),
         .testTarget(
             name: "FirebladeMathTests",
-            dependencies: ["FirebladeMath"])
+            dependencies: ["FirebladeMath"],
+            swiftSettings: swiftSettings),
     ]
 )

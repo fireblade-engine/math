@@ -9,23 +9,20 @@
 import func simd.simd_mix
 #endif
 
-#if canImport(SGLMath)
-import func SGLMath.mix
-#endif
-
-// MARK: - mix
-#if canImport(simd)
+/// Linearly interpolates between x and y, taking the value x when t=0 and y when t=1
 public func mix(_ x: Double, _ y: Double, _ t: Double) -> Double {
+    #if USE_SIMD
     return simd_mix(x, y, t)
+    #else
+    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    #endif
 }
-
-public func mix(_ x: Float, _ y: Float, _ t: Float) -> Float {
-    return simd_mix(x, y, t)
-}
-#endif
 
 /// Linearly interpolates between x and y, taking the value x when t=0 and y when t=1
-public func mix<S>(_ x: S, _ y: S, _ t: S) -> S where S: Scalar {
-    // FIXME: return SGLMath.mix(x, y, t)
-    fatalError("not implemented")
+public func mix(_ x: Float, _ y: Float, _ t: Float) -> Float {
+    #if USE_SIMD
+    return simd_mix(x, y, t)
+    #else
+    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    #endif
 }

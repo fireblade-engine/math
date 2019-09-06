@@ -5,7 +5,6 @@ import Glibc
 #else
 #error("unsupported platform")
 #endif
-import SGLMath
 
 /// Computes square root of arg.
 ///
