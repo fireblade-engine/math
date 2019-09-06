@@ -6,26 +6,26 @@
 //
 
 #if canImport(simd)
-import struct simd.matrix.simd_double3x3
-import struct simd.matrix.simd_float3x3
-import struct simd.matrix.simd_double4x4
 import struct simd.matrix.simd_float4x4
+import struct simd.matrix.simd_double4x4
+import struct simd.matrix.simd_float3x3
+import struct simd.matrix.simd_double3x3
+#endif
 
-public typealias Mat3x3d = simd_double3x3
-public typealias Mat3x3f = simd_float3x3
+#if USE_SIMD
 
-public typealias Mat4x4d = simd_double4x4
-public typealias Mat4x4f = simd_float4x4
+public typealias Mat4x4f = Matrix4x4<simd_float4x4>
+public typealias Mat4x4d = Matrix4x4<simd_double4x4>
+
+public typealias Mat3x3f = Matrix3x3<simd_float3x3>
+public typealias Mat3x3d = Matrix3x3<simd_double3x3>
 
 #else
 
-import struct SGLMath.Matrix3x3
-import struct SGLMath.Matrix4x4
+public typealias Mat4x4f = Matrix4x4<Storage4x4<Float>>
+public typealias Mat4x4d = Matrix4x4<Storage4x4<Double>>
 
-public typealias Mat3x3d = SGLMath.Matrix3x3<Double>
-public typealias Mat3x3f = SGLMath.Matrix3x3<Float>
-
-public typealias Mat4x4d = SGLMath.Matrix4x4<Double>
-public typealias Mat4x4f = SGLMath.Matrix4x4<Float>
+public typealias Mat3x3f = Matrix3x3<Storage3x3<Float>>
+public typealias Mat3x3d = Matrix3x3<Storage3x3<Double>>
 
 #endif
