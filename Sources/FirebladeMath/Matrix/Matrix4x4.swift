@@ -8,8 +8,6 @@
 public struct Matrix4x4<Storage> where Storage: Storage4x4Protocol {
     public typealias Value = Storage.Value
     public typealias Vector = Storage.Column
-    public typealias M3x3 = Matrix3x3<Storage._Storage3x3>
-
     @usableFromInline var storage: Storage
 }
 
@@ -34,10 +32,6 @@ extension Matrix4x4 {
                    Vector(values[8...11]),
                    Vector(values[12...15])])
     }
-
-    public init(rotation angleRadians: Value, axis: SIMD3<Value>) {
-        self.init(upperLeft: M3x3(rotation: angleRadians, axis: axis))
-    }
 }
 
 extension Matrix4x4: ExpressibleByArrayLiteral {
@@ -59,21 +53,6 @@ extension Matrix4x4: Sequence {
 extension Matrix4x4 {
     @inlinable public var columns: (Vector, Vector, Vector, Vector) {
         return storage.columns
-    }
-}
-
-extension Matrix4x4 {
-    public init(upperLeft matrix3x3: M3x3) {
-        self.init(Vector(matrix3x3.columns.0, .zero),
-                  Vector(matrix3x3.columns.1, .zero),
-                  Vector(matrix3x3.columns.2, .zero),
-                  Vector(.zero, .zero, .zero, .one))
-    }
-
-    @inlinable public var upperLeft: M3x3 {
-        return M3x3(SIMD3<Value>(columns.0.xyz),
-                    SIMD3<Value>(columns.1.xyz),
-                    SIMD3<Value>(columns.2.xyz))
     }
 }
 

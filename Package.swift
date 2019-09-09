@@ -2,31 +2,29 @@
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
+
+/// We define global swift settings to control SIMD usage.
+/// The gist is, that we will import and use SIMD implementations where available.
+/// Otherwise we fall back to our own implementation.
+let swiftSettings: [SwiftSetting]?
 #if canImport(simd)
-let swiftSettings: [SwiftSetting] = [
-    //.define("USE_SIMD", .when(platforms: [.iOS, .macOS, .tvOS, .watchOS])),
-    //.define("NO_SIMD", .when(platforms: [.linux])),
-    
-
+swiftSettings = [
     .define("USE_SIMD")
-
-    //.define("NO_SIMD")
 ]
+#else
+swiftSettings = nil
 #endif
+
+
 let package = Package(
     name: "FirebladeMath",
     products: [
-        // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
             name: "FirebladeMath",
+            type: .static,
             targets: ["FirebladeMath"])
     ],
-    dependencies: [
-        //.package(url: "https://github.com/SwiftGL/Math.git", from: "3.0.0")
-    ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "FirebladeMath",
             dependencies: [],
@@ -34,6 +32,6 @@ let package = Package(
         .testTarget(
             name: "FirebladeMathTests",
             dependencies: ["FirebladeMath"],
-            swiftSettings: swiftSettings),
+            swiftSettings: swiftSettings)
     ]
 )

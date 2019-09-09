@@ -28,12 +28,32 @@ extension Quat4f {
         return FirebladeMath.angle(self)
     }
 
+    @inlinable public var inverse: Quat4f {
+        return FirebladeMath.inverse(self)
+    }
+
+    @inlinable public var conjugate: Quat4f {
+        return FirebladeMath.conjugate(self)
+    }
+
     @inlinable public var isNaN: Bool {
         return x.isNaN || y.isNaN || z.isNaN || w.isNaN
     }
 }
 
 extension Quat4f {
+    public init(angle angleRadians: Float, axis: SIMD3<Float>) {
+        self = quaternion(angle: angleRadians, axis: axis)
+    }
+
+    public init(rotation matrix: Mat3x3f) {
+        self = quaternion(matrix: matrix)
+    }
+
+    public init(rotation matrix: Mat4x4f) {
+        self = quaternion(matrix: matrix)
+    }
+
     public init(yaw: Float, pitch: Float, roll: Float) {
         /// https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
         // Abbreviations for the various angular functions

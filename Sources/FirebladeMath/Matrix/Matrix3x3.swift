@@ -8,7 +8,6 @@
 public struct Matrix3x3<Storage> where Storage: Storage3x3Protocol {
     public typealias Value = Storage.Value
     public typealias Vector = Storage.Column
-    public typealias M4x4 = Storage._Storage4x4
 
     @usableFromInline var storage: Storage
 }
@@ -25,10 +24,6 @@ extension Matrix3x3 {
 
     public init(_ column0: Vector, _ column1: Vector, _ column2: Vector) {
         self.init([column0, column1, column2])
-    }
-
-    public init(rotation angleRadians: Value, axis: Vector) {
-        fatalError("impl missing \(#function)")
     }
 }
 

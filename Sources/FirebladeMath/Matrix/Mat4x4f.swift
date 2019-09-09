@@ -6,12 +6,30 @@
 //
 
 extension Mat4x4f {
+    public init(rotation angleRadians: Float, axis: SIMD3<Float>) {
+        let quat = Quat4f(angle: angleRadians, axis: axis)
+        self = matrix4x4(from: quat)
+    }
+
     @inlinable public var scale: SIMD3<Float> {
         let sx = storage.columns.0.length
         let sy = storage.columns.1.length
         let sz = storage.columns.2.length
 
         return SIMD3<Float>(sx, sy, sz)
+    }
+
+    public init(upperLeft matrix3x3: Mat3x3f) {
+        self.init(Vector(matrix3x3.columns.0, 0),
+                  Vector(matrix3x3.columns.1, 0),
+                  Vector(matrix3x3.columns.2, 0),
+                  Vector(0, 0, 0, 1))
+    }
+
+    @inlinable public var upperLeft: Mat3x3f {
+        return Mat3x3f(SIMD3<Float>(columns.0.xyz),
+                       SIMD3<Float>(columns.1.xyz),
+                       SIMD3<Float>(columns.2.xyz))
     }
 
     @inlinable public var translation: SIMD3<Float> {
