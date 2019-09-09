@@ -10,6 +10,10 @@ public struct Matrix3x3<Storage> where Storage: Storage3x3Protocol {
     public typealias Vector = Storage.Column
 
     @usableFromInline var storage: Storage
+
+    public init(storage: Storage) {
+        self.storage = storage
+    }
 }
 
 extension Matrix3x3 {

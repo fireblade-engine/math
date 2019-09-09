@@ -9,8 +9,7 @@ import PackageDescription
 let swiftSettings: [SwiftSetting]?
 #if canImport(simd)
 swiftSettings = [
-    //.define("USE_SIMD"),
-    .define("NO_SIMD")
+    .define("USE_SIMD")
 ]
 #else
 swiftSettings = nil

@@ -8,7 +8,12 @@
 public struct Matrix4x4<Storage> where Storage: Storage4x4Protocol {
     public typealias Value = Storage.Value
     public typealias Vector = Storage.Column
+
     @usableFromInline var storage: Storage
+
+    public init(storage: Storage) {
+        self.storage = storage
+    }
 }
 
 extension Matrix4x4 {
