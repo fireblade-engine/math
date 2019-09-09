@@ -26,6 +26,10 @@ extension Mat3x3f {
         )
     }
 
+    @inlinable public var inverted: Mat3x3f {
+        return FirebladeMath.inverse(self)
+    }
+
     /*public init(rotation angleRadians: Float, axis: SIMD3<Float>) {
      let quat = Quat4f(angle: angleRadians, axis: axis)
      self = matrix3x3(from: quat)
