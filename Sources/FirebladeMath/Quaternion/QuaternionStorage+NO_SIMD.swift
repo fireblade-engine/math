@@ -20,22 +20,22 @@ public struct QuaternionStorage<Value>: QuaternionStorageProtocol where Value: S
 
     @inlinable public var x: Value {
         set { _storage.x = newValue }
-        get { _storage.x }
+        get { return _storage.x }
     }
 
     @inlinable public var y: Value {
         set { _storage.y = newValue }
-        get { _storage.y }
+        get { return _storage.y }
     }
 
     @inlinable public var z: Value {
         set { _storage.z = newValue }
-        get { _storage.z }
+        get { return _storage.z }
     }
 
     @inlinable public var w: Value {
         set { _storage.w = newValue }
-        get { _storage.w }
+        get { return _storage.w }
     }
 
     public __consuming func makeIterator() -> IndexingIterator<[Value]> {
