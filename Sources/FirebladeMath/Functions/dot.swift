@@ -9,8 +9,6 @@
 import func simd.simd_dot
 #endif
 
-import GLKit
-
 @inlinable public func dot(_ x: SIMD2<Double>, _ y: SIMD2<Double>) -> Double {
     #if USE_SIMD
     return simd_dot(x, y)
