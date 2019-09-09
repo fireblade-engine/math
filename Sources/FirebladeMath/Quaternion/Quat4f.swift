@@ -54,6 +54,10 @@ extension Quat4f {
         self = quaternion(matrix: matrix)
     }
 
+    public init(from: SIMD3<Float>, to: SIMD3<Float>) {
+        self = quaternion(from: from, to: to)
+    }
+
     public init(yaw: Float, pitch: Float, roll: Float) {
         /// https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
         // Abbreviations for the various angular functions

@@ -44,6 +44,17 @@ class Quat4fTests: XCTestCase {
         XCTAssertEqualElements(quat.elements, vec.elements, accuracy: 1e-6)
     }
 
+    func testFromToInit() {
+        let quat = Quat4f(from: [1, 2, 3], to: [4, 5, 6])
+        let values: [Float] = [
+            -0.240_965_78,
+            0.481_931_63,
+            -0.240_965_96,
+            3.694_809
+        ]
+        XCTAssertEqualElements(quat.elements, values, accuracy: 1e-6)
+    }
+
     func testAngleAxisX() {
         let angle: Float = radians(33)
         let quat = Quat4f(angle: angle, axis: .axisX)
