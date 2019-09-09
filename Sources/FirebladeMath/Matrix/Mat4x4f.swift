@@ -6,9 +6,33 @@
 //
 
 extension Mat4x4f {
+    /*public init(rotation angleRadians: Float, axis: SIMD3<Float>) {
+     let quat = Quat4f(angle: angleRadians, axis: axis)
+     self = matrix4x4(from: quat)
+     }*/
+
     public init(rotation angleRadians: Float, axis: SIMD3<Float>) {
-        let quat = Quat4f(angle: angleRadians, axis: axis)
-        self = matrix4x4(from: quat)
+        // see: <GLKit.framework/.../Headers/GLKMatrix4.h>
+        let v: SIMD3<Float> = normalize(axis)
+        let icos: Storage.Value = cos(angleRadians)
+        let icosp: Storage.Value = 1.0 - icos
+        let isin: Storage.Value = sin(angleRadians)
+
+        self.init(
+            Vector( icos + icosp * v.x * v.x,
+                    icosp * v.x * v.y + v.z * isin,
+                    icosp * v.x * v.z - v.y * isin,
+                    0),
+            Vector( icosp * v.x * v.y - v.z * isin,
+                    icos + icosp * v.y * v.y,
+                    icosp * v.y * v.z + v.x * isin,
+                    0),
+            Vector( icosp * v.x * v.z + v.y * isin,
+                    icosp * v.y * v.z - v.x * isin,
+                    icos + icosp * v.z * v.z,
+                    0),
+            Vector(0, 0, 0, 1)
+        )
     }
 
     @inlinable public var scale: SIMD3<Float> {
