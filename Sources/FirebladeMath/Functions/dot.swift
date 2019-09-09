@@ -15,14 +15,14 @@ import GLKit
     #if USE_SIMD
     return simd_dot(x, y)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    return x.x * y.x + x.y * y.y
     #endif
 }
 @inlinable public func dot(_ x: SIMD2<Float>, _ y: SIMD2<Float>) -> Float {
     #if USE_SIMD
     return simd_dot(x, y)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    return x.x * y.x + x.y * y.y
     #endif
 }
 @inlinable public func dot(_ x: SIMD3<Double>, _ y: SIMD3<Double>) -> Double {
@@ -43,13 +43,19 @@ import GLKit
     #if USE_SIMD
     return simd_dot(x, y)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    return x.x * y.x +
+        x.y * y.y +
+        x.z * y.z +
+        x.w * y.w
     #endif
 }
 @inlinable public func dot(_ x: SIMD4<Float>, _ y: SIMD4<Float>) -> Float {
     #if USE_SIMD
     return simd_dot(x, y)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    return x.x * y.x +
+        x.y * y.y +
+        x.z * y.z +
+        x.w * y.w
     #endif
 }

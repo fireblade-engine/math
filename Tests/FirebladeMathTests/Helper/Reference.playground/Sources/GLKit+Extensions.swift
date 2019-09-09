@@ -19,7 +19,7 @@ extension GLKMatrix4: CustomStringConvertible, CustomDebugStringConvertible {
                 } else {
                     return String(format: "%.6f", v)
                 }
-            }
+        }
         .joined(separator: ",")
         .trimmingCharacters(in: .whitespacesAndNewlines)
     }
@@ -43,7 +43,7 @@ extension GLKQuaternion: CustomStringConvertible, CustomDebugStringConvertible {
                 } else {
                     return String(format: "%.6f", v)
                 }
-            }
+        }
         .joined(separator: ",")
         .trimmingCharacters(in: .whitespacesAndNewlines)
     }
@@ -67,7 +67,7 @@ extension GLKVector3: CustomStringConvertible, CustomDebugStringConvertible {
                 } else {
                     return String(format: "%.6f", v)
                 }
-            }
+        }
         .joined(separator: ",")
         .trimmingCharacters(in: .whitespacesAndNewlines)
     }
@@ -91,7 +91,7 @@ extension GLKVector4: CustomStringConvertible, CustomDebugStringConvertible {
                 } else {
                     return String(format: "%.6f", v)
                 }
-            }
+        }
         .joined(separator: ",")
         .trimmingCharacters(in: .whitespacesAndNewlines)
     }

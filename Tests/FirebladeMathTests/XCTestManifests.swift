@@ -82,6 +82,8 @@ extension Mat4x4fTests {
         ("testRotationInitZ", testRotationInitZ),
         ("testScaleInit", testScaleInit),
         ("testScaleMatrixByVector", testScaleMatrixByVector),
+        ("testSubscriptColumnRow", testSubscriptColumnRow),
+        ("testSubscriptIndex", testSubscriptIndex),
         ("testTranslateMatrixByVector", testTranslateMatrixByVector),
         ("testTranslationInit", testTranslationInit),
         ("testUpperLeft", testUpperLeft)
