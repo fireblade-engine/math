@@ -67,8 +67,8 @@ extension Quaternion: ExpressibleByArrayLiteral {
     }
 }
 
-extension Quaternion {
-    @inlinable public var isNaN: Bool {
-        return x.isNaN || y.isNaN || z.isNaN || w.isNaN
+extension Quaternion: Equatable where Value: Equatable {
+    public static func == (lhs: Quaternion<Storage>, rhs: Quaternion<Storage>) -> Bool {
+        return lhs.storage == rhs.storage
     }
 }

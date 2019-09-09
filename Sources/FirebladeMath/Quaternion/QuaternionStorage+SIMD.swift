@@ -5,6 +5,7 @@
 //  Created by Christian Treffs on 06.09.19.
 //
 
+#if USE_SIMD
 #if canImport(simd)
 import struct simd.quaternion.simd_quatd
 import struct simd.quaternion.simd_quatf
@@ -78,4 +79,5 @@ extension simd_quatd: QuaternionStorageProtocol {
     }
 }
 
+#endif
 #endif

@@ -5,6 +5,8 @@
 //  Created by Christian Treffs on 06.09.19.
 //
 
+#if !USE_SIMD
+
 public struct QuaternionStorage<Value>: QuaternionStorageProtocol where Value: StorageScalar {
     @usableFromInline var _storage: SIMD4<Value>
 
@@ -40,3 +42,11 @@ public struct QuaternionStorage<Value>: QuaternionStorageProtocol where Value: S
         return _storage.makeIterator()
     }
 }
+
+extension QuaternionStorage: Equatable {
+    public static func == (lhs: QuaternionStorage<Value>, rhs: QuaternionStorage<Value>) -> Bool {
+        return lhs._storage == rhs._storage
+    }
+}
+
+#endif

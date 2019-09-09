@@ -6,6 +6,49 @@
 //
 
 extension Mat4x4f {
+    @inlinable public var scale: SIMD3<Float> {
+        let sx = storage.columns.0.length
+        let sy = storage.columns.1.length
+        let sz = storage.columns.2.length
+
+        return SIMD3<Float>(sx, sy, sz)
+    }
+
+    @inlinable public var translation: SIMD3<Float> {
+        return SIMD3<Float>(columns.3[0],
+                            columns.3[1],
+                            columns.3[2])
+    }
+
+    public init(translation tVec: SIMD3<Float> = .zero, scale sVec: SIMD3<Float> = .one) {
+        let values: [Float] = [sVec.x, 0, 0, 0,
+                               0, sVec.y, 0, 0,
+                               0, 0, sVec.z, 0,
+                               tVec.x, tVec.y, tVec.z, 1]
+        self.init(values)
+    }
+
+    @discardableResult
+    @inlinable
+    public mutating func translate(by vec: SIMD3<Float>) -> Mat4x4f {
+        self = multiply(self, Mat4x4f(translation: vec))
+        return self
+    }
+
+    @discardableResult
+    @inlinable
+    public mutating func scale(by vec: SIMD3<Float>) -> Mat4x4f {
+        self = multiply(self, Mat4x4f(scale: vec))
+        return self
+    }
+
+    @discardableResult
+    @inlinable
+    public mutating func rotate(by angleRadians: Float, axis: SIMD3<Float>) -> Mat4x4f {
+        self = multiply(self, Mat4x4f(rotation: angleRadians, axis: axis))
+        return self
+    }
+
     @inlinable
     public static func look(from eyePosition: SIMD3<Float>, at lookAtPosition: SIMD3<Float>, up: SIMD3<Float>) -> Mat4x4f {
         // see: <GLKit.framework/.../Headers/GLKMatrix4.h>

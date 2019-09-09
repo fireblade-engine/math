@@ -63,6 +63,12 @@ extension Matrix3x3 {
     }
 }
 
+extension Matrix3x3: Equatable {
+    public static func ==(lhs: Matrix3x3<Storage>, rhs: Matrix3x3<Storage>) -> Bool {
+        return lhs.storage == rhs.storage
+    }
+}
+
 /*
  extension Matrix3x3 where Storage.Value: AdditiveArithmetic & FloatingPoint & Numeric {
  public init(rotation angleRadians: Storage.Value, axis: Vector) {

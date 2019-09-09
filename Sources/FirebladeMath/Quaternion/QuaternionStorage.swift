@@ -5,7 +5,7 @@
 //  Created by Christian Treffs on 06.09.19.
 //
 
-public protocol QuaternionStorageProtocol: Sequence {
+public protocol QuaternionStorageProtocol: Sequence, Equatable {
     associatedtype Value: StorageScalar
 
     init(_ x: Value, _ y: Value, _ z: Value, _ w: Value)

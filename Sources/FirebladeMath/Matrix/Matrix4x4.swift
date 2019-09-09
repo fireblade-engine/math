@@ -38,13 +38,6 @@ extension Matrix4x4 {
     public init(rotation angleRadians: Value, axis: SIMD3<Value>) {
         self.init(upperLeft: M3x3(rotation: angleRadians, axis: axis))
     }
-
-    public init(translation tVec: SIMD3<Value> = .zero, scale sVec: SIMD3<Value> = .one) {
-        self.init([sVec.x, 0, 0, 0,
-                   0, sVec.y, 0, 0,
-                   0, 0, sVec.z, 0,
-                   tVec.x, tVec.y, tVec.z, 1])
-    }
 }
 
 extension Matrix4x4: ExpressibleByArrayLiteral {
@@ -71,10 +64,10 @@ extension Matrix4x4 {
 
 extension Matrix4x4 {
     public init(upperLeft matrix3x3: M3x3) {
-        self.init(Vector(matrix3x3.columns.0, 0),
-                  Vector(matrix3x3.columns.1, 0),
-                  Vector(matrix3x3.columns.2, 0),
-                  Vector(0, 0, 0, 1))
+        self.init(Vector(matrix3x3.columns.0, .zero),
+                  Vector(matrix3x3.columns.1, .zero),
+                  Vector(matrix3x3.columns.2, .zero),
+                  Vector(.zero, .zero, .zero, .one))
     }
 
     @inlinable public var upperLeft: M3x3 {
@@ -84,49 +77,10 @@ extension Matrix4x4 {
     }
 }
 
-extension Matrix4x4 {
-    @inlinable public var scale: SIMD3<Value> {
-        let sx = storage.columns.0.length
-        let sy = storage.columns.1.length
-        let sz = storage.columns.2.length
-
-        return SIMD3<Value>(sx, sy, sz)
+extension Matrix4x4: Equatable {
+    public static func ==(lhs: Matrix4x4<Storage>, rhs: Matrix4x4<Storage>) -> Bool {
+        return lhs.storage == rhs.storage
     }
-
-    @inlinable public var translation: SIMD3<Value> {
-        return SIMD3<Value>(columns.3[0],
-                            columns.3[1],
-                            columns.3[2])
-    }
-}
-
-// MARK: - mutating operations
-extension Matrix4x4 {
-    @discardableResult
-    @inlinable
-    public mutating func translate(by vec: SIMD3<Value>) -> Matrix4x4 {
-        self = multiply(self, Matrix4x4(translation: vec))
-        return self
-    }
-
-    @discardableResult
-    @inlinable
-    public mutating func scale(by vec: SIMD3<Value>) -> Matrix4x4 {
-        self = multiply(self, Matrix4x4(scale: vec))
-        return self
-    }
-
-    @discardableResult
-    @inlinable
-    public mutating func rotate(by angleRadians: Value, axis: SIMD3<Value>) -> Matrix4x4 {
-        self = multiply(self, Matrix4x4(rotation: angleRadians, axis: axis))
-        return self
-    }
-}
-
-// MARK: - static functions
-
-extension Matrix4x4 {
 }
 
 // MARK: - euler

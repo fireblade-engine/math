@@ -5,6 +5,10 @@
 //  Created by Christian Treffs on 23.07.19.
 //
 
+#if canImport(simd)
+import func simd.simd_axis
+#endif
+
 extension Quat4f {
     @inlinable public var normalized: Quat4f {
         return FirebladeMath.normalize(self)
@@ -13,6 +17,19 @@ extension Quat4f {
     /// The length of the quaternion `q`.
     @inlinable public var length: Float {
         return FirebladeMath.length(self)
+    }
+
+    /// Returns the axis about which a quaternion rotates.
+    @inlinable public var axis: Vec3f {
+        return FirebladeMath.axis(self)
+    }
+
+    @inlinable public var angle: Float {
+        return FirebladeMath.angle(self)
+    }
+
+    @inlinable public var isNaN: Bool {
+        return x.isNaN || y.isNaN || z.isNaN || w.isNaN
     }
 }
 
@@ -118,14 +135,6 @@ extension Quat4f {
         }
 
         return angle
-    }
-
-    @inlinable public var rotationAxis: Vec3f {
-        #if USE_SIMD
-        return self.axis
-        #else
-        fatalError("implementation missing")
-        #endif
     }
 
     /// The (multiplicative) inverse of the quaternion `q`.

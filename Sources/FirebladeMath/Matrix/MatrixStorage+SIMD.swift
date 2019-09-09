@@ -5,6 +5,7 @@
 //  Created by Christian Treffs on 06.09.19.
 //
 
+#if USE_SIMD
 #if canImport(simd)
 import struct simd.matrix.simd_float4x4
 import struct simd.matrix.simd_double4x4
@@ -53,4 +54,5 @@ extension simd_double4x4: Storage4x4Protocol {
     }
 }
 
+#endif
 #endif
