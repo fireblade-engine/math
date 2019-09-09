@@ -2,6 +2,19 @@ import GLKit
 import SceneKit
 import simd
 
+let values = [
+    1, 2, 3,
+    4, 5, 6,
+    7, 8, 9
+]
+
+func index(column: Int, row: Int) {
+    return (column % 3) * row + column
+}
+
+index(column: 1, row: 2)
+index(column: 1, row: 3)
+
 // MARK: - Mat4x4f
 let trans = GLKMatrix4Translate(GLKMatrix4Identity, 1.23, 4.56, 7.89)
 
@@ -90,3 +103,5 @@ GLKQuaternionMakeWithMatrix4(mat4x4rot)
 
 let vvvv = GLKQuaternionRotateVector3(q2, GLKVector3Make(5, 6, 7)) // aka act
 vvvv.description
+
+GLKVector3CrossProduct(<#T##vectorLeft: GLKVector3##GLKVector3#>, <#T##vectorRight: GLKVector3##GLKVector3#>)

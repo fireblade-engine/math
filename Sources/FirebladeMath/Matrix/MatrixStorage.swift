@@ -14,6 +14,9 @@ public protocol Storage4x4Protocol: Sequence, Equatable {
     init(diagonal: Column)
 
     var columns: (Column, Column, Column, Column) { get }
+
+    subscript(column: Int, row: Int) -> Value { get set }
+    subscript(index: Int) -> Value { get set }
 }
 
 public protocol Storage3x3Protocol: Sequence, Equatable {
@@ -25,4 +28,7 @@ public protocol Storage3x3Protocol: Sequence, Equatable {
     init(diagonal: Column)
 
     var columns: (Column, Column, Column) { get }
+
+    subscript(column: Int, row: Int) -> Value { get set }
+    subscript(index: Int) -> Value { get set }
 }

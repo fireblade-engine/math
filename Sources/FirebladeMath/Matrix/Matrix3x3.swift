@@ -58,6 +58,26 @@ extension Matrix3x3 {
     }
 }
 
+extension Matrix3x3 {
+    public subscript(column: Int, row: Int) -> Value {
+        get {
+            return storage[column, row]
+        }
+        set {
+            storage[column, row] = newValue
+        }
+    }
+
+    public subscript(index: Int) -> Value {
+        get {
+            return storage[index]
+        }
+        set {
+            storage[index] = newValue
+        }
+    }
+}
+
 extension Matrix3x3: Equatable {
     public static func ==(lhs: Matrix3x3<Storage>, rhs: Matrix3x3<Storage>) -> Bool {
         return lhs.storage == rhs.storage

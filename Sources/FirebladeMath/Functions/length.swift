@@ -19,7 +19,8 @@ import struct simd.simd_quatd
     #if USE_SIMD
     return simd_length(x)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    return sqrt(x.x * x.x +
+        x.y * x.y)
     #endif
 }
 
@@ -31,7 +32,8 @@ import struct simd.simd_quatd
     #if USE_SIMD
     return simd_length(x)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    return sqrt(x.x * x.x +
+        x.y * x.y)
     #endif
 }
 
@@ -43,7 +45,9 @@ import struct simd.simd_quatd
     #if USE_SIMD
     return simd_length(x)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    return sqrt(x.x * x.x +
+        x.y * x.y +
+        x.z * x.z)
     #endif
 }
 
@@ -55,7 +59,9 @@ import struct simd.simd_quatd
     #if USE_SIMD
     return simd_length(x)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    return sqrt(x.x * x.x +
+        x.y * x.y +
+        x.z * x.z)
     #endif
 }
 
@@ -67,7 +73,10 @@ import struct simd.simd_quatd
     #if USE_SIMD
     return simd_length(x)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    return sqrt(x.x * x.x +
+        x.y * x.y +
+        x.z * x.z +
+        x.w * x.w)
     #endif
 }
 
@@ -79,7 +88,10 @@ import struct simd.simd_quatd
     #if USE_SIMD
     return simd_length(x)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    return sqrt(x.x * x.x +
+        x.y * x.y +
+        x.z * x.z +
+        x.w * x.w)
     #endif
 }
 
@@ -91,7 +103,10 @@ import struct simd.simd_quatd
     #if USE_SIMD
     return simd_length(x.storage)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    return sqrt(x.x * x.x +
+        x.y * x.y +
+        x.z * x.z +
+        x.w * x.w)
     #endif
 }
 
@@ -103,6 +118,9 @@ import struct simd.simd_quatd
     #if USE_SIMD
     return simd_length(x.storage)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    return sqrt(x.x * x.x +
+        x.y * x.y +
+        x.z * x.z +
+        x.w * x.w)
     #endif
 }

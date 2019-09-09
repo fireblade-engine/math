@@ -34,6 +34,26 @@ extension Matrix4x4 {
     }
 }
 
+extension Matrix4x4 {
+    public subscript(column: Int, row: Int) -> Value {
+        get {
+            return storage[column, row]
+        }
+        set {
+            storage[column, row] = newValue
+        }
+    }
+
+    public subscript(index: Int) -> Value {
+        get {
+            return storage[index]
+        }
+        set {
+            storage[index] = newValue
+        }
+    }
+}
+
 extension Matrix4x4: ExpressibleByArrayLiteral {
     public init(arrayLiteral elements: Value...) {
         self.init(elements)

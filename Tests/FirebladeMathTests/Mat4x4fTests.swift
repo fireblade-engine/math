@@ -59,6 +59,58 @@ class Mat4x4fTests: XCTestCase {
         XCTAssertFalse(Mat4x4f(diagonal: [1, 2, 3, 4]) == Mat4x4f.identity)
     }
 
+    func testSubscriptColumnRow() {
+        let values: [Float] = rnd(16)
+
+        let mat = Mat4x4f(values)
+
+        XCTAssertEqual(mat[0, 0], values[0])
+        XCTAssertEqual(mat[0, 1], values[1])
+        XCTAssertEqual(mat[0, 2], values[2])
+        XCTAssertEqual(mat[0, 3], values[3])
+
+        XCTAssertEqual(mat[1, 0], values[4])
+        XCTAssertEqual(mat[1, 1], values[5])
+        XCTAssertEqual(mat[1, 2], values[6])
+        XCTAssertEqual(mat[1, 3], values[7])
+
+        XCTAssertEqual(mat[2, 0], values[8])
+        XCTAssertEqual(mat[2, 1], values[9])
+        XCTAssertEqual(mat[2, 2], values[10])
+        XCTAssertEqual(mat[2, 3], values[11])
+
+        XCTAssertEqual(mat[3, 0], values[12])
+        XCTAssertEqual(mat[3, 1], values[13])
+        XCTAssertEqual(mat[3, 2], values[14])
+        XCTAssertEqual(mat[3, 3], values[15])
+    }
+
+    func testSubscriptIndex() {
+        let values: [Float] = rnd(16)
+
+        let mat = Mat4x4f(values)
+
+        XCTAssertEqual(mat[0], values[0])
+        XCTAssertEqual(mat[1], values[1])
+        XCTAssertEqual(mat[2], values[2])
+        XCTAssertEqual(mat[3], values[3])
+
+        XCTAssertEqual(mat[4], values[4])
+        XCTAssertEqual(mat[5], values[5])
+        XCTAssertEqual(mat[6], values[6])
+        XCTAssertEqual(mat[7], values[7])
+
+        XCTAssertEqual(mat[8], values[8])
+        XCTAssertEqual(mat[9], values[9])
+        XCTAssertEqual(mat[10], values[10])
+        XCTAssertEqual(mat[11], values[11])
+
+        XCTAssertEqual(mat[12], values[12])
+        XCTAssertEqual(mat[13], values[13])
+        XCTAssertEqual(mat[14], values[14])
+        XCTAssertEqual(mat[15], values[15])
+    }
+
     func testTranslationInit() {
         let vec = Vec3f(rnd(3))
 

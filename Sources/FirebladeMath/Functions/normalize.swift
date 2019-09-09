@@ -13,7 +13,8 @@ import func simd.simd_normalize
     #if USE_SIMD
     return simd_normalize(x)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    let scale: Double = 1.0 / length(x)
+    return SIMD2<Double>(x.x * scale, x.y * scale)
     #endif
 }
 
@@ -21,7 +22,8 @@ import func simd.simd_normalize
     #if USE_SIMD
     return simd_normalize(x)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    let scale: Float = 1.0 / length(x)
+    return SIMD2<Float>(x.x * scale, x.y * scale)
     #endif
 }
 
@@ -29,7 +31,8 @@ import func simd.simd_normalize
     #if USE_SIMD
     return simd_normalize(x)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    let scale: Double = 1.0 / length(x)
+    return SIMD3<Double>(x.x * scale, x.y * scale, x.z * scale)
     #endif
 }
 
@@ -37,7 +40,8 @@ import func simd.simd_normalize
     #if USE_SIMD
     return simd_normalize(x)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    let scale: Float = 1.0 / length(x)
+    return SIMD3<Float>(x.x * scale, x.y * scale, x.z * scale)
     #endif
 }
 
@@ -45,7 +49,8 @@ import func simd.simd_normalize
     #if USE_SIMD
     return simd_normalize(x)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    let scale: Double = 1.0 / length(x)
+    return SIMD4<Double>(x.x * scale, x.y * scale, x.z * scale, x.w * scale)
     #endif
 }
 
@@ -53,7 +58,8 @@ import func simd.simd_normalize
     #if USE_SIMD
     return simd_normalize(x)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    let scale: Float = 1.0 / length(x)
+    return SIMD4<Float>(x.x * scale, x.y * scale, x.z * scale, x.w * scale)
     #endif
 }
 
@@ -61,7 +67,8 @@ import func simd.simd_normalize
     #if USE_SIMD
     return Quat4f(storage: simd.simd_normalize(x.storage))
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    let scale: Float = 1.0 / length(x)
+    return Quat4f(x.x * scale, x.y * scale, x.z * scale, x.w * scale)
     #endif
 }
 
@@ -69,20 +76,7 @@ import func simd.simd_normalize
     #if USE_SIMD
     return Quat4d(storage: simd.simd_normalize(x.storage))
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    let scale: Double = 1.0 / length(x)
+    return Quat4d(x.x * scale, x.y * scale, x.z * scale, x.w * scale)
     #endif
 }
-
-/*
- @inlinable public func normalize<S>(_ x: SIMD2<S>) -> SIMD2<S> where S: FloatingPointScalar {
- return SGLMath.normalize(Vector2<S>(x)).simd
- }
-
- @inlinable public func normalize<S>(_ x: SIMD3<S>) -> SIMD3<S> where S: FloatingPointScalar {
- return SGLMath.normalize(Vector3<S>(x)).simd
- }
-
- @inlinable public func normalize<S>(_ x: SIMD4<S>) -> SIMD4<S> where S: FloatingPointScalar {
- return SGLMath.normalize(Vector4<S>(x)).simd
- }
- */

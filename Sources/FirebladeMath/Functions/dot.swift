@@ -9,6 +9,8 @@
 import func simd.simd_dot
 #endif
 
+import GLKit
+
 @inlinable public func dot(_ x: SIMD2<Double>, _ y: SIMD2<Double>) -> Double {
     #if USE_SIMD
     return simd_dot(x, y)
@@ -27,14 +29,14 @@ import func simd.simd_dot
     #if USE_SIMD
     return simd_dot(x, y)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    return x.x * y.x + x.y * y.y + x.z * y.z
     #endif
 }
 @inlinable public func dot(_ x: SIMD3<Float>, _ y: SIMD3<Float>) -> Float {
     #if USE_SIMD
     return simd_dot(x, y)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    return x.x * y.x + x.y * y.y + x.z * y.z
     #endif
 }
 @inlinable public func dot(_ x: SIMD4<Double>, _ y: SIMD4<Double>) -> Double {

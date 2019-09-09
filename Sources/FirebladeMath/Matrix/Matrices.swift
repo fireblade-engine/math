@@ -29,3 +29,13 @@ public typealias Mat3x3f = Matrix3x3<Storage3x3<Float>>
 public typealias Mat3x3d = Matrix3x3<Storage3x3<Double>>
 
 #endif
+
+@inlinable public func index(column: Int, row: Int, width: Int) -> Int {
+    return (row * width) + column
+}
+
+@inlinable public func columnRow(index: Int, width: Int) -> (column: Int, row: Int) {
+    let row: Int = index % width
+    let column: Int = index / width
+    return (column, row)
+}
