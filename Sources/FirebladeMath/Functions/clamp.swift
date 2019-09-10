@@ -39,9 +39,9 @@ public func clamp(_ x: Float, _ minVal: Float, _ maxVal: Float) -> Float {
     #endif
 }
 
-public extension Comparable {
+extension Comparable {
     @inlinable
-    func clamped(to range: ClosedRange<Self>) -> Self {
+    public func clamped(to range: ClosedRange<Self>) -> Self {
         if self < range.lowerBound {
             return range.lowerBound
         }
@@ -52,7 +52,7 @@ public extension Comparable {
     }
 
     @inlinable
-    mutating func clamp(to range: ClosedRange<Self>) {
+    public mutating func clamp(to range: ClosedRange<Self>) {
         if self < range.lowerBound {
             self = range.lowerBound
         }

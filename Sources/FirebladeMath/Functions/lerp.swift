@@ -5,9 +5,9 @@
 //  Created by Christian Treffs on 10.09.19.
 //
 
-public extension FloatingPoint {
+extension FloatingPoint {
     @inlinable
-    func lerped(from rangeIn: ClosedRange<Self>, to rangeOut: ClosedRange<Self>) -> Self {
+    public func lerped(from rangeIn: ClosedRange<Self>, to rangeOut: ClosedRange<Self>) -> Self {
         let x: Self = self
         let x0: Self = rangeIn.lowerBound
         let x1: Self = rangeIn.upperBound
@@ -19,7 +19,7 @@ public extension FloatingPoint {
     }
 
     @inlinable
-    mutating func lerp(from rangeIn: ClosedRange<Self>, to rangeOut: ClosedRange<Self>) {
+    public mutating func lerp(from rangeIn: ClosedRange<Self>, to rangeOut: ClosedRange<Self>) {
         let x: Self = self
         let x0: Self = rangeIn.lowerBound
         let x1: Self = rangeIn.upperBound
