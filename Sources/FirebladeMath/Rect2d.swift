@@ -6,10 +6,14 @@
 //
 
 public struct Rect2D {
+    /// x coord of lower left corner
     public var x: Int
+    /// y coord of lower left corner
     public var y: Int
     public var width: Int
     public var height: Int
+
+    public static let zero = Rect2D(x: 0, y: 0, width: 0, height: 0)
 
     public init(x: Int, y: Int, width: Int, height: Int) {
         self.x = x
