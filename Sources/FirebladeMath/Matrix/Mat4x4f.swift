@@ -95,6 +95,10 @@ extension Mat4x4f {
         return FirebladeMath.inverse(self)
     }
 
+    @inlinable public var transposed: Mat4x4f {
+        return FirebladeMath.transpose(self)
+    }
+
     @inlinable
     public static func look(from eyePosition: SIMD3<Float>, at lookAtPosition: SIMD3<Float>, up: SIMD3<Float>) -> Mat4x4f {
         // see: <GLKit.framework/.../Headers/GLKMatrix4.h>
