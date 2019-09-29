@@ -1,0 +1,23 @@
+//
+//  Matrix+Quaternion.swift
+//  FirebladeMath
+//
+//  Created by Christian Treffs on 27.08.19.
+//
+
+extension Mat4x4f {
+    /// Creates a new matrix from the specified quarternion.
+    /// Quaternion will be normalized.
+    public init(orientation quaternion: Quat4f) {
+        self = matrix4x4(from: quaternion.normalized)
+    }
+
+    /// Construct a quaternion from a 4x4 rotation `matrix`.
+    ///
+    /// The last row and column of the matrix are ignored. This
+    /// function is equivalent to calling simd_quaternion with the upper-left 3x3
+    /// submatrix.
+    @inlinable public var quaternion: Quat4f {
+        return FirebladeMath.quaternion(matrix: self)
+    }
+}

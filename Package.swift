@@ -3,30 +3,35 @@
 
 import PackageDescription
 
+/// We define global swift settings to control SIMD usage.
+/// The gist is, that we will import and use SIMD implementations where available.
+/// Otherwise we fall back to our own implementation.
+let swiftSettings: [SwiftSetting]?
+#if canImport(simd)
+swiftSettings = [
+    .define("USE_SIMD")
+]
+#else
+swiftSettings = nil
+#endif
+
+
 let package = Package(
     name: "FirebladeMath",
-    platforms: [
-        .macOS(.v10_14),
-        .iOS(.v11),
-        .tvOS(.v11)
-    ],
     products: [
-        // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
             name: "FirebladeMath",
+            type: .static,
             targets: ["FirebladeMath"])
     ],
-    dependencies: [
-        //.package(url: "https://github.com/nicklockwood/VectorMath.git", from: "0.4.0")
-    ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "FirebladeMath",
-            dependencies: []),
+            dependencies: [],
+            swiftSettings: swiftSettings),
         .testTarget(
             name: "FirebladeMathTests",
-            dependencies: ["FirebladeMath"])
+            dependencies: ["FirebladeMath"],
+            swiftSettings: swiftSettings)
     ]
 )
