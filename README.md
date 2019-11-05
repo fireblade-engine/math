@@ -3,6 +3,7 @@
 A description of this package.
 
 
+- <https://github.com/troughton/SwiftMath>
 - <https://j3d.org/matrix_faq/matrfaq_latest.html>
 - <https://github.com/g-truc/glm/blob/master/glm/gtc/matrix_transform.inl>
 - </Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/simd>
