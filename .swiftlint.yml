@@ -1,6 +1,8 @@
 included:
   - Sources
   - Tests  
+excluded:
+  - Tests/*/XCTestManifests.swift
 line_length: 200
 number_separator:
   minimum_length: 5

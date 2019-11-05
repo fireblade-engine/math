@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  quaternion.swift
 //
 //
 //  Created by Christian Treffs on 09.09.19.
