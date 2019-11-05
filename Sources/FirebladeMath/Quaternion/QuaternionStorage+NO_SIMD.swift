@@ -8,44 +8,44 @@
 #if !USE_SIMD
 
 public struct QuaternionStorage<Value>: QuaternionStorageProtocol where Value: StorageScalar {
-    @usableFromInline var _storage: SIMD4<Value>
+    @usableFromInline var storage: SIMD4<Value>
 
     public init(_ x: Value, _ y: Value, _ z: Value, _ w: Value) {
         self.init(SIMD4<Value>(x, y, z, w))
     }
 
     public init(_ vector: SIMD4<Value>) {
-        _storage = vector
+        storage = vector
     }
 
     @inlinable public var x: Value {
-        set { _storage.x = newValue }
-        get { return _storage.x }
+        set { storage.x = newValue }
+        get { return storage.x }
     }
 
     @inlinable public var y: Value {
-        set { _storage.y = newValue }
-        get { return _storage.y }
+        set { storage.y = newValue }
+        get { return storage.y }
     }
 
     @inlinable public var z: Value {
-        set { _storage.z = newValue }
-        get { return _storage.z }
+        set { storage.z = newValue }
+        get { return storage.z }
     }
 
     @inlinable public var w: Value {
-        set { _storage.w = newValue }
-        get { return _storage.w }
+        set { storage.w = newValue }
+        get { return storage.w }
     }
 
     public __consuming func makeIterator() -> IndexingIterator<[Value]> {
-        return _storage.makeIterator()
+        return storage.makeIterator()
     }
 }
 
 extension QuaternionStorage: Equatable {
     public static func == (lhs: QuaternionStorage<Value>, rhs: QuaternionStorage<Value>) -> Bool {
-        return lhs._storage == rhs._storage
+        return lhs.storage == rhs.storage
     }
 }
 
