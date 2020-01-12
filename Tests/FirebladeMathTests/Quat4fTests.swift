@@ -120,7 +120,7 @@ class Quat4fTests: XCTestCase {
 
     func testAngle() {
         let quat = Quat4f(1.23, 4.56, 7.89, 0.12)
-        XCTAssertEqual(quat.angle, 2.901_012_9, accuracy: 1e-6)
+        XCTAssertEqual(quat.angle, 3.115_494_7, accuracy: 1e-6)
     }
 
     func testInverse() {
