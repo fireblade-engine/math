@@ -44,6 +44,7 @@ class Quat4fTests: XCTestCase {
         XCTAssertEqualElements(quat.elements, vec.elements, accuracy: 1e-6)
     }
 
+    #if USE_SIMD
     func testFromToInit() {
         let quat = Quat4f(from: [1, 2, 3], to: [4, 5, 6])
         let values: [Float] = [
@@ -54,6 +55,7 @@ class Quat4fTests: XCTestCase {
         ]
         XCTAssertEqualElements(quat.elements, values, accuracy: 1e-6)
     }
+    #endif
 
     func testAngleAxisX() {
         let angle: Float = radians(33)

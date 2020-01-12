@@ -382,6 +382,7 @@ class Mat4x4fTests: XCTestCase {
         XCTAssertEqualElements(mat.elements, [55.978_317, 62.363_155, -9.606_318, 0.093_000], accuracy: 1e-5) // FIXME: would like to have 1e-6
     }
 
+    #if USE_SIMD
     func testInverse() {
         let values: [Float] = [
             -0.963_882, 0.110_248, 0.242_439, 0.000_000,
@@ -399,4 +400,5 @@ class Mat4x4fTests: XCTestCase {
         let iMat = mat.inverted
         XCTAssertEqualElements(iMat.elements, values, accuracy: 1e-6)
     }
+    #endif
 }
