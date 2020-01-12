@@ -100,6 +100,7 @@ public struct Storage4x4<Value>: Storage4x4Protocol where Value: StorageScalar {
     @usableFromInline var column2: Column
     @usableFromInline var column3: Column
 
+    // swiftlint:disable large_tuple
     @inlinable public var columns: (Column, Column, Column, Column) {
         return (column0, column1, column2, column3)
     }

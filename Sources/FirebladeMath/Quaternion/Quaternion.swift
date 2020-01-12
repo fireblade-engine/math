@@ -51,7 +51,7 @@ extension Quaternion {
 }
 
 extension Quaternion: Sequence {
-    public __consuming func makeIterator() -> IndexingIterator<[Value]> {
+    public func makeIterator() -> IndexingIterator<[Storage.Value]> {
         return storage.makeIterator() as! IndexingIterator<[Storage.Value]>
     }
 

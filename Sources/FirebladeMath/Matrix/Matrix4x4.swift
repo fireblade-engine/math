@@ -76,6 +76,7 @@ extension Matrix4x4: Sequence {
 }
 
 extension Matrix4x4 {
+    // swiftlint:disable large_tuple
     @inlinable public var columns: (Vector, Vector, Vector, Vector) {
         return storage.columns
     }
