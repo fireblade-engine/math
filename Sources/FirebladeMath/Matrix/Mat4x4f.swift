@@ -63,9 +63,9 @@ extension Mat4x4f {
                                 columns.3[2])
         }
         set {
-            storage[3][0] = newValue.x
-            storage[3][1] = newValue.y
-            storage[3][2] = newValue.z
+            storage[3, 0] = newValue.x
+            storage[3, 1] = newValue.y
+            storage[3, 2] = newValue.z
         }
     }
 
