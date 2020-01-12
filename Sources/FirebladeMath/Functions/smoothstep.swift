@@ -15,7 +15,8 @@ public func smoothstep(_ edge0: Double, _ edge1: Double, _ x: Double) -> Double 
     #if USE_SIMD
     return simd.simd_smoothstep(edge0, edge1, x)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    let t = clamp((x - edge0) / (edge1 - edge0), 0, 1)
+    return t * t * (3 - 2 * t)
     #endif
 }
 
@@ -25,6 +26,7 @@ public func smoothstep(_ edge0: Float, _ edge1: Float, _ x: Float) -> Float {
     #if USE_SIMD
     return simd.simd_smoothstep(edge0, edge1, x)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    let t = clamp((x - edge0) / (edge1 - edge0), 0, 1)
+    return t * t * (3 - 2 * t)
     #endif
 }
