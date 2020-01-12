@@ -248,6 +248,15 @@ class Mat4x4fTests: XCTestCase {
         XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
+    func testTranslation() {
+        var mat: Mat4x4f = .identity
+
+        XCTAssertEqual(mat.translation, [0, 0, 0])
+
+        mat.translation = [1, 2, 3]
+        XCTAssertEqual(mat.translation, [1, 2, 3])
+    }
+
     func testScaleMatrixByVector() {
         let values: [Float] = [
             -3.113_339, 0.500_740, 0.699_482, 0.000_000,

@@ -3,6 +3,8 @@ import SceneKit
 import simd
 GLKVector3DotProduct
 
+// swiftlint:disable all
+
 // MARK: - Mat4x4f
 let trans = GLKMatrix4Translate(GLKMatrix4Identity, 1.23, 4.56, 7.89)
 

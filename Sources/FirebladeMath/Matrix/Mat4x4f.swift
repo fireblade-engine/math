@@ -57,9 +57,16 @@ extension Mat4x4f {
     }
 
     @inlinable public var translation: SIMD3<Float> {
-        return SIMD3<Float>(columns.3[0],
-                            columns.3[1],
-                            columns.3[2])
+        get {
+            return SIMD3<Float>(columns.3[0],
+                                columns.3[1],
+                                columns.3[2])
+        }
+        set {
+            storage[3][0] = newValue.x
+            storage[3][1] = newValue.y
+            storage[3][2] = newValue.z
+        }
     }
 
     public init(translation tVec: SIMD3<Float> = .zero, scale sVec: SIMD3<Float> = .one) {
