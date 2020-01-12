@@ -17,7 +17,7 @@ public func rsqrt(_ x: Double) -> Double {
     #if USE_SIMD
     return simd.simd_rsqrt(x)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    return 1.0 / sqrt(x)
     #endif
 }
 
@@ -29,6 +29,6 @@ public func rsqrt(_ x: Float) -> Float {
     #if USE_SIMD
     return simd.simd_rsqrt(x)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    return 1.0 / sqrt(x)
     #endif
 }

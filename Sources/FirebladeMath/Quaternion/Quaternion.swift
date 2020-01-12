@@ -51,8 +51,8 @@ extension Quaternion {
 }
 
 extension Quaternion: Sequence {
-    public __consuming func makeIterator() -> IndexingIterator<[Value]> {
-        return storage.makeIterator() as! IndexingIterator<[Storage.Value]>
+    public func makeIterator() -> IndexingIterator<[Storage.Value]> {
+        return unsafeBitCast(storage.makeIterator(), to: IndexingIterator<[Storage.Value]>.self)
     }
 
     @inlinable public var elements: [Value] {

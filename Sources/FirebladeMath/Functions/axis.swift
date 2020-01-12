@@ -13,7 +13,7 @@ import func simd.simd_axis
     #if USE_SIMD
     return simd.simd_axis(quat.storage)
     #else
-    fatalError("implementation missing \(#function)")
+    return normalize(Vec3f(quat.x, quat.y, quat.z))
     #endif
 }
 
@@ -22,6 +22,6 @@ import func simd.simd_axis
     #if USE_SIMD
     return simd.simd_axis(quat.storage)
     #else
-    fatalError("implementation missing \(#function)")
+    return normalize(Vec3d(quat.x, quat.y, quat.z))
     #endif
 }

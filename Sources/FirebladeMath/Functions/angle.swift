@@ -14,7 +14,7 @@ public func angle(_ quat: Quat4f) -> Float {
     #if USE_SIMD
     return simd.simd_angle(quat.storage)
     #else
-    fatalError("implementation missing \(#function)")
+    return 2.0 * atan2(length(quat), quat.w)
     #endif
 }
 
@@ -23,6 +23,6 @@ public func angle(_ quat: Quat4d) -> Double {
     #if USE_SIMD
     return simd.simd_angle(quat.storage)
     #else
-    fatalError("implementation missing \(#function)")
+    return 2.0 * atan2(length(quat), quat.w)
     #endif
 }

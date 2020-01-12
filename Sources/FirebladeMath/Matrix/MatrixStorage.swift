@@ -13,6 +13,7 @@ public protocol Storage4x4Protocol: Sequence, Equatable {
     init(_ columns: [Column])
     init(diagonal: Column)
 
+    // swiftlint:disable large_tuple
     var columns: (Column, Column, Column, Column) { get }
 
     subscript(column: Int, row: Int) -> Value { get set }
