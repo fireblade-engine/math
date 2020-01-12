@@ -66,8 +66,8 @@ extension Matrix4x4: ExpressibleByArrayLiteral {
 }
 
 extension Matrix4x4: Sequence {
-    public __consuming func makeIterator() -> IndexingIterator<[Storage.Value]> {
-        return storage.makeIterator() as! IndexingIterator<[Storage.Value]>
+    public func makeIterator() -> IndexingIterator<[Storage.Value]> {
+        return unsafeBitCast(storage.makeIterator(), to: IndexingIterator<[Storage.Value]>.self)
     }
 
     @inlinable public var elements: [Value] {
@@ -76,6 +76,7 @@ extension Matrix4x4: Sequence {
 }
 
 extension Matrix4x4 {
+    // swiftlint:disable large_tuple
     @inlinable public var columns: (Vector, Vector, Vector, Vector) {
         return storage.columns
     }

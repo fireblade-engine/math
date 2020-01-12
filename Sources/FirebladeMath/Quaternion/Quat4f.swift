@@ -151,7 +151,7 @@ extension Quat4f {
         //   q = cos(A/2)+sin(A/2)*(x*i+y*j+z*k)
         let angle: Float
         let fSqrLength: Float = x * x + y * y + z * z
-        if ( fSqrLength > 0.0 ) {
+        if  fSqrLength > 0.0 {
             angle = 2.0 * acos(w)
         } else {
             // angle is 0 (mod 2*pi), so any axis will do

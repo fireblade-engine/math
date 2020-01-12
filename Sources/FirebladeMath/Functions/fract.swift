@@ -20,7 +20,7 @@ public func fract(_ value: Double) -> Double {
     #if USE_SIMD
     return simd_fract(value)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    return min(value - floor(value), Double(0x1.fffffffffffffp-1))
     #endif
 }
 
@@ -35,6 +35,6 @@ public func fract(_ value: Float) -> Float {
     #if USE_SIMD
     return simd_fract(value)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    return min(value - floor(value), Float(0x1.fffffep-1))
     #endif
 }

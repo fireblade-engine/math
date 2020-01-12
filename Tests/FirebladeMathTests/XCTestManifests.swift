@@ -86,6 +86,7 @@ extension Mat4x4fTests {
         ("testSubscriptColumnRow", testSubscriptColumnRow),
         ("testSubscriptIndex", testSubscriptIndex),
         ("testTranslateMatrixByVector", testTranslateMatrixByVector),
+        ("testTranslation", testTranslation),
         ("testTranslationInit", testTranslationInit),
         ("testUpperLeft", testUpperLeft)
     ]

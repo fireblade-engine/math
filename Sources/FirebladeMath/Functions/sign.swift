@@ -14,7 +14,7 @@ public func sign(_ x: Double) -> Double {
     #if USE_SIMD
     return simd_sign(x)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    return (x == 0 || x != x) ? 0 : copysign(1, x)
     #endif
 }
 
@@ -23,6 +23,6 @@ public func sign(_ x: Float) -> Float {
     #if USE_SIMD
     return simd_sign(x)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    return (x == 0 || x != x) ? 0 : copysign(1, x)
     #endif
 }

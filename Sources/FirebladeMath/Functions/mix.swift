@@ -14,7 +14,7 @@ public func mix(_ x: Double, _ y: Double, _ t: Double) -> Double {
     #if USE_SIMD
     return simd_mix(x, y, t)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    return x + t * (y - x)
     #endif
 }
 
@@ -23,6 +23,6 @@ public func mix(_ x: Float, _ y: Float, _ t: Float) -> Float {
     #if USE_SIMD
     return simd_mix(x, y, t)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    return x + t * (y - x)
     #endif
 }

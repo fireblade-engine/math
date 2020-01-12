@@ -12,7 +12,7 @@ public func quaternion(angle: Float, axis: SIMD3<Float>) -> Quat4f {
     #if USE_SIMD
     return Quat4f(storage: simd_quaternion(angle, axis))
     #else
-    fatalError("implementation missing \(#function)")
+    return Quat4f(Vec4f(sin(angle / 2.0) * axis, cos(angle / 2.0)))
     #endif
 }
 
@@ -20,7 +20,7 @@ public func quaternion(angle: Double, axis: SIMD3<Double>) -> Quat4d {
     #if USE_SIMD
     return Quat4d(storage: simd_quaternion(angle, axis))
     #else
-    fatalError("implementation missing \(#function)")
+    return Quat4d(Vec4d(sin(angle / 2.0) * axis, cos(angle / 2.0)))
     #endif
 }
 

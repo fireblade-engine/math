@@ -13,7 +13,7 @@ import func simd.simd_cross
     #if USE_SIMD
     return simd.simd_cross(x, y)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    return SIMD3<Double>(0, 0, (x.x * y.y) - (x.y * y.x))
     #endif
 }
 
@@ -21,7 +21,7 @@ import func simd.simd_cross
     #if USE_SIMD
     return simd.simd_cross(x, y)
     #else
-    fatalError("implementation missing \(#function) \(#file):\(#line)")
+    return SIMD3<Float>(0, 0, (x.x * y.y) - (x.y * y.x))
     #endif
 }
 
