@@ -105,7 +105,10 @@ import func simd.simd_mul
     #if USE_SIMD
     return Mat4x4f(storage: simd_mul(lhs, rhs.storage))
     #else
-    fatalError("not implemented yet \(#function)")
+    return Mat4x4f(rhs.storage.column0 * lhs,
+                   rhs.storage.column1 * lhs,
+                   rhs.storage.column2 * lhs,
+                   rhs.storage.column3 * lhs)
     #endif
 }
 

@@ -73,6 +73,9 @@ public func act(_ lhs: Quat4f, _ rhs: Vec3f) -> Vec3f {
     #if USE_SIMD
     return simd.simd_act(lhs.normalized.storage, rhs)
     #else
-    fatalError("not implemented yet")
+    let lNorm = lhs.normalized
+    let imag = Vec3f(lNorm.x, lNorm.y, lNorm.z)
+    let t: Vec3f = 2.0 * cross(imag, rhs)
+    return rhs + (lNorm.w * t) + cross(imag, t)
     #endif
 }

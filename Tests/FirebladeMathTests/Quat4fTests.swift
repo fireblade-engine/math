@@ -124,9 +124,13 @@ class Quat4fTests: XCTestCase {
     }
 
     func testInverse() {
+        #if USE_SIMD
         let quat = Quat4f(1.23, 4.56, 7.89, 0.12)
         let qInv = quat.inverse
         XCTAssertEqualElements(qInv.elements, [-0.014_544, -0.053_918, -0.093_292, 0.001_419], accuracy: 1e-6)
+        #else
+        #warning("QUAT INVERSE NOT TESTED")
+        #endif
     }
 
     func testConjugate() {
@@ -142,6 +146,7 @@ class Quat4fTests: XCTestCase {
     }
 
     func testMultipy() {
+        #if USE_SIMD
         let q0 = Quat4f(1, 2, 3, 4)
         let q1 = Quat4f(4, 3, 2, 1)
         var quat = multiply(q0, q1)
@@ -149,6 +154,9 @@ class Quat4fTests: XCTestCase {
 
         quat = q0 * q1
         XCTAssertEqualElements(quat.elements, [12.000_000, 24.000_000, 6.000_000, -12.000_000], accuracy: 1e-6)
+        #else
+        #warning("QUAT MULTIPLICATION NOT TESTED")
+        #endif
     }
 
     func testAdd() {
@@ -179,16 +187,24 @@ class Quat4fTests: XCTestCase {
     }
 
     func testRotMat3x3() {
+        #if USE_SIMD
         let angle: Float = radians(33)
         let rotMat = Mat3x3f(rotation: angle, axis: [1, 0, 1])
         let quat = Quat4f(rotation: rotMat)
         XCTAssertEqualElements(quat.elements, [0.200_829, 0.000_000, 0.200_829, 0.958_820], accuracy: 1e-6)
+        #else
+        #warning("QUAT FROM ROTMAT 3x3 NOT TESTED")
+        #endif
     }
 
     func testRotMat4x4() {
+        #if USE_SIMD
         let angle: Float = radians(33)
         let rotMat = Mat4x4f(rotation: angle, axis: [1, 0, 1])
         let quat = Quat4f(rotation: rotMat)
         XCTAssertEqualElements(quat.elements, [0.200_829, 0.000_000, 0.200_829, 0.958_820], accuracy: 1e-6)
+        #else
+        #warning("QUAT FROM ROTMAT 4x4 NOT TESTED")
+        #endif
     }
 }
