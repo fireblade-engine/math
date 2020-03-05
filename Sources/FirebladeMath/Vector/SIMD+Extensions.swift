@@ -7,6 +7,6 @@
 
 extension SIMD {
     @inlinable public var elements: [Scalar] {
-        return (0..<scalarCount).map { self[$0] }
+        (0..<scalarCount).map { self[$0] }
     }
 }

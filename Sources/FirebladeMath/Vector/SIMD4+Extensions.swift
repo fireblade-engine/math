@@ -7,39 +7,39 @@
 
 extension SIMD4: Sequence {
     public __consuming func makeIterator() -> IndexingIterator<[Scalar]> {
-        return [x, y, z, w].makeIterator()
+        [x, y, z, w].makeIterator()
     }
 }
 
 extension SIMD4 {
     @inlinable public var xyz: SIMD3<Scalar> {
-        return SIMD3<Scalar>(x, y, z)
+        SIMD3<Scalar>(x, y, z)
     }
 }
 
 extension SIMD4 where Scalar: FloatingPoint {
     @inlinable public var isNaN: Bool {
-        return x.isNaN || y.isNaN || z.isNaN || w.isNaN
+        x.isNaN || y.isNaN || z.isNaN || w.isNaN
     }
 }
 
 extension SIMD4 where Scalar == Double {
     @inlinable public var length: Scalar {
-        return FirebladeMath.length(self)
+        FirebladeMath.length(self)
     }
 
     @inlinable public var normalized: SIMD4<Scalar> {
-        return FirebladeMath.normalize(self)
+        FirebladeMath.normalize(self)
     }
 }
 
 extension SIMD4 where Scalar == Float {
     @inlinable public var length: Scalar {
-        return FirebladeMath.length(self)
+        FirebladeMath.length(self)
     }
 
     @inlinable public var normalized: SIMD4<Scalar> {
-        return FirebladeMath.normalize(self)
+        FirebladeMath.normalize(self)
     }
 }
 

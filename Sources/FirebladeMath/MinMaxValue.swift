@@ -19,7 +19,7 @@ public struct MinMaxValue<T> where T: FloatingPoint & Codable {
     }
 
     public var range: ClosedRange<T> {
-        return min...max
+        min...max
     }
 }
 

@@ -7,32 +7,32 @@
 
 extension SIMD2: Sequence {
     public __consuming func makeIterator() -> IndexingIterator<[Scalar]> {
-        return [x, y].makeIterator()
+        [x, y].makeIterator()
     }
 }
 
 extension SIMD2 where Scalar: FloatingPoint {
     @inlinable public var isNaN: Bool {
-        return x.isNaN || y.isNaN
+        x.isNaN || y.isNaN
     }
 }
 
 extension SIMD2 where Scalar == Double {
     @inlinable public var length: Scalar {
-        return FirebladeMath.length(self)
+        FirebladeMath.length(self)
     }
 
     @inlinable public var normalized: SIMD2<Scalar> {
-        return FirebladeMath.normalize(self)
+        normalize(self)
     }
 }
 
 extension SIMD2 where Scalar == Float {
     @inlinable public var length: Scalar {
-        return FirebladeMath.length(self)
+        FirebladeMath.length(self)
     }
 
     @inlinable public var normalized: SIMD2<Scalar> {
-        return FirebladeMath.normalize(self)
+        normalize(self)
     }
 }

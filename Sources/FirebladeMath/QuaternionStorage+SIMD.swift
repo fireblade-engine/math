@@ -6,7 +6,6 @@
 //
 
 #if USE_SIMD
-#if canImport(simd)
 import struct simd.quaternion.simd_quatd
 import struct simd.quaternion.simd_quatf
 import func simd.simd_quaternion
@@ -21,27 +20,27 @@ extension simd_quatf: QuaternionStorageProtocol {
     }
 
     @inlinable public var x: Float {
-        get { return imag.x }
+        get { imag.x }
         set { imag.x = newValue }
     }
 
     @inlinable public var y: Float {
-        get { return imag.y }
+        get { imag.y }
         set { imag.y = newValue }
     }
 
     @inlinable public var z: Float {
-        get { return imag.z }
+        get { imag.z }
         set { imag.z = newValue }
     }
 
     @inlinable public var w: Float {
-        get { return real }
+        get { real }
         set { real = newValue }
     }
 
     public __consuming func makeIterator() -> IndexingIterator<[Float]> {
-        return [x, y, z, w].makeIterator()
+        [x, y, z, w].makeIterator()
     }
 }
 
@@ -55,29 +54,28 @@ extension simd_quatd: QuaternionStorageProtocol {
     }
 
     @inlinable public var x: Double {
-        get { return imag.x }
+        get { imag.x }
         set { imag.x = newValue }
     }
 
     @inlinable public var y: Double {
-        get { return imag.y }
+        get { imag.y }
         set { imag.y = newValue }
     }
 
     @inlinable public var z: Double {
-        get { return imag.z }
+        get { imag.z }
         set { imag.z = newValue }
     }
 
     @inlinable public var w: Double {
-        get { return real }
+        get { real }
         set { real = newValue }
     }
 
     public __consuming func makeIterator() -> IndexingIterator<[Double]> {
-        return [x, y, z, w].makeIterator()
+        [x, y, z, w].makeIterator()
     }
 }
 
-#endif
 #endif
