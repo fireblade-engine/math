@@ -20,32 +20,32 @@ public struct QuaternionStorage<Value>: QuaternionStorageProtocol where Value: S
 
     @inlinable public var x: Value {
         set { storage.x = newValue }
-        get { return storage.x }
+        get { storage.x }
     }
 
     @inlinable public var y: Value {
         set { storage.y = newValue }
-        get { return storage.y }
+        get { storage.y }
     }
 
     @inlinable public var z: Value {
         set { storage.z = newValue }
-        get { return storage.z }
+        get { storage.z }
     }
 
     @inlinable public var w: Value {
         set { storage.w = newValue }
-        get { return storage.w }
+        get { storage.w }
     }
 
     public __consuming func makeIterator() -> IndexingIterator<[Value]> {
-        return storage.makeIterator()
+        storage.makeIterator()
     }
 }
 
 extension QuaternionStorage: Equatable {
     public static func == (lhs: QuaternionStorage<Value>, rhs: QuaternionStorage<Value>) -> Bool {
-        return lhs.storage == rhs.storage
+        lhs.storage == rhs.storage
     }
 }
 

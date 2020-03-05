@@ -6,7 +6,6 @@
 //
 
 #if USE_SIMD
-#if canImport(simd)
 import struct simd.matrix.simd_float4x4
 import struct simd.matrix.simd_double4x4
 import struct simd.matrix.simd_float3x3
@@ -19,7 +18,7 @@ extension simd_float3x3: Storage3x3Protocol {
     public typealias Storage4x4 = simd_float4x4
 
     public __consuming func makeIterator() -> IndexingIterator<[Value]> {
-        return [columns.0, columns.1, columns.2].flatMap { $0 }.makeIterator()
+        [columns.0, columns.1, columns.2].flatMap { $0 }.makeIterator()
     }
 
     public subscript(index: Int) -> Float {
@@ -64,7 +63,7 @@ extension simd_double3x3: Storage3x3Protocol {
     public typealias Storage4x4Ref = simd_double4x4
 
     public __consuming func makeIterator() -> IndexingIterator<[Value]> {
-        return [columns.0, columns.1, columns.2].flatMap { $0 }.makeIterator()
+        [columns.0, columns.1, columns.2].flatMap { $0 }.makeIterator()
     }
 
     public subscript(index: Int) -> Double {
@@ -110,7 +109,7 @@ extension simd_float4x4: Storage4x4Protocol {
     public typealias Storage3x3Ref = simd_float3x3
 
     public __consuming func makeIterator() -> IndexingIterator<[Value]> {
-        return [columns.0, columns.1, columns.2, columns.3].flatMap { $0 }.makeIterator()
+        [columns.0, columns.1, columns.2, columns.3].flatMap { $0 }.makeIterator()
     }
 
     public subscript(index: Int) -> Float {
@@ -161,7 +160,7 @@ extension simd_double4x4: Storage4x4Protocol {
     public typealias Storage3x3Ref = simd_double3x3
 
     public __consuming func makeIterator() -> IndexingIterator<[Value]> {
-        return [columns.0, columns.1, columns.2, columns.3].flatMap { $0 }.makeIterator()
+        [columns.0, columns.1, columns.2, columns.3].flatMap { $0 }.makeIterator()
     }
 
     public subscript(index: Int) -> Double {
@@ -206,5 +205,4 @@ extension simd_double4x4: Storage4x4Protocol {
     }
 }
 
-#endif
 #endif

@@ -5,39 +5,35 @@
 //  Created by Christian Treffs on 23.07.19.
 //
 
-#if canImport(simd)
-import func simd.simd_axis
-#endif
-
 extension Quat4f {
     @inlinable public var normalized: Quat4f {
-        return FirebladeMath.normalize(self)
+        normalize(self)
     }
 
     /// The length of the quaternion `q`.
     @inlinable public var length: Float {
-        return FirebladeMath.length(self)
+        FirebladeMath.length(self)
     }
 
     /// Returns the axis about which a quaternion rotates.
     @inlinable public var axis: Vec3f {
-        return FirebladeMath.axis(self)
+        FirebladeMath.axis(self)
     }
 
     @inlinable public var angle: Float {
-        return FirebladeMath.angle(self)
+        FirebladeMath.angle(self)
     }
 
     @inlinable public var inverse: Quat4f {
-        return FirebladeMath.inverse(self)
+        FirebladeMath.inverse(self)
     }
 
     @inlinable public var conjugate: Quat4f {
-        return FirebladeMath.conjugate(self)
+        FirebladeMath.conjugate(self)
     }
 
     @inlinable public var isNaN: Bool {
-        return x.isNaN || y.isNaN || z.isNaN || w.isNaN
+        x.isNaN || y.isNaN || z.isNaN || w.isNaN
     }
 }
 

@@ -16,7 +16,7 @@ public struct Storage3x3<Value>: Storage3x3Protocol where Value: StorageScalar {
     @usableFromInline var column2: Column
 
     @inlinable public var columns: (Column, Column, Column) {
-        return (column0, column1, column2)
+        (column0, column1, column2)
     }
 
     @inlinable public init(_ columns: [Column]) {
@@ -34,7 +34,7 @@ public struct Storage3x3<Value>: Storage3x3Protocol where Value: StorageScalar {
     }
 
     public __consuming func makeIterator() -> IndexingIterator<[Value]> {
-        return [column0, column1, column2].flatMap { $0 }.makeIterator()
+        [column0, column1, column2].flatMap { $0 }.makeIterator()
     }
 
     @inlinable public subscript(column: Int, row: Int) -> Value {
@@ -84,7 +84,7 @@ public struct Storage3x3<Value>: Storage3x3Protocol where Value: StorageScalar {
 
 extension Storage3x3: Equatable {
     public static func == (lhs: Storage3x3<Value>, rhs: Storage3x3<Value>) -> Bool {
-        return lhs.column0 == rhs.column0 &&
+        lhs.column0 == rhs.column0 &&
             lhs.column1 == rhs.column1 &&
             lhs.column2 == rhs.column2
     }
@@ -102,7 +102,7 @@ public struct Storage4x4<Value>: Storage4x4Protocol where Value: StorageScalar {
 
     // swiftlint:disable large_tuple
     @inlinable public var columns: (Column, Column, Column, Column) {
-        return (column0, column1, column2, column3)
+        (column0, column1, column2, column3)
     }
 
     @inlinable public init(_ columns: [Column]) {
@@ -122,7 +122,7 @@ public struct Storage4x4<Value>: Storage4x4Protocol where Value: StorageScalar {
     }
 
     public __consuming func makeIterator() -> IndexingIterator<[Value]> {
-        return [column0, column1, column2, column3].flatMap { $0 }.makeIterator()
+        [column0, column1, column2, column3].flatMap { $0 }.makeIterator()
     }
 
     public subscript(column: Int, row: Int) -> Value {
@@ -178,7 +178,7 @@ public struct Storage4x4<Value>: Storage4x4Protocol where Value: StorageScalar {
 
 extension Storage4x4: Equatable {
     public static func == (lhs: Storage4x4<Value>, rhs: Storage4x4<Value>) -> Bool {
-        return lhs.column0 == rhs.column0 &&
+        lhs.column0 == rhs.column0 &&
             lhs.column1 == rhs.column1 &&
             lhs.column2 == rhs.column2 &&
             lhs.column3 == rhs.column3

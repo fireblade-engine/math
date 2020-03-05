@@ -403,7 +403,7 @@ class Mat4x4fTests: XCTestCase {
         ]
 
         let iMat = mat.inverted
-        XCTAssertEqualElements(iMat.elements, values, accuracy: 1e-6)
+        XCTAssertEqualElements(iMat.elements, values, accuracy: 1e-5)
         #else
         #warning("MATRIX INVERSE NOT TESTED")
         #endif

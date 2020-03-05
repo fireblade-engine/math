@@ -13,7 +13,7 @@ import Glibc
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func sqrt(_ float: Float32) -> Float32 {
-    return sqrtf(float)
+    sqrtf(float)
 }
 
 /// Computes square root of arg.
