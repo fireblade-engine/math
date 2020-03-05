@@ -42,7 +42,7 @@ extension Matrix4x4 {
 extension Matrix4x4 {
     public subscript(column: Int, row: Int) -> Value {
         get {
-            return storage[column, row]
+            storage[column, row]
         }
         set {
             storage[column, row] = newValue
@@ -51,7 +51,7 @@ extension Matrix4x4 {
 
     public subscript(index: Int) -> Value {
         get {
-            return storage[index]
+            storage[index]
         }
         set {
             storage[index] = newValue
@@ -67,24 +67,24 @@ extension Matrix4x4: ExpressibleByArrayLiteral {
 
 extension Matrix4x4: Sequence {
     public func makeIterator() -> IndexingIterator<[Storage.Value]> {
-        return unsafeBitCast(storage.makeIterator(), to: IndexingIterator<[Storage.Value]>.self)
+        unsafeBitCast(storage.makeIterator(), to: IndexingIterator<[Storage.Value]>.self)
     }
 
     @inlinable public var elements: [Value] {
-        return [Value](self)
+        [Value](self)
     }
 }
 
 extension Matrix4x4 {
     // swiftlint:disable large_tuple
     @inlinable public var columns: (Vector, Vector, Vector, Vector) {
-        return storage.columns
+        storage.columns
     }
 }
 
 extension Matrix4x4: Equatable {
     public static func ==(lhs: Matrix4x4<Storage>, rhs: Matrix4x4<Storage>) -> Bool {
-        return lhs.storage == rhs.storage
+        lhs.storage == rhs.storage
     }
 }
 

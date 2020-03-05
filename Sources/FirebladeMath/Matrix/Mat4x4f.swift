@@ -51,16 +51,16 @@ extension Mat4x4f {
     }
 
     @inlinable public var upperLeft: Mat3x3f {
-        return Mat3x3f(SIMD3<Float>(columns.0.xyz),
-                       SIMD3<Float>(columns.1.xyz),
-                       SIMD3<Float>(columns.2.xyz))
+        Mat3x3f(SIMD3<Float>(columns.0.xyz),
+                SIMD3<Float>(columns.1.xyz),
+                SIMD3<Float>(columns.2.xyz))
     }
 
     @inlinable public var translation: SIMD3<Float> {
         get {
-            return SIMD3<Float>(columns.3[0],
-                                columns.3[1],
-                                columns.3[2])
+            SIMD3<Float>(columns.3[0],
+                         columns.3[1],
+                         columns.3[2])
         }
         set {
             storage[3, 0] = newValue.x
@@ -99,11 +99,11 @@ extension Mat4x4f {
     }
 
     @inlinable public var inverted: Mat4x4f {
-        return FirebladeMath.inverse(self)
+        inverse(self)
     }
 
     @inlinable public var transposed: Mat4x4f {
-        return FirebladeMath.transpose(self)
+        transpose(self)
     }
 
     @inlinable

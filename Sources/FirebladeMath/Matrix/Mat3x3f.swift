@@ -27,11 +27,11 @@ extension Mat3x3f {
     }
 
     @inlinable public var inverted: Mat3x3f {
-        return FirebladeMath.inverse(self)
+        inverse(self)
     }
 
     @inlinable public var transposed: Mat3x3f {
-        return FirebladeMath.transpose(self)
+        transpose(self)
     }
 
     /*public init(rotation angleRadians: Float, axis: SIMD3<Float>) {
