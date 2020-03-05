@@ -12,7 +12,7 @@ import Glibc
 /// - Returns: If no errors occur, the hyperbolic tangent of arg (tanh(arg), or (e^arg*-e^-arg)/(e^arg*+e^-arg)) is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func tanh(_ float: Float32) -> Float32 {
-    return tanhf(float)
+    tanhf(float)
 }
 
 /// Computes the hyperbolic tangent of arg.

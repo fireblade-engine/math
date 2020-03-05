@@ -33,30 +33,30 @@ extension Quaternion {
 
 extension Quaternion {
     @inlinable public var x: Value {
-        get { return storage.x }
+        get { storage.x }
         set { storage.x = newValue }
     }
     @inlinable public var y: Value {
-        get { return storage.y }
+        get { storage.y }
         set { storage.y = newValue }
     }
     @inlinable public var z: Value {
-        get { return storage.z }
+        get { storage.z }
         set { storage.z = newValue }
     }
     @inlinable public var w: Value {
-        get { return storage.w }
+        get { storage.w }
         set { storage.w = newValue }
     }
 }
 
 extension Quaternion: Sequence {
     public func makeIterator() -> IndexingIterator<[Storage.Value]> {
-        return unsafeBitCast(storage.makeIterator(), to: IndexingIterator<[Storage.Value]>.self)
+        unsafeBitCast(storage.makeIterator(), to: IndexingIterator<[Storage.Value]>.self)
     }
 
     @inlinable public var elements: [Value] {
-        return [Value](self)
+        [Value](self)
     }
 }
 
@@ -69,6 +69,6 @@ extension Quaternion: ExpressibleByArrayLiteral {
 
 extension Quaternion: Equatable where Value: Equatable {
     public static func == (lhs: Quaternion<Storage>, rhs: Quaternion<Storage>) -> Bool {
-        return lhs.storage == rhs.storage
+        lhs.storage == rhs.storage
     }
 }

@@ -18,6 +18,6 @@ extension Mat4x4f {
     /// function is equivalent to calling simd_quaternion with the upper-left 3x3
     /// submatrix.
     @inlinable public var quaternion: Quat4f {
-        return FirebladeMath.quaternion(matrix: self)
+        FirebladeMath.quaternion(matrix: self)
     }
 }

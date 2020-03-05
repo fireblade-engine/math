@@ -5,7 +5,7 @@
 //  Created by Christian Treffs on 09.09.19.
 //
 
-#if canImport(simd)
+#if USE_SIMD
 import func simd.simd_matrix3x3
 import func simd.simd_matrix4x4
 #endif

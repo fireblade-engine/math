@@ -48,24 +48,24 @@ extension Matrix3x3: ExpressibleByArrayLiteral {
 
 extension Matrix3x3: Sequence {
     public func makeIterator() -> IndexingIterator<[Value]> {
-        return unsafeBitCast(storage.makeIterator(), to: IndexingIterator<[Storage.Value]>.self)
+        unsafeBitCast(storage.makeIterator(), to: IndexingIterator<[Storage.Value]>.self)
     }
 
     @inlinable public var elements: [Value] {
-        return [Value](self)
+        [Value](self)
     }
 }
 
 extension Matrix3x3 {
     @inlinable public var columns: (Vector, Vector, Vector) {
-        return storage.columns
+        storage.columns
     }
 }
 
 extension Matrix3x3 {
     public subscript(column: Int, row: Int) -> Value {
         get {
-            return storage[column, row]
+            storage[column, row]
         }
         set {
             storage[column, row] = newValue
@@ -74,7 +74,7 @@ extension Matrix3x3 {
 
     public subscript(index: Int) -> Value {
         get {
-            return storage[index]
+            storage[index]
         }
         set {
             storage[index] = newValue
@@ -84,7 +84,7 @@ extension Matrix3x3 {
 
 extension Matrix3x3: Equatable {
     public static func ==(lhs: Matrix3x3<Storage>, rhs: Matrix3x3<Storage>) -> Bool {
-        return lhs.storage == rhs.storage
+        lhs.storage == rhs.storage
     }
 }
 

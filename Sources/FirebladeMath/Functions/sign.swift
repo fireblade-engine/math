@@ -5,7 +5,7 @@
 //  Created by Christian Treffs on 26.08.19.
 //
 
-#if canImport(simd)
+#if USE_SIMD
 import func simd.simd_sign
 #endif
 

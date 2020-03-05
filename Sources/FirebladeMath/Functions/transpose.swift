@@ -5,7 +5,7 @@
 //  Created by Christian Treffs on 29.09.19.
 //
 
-#if canImport(simd)
+#if USE_SIMD
 import func simd.simd_transpose
 #endif
 
