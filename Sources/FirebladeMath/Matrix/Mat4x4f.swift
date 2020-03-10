@@ -174,4 +174,64 @@ extension Mat4x4f {
             SIMD4<Float>(-ral / rsl, -tab / tsb, -fan / fsn, 1.0)
         )
     }
+
+    // Around x-axis
+    @inlinable
+    public mutating func pitch(by angle: Float) {
+        self.rotate(by: angle, axis: .axisX)
+    }
+
+    /// Around y-axis
+    @inlinable
+    public mutating func yaw(by angle: Float) {
+        self.rotate(by: angle, axis: .axisY)
+    }
+
+    /// Around z-axis
+    @inlinable
+    public mutating func roll(by angle: Float) {
+        self.rotate(by: angle, axis: .axisZ)
+    }
+
+    /// Along x-axis
+    @inlinable public var right: Vec3f {
+        get {
+            Vec3f(self[0, 0],
+                  self[1, 0],
+                  self[2, 0])
+        }
+        set {
+            self[0, 0] = newValue.x
+            self[1, 0] = newValue.y
+            self[2, 0] = newValue.z
+        }
+    }
+
+    /// Along y-axis
+    @inlinable public var up: Vec3f {
+        get {
+            Vec3f(self[0, 1],
+                  self[1, 1],
+                  self[2, 1])
+        }
+        set {
+            self[0, 1] = newValue.x
+            self[1, 1] = newValue.y
+            self[2, 1] = newValue.z
+        }
+    }
+
+    /// Along z-axis
+    @inlinable public var forward: Vec3f {
+        get {
+            Vec3f(self[0, 2],
+                  self[1, 2],
+                  self[2, 2])
+        }
+        set {
+            self[0, 2] = newValue.x
+            self[1, 2] = newValue.y
+            self[2, 2] = newValue.z
+        }
+    }
 }
