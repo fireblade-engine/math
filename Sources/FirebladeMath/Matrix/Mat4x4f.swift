@@ -145,10 +145,10 @@ extension Mat4x4f {
         let m33: Float = 0.0
 
         return Mat4x4f(
-            Vector(m00, 0.0, 0.0, 0.0),
-            Vector(0.0, m11, 0.0, 0.0),
-            Vector(0.0, 0.0, m22, m23),
-            Vector(0.0, 0.0, m32, m33))
+            .init(m00, 0.0, 0.0, 0.0),
+            .init(0.0, m11, 0.0, 0.0),
+            .init(0.0, 0.0, m22, m23),
+            .init(0.0, 0.0, m32, m33))
     }
 
     /// Returns a 4x4 orthographic projection matrix.
@@ -160,18 +160,18 @@ extension Mat4x4f {
     /// - Parameter zFar: The far coordinate of the projection volume in eye coordinates.
     @inlinable
     public static func orthographic(left: Float, right: Float, bottom: Float, top: Float, zNear: Float, zFar: Float) -> Mat4x4f {
-        let ral: Float = right + left
-        let rsl: Float = right - left
-        let tab: Float = top + bottom
-        let tsb: Float = top - bottom
-        let fan: Float = zFar + zNear
-        let fsn: Float = zFar - zNear
+        let rpl = right + left
+        let rml = right - left
+        let tpb = top + bottom
+        let tmb = top - bottom
+        let fpn = zFar + zNear
+        let fmn = zFar - zNear
 
         return Mat4x4f(
-            SIMD4<Float>(2.0 / rsl, 0.0, 0.0, 0.0),
-            SIMD4<Float>(0.0, 2.0 / tsb, 0.0, 0.0),
-            SIMD4<Float>(0.0, 0.0, -2.0 / fsn, 0.0),
-            SIMD4<Float>(-ral / rsl, -tab / tsb, -fan / fsn, 1.0)
+            .init(2.0 / rml, 0, 0, -rpl / rml),
+            .init(0, 2.0 / tmb, 0, -tpb / tmb),
+            .init(0, 0, -2.0 / fmn, -fpn / fmn),
+            .init(0, 0, 0, 1.0)
         )
     }
 
