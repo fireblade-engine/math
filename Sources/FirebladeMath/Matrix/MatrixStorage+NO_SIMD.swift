@@ -20,7 +20,7 @@ public struct Storage3x3<Value>: Storage3x3Protocol where Value: StorageScalar {
     }
 
     @inlinable public init(_ columns: [Column]) {
-        precondition(columns.count == 3, "Storage needs exacty 3 column vectors")
+        precondition(columns.count == 3, "Storage needs exactly 3 column vectors")
         column0 = columns[0]
         column1 = columns[1]
         column2 = columns[2]
@@ -106,7 +106,7 @@ public struct Storage4x4<Value>: Storage4x4Protocol where Value: StorageScalar {
     }
 
     @inlinable public init(_ columns: [Column]) {
-        precondition(columns.count == 4, "Storage needs exacty 4 column vectors")
+        precondition(columns.count == 4, "Storage needs exactly 4 column vectors")
         column0 = columns[0]
         column1 = columns[1]
         column2 = columns[2]
