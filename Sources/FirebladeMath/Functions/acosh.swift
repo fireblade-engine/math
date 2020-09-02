@@ -11,7 +11,7 @@ import Glibc
 /// - Returns: If no errors occur, the inverse hyperbolic cosine of arg (cosh-1
 ///    (arg), or arcosh(arg)) on the interval [0, +∞], is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
-public func acosh(_ double: Float64) -> Float64 {
+public func acosh(_ double: Double) -> Double {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.acosh(double)
     #elseif os(Linux)
@@ -25,7 +25,7 @@ public func acosh(_ double: Float64) -> Float64 {
 /// - Returns: If no errors occur, the inverse hyperbolic cosine of arg (cosh-1
 ///    (arg), or arcosh(arg)) on the interval [0, +∞], is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
-public func acosh(_ float: Float32) -> Float32 {
+public func acosh(_ float: Float) -> Float {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.acoshf(float)
     #elseif os(Linux)

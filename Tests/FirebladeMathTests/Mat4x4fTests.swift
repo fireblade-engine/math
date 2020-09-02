@@ -318,15 +318,14 @@ class Mat4x4fTests: XCTestCase {
         let values: [Float] = [
             0.697_798, 0.000_000, 0.000_000, 0.000_000,
             0.000_000, 1.116_477, 0.000_000, 0.000_000,
-            0.000_000, 0.000_000, -1.000_020, -1.000_000,
-            0.000_000, 0.000_000, -0.002_000, 0.000_000
+            0.000_000, 0.000_000, -1.000_010, -1.000_000,
+            0.000_000, 0.000_000, -0.0010000, 0.000_000
         ]
 
-        let mat: Mat4x4f = .perspective(fovy: radians(83.7),
-                                        width: 2880.0,
-                                        height: 1800.0,
-                                        zNear: 0.001,
-                                        zFar: 100.0)
+        let mat: Mat4x4f = .perspectiveRH(fovy: radians(83.7),
+                                          aspect: 2880.0 / 1800.0,
+                                          zNear: 0.001,
+                                          zFar: 100.0)
 
         XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
     }
@@ -338,16 +337,16 @@ class Mat4x4fTests: XCTestCase {
         let values: [Float] = [
             0.000_694, 0.000_000, 0.000_000, 0.000_000,
             0.000_000, 0.001_111, 0.000_000, 0.000_000,
-            0.000_000, 0.000_000, -0.020_000, -1.000_020,
-            -0.000_000, -0.000_000, 0.000_000, 1.000_000
+            0.000_000, 0.000_000, -0.0100001, 0.0,
+            -0.000_000, -0.000_000, -1.0000101e-05, 1.000_000
         ]
 
-        let mat = Mat4x4f.orthographic2(left: -width / 2.0,
-                                        right: width / 2.0,
-                                        top: height / 2.0,
-                                        bottom: -height / 2.0,
-                                        zNear: 0.001,
-                                        zFar: 100.0)
+        let mat = Mat4x4f.orthographicRH(left: -width / 2.0,
+                                         right: width / 2.0,
+                                         top: height / 2.0,
+                                         bottom: -height / 2.0,
+                                         zNear: 0.001,
+                                         zFar: 100.0)
 
         XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
     }

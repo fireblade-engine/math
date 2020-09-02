@@ -10,7 +10,7 @@ import Glibc
 ///
 /// - Parameter float: floating point value
 /// - Returns: If no errors occur, the largest integer value not greater than arg, that is ⌊arg⌋, is returned.
-public func floor(_ float: Float32) -> Float32 {
+public func floor(_ float: Float) -> Float {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.floorf(float)
     #elseif os(Linux)
@@ -22,7 +22,7 @@ public func floor(_ float: Float32) -> Float32 {
 ///
 /// - Parameter double: floating point value
 /// - Returns: If no errors occur, the largest integer value not greater than arg, that is ⌊arg⌋, is returned.
-public func floor(_ double: Float64) -> Float64 {
+public func floor(_ double: Double) -> Double {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.floor(double)
     #elseif os(Linux)

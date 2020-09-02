@@ -12,7 +12,7 @@ import Glibc
 /// - Returns: If no errors occur, the arc cosine of arg (arccos(arg)) in the range [0 ; π], is returned.
 ///               If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 ///                If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func acos(_ float: Float32) -> Float32 {
+public func acos(_ float: Float) -> Float {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.acosf(float)
     #elseif os(Linux)
@@ -26,7 +26,7 @@ public func acos(_ float: Float32) -> Float32 {
 /// - Returns: If no errors occur, the arc cosine of arg (arccos(arg)) in the range [0 ; π], is returned.
 ///               If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 ///                If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func acos(_ double: Float64) -> Float64 {
+public func acos(_ double: Double) -> Double {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.acos(double)
     #elseif os(Linux)

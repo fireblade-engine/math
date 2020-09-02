@@ -15,7 +15,7 @@ import Glibc
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a pole error or a range error due to overflow occurs, ±HUGE_VAL, ±HUGE_VALF, or ±HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func pow(_ base: Float32, _ exponent: Float32) -> Float32 {
+public func pow(_ base: Float, _ exponent: Float) -> Float {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.powf(base, exponent)
     #elseif os(Linux)
@@ -32,7 +32,7 @@ public func pow(_ base: Float32, _ exponent: Float32) -> Float32 {
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a pole error or a range error due to overflow occurs, ±HUGE_VAL, ±HUGE_VALF, or ±HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func pow(_ base: Float64, _ exponent: Float64) -> Float64 {
+public func pow(_ base: Double, _ exponent: Double) -> Double {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.pow(base, exponent)
     #elseif os(Linux)

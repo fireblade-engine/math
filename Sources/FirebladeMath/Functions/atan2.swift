@@ -9,7 +9,7 @@ import Glibc
 ///  using the signs of both arguments to determine the quadrant of the return value.
 /// - Parameter y: y
 /// - Parameter x: x
-public func atan2(_ y: Float64, _ x: Float64) -> Float64 {
+public func atan2(_ y: Double, _ x: Double) -> Double {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.atan2(y, x)
     #elseif os(Linux)
@@ -21,7 +21,7 @@ public func atan2(_ y: Float64, _ x: Float64) -> Float64 {
 ///  using the signs of both arguments to determine the quadrant of the return value.
 /// - Parameter y: y
 /// - Parameter x: x
-public func atan2(_ y: Float32, _ x: Float32) -> Float32 {
+public func atan2(_ y: Float, _ x: Float) -> Float {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.atan2f(y, x)
     #elseif os(Linux)

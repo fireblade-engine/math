@@ -10,7 +10,7 @@ import Glibc
 ///
 /// - Parameter float:     floating point value
 /// - Returns: If no errors occur, the nearest integer value not greater in magnitude than arg (in other words, arg rounded towards zero), is returned.
-public func trunc(_ float: Float32) -> Float32 {
+public func trunc(_ float: Float) -> Float {
     truncf(float)
 }
 
@@ -18,7 +18,7 @@ public func trunc(_ float: Float32) -> Float32 {
 ///
 /// - Parameter double:     floating point value
 /// - Returns: If no errors occur, the nearest integer value not greater in magnitude than arg (in other words, arg rounded towards zero), is returned.
-public func trunc(_ double: Float64) -> Float64 {
+public func trunc(_ double: Double) -> Double {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.trunc(double)
     #elseif os(Linux)

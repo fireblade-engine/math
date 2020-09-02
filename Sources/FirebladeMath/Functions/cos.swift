@@ -12,9 +12,9 @@ import Glibc
 /// - Returns: If no errors occur, the cosine of arg (cos(arg)) in the range [-1 ; +1], is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func cos(_ floatAngleRadians: Float32) -> Float32 {
+public func cos(_ angleRad: Float) -> Float {
     #if os(macOS) || os(iOS) || os(tvOS)
-    return Darwin.cosf(floatAngleRadians)
+    return Darwin.cosf(angleRad)
     #elseif os(Linux)
     return Glibc.cosf(floatAngleRadians)
     #endif
@@ -26,9 +26,9 @@ public func cos(_ floatAngleRadians: Float32) -> Float32 {
 /// - Returns: If no errors occur, the cosine of arg (cos(arg)) in the range [-1 ; +1], is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func cos(_ doubleAngleRadians: Float64) -> Float64 {
+public func cos(_ angleRad: Double) -> Double {
     #if os(macOS) || os(iOS) || os(tvOS)
-    return Darwin.cos(doubleAngleRadians)
+    return Darwin.cos(angleRad)
     #elseif os(Linux)
     return Glibc.cos(doubleAngleRadians)
     #endif

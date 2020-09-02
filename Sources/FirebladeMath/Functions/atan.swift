@@ -10,7 +10,7 @@ import Glibc
 /// - Parameter double: floating point value
 /// - Returns: If no errors occur, the arc tangent of arg (arctan(arg)) in the range [-π/2;+π/2] radians, is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func atan(_ double: Float64) -> Float64 {
+public func atan(_ double: Double) -> Double {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.atan(double)
     #elseif os(Linux)
@@ -23,7 +23,7 @@ public func atan(_ double: Float64) -> Float64 {
 /// - Parameter float: floating point value
 /// - Returns: If no errors occur, the arc tangent of arg (arctan(arg)) in the range [-π/2;+π/2] radians, is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func atan(_ float: Float32) -> Float32 {
+public func atan(_ float: Float) -> Float {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.atanf(float)
     #elseif os(Linux)

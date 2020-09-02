@@ -15,7 +15,7 @@ import Glibc
 /// - Returns: If successful, returns the floating-point remainder of the division x/y as defined above.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func mod(_ x: Float32, _ y: Float32) -> Float32 {
+public func mod(_ x: Float, _ y: Float) -> Float {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.fmodf(x, y)
     #elseif os(Linux)
@@ -32,7 +32,7 @@ public func mod(_ x: Float32, _ y: Float32) -> Float32 {
 /// - Returns: If successful, returns the floating-point remainder of the division x/y as defined above.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func mod(_ x: Float64, _ y: Float64) -> Float64 {
+public func mod(_ x: Double, _ y: Double) -> Double {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.fmod(x, y)
     #elseif os(Linux)

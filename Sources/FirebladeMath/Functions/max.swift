@@ -12,7 +12,7 @@ import Glibc
 ///   - x: floating point value
 ///   - y: floating point value
 /// - Returns: If successful, returns the larger of two floating point values. The value returned is exact and does not depend on any rounding modes.
-public func max(_ x: Float32, _ y: Float32) -> Float32 {
+public func max(_ x: Float, _ y: Float) -> Float {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.fmaxf(x, y)
     #elseif os(Linux)
@@ -26,4 +26,4 @@ public func max(_ x: Float32, _ y: Float32) -> Float32 {
 ///   - x: floating point value
 ///   - y: floating point value
 /// - Returns: If successful, returns the larger of two floating point values. The value returned is exact and does not depend on any rounding modes.
-public func max(_ x: Float64, _ y: Float64) -> Float64 { fmax(x, y) }
+public func max(_ x: Double, _ y: Double) -> Double { fmax(x, y) }

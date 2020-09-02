@@ -9,7 +9,7 @@ import Glibc
 /// Returns the hypotenuse of a right-angled triangle whose legs are x and y.
 /// - Parameter x: x
 /// - Parameter y: y
-public func hypot(_ x: Float32, _ y: Float32) -> Float32 {
+public func hypot(_ x: Float, _ y: Float) -> Float {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.hypotf(x, y)
     #elseif os(Linux)
@@ -20,7 +20,7 @@ public func hypot(_ x: Float32, _ y: Float32) -> Float32 {
 /// Returns the hypotenuse of a right-angled triangle whose legs are x and y.
 /// - Parameter x: x
 /// - Parameter y: y
-public func hypot(_ x: Float64, _ y: Float64) -> Float64 {
+public func hypot(_ x: Double, _ y: Double) -> Double {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.hypot(x, y)
     #elseif os(Linux)

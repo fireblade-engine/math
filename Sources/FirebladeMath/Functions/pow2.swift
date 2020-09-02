@@ -7,7 +7,7 @@ import Glibc
 #endif
 
 /// Computes the value of base 2 raised to the power exponent.
-public func pow2(_ exponent: Float32) -> Float32 {
+public func pow2(_ exponent: Float) -> Float {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.powf(2, exponent)
     #elseif os(Linux)
@@ -16,7 +16,7 @@ public func pow2(_ exponent: Float32) -> Float32 {
 }
 
 /// Computes the value of base 2 raised to the power exponent.
-public func pow2(_ exponent: Float64) -> Float64 {
+public func pow2(_ exponent: Double) -> Double {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.pow(2, exponent)
     #elseif os(Linux)

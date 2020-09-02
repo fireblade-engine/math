@@ -12,7 +12,7 @@ import Glibc
 ///   - x: floating point value
 ///   - y: floating point value
 /// - Returns: If successful, returns the smaller of two floating point values. The value returned is exact and does not depend on any rounding modes.
-public func min(_ x: Float32, _ y: Float32) -> Float32 {
+public func min(_ x: Float, _ y: Float) -> Float {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.fminf(x, y)
     #elseif os(Linux)
@@ -26,7 +26,7 @@ public func min(_ x: Float32, _ y: Float32) -> Float32 {
 ///   - x: floating point value
 ///   - y: floating point value
 /// - Returns: If successful, returns the smaller of two floating point values. The value returned is exact and does not depend on any rounding modes.
-public func min(_ x: Float64, _ y: Float64) -> Float64 {
+public func min(_ x: Double, _ y: Double) -> Double {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.fmin(x, y)
     #elseif os(Linux)

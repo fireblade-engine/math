@@ -11,7 +11,7 @@ import Glibc
 /// - Returns: If no errors occur, the common (base-10) logarithm of arg (log_10(arg) or lg(arg)) is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a pole error occurs, -HUGE_VAL, -HUGE_VALF, or -HUGE_VALL is returned.
-public func log10(_ float: Float32) -> Float32 {
+public func log10(_ float: Float) -> Float {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.log10f(float)
     #elseif os(Linux)
@@ -25,7 +25,7 @@ public func log10(_ float: Float32) -> Float32 {
 /// - Returns: If no errors occur, the common (base-10) logarithm of arg (log_10(arg) or lg(arg)) is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a pole error occurs, -HUGE_VAL, -HUGE_VALF, or -HUGE_VALL is returned.
-public func log10(_ double: Float64) -> Float64 {
+public func log10(_ double: Double) -> Double {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.log10(double)
     #elseif os(Linux)

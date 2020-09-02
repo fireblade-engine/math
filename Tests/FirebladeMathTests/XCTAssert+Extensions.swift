@@ -15,8 +15,8 @@ public func XCTAssertEqualElements<T, S>(_ expression1: @autoclosure () throws -
                                          file: StaticString = #file,
                                          line: UInt = #line) where T: FloatingPoint, S: Sequence, S.Element == T {
     do {
-        for (lhs, rhs) in zip(try expression1(), try expression2()) {
-            XCTAssertEqual(lhs, rhs, accuracy: accuracy, message(), file: file, line: line)
+        for (index, elements) in zip(try expression1(), try expression2()).enumerated() {
+            XCTAssertEqual(elements.0, elements.1, accuracy: accuracy, "[element:\(index+1)]" + message(), file: file, line: line)
         }
     } catch {
         XCTFail(error.localizedDescription)
@@ -29,8 +29,8 @@ public func XCTAssertEqualElements<T, S>(_ expression1: @autoclosure () throws -
                                          file: StaticString = #file,
                                          line: UInt = #line) where T: Equatable, S: Sequence, S.Element == T {
     do {
-        for (lhs, rhs) in zip(try expression1(), try expression2()) {
-            XCTAssertEqual(lhs, rhs, message(), file: file, line: line)
+        for (index, elements) in zip(try expression1(), try expression2()).enumerated() {
+            XCTAssertEqual(elements.0, elements.1, "[element:\(index+1)]" + message(), file: file, line: line)
         }
     } catch {
         XCTFail(error.localizedDescription)

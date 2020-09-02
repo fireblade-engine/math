@@ -11,7 +11,7 @@ import Glibc
 /// - Parameter double: floating point value representing the area of a hyperbolic sector
 /// - Returns: If no errors occur, the inverse hyperbolic sine of arg (sinh^-1(arg), or arsinh(arg)), is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func asinh(_ double: Float64) -> Float64 {
+public func asinh(_ double: Double) -> Double {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.asinh(double)
     #elseif os(Linux)
@@ -24,7 +24,7 @@ public func asinh(_ double: Float64) -> Float64 {
 /// - Parameter float: floating point value representing the area of a hyperbolic sector
 /// - Returns: If no errors occur, the inverse hyperbolic sine of arg (sinh^-1(arg), or arsinh(arg)), is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func asinh(_ float: Float32) -> Float32 {
+public func asinh(_ float: Float) -> Float {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.asinhf(float)
     #elseif os(Linux)

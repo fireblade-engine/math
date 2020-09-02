@@ -7,12 +7,12 @@
 /// - Returns: one of the following:
 ///  ''n'' if dot(''i'', ''nref'') < 0.
 ///  ''-n'' otherwise.
-public func faceforward(n: Float32, i: Float32, nref: Float32) -> Float32 {
-    let dot: Float32 = i * nref
+public func faceforward(n: Float, i: Float, nref: Float) -> Float {
+    let dot: Float = i * nref
     if dot < 0.0 {
         return n
     } else if dot.isNaN {
-        return Float32.nan
+        return Float.nan
     } else {
         return -n
     }
@@ -27,12 +27,12 @@ public func faceforward(n: Float32, i: Float32, nref: Float32) -> Float32 {
 /// - Returns: one of the following:
 ///  ''n'' if dot(''i'', ''nref'') < 0.
 ///  ''-n'' otherwise.
-public func faceforward(n: Float64, i: Float64, nref: Float64) -> Float64 {
-    let dot: Float64 = i * nref
+public func faceforward(n: Double, i: Double, nref: Double) -> Double {
+    let dot: Double = i * nref
     if dot < 0.0 {
         return n
     } else if dot.isNaN {
-        return Float64.nan
+        return Double.nan
     } else {
         return -n
     }

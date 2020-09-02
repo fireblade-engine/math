@@ -6,11 +6,11 @@
 ///   - n: the normal, must be normalized to achieve the desired result.
 ///   - eta: the ratio of indices of refration.
 /// - Returns: the refraction vector.
-public func refract(_ i: Float32, _ n: Float32, _ eta: Float32) -> Float32 {
-    let nTi: Float32 = n * i
-    let frac: Float32 = 1 - eta * eta * (1 - nTi * nTi)
+public func refract(_ i: Float, _ n: Float, _ eta: Float) -> Float {
+    let nTi: Float = n * i
+    let frac: Float = 1 - eta * eta * (1 - nTi * nTi)
     if frac < 0 {
-        return Float32(0.0)
+        return Float(0.0)
     } else {
         return eta * i - (eta * nTi + sqrt(frac)) * n
     }
@@ -24,11 +24,11 @@ public func refract(_ i: Float32, _ n: Float32, _ eta: Float32) -> Float32 {
 ///   - n: the normal, must be normalized to achieve the desired result.
 ///   - eta: the ratio of indices of refration.
 /// - Returns: the refraction vector.
-public func refract(_ i: Float64, _ n: Float64, _ eta: Float64) -> Float64 {
-    let nTi: Float64 = n * i
-    let frac: Float64 = 1 - eta * eta * (1 - nTi * nTi)
+public func refract(_ i: Double, _ n: Double, _ eta: Double) -> Double {
+    let nTi: Double = n * i
+    let frac: Double = 1 - eta * eta * (1 - nTi * nTi)
     if frac < 0 {
-        return Float64(0.0)
+        return Double(0.0)
     } else {
         return eta * i - (eta * nTi + sqrt(frac)) * n
     }

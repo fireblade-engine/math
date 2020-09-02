@@ -1,11 +1,11 @@
-/// Returns true if Float32.infinity == arg.
+/// Returns true if Float.infinity == arg.
 ///
 /// - Parameter float: floating point value
-/// - Returns: true if Float32.infinity == arg, false otherwise
-public func isInfinite(_ float: Float32) -> Bool { Float32.infinity == float }
+/// - Returns: true if Float.infinity == arg, false otherwise
+public func isInfinite(_ float: Float) -> Bool { Float.infinity == float }
 
-/// Returns true if Float64.infinity == arg.
+/// Returns true if Double.infinity == arg.
 ///
 /// - Parameter double: floating point value
-/// - Returns: true if Float64.infinity == arg, false otherwise
-public func isInfinite(_ double: Float64) -> Bool { Float64.infinity == double }
+/// - Returns: true if Double.infinity == arg, false otherwise
+public func isInfinite(_ double: Double) -> Bool { Double.infinity == double }

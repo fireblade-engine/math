@@ -10,7 +10,7 @@ import Glibc
 ///
 /// - Parameter float:     floating point value
 /// - Returns: If no errors occur, the smallest integer value not less than arg, that is ⌈arg⌉, is returned.
-public func ceil(_ float: Float32) -> Float32 {
+public func ceil(_ float: Float) -> Float {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.ceilf(float)
     #elseif os(Linux)
@@ -22,7 +22,7 @@ public func ceil(_ float: Float32) -> Float32 {
 ///
 /// - Parameter double:     floating point value
 /// - Returns: If no errors occur, the smallest integer value not less than arg, that is ⌈arg⌉, is returned.
-public func ceil(_ double: Float64) -> Float64 {
+public func ceil(_ double: Double) -> Double {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.ceil(double)
     #elseif os(Linux)

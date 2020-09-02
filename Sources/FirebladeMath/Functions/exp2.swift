@@ -11,7 +11,7 @@ import Glibc
 /// - Returns: If no errors occur, the base-2 exponential of n (2^n) is returned.
 /// If a range error due to overflow occurs, +HUGE_VAL, +HUGE_VALF, or +HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func exp2(_ power: Float32) -> Float32 {
+public func exp2(_ power: Float) -> Float {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.exp2f(power)
     #elseif os(Linux)
@@ -25,7 +25,7 @@ public func exp2(_ power: Float32) -> Float32 {
 /// - Returns: If no errors occur, the base-2 exponential of n (2^n) is returned.
 /// If a range error due to overflow occurs, +HUGE_VAL, +HUGE_VALF, or +HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func exp2(_ power: Float64) -> Float64 {
+public func exp2(_ power: Double) -> Double {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.exp2(power)
     #elseif os(Linux)

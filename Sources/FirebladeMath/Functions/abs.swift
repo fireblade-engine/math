@@ -9,7 +9,7 @@ import Glibc
 ///
 /// - Parameter float:     floating point value
 /// - Returns: If successful, returns the absolute value of arg (|arg|). The value returned is exact and does not depend on any rounding modes.
-public func abs(_ float: Float32) -> Float32 {
+public func abs(_ float: Float) -> Float {
     fabsf(float)
 }
 
@@ -17,7 +17,7 @@ public func abs(_ float: Float32) -> Float32 {
 ///
 /// - Parameter double:     floating point value
 /// - Returns: If successful, returns the absolute value of arg (|arg|). The value returned is exact and does not depend on any rounding modes.
-public func abs(_ double: Float64) -> Float64 {
+public func abs(_ double: Double) -> Double {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.fabs(double)
     #elseif os(Linux)

@@ -12,9 +12,9 @@ import Glibc
 /// - Returns: If no errors occur, the sine of arg (sin(arg)) in the range [-1 ; +1], is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func sin(_ floatAngleRadians: Float32) -> Float32 {
+public func sin(_ angleRad: Float) -> Float {
     #if os(macOS) || os(iOS) || os(tvOS)
-    return Darwin.sinf(floatAngleRadians)
+    return Darwin.sinf(angleRad)
     #elseif os(Linux)
     return Glibc.sinf(floatAngleRadians)
     #endif
@@ -26,9 +26,9 @@ public func sin(_ floatAngleRadians: Float32) -> Float32 {
 /// - Returns: If no errors occur, the sine of arg (sin(arg)) in the range [-1 ; +1], is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func sin(_ floatAngleRadians: Float64) -> Float64 {
+public func sin(_ angleRad: Double) -> Double {
     #if os(macOS) || os(iOS) || os(tvOS)
-    return Darwin.sin(floatAngleRadians)
+    return Darwin.sin(angleRad)
     #elseif os(Linux)
     return Glibc.sin(floatAngleRadians)
     #endif
