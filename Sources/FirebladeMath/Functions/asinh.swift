@@ -1,9 +1,9 @@
-#if canImport(Darwin)
+#if FRB_MATH_DARWIN
 import Darwin.C.math
-#elseif canImport(Glibc)
+#endif
+
+#if FRB_MATH_GLIBC
 import Glibc
-#else
-#error("unsupported platform")
 #endif
 
 /// Computes the inverse hyperbolic sine of arg.
@@ -12,9 +12,12 @@ import Glibc
 /// - Returns: If no errors occur, the inverse hyperbolic sine of arg (sinh^-1(arg), or arsinh(arg)), is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func asinh(_ double: Double) -> Double {
-    #if os(macOS) || os(iOS) || os(tvOS)
+    #if FRB_MATH_DARWIN
     return Darwin.asinh(double)
-    #elseif os(Linux)
+    #endif
+
+    #if FRB_MATH_GLIBC
+
     return Glibc.asinh(double)
     #endif
 }
@@ -25,9 +28,12 @@ public func asinh(_ double: Double) -> Double {
 /// - Returns: If no errors occur, the inverse hyperbolic sine of arg (sinh^-1(arg), or arsinh(arg)), is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func asinh(_ float: Float) -> Float {
-    #if os(macOS) || os(iOS) || os(tvOS)
+    #if FRB_MATH_DARWIN
     return Darwin.asinhf(float)
-    #elseif os(Linux)
+    #endif
+
+    #if FRB_MATH_GLIBC
+
     return Glibc.asinhf(float)
     #endif
 }

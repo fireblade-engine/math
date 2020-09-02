@@ -1,9 +1,9 @@
-#if canImport(Darwin)
+#if FRB_MATH_DARWIN
 import Darwin.C.math
-#elseif canImport(Glibc)
+#endif
+
+#if FRB_MATH_GLIBC
 import Glibc
-#else
-#error("unsupported platform")
 #endif
 
 /// Computes the floating-point remainder of the division operation x/y.
@@ -16,9 +16,11 @@ import Glibc
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func mod(_ x: Float, _ y: Float) -> Float {
-    #if os(macOS) || os(iOS) || os(tvOS)
+    #if FRB_MATH_DARWIN
     return Darwin.fmodf(x, y)
-    #elseif os(Linux)
+    #endif
+
+    #if FRB_MATH_GLIBC
     return Glibc.fmodf(x, y)
     #endif
 }
@@ -33,9 +35,11 @@ public func mod(_ x: Float, _ y: Float) -> Float {
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func mod(_ x: Double, _ y: Double) -> Double {
-    #if os(macOS) || os(iOS) || os(tvOS)
+    #if FRB_MATH_DARWIN
     return Darwin.fmod(x, y)
-    #elseif os(Linux)
+    #endif
+
+    #if FRB_MATH_GLIBC
     return Glibc.fmod(x, y)
     #endif
 }

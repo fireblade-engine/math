@@ -1,9 +1,9 @@
-#if canImport(Darwin)
+#if FRB_MATH_DARWIN
 import Darwin.C.math
-#elseif canImport(Glibc)
+#endif
+
+#if FRB_MATH_GLIBC
 import Glibc
-#else
-#error("unsupported platform")
 #endif
 
 /// Computes the natural (base e) logarithm of arg.
@@ -13,9 +13,11 @@ import Glibc
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a pole error occurs, -HUGE_VAL, -HUGE_VALF, or -HUGE_VALL is returned.
 public func log(_ float: Float) -> Float {
-    #if os(macOS) || os(iOS) || os(tvOS)
+    #if FRB_MATH_DARWIN
     return Darwin.logf(float)
-    #elseif os(Linux)
+    #endif
+
+    #if FRB_MATH_GLIBC
     return Glibc.logf(float)
     #endif
 }
@@ -27,9 +29,11 @@ public func log(_ float: Float) -> Float {
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a pole error occurs, -HUGE_VAL, -HUGE_VALF, or -HUGE_VALL is returned.
 public func log(_ double: Double) -> Double {
-    #if os(macOS) || os(iOS) || os(tvOS)
+    #if FRB_MATH_DARWIN
     return Darwin.log(double)
-    #elseif os(Linux)
+    #endif
+
+    #if FRB_MATH_GLIBC
     return Glibc.log(double)
     #endif
 }

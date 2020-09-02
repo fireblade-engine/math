@@ -1,10 +1,11 @@
-#if canImport(Darwin)
+#if FRB_MATH_DARWIN
 import Darwin.C.math
-#elseif canImport(Glibc)
-import Glibc
-#else
-#error("unsupported platform")
 #endif
+
+#if FRB_MATH_GLIBC
+import Glibc
+#endif
+
 ///  Computes the inverse hyperbolic cosine of arg.
 ///
 /// - Parameter double:     floating point value representing the area of a hyperbolic sector
@@ -12,9 +13,11 @@ import Glibc
 ///    (arg), or arcosh(arg)) on the interval [0, +∞], is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 public func acosh(_ double: Double) -> Double {
-    #if os(macOS) || os(iOS) || os(tvOS)
+    #if FRB_MATH_DARWIN
     return Darwin.acosh(double)
-    #elseif os(Linux)
+    #endif
+
+    #if FRB_MATH_GLIBC
     return Glibc.acosh(double)
     #endif
 }
@@ -26,9 +29,11 @@ public func acosh(_ double: Double) -> Double {
 ///    (arg), or arcosh(arg)) on the interval [0, +∞], is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 public func acosh(_ float: Float) -> Float {
-    #if os(macOS) || os(iOS) || os(tvOS)
+    #if FRB_MATH_DARWIN
     return Darwin.acoshf(float)
-    #elseif os(Linux)
+    #endif
+
+    #if FRB_MATH_GLIBC
     return Glibc.acoshf(float)
     #endif
 }

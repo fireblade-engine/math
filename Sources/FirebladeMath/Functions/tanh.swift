@@ -1,9 +1,9 @@
-#if canImport(Darwin)
+#if FRB_MATH_DARWIN
 import Darwin.C.math
-#elseif canImport(Glibc)
+#endif
+
+#if FRB_MATH_GLIBC
 import Glibc
-#else
-#error("unsupported platform")
 #endif
 
 /// Computes the hyperbolic tangent of arg.
@@ -21,9 +21,11 @@ public func tanh(_ float: Float) -> Float {
 /// - Returns: If no errors occur, the hyperbolic tangent of arg (tanh(arg), or (e^arg*-e^-arg)/(e^arg*+e^-arg)) is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func tanh(_ double: Double) -> Double {
-    #if os(macOS) || os(iOS) || os(tvOS)
+    #if FRB_MATH_DARWIN
     return Darwin.tanh(double)
-    #elseif os(Linux)
+    #endif
+
+    #if FRB_MATH_GLIBC
     return Glibc.tanh(double)
     #endif
 }

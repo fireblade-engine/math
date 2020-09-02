@@ -1,9 +1,9 @@
-#if canImport(Darwin)
+#if FRB_MATH_DARWIN
 import Darwin.C.math
-#elseif canImport(Glibc)
+#endif
+
+#if FRB_MATH_GLIBC
 import Glibc
-#else
-#error("unsupported platform")
 #endif
 
 /// Computes the nearest integer not greater in magnitude than arg.
@@ -19,9 +19,11 @@ public func trunc(_ float: Float) -> Float {
 /// - Parameter double:     floating point value
 /// - Returns: If no errors occur, the nearest integer value not greater in magnitude than arg (in other words, arg rounded towards zero), is returned.
 public func trunc(_ double: Double) -> Double {
-    #if os(macOS) || os(iOS) || os(tvOS)
+    #if FRB_MATH_DARWIN
     return Darwin.trunc(double)
-    #elseif os(Linux)
+    #endif
+
+    #if FRB_MATH_GLIBC
     return Glibc.trunc(double)
     #endif
 }

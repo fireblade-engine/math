@@ -1,9 +1,9 @@
-#if canImport(Darwin)
+#if FRB_MATH_DARWIN
 import Darwin.C.math
-#elseif canImport(Glibc)
+#endif
+
+#if FRB_MATH_GLIBC
 import Glibc
-#else
-#error("unsupported platform")
 #endif
 
 /// Computes hyperbolic sine of arg.
@@ -13,9 +13,11 @@ import Glibc
 /// If a range error due to overflow occurs, ±HUGE_VAL, ±HUGE_VALF, or ±HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func sinh(_ float: Float) -> Float {
-    #if canImport(Darwin)
+    #if FRB_MATH_DARWIN
     return Darwin.sinhf(float)
-    #elseif canImport(Glibc)
+    #endif
+
+    #if FRB_MATH_GLIBC
     return Glibc.sinhf(float)
     #endif
 }
@@ -27,9 +29,11 @@ public func sinh(_ float: Float) -> Float {
 /// If a range error due to overflow occurs, ±HUGE_VAL, ±HUGE_VALF, or ±HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func sinh(_ double: Double) -> Double {
-    #if canImport(Darwin)
+    #if FRB_MATH_DARWIN
     return Darwin.sinh(double)
-    #elseif canImport(Glibc)
+    #endif
+
+    #if FRB_MATH_GLIBC
     return Glibc.sinh(double)
     #endif
 }

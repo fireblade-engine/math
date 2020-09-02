@@ -1,19 +1,22 @@
-#if canImport(Darwin)
+#if FRB_MATH_DARWIN
 import Darwin.C.math
-#elseif canImport(Glibc)
-import Glibc
-#else
-#error("unsupported platform")
 #endif
+
+#if FRB_MATH_GLIBC
+import Glibc
+#endif
+
 /// Computes the principal value of the arc tangent of arg.
 ///
 /// - Parameter double: floating point value
 /// - Returns: If no errors occur, the arc tangent of arg (arctan(arg)) in the range [-π/2;+π/2] radians, is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func atan(_ double: Double) -> Double {
-    #if os(macOS) || os(iOS) || os(tvOS)
+    #if FRB_MATH_DARWIN
     return Darwin.atan(double)
-    #elseif os(Linux)
+    #endif
+
+    #if FRB_MATH_GLIBC
     return Glibc.atan(double)
     #endif
 }
@@ -24,9 +27,11 @@ public func atan(_ double: Double) -> Double {
 /// - Returns: If no errors occur, the arc tangent of arg (arctan(arg)) in the range [-π/2;+π/2] radians, is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func atan(_ float: Float) -> Float {
-    #if os(macOS) || os(iOS) || os(tvOS)
+    #if FRB_MATH_DARWIN
     return Darwin.atanf(float)
-    #elseif os(Linux)
+    #endif
+
+    #if FRB_MATH_GLIBC
     return Glibc.atanf(float)
     #endif
 }

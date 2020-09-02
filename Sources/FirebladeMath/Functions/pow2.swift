@@ -1,25 +1,28 @@
-#if canImport(Darwin)
+#if FRB_MATH_DARWIN
 import Darwin.C.math
-#elseif canImport(Glibc)
-import Glibc
-#else
-#error("unsupported platform")
 #endif
 
+#if FRB_MATH_GLIBC
+import Glibc
+#endif
 /// Computes the value of base 2 raised to the power exponent.
 public func pow2(_ exponent: Float) -> Float {
-    #if os(macOS) || os(iOS) || os(tvOS)
+    #if FRB_MATH_DARWIN
     return Darwin.powf(2, exponent)
-    #elseif os(Linux)
+    #endif
+
+    #if FRB_MATH_GLIBC
     return Glibc.powf(2, exponent)
     #endif
 }
 
 /// Computes the value of base 2 raised to the power exponent.
 public func pow2(_ exponent: Double) -> Double {
-    #if os(macOS) || os(iOS) || os(tvOS)
+    #if FRB_MATH_DARWIN
     return Darwin.pow(2, exponent)
-    #elseif os(Linux)
+    #endif
+
+    #if FRB_MATH_GLIBC
     return Glibc.pow(2, exponent)
     #endif
 }

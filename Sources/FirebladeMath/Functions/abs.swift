@@ -1,10 +1,11 @@
-#if canImport(Darwin)
+#if FRB_MATH_DARWIN
 import Darwin.C.math
-#elseif canImport(Glibc)
-import Glibc
-#else
-#error("unsupported platform")
 #endif
+
+#if FRB_MATH_GLIBC
+import Glibc
+#endif
+
 /// Computes the absolute value of a floating point value arg.
 ///
 /// - Parameter float:     floating point value
@@ -18,9 +19,11 @@ public func abs(_ float: Float) -> Float {
 /// - Parameter double:     floating point value
 /// - Returns: If successful, returns the absolute value of arg (|arg|). The value returned is exact and does not depend on any rounding modes.
 public func abs(_ double: Double) -> Double {
-    #if os(macOS) || os(iOS) || os(tvOS)
+    #if FRB_MATH_DARWIN
     return Darwin.fabs(double)
-    #elseif os(Linux)
+    #endif
+
+    #if FRB_MATH_GLIBC
     return Glibc.fabs(double)
     #endif
 }

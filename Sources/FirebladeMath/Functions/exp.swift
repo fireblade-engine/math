@@ -1,9 +1,9 @@
-#if canImport(Darwin)
+#if FRB_MATH_DARWIN
 import Darwin.C.math
-#elseif canImport(Glibc)
+#endif
+
+#if FRB_MATH_GLIBC
 import Glibc
-#else
-#error("unsupported platform")
 #endif
 
 ///  Computes the e (Euler's number, 2.7182818) raised to the given power arg.
@@ -13,9 +13,11 @@ import Glibc
 /// If a range error due to overflow occurs, +HUGE_VAL, +HUGE_VALF, or +HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func exp(_ power: Float) -> Float {
-    #if os(macOS) || os(iOS) || os(tvOS)
+    #if FRB_MATH_DARWIN
     return Darwin.expf(power)
-    #elseif os(Linux)
+    #endif
+
+    #if FRB_MATH_GLIBC
     return Glibc.expf(power)
     #endif
 }
@@ -27,9 +29,11 @@ public func exp(_ power: Float) -> Float {
 /// If a range error due to overflow occurs, +HUGE_VAL, +HUGE_VALF, or +HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func exp(_ power: Double) -> Double {
-    #if os(macOS) || os(iOS) || os(tvOS)
+    #if FRB_MATH_DARWIN
     return Darwin.exp(power)
-    #elseif os(Linux)
+    #endif
+
+    #if FRB_MATH_GLIBC
     return Glibc.exp(power)
     #endif
 }

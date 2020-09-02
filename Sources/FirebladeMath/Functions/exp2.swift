@@ -1,10 +1,11 @@
-#if canImport(Darwin)
+#if FRB_MATH_DARWIN
 import Darwin.C.math
-#elseif canImport(Glibc)
-import Glibc
-#else
-#error("unsupported platform")
 #endif
+
+#if FRB_MATH_GLIBC
+import Glibc
+#endif
+
 /// Computes 2 raised to the given power n.
 ///
 /// - Parameter float:     floating point value
@@ -12,9 +13,11 @@ import Glibc
 /// If a range error due to overflow occurs, +HUGE_VAL, +HUGE_VALF, or +HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func exp2(_ power: Float) -> Float {
-    #if os(macOS) || os(iOS) || os(tvOS)
+    #if FRB_MATH_DARWIN
     return Darwin.exp2f(power)
-    #elseif os(Linux)
+    #endif
+
+    #if FRB_MATH_GLIBC
     return Glibc.exp2f(power)
     #endif
 }
@@ -26,9 +29,11 @@ public func exp2(_ power: Float) -> Float {
 /// If a range error due to overflow occurs, +HUGE_VAL, +HUGE_VALF, or +HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func exp2(_ power: Double) -> Double {
-    #if os(macOS) || os(iOS) || os(tvOS)
+    #if FRB_MATH_DARWIN
     return Darwin.exp2(power)
-    #elseif os(Linux)
+    #endif
+
+    #if FRB_MATH_GLIBC
     return Glibc.exp2(power)
     #endif
 }

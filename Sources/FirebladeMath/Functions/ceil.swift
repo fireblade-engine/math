@@ -1,9 +1,9 @@
-#if canImport(Darwin)
+#if FRB_MATH_DARWIN
 import Darwin.C.math
-#elseif canImport(Glibc)
+#endif
+
+#if FRB_MATH_GLIBC
 import Glibc
-#else
-#error("unsupported platform")
 #endif
 
 /// Computes the smallest integer value not less than arg.
@@ -11,9 +11,11 @@ import Glibc
 /// - Parameter float:     floating point value
 /// - Returns: If no errors occur, the smallest integer value not less than arg, that is ⌈arg⌉, is returned.
 public func ceil(_ float: Float) -> Float {
-    #if os(macOS) || os(iOS) || os(tvOS)
+    #if FRB_MATH_DARWIN
     return Darwin.ceilf(float)
-    #elseif os(Linux)
+    #endif
+
+    #if FRB_MATH_GLIBC
     return Glibc.ceilf(float)
     #endif
 }
@@ -23,9 +25,11 @@ public func ceil(_ float: Float) -> Float {
 /// - Parameter double:     floating point value
 /// - Returns: If no errors occur, the smallest integer value not less than arg, that is ⌈arg⌉, is returned.
 public func ceil(_ double: Double) -> Double {
-    #if os(macOS) || os(iOS) || os(tvOS)
+    #if FRB_MATH_DARWIN
     return Darwin.ceil(double)
-    #elseif os(Linux)
+    #endif
+
+    #if FRB_MATH_GLIBC
     return Glibc.ceil(double)
     #endif
 }
