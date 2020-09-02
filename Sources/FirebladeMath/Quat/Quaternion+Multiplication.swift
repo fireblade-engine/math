@@ -16,7 +16,7 @@ public func multiply(_ lhs: Float, _ rhs: Quat4f) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd.simd_mul(lhs, rhs.storage))
     #else
-    fatalError("not implemented yet")
+    return Quat4f(lhs * SIMD4<Float>(rhs.storage))
     #endif
 }
 
@@ -24,12 +24,12 @@ public func multiply(_ lhs: Quat4f, _ rhs: Float) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd.simd_mul(lhs.storage, rhs))
     #else
-    fatalError("not implemented yet")
+    return Quat4f(SIMD4<Float>(lhs.storage) * rhs)
     #endif
 }
 
 /// Returns the product of two quaternions.
-public func multiply (_ lhs: Quat4f, _ rhs: Quat4f) -> Quat4f {
+public func multiply(_ lhs: Quat4f, _ rhs: Quat4f) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd.simd_mul(lhs.storage, rhs.storage))
     #else

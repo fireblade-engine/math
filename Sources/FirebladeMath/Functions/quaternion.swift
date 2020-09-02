@@ -37,7 +37,10 @@ public func quaternion(from: SIMD3<Float>, to: SIMD3<Float>) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd.simd_quaternion(from, to))
     #else
-    fatalError("implementation missing \(#function)")
+    let half = normalize(from + to)
+    let img = cross(from, half)
+    let real = dot(from, half)
+    return Quat4f(img.x, img.y, img.z, real)
     #endif
 }
 
@@ -45,7 +48,10 @@ public func quaternion(from: SIMD3<Double>, to: SIMD3<Double>) -> Quat4d {
     #if FRB_MATH_USE_SIMD
     return Quat4d(storage: simd.simd_quaternion(from, to))
     #else
-    fatalError("implementation missing \(#function)")
+    let half = normalize(from + to)
+    let img = cross(from, half)
+    let real = dot(from, half)
+    return Quat4d(img.x, img.y, img.z, real)
     #endif
 }
 

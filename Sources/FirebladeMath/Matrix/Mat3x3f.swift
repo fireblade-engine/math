@@ -26,10 +26,6 @@ extension Mat3x3f {
         )
     }
 
-    @inlinable public var inverted: Mat3x3f {
-        inverse(self)
-    }
-
     @inlinable public var transposed: Mat3x3f {
         transpose(self)
     }

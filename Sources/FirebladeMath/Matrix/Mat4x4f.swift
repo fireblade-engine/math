@@ -42,9 +42,6 @@ extension Mat4x4f {
             let sz = storage.columns.2.length
             return SIMD3<Float>(sx, sy, sz)
         }
-        set {
-            fatalError("CAN NOT SET SCALE YET")
-        }
     }
 
     public init(upperLeft matrix3x3: Mat3x3f) {
@@ -76,9 +73,6 @@ extension Mat4x4f {
     @inlinable public var rotation: SIMD4<Float> {
         get {
             SIMD4<Float>(Quat4f(rotation: self))
-        }
-        set {
-            fatalError("CAN NOT SET ROTATION YET")
         }
     }
 
