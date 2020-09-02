@@ -10,7 +10,8 @@ public struct Quaternion<Storage> where Storage: QuaternionStorageProtocol {
 
     @usableFromInline var storage: Storage
 
-    @inlinable public init(storage: Storage) {
+    @inlinable
+    public init(storage: Storage) {
         self.storage = storage
     }
 }

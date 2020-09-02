@@ -4,7 +4,7 @@ excluded:
   - .build
   - Tests
 identifier_name:
-  excluded: ['x', 'y', 'z', 'w', 't', 'i', 'n', 'v', 'j', 'u']
+  excluded: ['x', 'y', 'z', 'w', 't', 'i', 'n', 'v', 'j', 'u', 'P', 'Q', 'R', 'S']
   min_length: 2
 line_length: 220
 number_separator:

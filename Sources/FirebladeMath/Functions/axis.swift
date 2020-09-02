@@ -9,7 +9,8 @@ import func simd.simd_axis
 #endif
 
 /// Returns the axis about which a quaternion rotates.
-@inlinable public func axis(_ quat: Quat4f) -> SIMD3<Float> {
+@inlinable
+public func axis(_ quat: Quat4f) -> SIMD3<Float> {
     #if FRB_MATH_USE_SIMD
     return simd.simd_axis(quat.storage)
     #else
@@ -18,7 +19,8 @@ import func simd.simd_axis
 }
 
 /// Returns the axis about which a quaternion rotates.
-@inlinable public func axis(_ quat: Quat4d) -> SIMD3<Double> {
+@inlinable
+public func axis(_ quat: Quat4d) -> SIMD3<Double> {
     #if FRB_MATH_USE_SIMD
     return simd.simd_axis(quat.storage)
     #else

@@ -19,14 +19,16 @@ public struct Storage3x3<Value>: Storage3x3Protocol where Value: StorageScalar {
         (column0, column1, column2)
     }
 
-    @inlinable public init(_ columns: [Column]) {
+    @inlinable
+    public init(_ columns: [Column]) {
         precondition(columns.count == 3, "Storage needs exactly 3 column vectors")
         column0 = columns[0]
         column1 = columns[1]
         column2 = columns[2]
     }
 
-    @inlinable public init(diagonal: Column) {
+    @inlinable
+    public init(diagonal: Column) {
         let zero: Value = 0
         column0 = Column(diagonal.x, zero, zero)
         column1 = Column(zero, diagonal.y, zero)
@@ -37,7 +39,8 @@ public struct Storage3x3<Value>: Storage3x3Protocol where Value: StorageScalar {
         [column0, column1, column2].flatMap { $0 }.makeIterator()
     }
 
-    @inlinable public subscript(column: Int, row: Int) -> Value {
+    @inlinable
+    public subscript(column: Int, row: Int) -> Value {
         get {
             switch column {
             case 0:
@@ -107,7 +110,8 @@ public struct Storage4x4<Value>: Storage4x4Protocol where Value: StorageScalar {
         (column0, column1, column2, column3)
     }
 
-    @inlinable public init(_ columns: [Column]) {
+    @inlinable
+    public init(_ columns: [Column]) {
         precondition(columns.count == 4, "Storage needs exactly 4 column vectors")
         column0 = columns[0]
         column1 = columns[1]
@@ -115,7 +119,8 @@ public struct Storage4x4<Value>: Storage4x4Protocol where Value: StorageScalar {
         column3 = columns[3]
     }
 
-    @inlinable public init(diagonal: Column) {
+    @inlinable
+    public init(diagonal: Column) {
         let zero: Value = 0
         column0 = Column(diagonal.x, zero, zero, zero)
         column1 = Column(zero, diagonal.y, zero, zero)

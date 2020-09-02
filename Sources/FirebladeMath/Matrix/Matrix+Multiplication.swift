@@ -10,7 +10,8 @@ import func simd.simd_mul
 #endif
 
 // MARK: - Mat4x4d
-@inlinable public func multiply(_ lhs: Mat4x4d, _ rhs: Mat4x4d) -> Mat4x4d {
+@inlinable
+public func multiply(_ lhs: Mat4x4d, _ rhs: Mat4x4d) -> Mat4x4d {
     #if FRB_MATH_USE_SIMD
     return Mat4x4d(storage: simd_mul(lhs.storage, rhs.storage))
     #else
@@ -43,7 +44,8 @@ import func simd.simd_mul
     #endif
 }
 
-@inlinable public func multiply(_ lhs: Double, _ rhs: Mat4x4d) -> Mat4x4d {
+@inlinable
+public func multiply(_ lhs: Double, _ rhs: Mat4x4d) -> Mat4x4d {
     #if FRB_MATH_USE_SIMD
     return Mat4x4d(storage: simd_mul(lhs, rhs.storage))
     #else
@@ -51,7 +53,8 @@ import func simd.simd_mul
     #endif
 }
 
-@inlinable public func multiply(_ lhs: Vec4d, _ rhs: Mat4x4d) -> Vec4d {
+@inlinable
+public func multiply(_ lhs: Vec4d, _ rhs: Mat4x4d) -> Vec4d {
     #if FRB_MATH_USE_SIMD
     return simd_mul(lhs, rhs.storage)
     #else
@@ -59,7 +62,8 @@ import func simd.simd_mul
     #endif
 }
 
-@inlinable public func multiply(_ lhs: Mat4x4d, _ rhs: Vec4d) -> Vec4d {
+@inlinable
+public func multiply(_ lhs: Mat4x4d, _ rhs: Vec4d) -> Vec4d {
     #if FRB_MATH_USE_SIMD
     return simd_mul(lhs.storage, rhs)
     #else
@@ -68,7 +72,8 @@ import func simd.simd_mul
 }
 
 // MARK: - Mat4x4f
-@inlinable public func multiply(_ lhs: Mat4x4f, _ rhs: Mat4x4f) -> Mat4x4f {
+@inlinable
+public func multiply(_ lhs: Mat4x4f, _ rhs: Mat4x4f) -> Mat4x4f {
     #if FRB_MATH_USE_SIMD
     return Mat4x4f(storage: simd_mul(lhs.storage, rhs.storage))
     #else
@@ -101,7 +106,8 @@ import func simd.simd_mul
     #endif
 }
 
-@inlinable public func multiply(_ lhs: Float, _ rhs: Mat4x4f) -> Mat4x4f {
+@inlinable
+public func multiply(_ lhs: Float, _ rhs: Mat4x4f) -> Mat4x4f {
     #if FRB_MATH_USE_SIMD
     return Mat4x4f(storage: simd_mul(lhs, rhs.storage))
     #else
@@ -112,7 +118,8 @@ import func simd.simd_mul
     #endif
 }
 
-@inlinable public func multiply(_ lhs: Vec4f, _ rhs: Mat4x4f) -> Vec4f {
+@inlinable
+public func multiply(_ lhs: Vec4f, _ rhs: Mat4x4f) -> Vec4f {
     #if FRB_MATH_USE_SIMD
     return simd_mul(lhs, rhs.storage)
     #else
@@ -120,7 +127,8 @@ import func simd.simd_mul
     #endif
 }
 
-@inlinable public func multiply(_ lhs: Mat4x4f, _ rhs: Vec4f) -> Vec4f {
+@inlinable
+public func multiply(_ lhs: Mat4x4f, _ rhs: Vec4f) -> Vec4f {
     #if FRB_MATH_USE_SIMD
     return simd_mul(lhs.storage, rhs)
     #else
