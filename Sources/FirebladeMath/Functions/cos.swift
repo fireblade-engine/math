@@ -16,7 +16,7 @@ public func cos(_ angleRad: Float) -> Float {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.cosf(angleRad)
     #elseif os(Linux)
-    return Glibc.cosf(floatAngleRadians)
+    return Glibc.cosf(angleRad)
     #endif
 }
 
@@ -30,6 +30,6 @@ public func cos(_ angleRad: Double) -> Double {
     #if os(macOS) || os(iOS) || os(tvOS)
     return Darwin.cos(angleRad)
     #elseif os(Linux)
-    return Glibc.cos(doubleAngleRadians)
+    return Glibc.cos(angleRad)
     #endif
 }
