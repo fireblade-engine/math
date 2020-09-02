@@ -5,7 +5,7 @@
 //  Created by Christian Treffs on 06.09.19.
 //
 
-#if !USE_SIMD
+#if !FRB_USE_SIMD
 
 public struct QuaternionStorage<Value>: QuaternionStorageProtocol where Value: StorageScalar {
     @usableFromInline var storage: SIMD4<Value>

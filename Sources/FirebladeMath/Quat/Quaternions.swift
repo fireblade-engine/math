@@ -5,12 +5,12 @@
 //  Created by Christian Treffs on 26.08.19.
 //
 
-#if USE_SIMD
+#if FRB_USE_SIMD
 import struct simd.quaternion.simd_quatd
 import struct simd.quaternion.simd_quatf
 #endif
 
-#if USE_SIMD
+#if FRB_USE_SIMD
 public typealias Quat4d = Quaternion<simd_quatd>
 public typealias Quat4f = Quaternion<simd_quatf>
 #else

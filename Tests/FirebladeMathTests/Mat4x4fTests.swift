@@ -342,12 +342,12 @@ class Mat4x4fTests: XCTestCase {
             -0.000_000, -0.000_000, 0.000_000, 1.000_000
         ]
 
-        let mat: Mat4x4f = .orthographic(left: -width / 2.0,
-                                         right: width / 2.0,
-                                         bottom: -height / 2.0,
-                                         top: height / 2.0,
-                                         zNear: 0.001,
-                                         zFar: 100.0)
+        let mat = Mat4x4f.orthographic2(left: -width / 2.0,
+                                        right: width / 2.0,
+                                        top: height / 2.0,
+                                        bottom: -height / 2.0,
+                                        zNear: 0.001,
+                                        zFar: 100.0)
 
         XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
     }
@@ -371,7 +371,7 @@ class Mat4x4fTests: XCTestCase {
     }
 
     func testMultiplyVec4f() {
-        #if USE_SIMD
+        #if FRB_USE_SIMD
         let m0 = Mat4x4f(rotation: radians(51), axis: [1, 0, 1])
         let m1 = Mat4x4f(translation: [1, 2, 3])
         let mat00 = m0 * m1
@@ -388,7 +388,7 @@ class Mat4x4fTests: XCTestCase {
     }
 
     func testInverse() {
-        #if USE_SIMD
+        #if FRB_USE_SIMD
         let values: [Float] = [
             -0.963_882, 0.110_248, 0.242_439, 0.000_000,
             0.155_028, -0.507_928, 0.847_335, 0.000_000,
