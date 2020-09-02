@@ -5,7 +5,7 @@
 //  Created by Christian Treffs on 06.09.19.
 //
 
-#if USE_SIMD
+#if FRB_USE_SIMD
 import struct simd.quaternion.simd_quatd
 import struct simd.quaternion.simd_quatf
 import func simd.simd_quaternion

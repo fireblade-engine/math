@@ -5,11 +5,22 @@
 //  Created by Christian Treffs on 26.08.19.
 //
 
-#if USE_SIMD
+#if FRB_USE_SIMD
 import func simd.simd_clamp
 #endif
 
-/// x clamped to the range [min, max].
+/// x clamped to the range [min, max], such that min ≤ x ≤ max.
+/// Note that if you want to clamp all lanes to the same range, you can use a scalar value for min and max.
+/// - Parameters:
+///   - x: value to be clamped
+///   - min: min range bound
+///   - max: max range bound
+/// - Returns: x clamped to the range [min, max]
+public func clamp<Value>(_ x: Value, min minVal: Value, max maxVal: Value) -> Value where Value: Comparable {
+    min(max(x, minVal), maxVal)
+}
+
+/// x clamped to the range [min, max], such that min ≤ x ≤ max.
 /// Note that if you want to clamp all lanes to the same range, you can use a scalar value for min and max.
 /// - Parameters:
 ///   - x: value to be clamped
@@ -17,14 +28,14 @@ import func simd.simd_clamp
 ///   - max: max range bound
 /// - Returns: x clamped to the range [min, max]
 public func clamp(_ x: Double, _ minVal: Double, _ maxVal: Double) -> Double {
-    #if USE_SIMD
+    #if FRB_USE_SIMD
     return simd_clamp(x, minVal, maxVal)
     #else
     return min(max(x, minVal), maxVal)
     #endif
 }
 
-/// x clamped to the range [min, max].
+/// x clamped to the range [min, max], such that min ≤ x ≤ max.
 /// Note that if you want to clamp all lanes to the same range, you can use a scalar value for min and max.
 /// - Parameters:
 ///   - x: value to be clamped
@@ -32,7 +43,7 @@ public func clamp(_ x: Double, _ minVal: Double, _ maxVal: Double) -> Double {
 ///   - max: max range bound
 /// - Returns: x clamped to the range [min, max]
 public func clamp(_ x: Float, _ minVal: Float, _ maxVal: Float) -> Float {
-    #if USE_SIMD
+    #if FRB_USE_SIMD
     return simd_clamp(x, minVal, maxVal)
     #else
     return min(max(x, minVal), maxVal)

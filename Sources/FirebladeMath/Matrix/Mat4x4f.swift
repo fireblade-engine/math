@@ -36,11 +36,15 @@ extension Mat4x4f {
     }
 
     @inlinable public var scale: SIMD3<Float> {
-        let sx = storage.columns.0.length
-        let sy = storage.columns.1.length
-        let sz = storage.columns.2.length
-
-        return SIMD3<Float>(sx, sy, sz)
+        get {
+            let sx = storage.columns.0.length
+            let sy = storage.columns.1.length
+            let sz = storage.columns.2.length
+            return SIMD3<Float>(sx, sy, sz)
+        }
+        set {
+            fatalError("CAN NOT SET SCALE YET")
+        }
     }
 
     public init(upperLeft matrix3x3: Mat3x3f) {
@@ -66,6 +70,15 @@ extension Mat4x4f {
             storage[3, 0] = newValue.x
             storage[3, 1] = newValue.y
             storage[3, 2] = newValue.z
+        }
+    }
+
+    @inlinable public var rotation: SIMD4<Float> {
+        get {
+            SIMD4<Float>(Quat4f(rotation: self))
+        }
+        set {
+            fatalError("CAN NOT SET ROTATION YET")
         }
     }
 
@@ -127,14 +140,19 @@ extension Mat4x4f {
 
     @inlinable
     public static func perspective(fovy fovyRadians: Float, width: Float, height: Float, zNear: Float, zFar: Float) -> Mat4x4f {
-        // see: <GLKit.framework/.../Headers/GLKMatrix4.h>
-        precondition(fovyRadians > Float(0.0), "Field of view must be greater than 0.0")
-        precondition(width > Float(0.0), "Width must be greater than 0.0")
-        precondition(height > Float(0.0), "Height must be greater than 0.0")
-        precondition(zNear > Float(0.0), "zNear must be greater than 0.0")
-        precondition(zFar > zNear, "zFar must be greater than zNear and greater than 0.0")
-
         let aspect: Float = width / height
+        return Self.perspective(fovy: fovyRadians, aspect: aspect, zNear: zNear, zFar: zFar)
+    }
+
+    @inlinable
+    public static func perspective(fovy fovyRadians: Float, aspect: Float, zNear: Float, zFar: Float) -> Mat4x4f {
+        // see: <GLKit.framework/.../Headers/GLKMatrix4.h>
+        //precondition(fovyRadians > Float(0.0), "Field of view must be greater than 0.0")
+        //precondition(width > Float(0.0), "Width must be greater than 0.0")
+        //precondition(height > Float(0.0), "Height must be greater than 0.0")
+        //precondition(zNear > Float(0.0), "zNear must be greater than 0.0")
+        //precondition(zFar > zNear, "zFar must be greater than zNear and greater than 0.0")
+
         let cotan: Float = 1.0 / tan(fovyRadians / 2.0)
 
         let m00: Float = cotan / aspect
@@ -154,25 +172,67 @@ extension Mat4x4f {
     /// Returns a 4x4 orthographic projection matrix.
     /// - Parameter left: The left coordinate of the projection volume in eye coordinates.
     /// - Parameter right: The right coordinate of the projection volume in eye coordinates.
-    /// - Parameter bottom: The bottom coordinate of the projection volume in eye coordinates.
     /// - Parameter top: The top coordinate of the projection volume in eye coordinates.
+    /// - Parameter bottom: The bottom coordinate of the projection volume in eye coordinates.
     /// - Parameter zNear: The near coordinate of the projection volume in eye coordinates.
     /// - Parameter zFar: The far coordinate of the projection volume in eye coordinates.
     @inlinable
-    public static func orthographic(left: Float, right: Float, bottom: Float, top: Float, zNear: Float, zFar: Float) -> Mat4x4f {
-        let rpl = right + left
-        let rml = right - left
-        let tpb = top + bottom
-        let tmb = top - bottom
-        let fpn = zFar + zNear
-        let fmn = zFar - zNear
+    public static func orthographic(left: Float, right: Float, top: Float, bottom: Float, zNear: Float, zFar: Float) -> Mat4x4f {
+        // https://blog.demofox.org/2017/03/31/orthogonal-projection-matrix-plainly-explained/
 
-        return Mat4x4f(
-            .init(2.0 / rml, 0, 0, -rpl / rml),
-            .init(0, 2.0 / tmb, 0, -tpb / tmb),
-            .init(0, 0, -2.0 / fmn, -fpn / fmn),
-            .init(0, 0, 0, 1.0)
-        )
+        let rsl = right - left
+        let tsb = top - bottom
+        let fsn = zFar - zNear
+        let lsr = left - right
+        let bst = bottom - top
+
+        let ral = right + left
+        let tab = top + bottom
+
+        let P = Vec4f(2.0 / rsl, 0.0, 0.0, 0.0)
+        let Q = Vec4f(0.0, 2.0 / tsb, 0.0, 0.0)
+        let R = Vec4f(0.0, 0.0, 1 / fsn, 0.0)
+        let S = Vec4f(ral / lsr, tab / bst, zNear / fsn, 1.0)
+
+        return Mat4x4f(P, Q, R, S)
+    }
+
+    // https://metashapes.com/blog/opengl-metal-projection-matrix-problem/
+
+    /// Returns a 4x4 orthographic projection matrix.
+    /// - Parameter left: The left coordinate of the projection volume in eye coordinates.
+    /// - Parameter right: The right coordinate of the projection volume in eye coordinates.
+    /// - Parameter top: The top coordinate of the projection volume in eye coordinates.
+    /// - Parameter bottom: The bottom coordinate of the projection volume in eye coordinates.
+    /// - Parameter zNear: The near coordinate of the projection volume in eye coordinates.
+    /// - Parameter zFar: The far coordinate of the projection volume in eye coordinates.
+    @inlinable
+    public static func orthographic2(left: Float, right: Float, top: Float, bottom: Float, zNear: Float, zFar: Float) -> Mat4x4f {
+        let rsl = right - left
+        let tsb = top - bottom
+        let fsn = zFar - zNear
+        let rpl = right + left
+        let tpb = top + bottom
+
+        let P = Vec4f(2.0 / rsl, 0.0, 0.0, -rpl / rsl)
+        let Q = Vec4f(0.0, 2.0 / tsb, 0.0, -tpb / tsb)
+        let R = Vec4f(0.0, 0.0, -1.0 / fsn, -zNear / fsn)
+        let S = Vec4f(0.0, 0.0, 0.0, 1.0)
+
+        return Mat4x4f(P, Q, R, S)
+    }
+
+    public static func orthographic3(left: Float, right: Float, top: Float, bottom: Float, zNear: Float, zFar: Float) -> Mat4x4f {
+        let sLength: Float = 1.0 / (right - left)
+        let sHeight: Float = 1.0 / (top - bottom)
+        let sDepth: Float = 1.0 / (zFar - zNear)
+
+        let P = Vec4f(2.0 * sLength, 0.0, 0.0, 0.0)
+        let Q = Vec4f(0.0, 2.0 * sHeight, 0.0, 0.0)
+        let R = Vec4f(0.0, 0.0, sDepth, 0.0)
+        let S = Vec4f(0.0, 0.0, -zNear * sDepth, 1.0)
+
+        return Mat4x4f(P, Q, R, S)
     }
 
     // Around x-axis

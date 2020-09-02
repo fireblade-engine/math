@@ -81,7 +81,7 @@ extension Quat4f {
     /// Yaw is used when driving a car.
     @inlinable public var yaw: Float {
         /// https://github.com/OGRECave/ogre/blob/master/OgreMain/src/OgreQuaternion.cpp#L508
-        return asin(-2 * (x * z - w * y))
+        asin(-2 * (x * z - w * y))
     }
 
     /// Calculate the local pitch element of this quaternion in radians.
@@ -94,7 +94,7 @@ extension Quat4f {
     /// Pitch is used when flying a jet down or up, or when driving up hill or down.
     @inlinable public var pitch: Float {
         /// https://github.com/OGRECave/ogre/blob/master/OgreMain/src/OgreQuaternion.cpp#L484
-        return atan2(2.0 * (y * z + w * x), w * w - x * x - y * y + z * z)
+        atan2(2.0 * (y * z + w * x), w * w - x * x - y * y + z * z)
     }
 
     /// Calculate the local roll element of this quaternion in radians.
@@ -107,7 +107,7 @@ extension Quat4f {
     /// Roll is literally what happens to your car when you take a curve too fast!
     @inlinable public var roll: Float {
         /// https://github.com/OGRECave/ogre/blob/master/OgreMain/src/OgreQuaternion.cpp#L459
-        return atan2(2.0 * (x * y + w * z), w * w + x * x - y * y - z * z)
+        atan2(2.0 * (x * y + w * z), w * w + x * x - y * y - z * z)
     }
 
     /// x: yaw, y: pitch, z: roll

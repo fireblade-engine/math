@@ -22,7 +22,7 @@ extension Matrix3x3 {
     }
 
     public init(_ columns: [Vector]) {
-        precondition(columns.count == 3, "Matrix needs exacty 3 Vector vectors")
+        precondition(columns.count == 3, "Matrix needs exactly 3 Vector vectors")
         self.storage = Storage(columns)
     }
 

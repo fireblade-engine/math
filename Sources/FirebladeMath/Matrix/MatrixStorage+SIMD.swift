@@ -5,7 +5,7 @@
 //  Created by Christian Treffs on 06.09.19.
 //
 
-#if USE_SIMD
+#if FRB_USE_SIMD
 import struct simd.matrix.simd_float4x4
 import struct simd.matrix.simd_double4x4
 import struct simd.matrix.simd_float3x3

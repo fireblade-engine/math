@@ -5,7 +5,7 @@
 //  Created by Christian Treffs on 26.08.19.
 //
 
-#if USE_SIMD
+#if FRB_USE_SIMD
 import func simd.simd_fract
 #endif
 
@@ -17,7 +17,7 @@ import func simd.simd_fract
 ///     - v: floating point value
 /// - Returns: The "fractional part" of x
 public func fract(_ value: Double) -> Double {
-    #if USE_SIMD
+    #if FRB_USE_SIMD
     return simd_fract(value)
     #else
     return min(value - floor(value), Double(0x1.fffffffffffffp-1))
@@ -32,7 +32,7 @@ public func fract(_ value: Double) -> Double {
 ///     - v: floating point value
 /// - Returns: The "fractional part" of x
 public func fract(_ value: Float) -> Float {
-    #if USE_SIMD
+    #if FRB_USE_SIMD
     return simd_fract(value)
     #else
     return min(value - floor(value), Float(0x1.fffffep-1))

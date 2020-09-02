@@ -42,11 +42,3 @@ extension SIMD4 where Scalar == Float {
         FirebladeMath.normalize(self)
     }
 }
-
-#if swift(<5.1)
-extension SIMD4 {
-    public init(_ vec: SIMD3<Scalar>, _ w: Scalar) {
-        self.init(vec.x, vec.y, vec.z, w)
-    }
-}
-#endif

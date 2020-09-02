@@ -5,13 +5,13 @@
 //  Created by Christian Treffs on 26.08.19.
 //
 
-#if USE_SIMD
+#if FRB_USE_SIMD
 import func simd.simd_mul
 #endif
 
 // MARK: - Mat4x4d
 @inlinable public func multiply(_ lhs: Mat4x4d, _ rhs: Mat4x4d) -> Mat4x4d {
-    #if USE_SIMD
+    #if FRB_USE_SIMD
     return Mat4x4d(storage: simd_mul(lhs.storage, rhs.storage))
     #else
     return Mat4x4d(
@@ -44,7 +44,7 @@ import func simd.simd_mul
 }
 
 @inlinable public func multiply(_ lhs: Double, _ rhs: Mat4x4d) -> Mat4x4d {
-    #if USE_SIMD
+    #if FRB_USE_SIMD
     return Mat4x4d(storage: simd_mul(lhs, rhs.storage))
     #else
     fatalError("not implemented yet \(#function)")
@@ -52,7 +52,7 @@ import func simd.simd_mul
 }
 
 @inlinable public func multiply(_ lhs: Vec4d, _ rhs: Mat4x4d) -> Vec4d {
-    #if USE_SIMD
+    #if FRB_USE_SIMD
     return simd_mul(lhs, rhs.storage)
     #else
     fatalError("not implemented yet \(#function)")
@@ -60,7 +60,7 @@ import func simd.simd_mul
 }
 
 @inlinable public func multiply(_ lhs: Mat4x4d, _ rhs: Vec4d) -> Vec4d {
-    #if USE_SIMD
+    #if FRB_USE_SIMD
     return simd_mul(lhs.storage, rhs)
     #else
     fatalError("not implemented yet \(#function)")
@@ -69,7 +69,7 @@ import func simd.simd_mul
 
 // MARK: - Mat4x4f
 @inlinable public func multiply(_ lhs: Mat4x4f, _ rhs: Mat4x4f) -> Mat4x4f {
-    #if USE_SIMD
+    #if FRB_USE_SIMD
     return Mat4x4f(storage: simd_mul(lhs.storage, rhs.storage))
     #else
     return Mat4x4f(
@@ -102,7 +102,7 @@ import func simd.simd_mul
 }
 
 @inlinable public func multiply(_ lhs: Float, _ rhs: Mat4x4f) -> Mat4x4f {
-    #if USE_SIMD
+    #if FRB_USE_SIMD
     return Mat4x4f(storage: simd_mul(lhs, rhs.storage))
     #else
     return Mat4x4f(rhs.storage.column0 * lhs,
@@ -113,7 +113,7 @@ import func simd.simd_mul
 }
 
 @inlinable public func multiply(_ lhs: Vec4f, _ rhs: Mat4x4f) -> Vec4f {
-    #if USE_SIMD
+    #if FRB_USE_SIMD
     return simd_mul(lhs, rhs.storage)
     #else
     fatalError("not implemented yet \(#function)")
@@ -121,7 +121,7 @@ import func simd.simd_mul
 }
 
 @inlinable public func multiply(_ lhs: Mat4x4f, _ rhs: Vec4f) -> Vec4f {
-    #if USE_SIMD
+    #if FRB_USE_SIMD
     return simd_mul(lhs.storage, rhs)
     #else
     fatalError("not implemented yet \(#function)")

@@ -22,7 +22,7 @@ extension Matrix4x4 {
     }
 
     public init(_ columns: [Vector]) {
-        precondition(columns.count == 4, "Matrix needs exacty 4 Column vectors")
+        precondition(columns.count == 4, "Matrix needs exactly 4 Column vectors")
         self.storage = Storage(columns)
     }
 
