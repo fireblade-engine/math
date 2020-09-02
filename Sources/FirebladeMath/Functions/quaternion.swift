@@ -5,12 +5,12 @@
 //  Created by Christian Treffs on 09.09.19.
 //
 
-#if FRB_USE_SIMD
+#if FRB_MATH_USE_SIMD
 import func simd.simd_quaternion
 #endif
 
 public func quaternion(angle: Float, axis: SIMD3<Float>) -> Quat4f {
-    #if FRB_USE_SIMD
+    #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd_quaternion(angle, axis))
     #else
     return Quat4f(Vec4f(sin(angle / 2.0) * axis, cos(angle / 2.0)))
@@ -18,7 +18,7 @@ public func quaternion(angle: Float, axis: SIMD3<Float>) -> Quat4f {
 }
 
 public func quaternion(angle: Double, axis: SIMD3<Double>) -> Quat4d {
-    #if FRB_USE_SIMD
+    #if FRB_MATH_USE_SIMD
     return Quat4d(storage: simd_quaternion(angle, axis))
     #else
     return Quat4d(Vec4d(sin(angle / 2.0) * axis, cos(angle / 2.0)))
@@ -34,7 +34,7 @@ public func quaternion(angle: Double, axis: SIMD3<Double>) -> Quat4d {
  *  `to` point in opposite directions (to within machine precision), an
  *  arbitrary rotation axis is chosen, and the angle is pi radians.           */
 public func quaternion(from: SIMD3<Float>, to: SIMD3<Float>) -> Quat4f {
-    #if FRB_USE_SIMD
+    #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd.simd_quaternion(from, to))
     #else
     fatalError("implementation missing \(#function)")
@@ -42,7 +42,7 @@ public func quaternion(from: SIMD3<Float>, to: SIMD3<Float>) -> Quat4f {
 }
 
 public func quaternion(from: SIMD3<Double>, to: SIMD3<Double>) -> Quat4d {
-    #if FRB_USE_SIMD
+    #if FRB_MATH_USE_SIMD
     return Quat4d(storage: simd.simd_quaternion(from, to))
     #else
     fatalError("implementation missing \(#function)")
@@ -50,7 +50,7 @@ public func quaternion(from: SIMD3<Double>, to: SIMD3<Double>) -> Quat4d {
 }
 
 public func quaternion(matrix: Mat3x3f) -> Quat4f {
-    #if FRB_USE_SIMD
+    #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd_quaternion(matrix.storage))
     #else
     fatalError("implementation missing \(#function)")
@@ -58,7 +58,7 @@ public func quaternion(matrix: Mat3x3f) -> Quat4f {
 }
 
 public func quaternion(matrix: Mat3x3d) -> Quat4d {
-    #if FRB_USE_SIMD
+    #if FRB_MATH_USE_SIMD
     return Quat4d(storage: simd_quaternion(matrix.storage))
     #else
     fatalError("implementation missing \(#function)")
@@ -66,7 +66,7 @@ public func quaternion(matrix: Mat3x3d) -> Quat4d {
 }
 
 public func quaternion(matrix: Mat4x4f) -> Quat4f {
-    #if FRB_USE_SIMD
+    #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd_quaternion(matrix.storage))
     #else
     fatalError("implementation missing \(#function)")
@@ -74,7 +74,7 @@ public func quaternion(matrix: Mat4x4f) -> Quat4f {
 }
 
 public func quaternion(matrix: Mat4x4d) -> Quat4d {
-    #if FRB_USE_SIMD
+    #if FRB_MATH_USE_SIMD
     return Quat4d(storage: simd_quaternion(matrix.storage))
     #else
     fatalError("implementation missing \(#function)")

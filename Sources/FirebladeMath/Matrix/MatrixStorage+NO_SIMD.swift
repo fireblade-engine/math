@@ -5,7 +5,7 @@
 //  Created by Christian Treffs on 06.09.19.
 //
 
-#if !FRB_USE_SIMD
+#if !FRB_MATH_USE_SIMD
 // MARK: - Storage3x3
 public struct Storage3x3<Value>: Storage3x3Protocol where Value: StorageScalar {
     public typealias Column = SIMD3<Value>

@@ -370,7 +370,7 @@ class Mat4x4fTests: XCTestCase {
     }
 
     func testMultiplyVec4f() {
-        #if FRB_USE_SIMD
+        #if FRB_MATH_USE_SIMD
         let m0 = Mat4x4f(rotation: radians(51), axis: [1, 0, 1])
         let m1 = Mat4x4f(translation: [1, 2, 3])
         let mat00 = m0 * m1
@@ -387,7 +387,7 @@ class Mat4x4fTests: XCTestCase {
     }
 
     func testInverse() {
-        #if FRB_USE_SIMD
+        #if FRB_MATH_USE_SIMD
         let values: [Float] = [
             -0.963_882, 0.110_248, 0.242_439, 0.000_000,
             0.155_028, -0.507_928, 0.847_335, 0.000_000,

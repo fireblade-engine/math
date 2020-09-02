@@ -18,7 +18,7 @@ public func sin(_ angleRad: Float) -> Float {
     #endif
 
     #if FRB_MATH_GLIBC
-    return Glibc.sinf(floatAngleRadians)
+    return Glibc.sinf(angleRad)
     #endif
 }
 
@@ -34,6 +34,6 @@ public func sin(_ angleRad: Double) -> Double {
     #endif
 
     #if FRB_MATH_GLIBC
-    return Glibc.sin(floatAngleRadians)
+    return Glibc.sin(angleRad)
     #endif
 }

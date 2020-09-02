@@ -5,7 +5,7 @@
 //  Created by Christian Treffs on 26.08.19.
 //
 
-#if FRB_USE_SIMD
+#if FRB_MATH_USE_SIMD
 import func simd.simd_clamp
 #endif
 
@@ -28,7 +28,7 @@ public func clamp<Value>(_ x: Value, min minVal: Value, max maxVal: Value) -> Va
 ///   - max: max range bound
 /// - Returns: x clamped to the range [min, max]
 public func clamp(_ x: Double, _ minVal: Double, _ maxVal: Double) -> Double {
-    #if FRB_USE_SIMD
+    #if FRB_MATH_USE_SIMD
     return simd_clamp(x, minVal, maxVal)
     #else
     return min(max(x, minVal), maxVal)
@@ -43,7 +43,7 @@ public func clamp(_ x: Double, _ minVal: Double, _ maxVal: Double) -> Double {
 ///   - max: max range bound
 /// - Returns: x clamped to the range [min, max]
 public func clamp(_ x: Float, _ minVal: Float, _ maxVal: Float) -> Float {
-    #if FRB_USE_SIMD
+    #if FRB_MATH_USE_SIMD
     return simd_clamp(x, minVal, maxVal)
     #else
     return min(max(x, minVal), maxVal)

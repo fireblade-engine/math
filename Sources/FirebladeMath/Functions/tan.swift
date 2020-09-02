@@ -28,6 +28,6 @@ public func tan(_ angleRad: Double) -> Double {
     #endif
 
     #if FRB_MATH_GLIBC
-    return Glibc.tan(double)
+    return Glibc.tan(angleRad)
     #endif
 }

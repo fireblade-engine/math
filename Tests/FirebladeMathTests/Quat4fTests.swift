@@ -45,7 +45,7 @@ class Quat4fTests: XCTestCase {
     }
 
     func testFromToInit() {
-        #if FRB_USE_SIMD
+        #if FRB_MATH_USE_SIMD
         let quat = Quat4f(from: [1, 2, 3], to: [4, 5, 6])
         let values: [Float] = [
             -0.240_965_78,
@@ -124,7 +124,7 @@ class Quat4fTests: XCTestCase {
     }
 
     func testInverse() {
-        #if FRB_USE_SIMD
+        #if FRB_MATH_USE_SIMD
         let quat = Quat4f(1.23, 4.56, 7.89, 0.12)
         let qInv = quat.inverse
         XCTAssertEqualElements(qInv.elements, [-0.014_544, -0.053_918, -0.093_292, 0.001_419], accuracy: 1e-6)
@@ -146,7 +146,7 @@ class Quat4fTests: XCTestCase {
     }
 
     func testMultipy() {
-        #if FRB_USE_SIMD
+        #if FRB_MATH_USE_SIMD
         let q0 = Quat4f(1, 2, 3, 4)
         let q1 = Quat4f(4, 3, 2, 1)
         var quat = multiply(q0, q1)
@@ -187,7 +187,7 @@ class Quat4fTests: XCTestCase {
     }
 
     func testRotMat3x3() {
-        #if FRB_USE_SIMD
+        #if FRB_MATH_USE_SIMD
         let angle: Float = radians(33)
         let rotMat = Mat3x3f(rotation: angle, axis: [1, 0, 1])
         let quat = Quat4f(rotation: rotMat)
@@ -198,7 +198,7 @@ class Quat4fTests: XCTestCase {
     }
 
     func testRotMat4x4() {
-        #if FRB_USE_SIMD
+        #if FRB_MATH_USE_SIMD
         let angle: Float = radians(33)
         let rotMat = Mat4x4f(rotation: angle, axis: [1, 0, 1])
         let quat = Quat4f(rotation: rotMat)

@@ -8,7 +8,7 @@ import PackageDescription
 /// Otherwise we fall back to our own implementation.
 var swiftSettings: [SwiftSetting] = []
 #if canImport(simd)
-swiftSettings.append(.define("FRB_USE_SIMD"))
+swiftSettings.append(.define("FRB_MATH_USE_SIMD"))
 #endif
 
 #if canImport(Darwin)
