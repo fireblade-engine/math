@@ -55,38 +55,152 @@ public func quaternion(from: SIMD3<Double>, to: SIMD3<Double>) -> Quat4d {
     #endif
 }
 
-public func quaternion(matrix: Mat3x3f) -> Quat4f {
+public func quaternion(matrix mat: Mat3x3f) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd_quaternion(matrix.storage))
     #else
-    #warning("implementation missing")
-    return Quat4f.identity
+    let trace = mat[0, 0] + mat[1, 1] + mat[2, 2]
+    if trace >= 0.0 {
+        let r = 2 * sqrt(1 + trace)
+        let rinv = 1 / r
+        return Quat4f(rinv * (mat[1, 2] - mat[2, 1]),
+                      rinv * (mat[2, 0] - mat[0, 2]),
+                      rinv * (mat[0, 1] - mat[1, 0]),
+                      r / 4)
+    } else if mat[0, 0] >= mat[1, 1] && mat[0, 0] >= mat[2, 2] {
+        let r = 2 * sqrt(1 - mat[1, 1] - mat[2, 2] + mat[0, 0])
+        let rinv = 1 / r
+        return Quat4f(r / 4,
+                      rinv * (mat[0, 1] + mat[1, 0]),
+                      rinv * (mat[0, 2] + mat[2, 0]),
+                      rinv * (mat[1, 2] - mat[2, 1]))
+    } else if mat[1, 1] >= mat[2, 2] {
+        let r = 2 * sqrt(1 - mat[0, 0] - mat[2, 2] + mat[1, 1])
+        let rinv = 1 / r
+        return Quat4f(rinv * (mat[0, 1] + mat[1, 0]),
+                      r / 4,
+                      rinv * (mat[1, 2] + mat[2, 1]),
+                      rinv * (mat[2, 0] - mat[0, 2]))
+    } else {
+        let r = 2 * sqrt(1 - mat[0, 0] - mat[1, 1] + mat[2, 2])
+        let rinv = 1 / r
+        return Quat4f(rinv * (mat[0, 2] + mat[2, 0]),
+                      rinv * (mat[1, 2] + mat[2, 1]),
+                      r / 4,
+                      rinv * (mat[0, 1] - mat[1, 0]))
+    }
     #endif
 }
 
-public func quaternion(matrix: Mat3x3d) -> Quat4d {
+public func quaternion(matrix mat: Mat3x3d) -> Quat4d {
     #if FRB_MATH_USE_SIMD
     return Quat4d(storage: simd_quaternion(matrix.storage))
     #else
-    #warning("implementation missing")
-    return Quat4d.identity
+    let trace = mat[0, 0] + mat[1, 1] + mat[2, 2]
+    if trace >= 0.0 {
+        let r = 2 * sqrt(1 + trace)
+        let rinv = 1 / r
+        return Quat4d(rinv * (mat[1, 2] - mat[2, 1]),
+                      rinv * (mat[2, 0] - mat[0, 2]),
+                      rinv * (mat[0, 1] - mat[1, 0]),
+                      r / 4)
+    } else if mat[0, 0] >= mat[1, 1] && mat[0, 0] >= mat[2, 2] {
+        let r = 2 * sqrt(1 - mat[1, 1] - mat[2, 2] + mat[0, 0])
+        let rinv = 1 / r
+        return Quat4d(r / 4,
+                      rinv * (mat[0, 1] + mat[1, 0]),
+                      rinv * (mat[0, 2] + mat[2, 0]),
+                      rinv * (mat[1, 2] - mat[2, 1]))
+    } else if mat[1, 1] >= mat[2, 2] {
+        let r = 2 * sqrt(1 - mat[0, 0] - mat[2, 2] + mat[1, 1])
+        let rinv = 1 / r
+        return Quat4d(rinv * (mat[0, 1] + mat[1, 0]),
+                      r / 4,
+                      rinv * (mat[1, 2] + mat[2, 1]),
+                      rinv * (mat[2, 0] - mat[0, 2]))
+    } else {
+        let r = 2 * sqrt(1 - mat[0, 0] - mat[1, 1] + mat[2, 2])
+        let rinv = 1 / r
+        return Quat4d(rinv * (mat[0, 2] + mat[2, 0]),
+                      rinv * (mat[1, 2] + mat[2, 1]),
+                      r / 4,
+                      rinv * (mat[0, 1] - mat[1, 0]))
+    }
     #endif
 }
 
-public func quaternion(matrix: Mat4x4f) -> Quat4f {
+public func quaternion(matrix mat: Mat4x4f) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd_quaternion(matrix.storage))
     #else
-    #warning("implementation missing")
-    return Quat4f.identity
+
+    let trace = mat[0, 0] + mat[1, 1] + mat[2, 2]
+    if trace >= 0.0 {
+        let r = 2 * sqrt(1 + trace)
+        let rinv = 1 / r
+        return Quat4f(rinv * (mat[1, 2] - mat[2, 1]),
+                      rinv * (mat[2, 0] - mat[0, 2]),
+                      rinv * (mat[0, 1] - mat[1, 0]),
+                      r / 4)
+    } else if mat[0, 0] >= mat[1, 1] && mat[0, 0] >= mat[2, 2] {
+        let r = 2 * sqrt(1 - mat[1, 1] - mat[2, 2] + mat[0, 0])
+        let rinv = 1 / r
+        return Quat4f(r / 4,
+                      rinv * (mat[0, 1] + mat[1, 0]),
+                      rinv * (mat[0, 2] + mat[2, 0]),
+                      rinv * (mat[1, 2] - mat[2, 1]))
+    } else if mat[1, 1] >= mat[2, 2] {
+        let r = 2 * sqrt(1 - mat[0, 0] - mat[2, 2] + mat[1, 1])
+        let rinv = 1 / r
+        return Quat4f(rinv * (mat[0, 1] + mat[1, 0]),
+                      r / 4,
+                      rinv * (mat[1, 2] + mat[2, 1]),
+                      rinv * (mat[2, 0] - mat[0, 2]))
+    } else {
+        let r = 2 * sqrt(1 - mat[0, 0] - mat[1, 1] + mat[2, 2])
+        let rinv = 1 / r
+        return Quat4f(rinv * (mat[0, 2] + mat[2, 0]),
+                      rinv * (mat[1, 2] + mat[2, 1]),
+                      r / 4,
+                      rinv * (mat[0, 1] - mat[1, 0]))
+    }
     #endif
 }
 
-public func quaternion(matrix: Mat4x4d) -> Quat4d {
+public func quaternion(matrix mat: Mat4x4d) -> Quat4d {
     #if FRB_MATH_USE_SIMD
     return Quat4d(storage: simd_quaternion(matrix.storage))
     #else
-    #warning("implementation missing")
-    return Quat4d.identity
+
+    let trace = mat[0, 0] + mat[1, 1] + mat[2, 2]
+    if trace >= 0.0 {
+        let r = 2 * sqrt(1 + trace)
+        let rinv = 1 / r
+        return Quat4d(rinv * (mat[1, 2] - mat[2, 1]),
+                      rinv * (mat[2, 0] - mat[0, 2]),
+                      rinv * (mat[0, 1] - mat[1, 0]),
+                      r / 4)
+    } else if mat[0, 0] >= mat[1, 1] && mat[0, 0] >= mat[2, 2] {
+        let r = 2 * sqrt(1 - mat[1, 1] - mat[2, 2] + mat[0, 0])
+        let rinv = 1 / r
+        return Quat4d(r / 4,
+                      rinv * (mat[0, 1] + mat[1, 0]),
+                      rinv * (mat[0, 2] + mat[2, 0]),
+                      rinv * (mat[1, 2] - mat[2, 1]))
+    } else if mat[1, 1] >= mat[2, 2] {
+        let r = 2 * sqrt(1 - mat[0, 0] - mat[2, 2] + mat[1, 1])
+        let rinv = 1 / r
+        return Quat4d(rinv * (mat[0, 1] + mat[1, 0]),
+                      r / 4,
+                      rinv * (mat[1, 2] + mat[2, 1]),
+                      rinv * (mat[2, 0] - mat[0, 2]))
+    } else {
+        let r = 2 * sqrt(1 - mat[0, 0] - mat[1, 1] + mat[2, 2])
+        let rinv = 1 / r
+        return Quat4d(rinv * (mat[0, 2] + mat[2, 0]),
+                      rinv * (mat[1, 2] + mat[2, 1]),
+                      r / 4,
+                      rinv * (mat[0, 1] - mat[1, 0]))
+    }
     #endif
 }
