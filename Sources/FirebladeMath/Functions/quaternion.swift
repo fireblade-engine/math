@@ -57,7 +57,7 @@ public func quaternion(from: SIMD3<Double>, to: SIMD3<Double>) -> Quat4d {
 
 public func quaternion(matrix mat: Mat3x3f) -> Quat4f {
     #if FRB_MATH_USE_SIMD
-    return Quat4f(storage: simd_quaternion(matrix.storage))
+    return Quat4f(storage: simd_quaternion(mat.storage))
     #else
     let trace = mat[0, 0] + mat[1, 1] + mat[2, 2]
     if trace >= 0.0 {
@@ -94,7 +94,7 @@ public func quaternion(matrix mat: Mat3x3f) -> Quat4f {
 
 public func quaternion(matrix mat: Mat3x3d) -> Quat4d {
     #if FRB_MATH_USE_SIMD
-    return Quat4d(storage: simd_quaternion(matrix.storage))
+    return Quat4d(storage: simd_quaternion(mat.storage))
     #else
     let trace = mat[0, 0] + mat[1, 1] + mat[2, 2]
     if trace >= 0.0 {
@@ -131,7 +131,7 @@ public func quaternion(matrix mat: Mat3x3d) -> Quat4d {
 
 public func quaternion(matrix mat: Mat4x4f) -> Quat4f {
     #if FRB_MATH_USE_SIMD
-    return Quat4f(storage: simd_quaternion(matrix.storage))
+    return Quat4f(storage: simd_quaternion(mat.storage))
     #else
 
     let trace = mat[0, 0] + mat[1, 1] + mat[2, 2]
@@ -169,7 +169,7 @@ public func quaternion(matrix mat: Mat4x4f) -> Quat4f {
 
 public func quaternion(matrix mat: Mat4x4d) -> Quat4d {
     #if FRB_MATH_USE_SIMD
-    return Quat4d(storage: simd_quaternion(matrix.storage))
+    return Quat4d(storage: simd_quaternion(mat.storage))
     #else
 
     let trace = mat[0, 0] + mat[1, 1] + mat[2, 2]
