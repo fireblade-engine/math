@@ -49,8 +49,10 @@ public func multiply(_ lhs: Double, _ rhs: Mat4x4d) -> Mat4x4d {
     #if FRB_MATH_USE_SIMD
     return Mat4x4d(storage: simd_mul(lhs, rhs.storage))
     #else
-    #warning("implementation missing")
-    return Mat4x4d.identity
+    return Mat4x4d(lhs * rhs.storage.columns.0,
+                   lhs * rhs.storage.columns.1,
+                   lhs * rhs.storage.columns.2,
+                   lhs * rhs.storage.columns.3)
     #endif
 }
 
@@ -114,10 +116,10 @@ public func multiply(_ lhs: Float, _ rhs: Mat4x4f) -> Mat4x4f {
     #if FRB_MATH_USE_SIMD
     return Mat4x4f(storage: simd_mul(lhs, rhs.storage))
     #else
-    return Mat4x4f(rhs.storage.column0 * lhs,
-                   rhs.storage.column1 * lhs,
-                   rhs.storage.column2 * lhs,
-                   rhs.storage.column3 * lhs)
+    return Mat4x4f(lhs * rhs.storage.column0,
+                   lhs * rhs.storage.column1,
+                   lhs * rhs.storage.column2,
+                   lhs * rhs.storage.column3)
     #endif
 }
 
