@@ -5,11 +5,7 @@
 //  Created by Christian Treffs on 25.08.19.
 //
 
-extension SIMD3: Sequence {
-    public __consuming func makeIterator() -> IndexingIterator<[Scalar]> {
-        [x, y, z].makeIterator()
-    }
-}
+extension SIMD3: Sequence { }
 
 extension SIMD3 where Scalar: FloatingPoint {
     @inlinable public var isNaN: Bool {

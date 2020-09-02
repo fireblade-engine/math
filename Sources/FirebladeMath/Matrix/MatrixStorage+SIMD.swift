@@ -17,7 +17,7 @@ extension simd_float3x3: Storage3x3Protocol {
     public typealias Value = Float
     public typealias Storage4x4 = simd_float4x4
 
-    public __consuming func makeIterator() -> IndexingIterator<[Value]> {
+    public func makeIterator() -> IndexingIterator<[Value]> {
         [columns.0, columns.1, columns.2].flatMap { $0 }.makeIterator()
     }
 
@@ -62,7 +62,7 @@ extension simd_double3x3: Storage3x3Protocol {
     public typealias Value = Double
     public typealias Storage4x4Ref = simd_double4x4
 
-    public __consuming func makeIterator() -> IndexingIterator<[Value]> {
+    public func makeIterator() -> IndexingIterator<[Value]> {
         [columns.0, columns.1, columns.2].flatMap { $0 }.makeIterator()
     }
 
@@ -108,7 +108,7 @@ extension simd_float4x4: Storage4x4Protocol {
     public typealias Value = Float
     public typealias Storage3x3Ref = simd_float3x3
 
-    public __consuming func makeIterator() -> IndexingIterator<[Value]> {
+    public func makeIterator() -> IndexingIterator<[Value]> {
         [columns.0, columns.1, columns.2, columns.3].flatMap { $0 }.makeIterator()
     }
 
@@ -159,7 +159,7 @@ extension simd_double4x4: Storage4x4Protocol {
     public typealias Value = Double
     public typealias Storage3x3Ref = simd_double3x3
 
-    public __consuming func makeIterator() -> IndexingIterator<[Value]> {
+    public func makeIterator() -> IndexingIterator<[Value]> {
         [columns.0, columns.1, columns.2, columns.3].flatMap { $0 }.makeIterator()
     }
 

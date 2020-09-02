@@ -33,7 +33,7 @@ public struct Storage3x3<Value>: Storage3x3Protocol where Value: StorageScalar {
         column2 = Column(zero, zero, diagonal.z)
     }
 
-    public __consuming func makeIterator() -> IndexingIterator<[Value]> {
+    public func makeIterator() -> IndexingIterator<[Value]> {
         [column0, column1, column2].flatMap { $0 }.makeIterator()
     }
 
@@ -123,7 +123,7 @@ public struct Storage4x4<Value>: Storage4x4Protocol where Value: StorageScalar {
         column3 = Column(zero, zero, zero, diagonal.w)
     }
 
-    public __consuming func makeIterator() -> IndexingIterator<[Value]> {
+    public func makeIterator() -> IndexingIterator<[Value]> {
         [column0, column1, column2, column3].flatMap { $0 }.makeIterator()
     }
 

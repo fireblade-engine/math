@@ -5,11 +5,7 @@
 //  Created by Christian Treffs on 25.08.19.
 //
 
-extension SIMD2: Sequence {
-    public __consuming func makeIterator() -> IndexingIterator<[Scalar]> {
-        [x, y].makeIterator()
-    }
-}
+extension SIMD2: Sequence { }
 
 extension SIMD2 where Scalar: FloatingPoint {
     @inlinable public var isNaN: Bool {

@@ -5,11 +5,7 @@
 //  Created by Christian Treffs on 25.08.19.
 //
 
-extension SIMD4: Sequence {
-    public __consuming func makeIterator() -> IndexingIterator<[Scalar]> {
-        [x, y, z, w].makeIterator()
-    }
-}
+extension SIMD4: Sequence { }
 
 extension SIMD4 {
     @inlinable public var xyz: SIMD3<Scalar> {

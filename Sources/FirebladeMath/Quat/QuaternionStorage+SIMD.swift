@@ -39,7 +39,7 @@ extension simd_quatf: QuaternionStorageProtocol {
         set { real = newValue }
     }
 
-    public __consuming func makeIterator() -> IndexingIterator<[Float]> {
+    public func makeIterator() -> IndexingIterator<[Float]> {
         [x, y, z, w].makeIterator()
     }
 }
@@ -73,7 +73,7 @@ extension simd_quatd: QuaternionStorageProtocol {
         set { real = newValue }
     }
 
-    public __consuming func makeIterator() -> IndexingIterator<[Double]> {
+    public func makeIterator() -> IndexingIterator<[Double]> {
         [x, y, z, w].makeIterator()
     }
 }

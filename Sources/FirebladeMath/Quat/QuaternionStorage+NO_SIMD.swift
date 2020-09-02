@@ -38,7 +38,7 @@ public struct QuaternionStorage<Value>: QuaternionStorageProtocol where Value: S
         get { storage.w }
     }
 
-    public __consuming func makeIterator() -> IndexingIterator<[Value]> {
+    public func makeIterator() -> SIMDScalarIterator<SIMD4<Value>> {
         storage.makeIterator()
     }
 }
