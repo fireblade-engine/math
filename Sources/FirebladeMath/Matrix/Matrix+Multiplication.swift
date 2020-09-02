@@ -49,7 +49,8 @@ public func multiply(_ lhs: Double, _ rhs: Mat4x4d) -> Mat4x4d {
     #if FRB_MATH_USE_SIMD
     return Mat4x4d(storage: simd_mul(lhs, rhs.storage))
     #else
-    fatalError("not implemented yet \(#function)")
+    #warning("implementation missing")
+    return Mat4x4d.identity
     #endif
 }
 
@@ -58,7 +59,8 @@ public func multiply(_ lhs: Vec4d, _ rhs: Mat4x4d) -> Vec4d {
     #if FRB_MATH_USE_SIMD
     return simd_mul(lhs, rhs.storage)
     #else
-    fatalError("not implemented yet \(#function)")
+    #warning("implementation missing")
+    return Vec4d.zero
     #endif
 }
 
@@ -67,7 +69,8 @@ public func multiply(_ lhs: Mat4x4d, _ rhs: Vec4d) -> Vec4d {
     #if FRB_MATH_USE_SIMD
     return simd_mul(lhs.storage, rhs)
     #else
-    fatalError("not implemented yet \(#function)")
+    #warning("implementation missing")
+    return Vec4d.zero
     #endif
 }
 
@@ -123,7 +126,8 @@ public func multiply(_ lhs: Vec4f, _ rhs: Mat4x4f) -> Vec4f {
     #if FRB_MATH_USE_SIMD
     return simd_mul(lhs, rhs.storage)
     #else
-    fatalError("not implemented yet \(#function)")
+    #warning("implementation missing")
+    return Vec4f.zero
     #endif
 }
 
@@ -132,6 +136,7 @@ public func multiply(_ lhs: Mat4x4f, _ rhs: Vec4f) -> Vec4f {
     #if FRB_MATH_USE_SIMD
     return simd_mul(lhs.storage, rhs)
     #else
-    fatalError("not implemented yet \(#function)")
+    #warning("implementation missing")
+    return Vec4f.zero
     #endif
 }

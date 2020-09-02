@@ -33,7 +33,8 @@ public func multiply(_ lhs: Quat4f, _ rhs: Quat4f) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd.simd_mul(lhs.storage, rhs.storage))
     #else
-    fatalError("not implemented yet")
+    #warning("not implemented yet")
+    return Quat4f.identity
     #endif
 }
 

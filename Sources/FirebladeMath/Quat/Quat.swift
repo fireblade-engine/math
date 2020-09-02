@@ -7,7 +7,6 @@
 
 public struct Quaternion<Storage> where Storage: QuaternionStorageProtocol {
     public typealias Value = Storage.Value
-
     @usableFromInline var storage: Storage
 
     @inlinable
@@ -52,12 +51,13 @@ extension Quaternion {
 }
 
 extension Quaternion: Sequence {
-    public func makeIterator() -> IndexingIterator<[Storage.Value]> {
-        unsafeBitCast(storage.makeIterator(), to: IndexingIterator<[Storage.Value]>.self)
+    public func makeIterator() -> AnyIterator<Value> {
+        var iter = self.storage.makeIterator()
+        return AnyIterator { iter.next() as? Value }
     }
 
     @inlinable public var elements: [Value] {
-        [Value](self)
+        Array(AnyIterator(makeIterator()))
     }
 }
 

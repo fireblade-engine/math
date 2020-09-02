@@ -370,7 +370,6 @@ class Mat4x4fTests: XCTestCase {
     }
 
     func testMultiplyVec4f() {
-        #if FRB_MATH_USE_SIMD
         let m0 = Mat4x4f(rotation: radians(51), axis: [1, 0, 1])
         let m1 = Mat4x4f(translation: [1, 2, 3])
         let mat00 = m0 * m1
@@ -380,14 +379,9 @@ class Mat4x4fTests: XCTestCase {
 
         mat = mat00 * Vec4f(78.0, 3.02, -32, 0.093)
         XCTAssertEqualElements(mat.elements, [55.978_317, 62.363_155, -9.606_318, 0.093_000], accuracy: 1e-5) // FIXME: would like to have 1e-6
-
-        #else
-        #warning("MATRIX * VECTOR * SCALAR MULTIPLICATION NOT TESTED")
-        #endif
     }
 
     func testInverse() {
-        #if FRB_MATH_USE_SIMD
         let values: [Float] = [
             -0.963_882, 0.110_248, 0.242_439, 0.000_000,
             0.155_028, -0.507_928, 0.847_335, 0.000_000,
@@ -403,8 +397,5 @@ class Mat4x4fTests: XCTestCase {
 
         let iMat = mat.inverted
         XCTAssertEqualElements(iMat.elements, values, accuracy: 1e-5)
-        #else
-        #warning("MATRIX INVERSE NOT TESTED")
-        #endif
     }
 }

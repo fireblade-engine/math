@@ -24,6 +24,10 @@ extension Quat4f {
         FirebladeMath.angle(self)
     }
 
+    @inlinable public var inverse: Quat4f {
+        FirebladeMath.inverse(self)
+    }
+
     @inlinable public var conjugate: Quat4f {
         FirebladeMath.conjugate(self)
     }
