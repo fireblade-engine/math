@@ -71,10 +71,10 @@ public func multiply(_ lhs: Mat4x4d, _ rhs: Vec4d) -> Vec4d {
     #if FRB_MATH_USE_SIMD
     return simd_mul(lhs.storage, rhs)
     #else
-    let Q = lhs[0, 0] * rhs[0] + lhs[1, 0] * rhs[1] + lhs[2, 0] * rhs[2] + lhs[2, 0] * rhs[3]
-    let R = lhs[0, 1] * rhs[0] + lhs[1, 1] * rhs[1] + lhs[2, 1] * rhs[2] + lhs[2, 1] * rhs[3]
-    let S = lhs[0, 2] * rhs[0] + lhs[1, 2] * rhs[1] + lhs[2, 2] * rhs[2] + lhs[2, 2] * rhs[3]
-    let T = lhs[0, 3] * rhs[0] + lhs[1, 3] * rhs[1] + lhs[2, 3] * rhs[2] + lhs[2, 3] * rhs[3]
+    let Q = lhs[0, 0] * rhs[0] + lhs[1, 0] * rhs[1] + lhs[2, 0] * rhs[2] + lhs[3, 0] * rhs[3]
+    let R = lhs[0, 1] * rhs[0] + lhs[1, 1] * rhs[1] + lhs[2, 1] * rhs[2] + lhs[3, 1] * rhs[3]
+    let S = lhs[0, 2] * rhs[0] + lhs[1, 2] * rhs[1] + lhs[2, 2] * rhs[2] + lhs[3, 2] * rhs[3]
+    let T = lhs[0, 3] * rhs[0] + lhs[1, 3] * rhs[1] + lhs[2, 3] * rhs[2] + lhs[3, 3] * rhs[3]
     return SIMD4<Double>(Q, R, S, T)
     #endif
 }
@@ -141,10 +141,10 @@ public func multiply(_ lhs: Mat4x4f, _ rhs: Vec4f) -> Vec4f {
     #if FRB_MATH_USE_SIMD
     return simd_mul(lhs.storage, rhs)
     #else
-    let Q = lhs[0, 0] * rhs[0] + lhs[1, 0] * rhs[1] + lhs[2, 0] * rhs[2] + lhs[2, 0] * rhs[3]
-    let R = lhs[0, 1] * rhs[0] + lhs[1, 1] * rhs[1] + lhs[2, 1] * rhs[2] + lhs[2, 1] * rhs[3]
-    let S = lhs[0, 2] * rhs[0] + lhs[1, 2] * rhs[1] + lhs[2, 2] * rhs[2] + lhs[2, 2] * rhs[3]
-    let T = lhs[0, 3] * rhs[0] + lhs[1, 3] * rhs[1] + lhs[2, 3] * rhs[2] + lhs[2, 3] * rhs[3]
+    let Q = lhs[0, 0] * rhs[0] + lhs[1, 0] * rhs[1] + lhs[2, 0] * rhs[2] + lhs[3, 0] * rhs[3]
+    let R = lhs[0, 1] * rhs[0] + lhs[1, 1] * rhs[1] + lhs[2, 1] * rhs[2] + lhs[3, 1] * rhs[3]
+    let S = lhs[0, 2] * rhs[0] + lhs[1, 2] * rhs[1] + lhs[2, 2] * rhs[2] + lhs[3, 2] * rhs[3]
+    let T = lhs[0, 3] * rhs[0] + lhs[1, 3] * rhs[1] + lhs[2, 3] * rhs[2] + lhs[3, 3] * rhs[3]
     return SIMD4<Float>(Q, R, S, T)
     #endif
 }
