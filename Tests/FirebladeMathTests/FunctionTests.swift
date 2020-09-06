@@ -16,15 +16,15 @@ final class FunctionTests: XCTestCase {
         XCTAssertEqual(FirebladeMath.abs(Float(-123)), 123)
     }
     func test_acos() {
-        XCTAssertEqual(FirebladeMath.acos(Double(0.5)), 1.0471975511965976)
-        XCTAssertEqual(FirebladeMath.acos(Float(0.5)), 1.0471975)
+        XCTAssertEqual(FirebladeMath.acos(Double(0.5)), 1.0471975511965976, accuracy: 1e-14)
+        XCTAssertEqual(FirebladeMath.acos(Float(0.5)), 1.0471975, accuracy: 1e-6)
     }
     func test_acosh() {
         XCTAssertEqual(FirebladeMath.acosh(Double(123)), 5.505315010967267)
         XCTAssertEqual(FirebladeMath.acosh(Float(123)), 5.505315)
     }
     func test_asin() {
-        XCTAssertEqual(FirebladeMath.asin(Double(0.5)), 0.5235987755982988)
+        XCTAssertEqual(FirebladeMath.asin(Double(0.5)), 0.5235987755982988, accuracy: 1e-14)
         XCTAssertEqual(FirebladeMath.asin(Float(0.5)), 0.5235988)
     }
     func test_asinh() {
@@ -40,7 +40,7 @@ final class FunctionTests: XCTestCase {
         XCTAssertEqual(FirebladeMath.atan2(Float(123), Float(123)), 0.7853982)
     }
     func test_atanh() {
-        XCTAssertEqual(FirebladeMath.atanh(Double(0.5)), 0.5493061443340549)
+        XCTAssertEqual(FirebladeMath.atanh(Double(0.5)), 0.5493061443340549, accuracy: 1e-14)
         XCTAssertEqual(FirebladeMath.atanh(Float(0.5)), 0.54930615)
     }
     func test_ceil() {
@@ -57,7 +57,7 @@ final class FunctionTests: XCTestCase {
     }
     func test_cosh() {
         XCTAssertEqual(FirebladeMath.cosh(Double.pi), 11.591953275521519)
-        XCTAssertEqual(FirebladeMath.cosh(Float.pi), 11.591951)
+        XCTAssertEqual(FirebladeMath.cosh(Float.pi), 11.591951, accuracy: 1e-6)
     }
     func test_degrees() {
         XCTAssertEqual(FirebladeMath.degrees(Double(123)), 7047.380880109125)
@@ -219,7 +219,7 @@ final class FunctionTests: XCTestCase {
         XCTAssertEqual(FirebladeMath.step(Float(123), Float(123)), 1.0)
     }
     func test_tan() {
-        XCTAssertEqual(FirebladeMath.tan(Double(123)), 0.5179274715856551)
+        XCTAssertEqual(FirebladeMath.tan(Double(123)), 0.5179274715856551, accuracy: 1e-14)
         XCTAssertEqual(FirebladeMath.tan(Float(123)), 0.51792747)
     }
     func test_tanh() {
