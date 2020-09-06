@@ -54,8 +54,7 @@ extension FunctionTests {
         ("test_sqrt", test_sqrt),
         ("test_step", test_step),
         ("test_tan", test_tan),
-        ("test_tanh", test_tanh),
-        ("test_trunc", test_trunc)
+        ("test_tanh", test_tanh)
     ]
 }
 
