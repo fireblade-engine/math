@@ -164,7 +164,11 @@ final class FunctionTests: XCTestCase {
 
         XCTAssertEqual(FirebladeMath.normalize(SIMD2<Float>(1, 2)), SIMD2<Float>(0.4472136, 0.8944272))
         XCTAssertEqual(FirebladeMath.normalize(SIMD3<Float>(1, 2, 3)), SIMD3<Float>(0.26726124, 0.5345225, 0.8017837))
+        #if FRB_MATH_USE_SIMD
         XCTAssertEqual(FirebladeMath.normalize(SIMD4<Float>(1, 2, 3, 4)), SIMD4<Float>(0.18257417, 0.36514834, 0.5477225, 0.7302967))
+        #else
+        XCTAssertEqual(FirebladeMath.normalize(SIMD4<Float>(1, 2, 3, 4)), SIMD4<Float>(0.18257418, 0.36514837, 0.5477226, 0.73029673))
+        #endif
     }
     func test_pow() {
         XCTAssertEqual(FirebladeMath.pow(Double(123), Double(2)), 15129.0)
@@ -188,7 +192,7 @@ final class FunctionTests: XCTestCase {
     }
     func test_rsqrt() {
         XCTAssertEqual(FirebladeMath.rsqrt(Double(123)), 0.09016696346674323)
-        XCTAssertEqual(FirebladeMath.rsqrt(Float(123)), 0.090166956)
+        XCTAssertEqual(FirebladeMath.rsqrt(Float(123)), 0.090166956, accuracy: 1e-8)
     }
     func test_sign() {
         XCTAssertEqual(FirebladeMath.sign(Double(123)), 1.0)
