@@ -13,5 +13,5 @@ jobs:
     - name: markdown-link-check
       uses: gaurav-nelson/github-action-markdown-link-check@master
       with:
-        config-file: '.mlc_config.json'
+        config-file: '.github/workflows/mlc_config.json'
 
