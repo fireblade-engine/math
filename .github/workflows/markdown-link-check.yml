@@ -14,5 +14,4 @@ jobs:
       uses: gaurav-nelson/github-action-markdown-link-check@master
       with:
         config-file: '.mlc_config.json'
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
 
