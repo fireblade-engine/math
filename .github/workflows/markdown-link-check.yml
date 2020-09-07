@@ -9,7 +9,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
     - name: Inject GH token into config
-      run: sed -i 's/GITHUB_TOKEN/${{ secrets.GITHUB_TOKEN }}/g' .mlc-config.json
+      run: sed -i 's/GITHUB_TOKEN/${{ secrets.GITHUB_TOKEN }}/g' .mlc_config.json
     - name: markdown-link-check
       uses: gaurav-nelson/github-action-markdown-link-check@master
       with:
