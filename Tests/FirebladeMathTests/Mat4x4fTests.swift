@@ -374,11 +374,11 @@ class Mat4x4fTests: XCTestCase {
         let m1 = Mat4x4f(translation: [1, 2, 3])
         let mat00 = m0 * m1
 
-        var mat = multiply(mat00, Vec4f(78.0, 3.02, -32, 0.093))
-        XCTAssertEqualElements(mat.elements, [55.978_317, 62.363_155, -9.606_318, 0.093_000], accuracy: 1e-5) // FIXME: would like to have 1e-6
+        var mat = multiply(mat00, Vec4f(78.0, 3.02, -32, 1.0))
+        XCTAssertEqualElements(mat.elements, [56.224686, 62.507904, -6.2246857, 1.0], accuracy: 1e-5)
 
-        mat = mat00 * Vec4f(78.0, 3.02, -32, 0.093)
-        XCTAssertEqualElements(mat.elements, [55.978_317, 62.363_155, -9.606_318, 0.093_000], accuracy: 1e-5) // FIXME: would like to have 1e-6
+        mat = mat00 * Vec4f(78.0, 3.02, -32, 1.0)
+        XCTAssertEqualElements(mat.elements, [56.224686, 62.507904, -6.2246857, 1.0], accuracy: 1e-5)
     }
 
     func testInverse() {
