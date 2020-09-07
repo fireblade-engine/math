@@ -51,8 +51,7 @@ public func inverse(_ quat: Quat4f) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd_inverse(quat.storage))
     #else
-    #warning("implementation missing")
-    return Quat4f.identity
+    return conjugate(quat) * (1.0 / (length(quat) * length(quat)))
     #endif
 }
 
@@ -60,7 +59,6 @@ public func inverse(_ quat: Quat4d) -> Quat4d {
     #if FRB_MATH_USE_SIMD
     return Quat4d(storage: simd_inverse(quat.storage))
     #else
-    #warning("implementation missing")
-    return Quat4d.identity
+    return conjugate(quat) * (1.0 / (length(quat) * length(quat)))
     #endif
 }

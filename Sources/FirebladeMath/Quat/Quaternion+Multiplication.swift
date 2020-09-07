@@ -41,6 +41,19 @@ public func multiply(_ lhs: Quat4f, _ rhs: Quat4f) -> Quat4f {
     #endif
 }
 
+/// Returns the product of two quaternions.
+public func multiply(_ lhs: Quat4d, _ rhs: Quat4d) -> Quat4d {
+    #if FRB_MATH_USE_SIMD
+    return Quat4d(storage: simd.simd_mul(lhs.storage, rhs.storage))
+    #else
+    let n0 = rhs.x * lhs.x - rhs.y * lhs.y - rhs.z * lhs.z - rhs.w * lhs.w
+    let n1 = rhs.x * lhs.y + rhs.y * lhs.x - rhs.z * lhs.w + rhs.w * lhs.z
+    let n2 = rhs.x * lhs.z + rhs.y * lhs.w + rhs.z * lhs.x - rhs.w * lhs.y
+    let n3 = rhs.x * lhs.w - rhs.y * lhs.z + rhs.z * lhs.y + rhs.w * lhs.x
+    return Quat4d(n3, n2, n1, n0)
+    #endif
+}
+
 public func add(_ lhs: Quat4f, _ rhs: Quat4f) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd.simd_add(lhs.storage, rhs.storage))
