@@ -81,13 +81,13 @@ Please consult the [README][ref-readme] for installation instructions.
 <!-- REFERENCES -->
 
 [ref-code-of-conduct]: t.b.d.
-[ref-contributors]: https://github.com/fireblade-engine/ecs/graphs/contributors
-[ref-documentation]: https://github.com/fireblade-engine/ecs/wiki
-[ref-gh-actions]: https://github.com/fireblade-engine/ecs/actions
-[ref-issues-first]: https://github.com/fireblade-engine/ecs/issues?q=is%3Aopen+is%3Aissue+label%3A"good+first+issue"
-[ref-issues-help]: https://github.com/fireblade-engine/ecs/issues?q=is%3Aopen+is%3Aissue+label%3A"help+wanted"
-[ref-issues-new]: https://github.com/fireblade-engine/ecs/issues/new/choose
-[ref-issues]: https://github.com/fireblade-engine/ecs/issues
+[ref-contributors]: https://github.com/fireblade-engine/math/graphs/contributors
+[ref-documentation]: https://github.com/fireblade-engine/math/wiki
+[ref-gh-actions]: https://github.com/fireblade-engine/math/actions
+[ref-issues-first]: https://github.com/fireblade-engine/math/issues?q=is%3Aopen+is%3Aissue+label%3A"good+first+issue"
+[ref-issues-help]: https://github.com/fireblade-engine/math/issues?q=is%3Aopen+is%3Aissue+label%3A"help+wanted"
+[ref-issues-new]: https://github.com/fireblade-engine/math/issues/new/choose
+[ref-issues]: https://github.com/fireblade-engine/math/issues
 [ref-pull-request-how-to]: https://docs.github.com/en/github/writing-on-github/autolinked-references-and-urls
-[ref-pull-request-new]: https://github.com/fireblade-engine/ecs/compare
-[ref-readme]: https://github.com/fireblade-engine/ecs/blob/master/README.md
+[ref-pull-request-new]: https://github.com/fireblade-engine/math/compare
+[ref-readme]: https://github.com/fireblade-engine/math/blob/master/README.md
