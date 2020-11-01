@@ -60,6 +60,6 @@ jobs:
       - name: Swift version
         run: swift --version
       - name: Build
-        uses: swiftwasm/swiftwasm-action@main
+      - uses: swiftwasm/swiftwasm-action@v5.3
         with:
-          shell-action: swift build --triple wasm32-unknown-wasi
+          shell-action: carton test
