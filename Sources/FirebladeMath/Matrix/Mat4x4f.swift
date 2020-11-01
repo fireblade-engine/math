@@ -191,4 +191,31 @@ extension Mat4x4f {
             self[2, 2] = newValue.z
         }
     }
+
+    @inline(__always) public var eulerAnglesXYZ: Vec3f {
+        // /// https://www.geometrictools.com/Documentation/EulerAngles.pdf
+        let thetaX: Float
+        let thetaY: Float
+        let thetaZ: Float
+
+        if self[0, 2] < +1 {
+            if self[0, 2] > -1 {
+                thetaY = asin(self[0, 2])
+                thetaX = atan2(-self[1, 2], self[2, 2])
+                thetaZ = atan2(-self[0, 1], self[0, 0])
+            } else { // = -1
+                // Not a unique solution: thetaZ - thetaX = atan2(self[1,0], self[1,1])
+                thetaY = -.pi / 2
+                thetaX = -atan2(self[1, 0], self[1, 1])
+                thetaZ = 0
+            }
+        } else { // self[0,2] = +1
+            // Not a unique solution: thetaZ + thetaX = atan2(self[1,0],self[1,1])
+            thetaY = +.pi / 2
+            thetaX = atan2(self[1, 0], self[1, 1])
+            thetaZ = 0
+        }
+
+        return Vec3f(thetaX, thetaY, thetaZ)
+    }
 }
