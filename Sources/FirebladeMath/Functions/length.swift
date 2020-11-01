@@ -21,7 +21,7 @@ public func length(_ x: SIMD2<Double>) -> Double {
     return simd_length(x)
     #else
     return sqrt(x.x * x.x +
-        x.y * x.y)
+                    x.y * x.y)
     #endif
 }
 
@@ -35,7 +35,7 @@ public func length(_ x: SIMD2<Float>) -> Float {
     return simd_length(x)
     #else
     return sqrt(x.x * x.x +
-        x.y * x.y)
+                    x.y * x.y)
     #endif
 }
 
@@ -49,8 +49,8 @@ public func length(_ x: SIMD3<Double>) -> Double {
     return simd_length(x)
     #else
     return sqrt(x.x * x.x +
-        x.y * x.y +
-        x.z * x.z)
+                    x.y * x.y +
+                    x.z * x.z)
     #endif
 }
 
@@ -64,8 +64,8 @@ public func length(_ x: SIMD3<Float>) -> Float {
     return simd_length(x)
     #else
     return sqrt(x.x * x.x +
-        x.y * x.y +
-        x.z * x.z)
+                    x.y * x.y +
+                    x.z * x.z)
     #endif
 }
 
@@ -79,9 +79,9 @@ public func length(_ x: SIMD4<Double>) -> Double {
     return simd_length(x)
     #else
     return sqrt(x.x * x.x +
-        x.y * x.y +
-        x.z * x.z +
-        x.w * x.w)
+                    x.y * x.y +
+                    x.z * x.z +
+                    x.w * x.w)
     #endif
 }
 
@@ -95,9 +95,9 @@ public func length(_ x: SIMD4<Float>) -> Float {
     return simd_length(x)
     #else
     return sqrt(x.x * x.x +
-        x.y * x.y +
-        x.z * x.z +
-        x.w * x.w)
+                    x.y * x.y +
+                    x.z * x.z +
+                    x.w * x.w)
     #endif
 }
 
@@ -111,9 +111,9 @@ public func length(_ x: Quat4f) -> Float {
     return simd_length(x.storage)
     #else
     return sqrt(x.x * x.x +
-        x.y * x.y +
-        x.z * x.z +
-        x.w * x.w)
+                    x.y * x.y +
+                    x.z * x.z +
+                    x.w * x.w)
     #endif
 }
 
@@ -127,8 +127,8 @@ public func length(_ x: Quat4d) -> Double {
     return simd_length(x.storage)
     #else
     return sqrt(x.x * x.x +
-        x.y * x.y +
-        x.z * x.z +
-        x.w * x.w)
+                    x.y * x.y +
+                    x.z * x.z +
+                    x.w * x.w)
     #endif
 }
