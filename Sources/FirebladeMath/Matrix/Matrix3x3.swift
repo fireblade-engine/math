@@ -5,18 +5,24 @@
 //  Created by Christian Treffs on 05.09.19.
 //
 
-public struct Matrix3x3<Storage> where Storage: Storage3x3Protocol {
+@frozen
+public struct Matrix3x3<Storage>: RandomAccessCollection, MutableCollection where Storage: Storage3x3Protocol, Storage.Value == Storage.Element {
+    public typealias Element = Storage.Element
+    public typealias Index = Storage.Index
     public typealias Value = Storage.Value
     public typealias Vector = Storage.Column
 
     @usableFromInline var storage: Storage
 
-    public init(storage: Storage) {
+    public var startIndex: Index { storage.startIndex }
+    public var endIndex: Index { storage.endIndex }
+    public func index(after i: Index) -> Index { storage.index(after: i) }
+    public func index(before i: Index) -> Index { storage.index(before: i) }
+
+    @usableFromInline init(storage: Storage) {
         self.storage = storage
     }
-}
 
-extension Matrix3x3 {
     public init(diagonal: Vector) {
         self.storage = Storage(diagonal: diagonal)
     }
@@ -29,55 +35,36 @@ extension Matrix3x3 {
     public init(_ column0: Vector, _ column1: Vector, _ column2: Vector) {
         self.init([column0, column1, column2])
     }
-}
 
-extension Matrix3x3 {
     public init(_ values: [Storage.Value]) {
         precondition(values.count == 9, "Matrix needs exactly 9 values")
         self.init([Vector(values[0...2]),
                    Vector(values[3...5]),
                    Vector(values[6...8])])
     }
-}
 
-extension Matrix3x3: ExpressibleByArrayLiteral {
-    public init(arrayLiteral elements: Storage.Value...) {
-        self.init(elements)
-    }
-}
-
-extension Matrix3x3: Sequence {
-    public func makeIterator() -> IndexingIterator<[Value]> {
-        unsafeBitCast(storage.makeIterator(), to: IndexingIterator<[Storage.Value]>.self)
+    public subscript(index: Index) -> Element {
+        get { storage[index] }
+        set { storage[index] = newValue }
     }
 
-    @inlinable public var elements: [Value] {
-        [Value](self)
+    public subscript(column: Int, row: Int) -> Value {
+        get { storage[column, row] }
+        set { storage[column, row] = newValue }
     }
-}
 
-extension Matrix3x3 {
     @inlinable public var columns: (Vector, Vector, Vector) {
         storage.columns
     }
-}
 
-extension Matrix3x3 {
-    public subscript(column: Int, row: Int) -> Value {
-        get {
-            storage[column, row]
-        }
-        set {
-            storage[column, row] = newValue
+    @inlinable public var elements: [Value] {
+        [Value](AnyIterator(self.storage.makeIterator()))
+    }
+
         }
     }
 
-    public subscript(index: Int) -> Value {
-        get {
-            storage[index]
         }
-        set {
-            storage[index] = newValue
         }
     }
 }
