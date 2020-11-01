@@ -11,6 +11,7 @@ import class XCTest.XCTestCase
 import func XCTest.XCTAssertEqual
 import func XCTest.XCTAssertTrue
 import func XCTest.XCTAssertFalse
+import func XCTest.XCTAssertNotNil
 
 class Mat4x4fTests: XCTestCase {
     func testIdentity() {
@@ -403,4 +404,48 @@ class Mat4x4fTests: XCTestCase {
         XCTAssertEqualElements(iMat.elements, values, accuracy: 1)
         #endif
     }
+
+    func testMatrixForcedContiguousStorage () throws {
+        let mat = Mat4x4f(diagonal: Vec4f(1, 2, 3, 4))
+
+        let exp = expectation(description: "\(#function)_immutable")
+        try mat.withForcedContiguousStorage { buffer in
+            XCTAssertNotNil(buffer.baseAddress)
+            XCTAssertEqual(buffer[0], 1)
+            XCTAssertEqual(buffer[5], 2)
+            XCTAssertEqual(buffer[10], 3)
+            XCTAssertEqual(buffer[15], 4)
+            exp.fulfill()
+        }
+
+        XCTAssertEqual(mat[0], 1)
+        XCTAssertEqual(mat[5], 2)
+        XCTAssertEqual(mat[10], 3)
+        XCTAssertEqual(mat[15], 4)
+
+        wait(for: [exp], timeout: 0.1)
+
+        var mutableMat: Mat4x4f = Mat4x4f(diagonal: Vec4f(1, 2, 3, 4))
+        let exp2 = expectation(description: "\(#function)_mutable")
+        try mutableMat.withForcedContiguousMutableStorage { buffer in
+            XCTAssertNotNil(buffer.baseAddress)
+            XCTAssertEqual(buffer[0], 1)
+            buffer[0] = 123
+            XCTAssertEqual(buffer[5], 2)
+            buffer[5] = 456
+            XCTAssertEqual(buffer[10], 3)
+            buffer[10] = 789
+            XCTAssertEqual(buffer[15], 4)
+            buffer[15] = 012
+            exp2.fulfill()
+        }
+
+        XCTAssertEqual(mutableMat[0], 123)
+        XCTAssertEqual(mutableMat[5], 456)
+        XCTAssertEqual(mutableMat[10], 789)
+        XCTAssertEqual(mutableMat[15], 012)
+
+        wait(for: [exp2], timeout: 0.1)
+    }
+
 }

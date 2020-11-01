@@ -11,7 +11,7 @@ jobs:
     runs-on: macOS-latest
     strategy:
       matrix:
-        xcode: ["11.6", "12_beta"]
+        xcode: ["11.7", "12"]
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -20,7 +20,7 @@ jobs:
       - name: Swift version
         run: swift --version
       - name: Test
-        run: swift test --skip-update --parallel --enable-test-discovery --enable-code-coverage
+        run: swift test -v --skip-update --parallel --enable-test-discovery --enable-code-coverage
         env:
           DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
       - name: Build Release
@@ -47,7 +47,7 @@ jobs:
       - name: Swift version
         run: swift --version
       - name: Test
-        run: swift test --skip-update --parallel --enable-test-discovery --enable-code-coverage
+        run: swift test -v --skip-update --parallel --enable-test-discovery --enable-code-coverage
       - name: Build Release
         run: swift build -c release
         
@@ -60,6 +60,6 @@ jobs:
       - name: Swift version
         run: swift --version
       - name: Build
-        uses: swiftwasm/swiftwasm-action@master
+        uses: swiftwasm/swiftwasm-action@v5.3
         with:
-          shell-action: swift build --triple wasm32-unknown-wasi
+          shell-action: carton test

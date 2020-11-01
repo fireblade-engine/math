@@ -5,18 +5,24 @@
 //  Created by Christian Treffs on 05.09.19.
 //
 
-public struct Matrix4x4<Storage> where Storage: Storage4x4Protocol {
+@frozen
+public struct Matrix4x4<Storage>: RandomAccessCollection, MutableCollection where Storage: Storage4x4Protocol, Storage.Value == Storage.Element {
+    public typealias Element = Storage.Element
+    public typealias Index = Storage.Index
     public typealias Value = Storage.Value
     public typealias Vector = Storage.Column
 
     @usableFromInline var storage: Storage
 
-    public init(storage: Storage) {
+    public var startIndex: Index { storage.startIndex }
+    public var endIndex: Index { storage.endIndex }
+    public func index(after i: Index) -> Index { storage.index(after: i) }
+    public func index(before i: Index) -> Index { storage.index(before: i) }
+
+    @usableFromInline init(storage: Storage) {
         self.storage = storage
     }
-}
 
-extension Matrix4x4 {
     public init(diagonal: Vector) {
         self.storage = Storage(diagonal: diagonal)
     }
@@ -37,48 +43,52 @@ extension Matrix4x4 {
                    Vector(values[8...11]),
                    Vector(values[12...15])])
     }
-}
 
-extension Matrix4x4 {
+    public subscript(index: Index) -> Element {
+        get { storage[index] }
+        set { storage[index] = newValue }
+    }
     public subscript(column: Int, row: Int) -> Value {
-        get {
-            storage[column, row]
-        }
-        set {
-            storage[column, row] = newValue
-        }
+        get { storage[column, row] }
+        set { storage[column, row] = newValue }
     }
 
-    public subscript(index: Int) -> Value {
-        get {
-            storage[index]
+    // swiftlint:disable large_tuple
+    @inlinable public var columns: (Vector, Vector, Vector, Vector) {
+        storage.columns
+    }
+
+    @inlinable public var elements: [Value] {
+        [Value](AnyIterator(self.storage.makeIterator()))
+    }
+
+    @inlinable public func withForcedContiguousStorage<R>(_ body: (UnsafeBufferPointer<Element>) -> R) throws -> R? {
+        // https://forums.swift.org/t/se-0256-introduce-mutable-contiguouscollection-protocol/22569/7
+        if let result = withContiguousStorageIfAvailable(body) {
+            return result
         }
-        set {
-            storage[index] = newValue
+
+        return ContiguousArray(self).withContiguousStorageIfAvailable(body)
+    }
+
+    @inlinable public mutating func withForcedContiguousMutableStorage<R>(_ body: (inout UnsafeMutableBufferPointer<Element>) -> R) throws -> R? {
+        // https://forums.swift.org/t/se-0256-introduce-mutable-contiguouscollection-protocol/22569/7
+        if let result = withContiguousMutableStorageIfAvailable(body) {
+            return result
         }
+
+        var array = ContiguousArray(self)
+        let result = array.withContiguousMutableStorageIfAvailable(body)
+        for (idx, arrayIdx) in zip(self.indices, array.indices) {
+            self[idx] = array[arrayIdx]
+        }
+        return result
     }
 }
 
 extension Matrix4x4: ExpressibleByArrayLiteral {
     public init(arrayLiteral elements: Value...) {
         self.init(elements)
-    }
-}
-
-extension Matrix4x4: Sequence {
-    public func makeIterator() -> IndexingIterator<[Storage.Value]> {
-        unsafeBitCast(storage.makeIterator(), to: IndexingIterator<[Storage.Value]>.self)
-    }
-
-    @inlinable public var elements: [Value] {
-        [Value](self)
-    }
-}
-
-extension Matrix4x4 {
-    // swiftlint:disable large_tuple
-    @inlinable public var columns: (Vector, Vector, Vector, Vector) {
-        storage.columns
     }
 }
 

@@ -38,3 +38,9 @@ extension Size where Value == UInt {
 extension Size: Equatable where Value: Equatable { }
 extension Size: Hashable where Value: Hashable { }
 extension Size: Codable where Value: Codable { }
+
+extension Vec2f {
+    public init(_ size: Size<Float>) {
+        self.init(x: size.width, y: size.height)
+    }
+}
