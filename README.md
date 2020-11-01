@@ -34,7 +34,7 @@ import PackageDescription
 let package = Package(
     name: "YourPackageName",
     dependencies: [
-        .package(url: "https://github.com/fireblade-engine/math.git", from: "0.9.0")
+        .package(url: "https://github.com/fireblade-engine/math.git", from: "0.9.1")
     ],
     targets: [
         .target(
