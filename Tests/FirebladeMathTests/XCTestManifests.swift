@@ -70,6 +70,7 @@ extension Mat4x4fTests {
         ("testInitVectorColumns", testInitVectorColumns),
         ("testInverse", testInverse),
         ("testLookAt", testLookAt),
+        ("testMatrixForcedContiguousStorage", testMatrixForcedContiguousStorage),
         ("testMultiply", testMultiply),
         ("testMultiplyVec4f", testMultiplyVec4f),
         ("testOrthographic", testOrthographic),
