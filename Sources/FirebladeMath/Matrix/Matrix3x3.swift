@@ -61,11 +61,27 @@ public struct Matrix3x3<Storage>: RandomAccessCollection, MutableCollection wher
         [Value](AnyIterator(self.storage.makeIterator()))
     }
 
+    @inlinable public func withForcedContiguousStorage<R>(_ body: (UnsafeBufferPointer<Element>) -> R) throws -> R? {
+        // https://forums.swift.org/t/se-0256-introduce-mutable-contiguouscollection-protocol/22569/7
+        if let result = withContiguousStorageIfAvailable(body) {
+            return result
         }
+
+        return ContiguousArray(self).withContiguousStorageIfAvailable(body)
     }
 
+    @inlinable public mutating func withForcedContiguousMutableStorage<R>(_ body: (inout UnsafeMutableBufferPointer<Element>) -> R) throws -> R? {
+        // https://forums.swift.org/t/se-0256-introduce-mutable-contiguouscollection-protocol/22569/7
+        if let result = withContiguousMutableStorageIfAvailable(body) {
+            return result
         }
+
+        var array = ContiguousArray(self)
+        let result = array.withContiguousMutableStorageIfAvailable(body)
+        for (idx, arrayIdx) in zip(self.indices, array.indices) {
+            self[idx] = array[arrayIdx]
         }
+        return result
     }
 }
 
