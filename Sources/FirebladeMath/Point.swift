@@ -49,3 +49,9 @@ extension Point where Value == UInt {
 extension Point: Equatable where Value: Equatable { }
 extension Point: Hashable where Value: Hashable { }
 extension Point: Codable where Value: Codable { }
+
+extension Vec2f {
+    public init(_ point: Point<Float>) {
+        self.init(x: point.x, y: point.y)
+    }
+}
