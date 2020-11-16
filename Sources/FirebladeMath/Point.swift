@@ -22,9 +22,19 @@ extension Point {
     }
 }
 
+extension Point: Equatable where Value: Equatable { }
+extension Point: Hashable where Value: Hashable { }
+extension Point: Codable where Value: Codable { }
+
 extension Point where Value == Float {
     public init(_ vector: Vec2f) {
         self.init(x: vector.x, y: vector.y)
+    }
+}
+
+extension Vec2f {
+    public init(_ point: Point<Float>) {
+        self.init(x: point.x, y: point.y)
     }
 }
 
@@ -34,9 +44,20 @@ extension Point where Value == Int {
     }
 }
 
+extension Vec2i {
+    public init(_ point: Point<Int>) {
+        self.init(x: point.x, y: point.y)
+    }
+}
+
 extension Point where Value == Double {
     public init(_ vector: Vec2d) {
         self.init(x: vector.x, y: vector.y)
+    }
+}
+extension Vec2d {
+    public init(_ point: Point<Double>) {
+        self.init(x: point.x, y: point.y)
     }
 }
 
@@ -46,12 +67,8 @@ extension Point where Value == UInt {
     }
 }
 
-extension Point: Equatable where Value: Equatable { }
-extension Point: Hashable where Value: Hashable { }
-extension Point: Codable where Value: Codable { }
-
-extension Vec2f {
-    public init(_ point: Point<Float>) {
+extension Vec2u {
+    public init(_ point: Point<UInt>) {
         self.init(x: point.x, y: point.y)
     }
 }
