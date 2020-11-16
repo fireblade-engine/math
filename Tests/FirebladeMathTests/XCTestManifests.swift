@@ -54,7 +54,7 @@ extension FunctionTests {
         ("test_sqrt", test_sqrt),
         ("test_step", test_step),
         ("test_tan", test_tan),
-        ("test_tanh", test_tanh)
+        ("test_tanh", test_tanh),
     ]
 }
 
@@ -88,7 +88,7 @@ extension Mat4x4fTests {
         ("testTranslateMatrixByVector", testTranslateMatrixByVector),
         ("testTranslation", testTranslation),
         ("testTranslationInit", testTranslationInit),
-        ("testUpperLeft", testUpperLeft)
+        ("testUpperLeft", testUpperLeft),
     ]
 }
 
@@ -120,7 +120,7 @@ extension Quat4fTests {
         ("testRotMat3x3", testRotMat3x3),
         ("testRotMat4x4", testRotMat4x4),
         ("testSubtract", testSubtract),
-        ("testVectorInit", testVectorInit)
+        ("testVectorInit", testVectorInit),
     ]
 }
 
@@ -128,7 +128,7 @@ public func __allTests() -> [XCTestCaseEntry] {
     return [
         testCase(FunctionTests.__allTests__FunctionTests),
         testCase(Mat4x4fTests.__allTests__Mat4x4fTests),
-        testCase(Quat4fTests.__allTests__Quat4fTests)
+        testCase(Quat4fTests.__allTests__Quat4fTests),
     ]
 }
 #endif

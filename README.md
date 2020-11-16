@@ -4,7 +4,7 @@
 [![github CI](https://github.com/fireblade-engine/math/workflows/CI/badge.svg)](https://github.com/fireblade-engine/math/actions?query=workflow%3ACI)  
 [![swift-version-compatibility](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Ffireblade-engine%2Fmath%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/fireblade-engine/math) 
 [![platform-compatilibilty](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Ffireblade-engine%2Fmath%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/fireblade-engine/math) 
-[![platform-webassembly](https://img.shields.io/badge/Platform-WebAssembly-blue.svg)](https://github.com/swiftwasm/swift#swiftwasm)
+<!--[![platform-webassembly](https://img.shields.io/badge/Platform-WebAssembly-blue.svg)](https://github.com/swiftwasm/swift#swiftwasm)-->
 
 
 A dependency free, lightweight, fast math library for 2D and 3D vectors, quaternions and matrices in Swift with (optional) SIMD support.  It is developed and maintained as part of the [Fireblade Game Engine project](https://github.com/fireblade-engine).
