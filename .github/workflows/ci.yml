@@ -11,7 +11,7 @@ jobs:
     runs-on: macOS-latest
     strategy:
       matrix:
-        xcode: ["11.7", "12"]
+        xcode: ["11.7", "12.1"]
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -52,14 +52,14 @@ jobs:
         run: swift build -c release
         
 
-  webAssembly:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@master
-      - name: Swift version
-        run: swift --version
-      - name: Build
-        uses: swiftwasm/swiftwasm-action@main
-        with:
-          shell-action: carton test
+#  webAssembly:
+#    runs-on: ubuntu-20.04
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@master
+#      - name: Swift version
+#        run: swift --version
+#      - name: Build
+#        uses: swiftwasm/swiftwasm-action@main
+#        with:
+#          shell-action: carton test
