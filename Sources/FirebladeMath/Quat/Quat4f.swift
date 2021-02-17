@@ -52,21 +52,12 @@ extension Quat4f {
         self = quaternion(from: from, to: to)
     }
 
-    public init(yaw: Float, pitch: Float, roll: Float) {
-        /// https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
-        // Abbreviations for the various angular functions
-        let cy: Float = cos(roll * 0.5)
-        let sy: Float = sin(roll * 0.5)
-        let cp: Float = cos(yaw * 0.5)
-        let sp: Float = sin(yaw * 0.5)
-        let cr: Float = cos(pitch * 0.5)
-        let sr: Float = sin(pitch * 0.5)
+    public init(pitch: Float, yaw: Float, roll: Float) {
+        self.init(eulerAngles: Vec3f(x: pitch, y: yaw, z: roll))
+    }
 
-        let w: Float = cy * cp * cr + sy * sp * sr
-        let x: Float = cy * cp * sr - sy * sp * cr
-        let y: Float = sy * cp * sr + cy * sp * cr
-        let z: Float = sy * cp * cr - cy * sp * sr
-        self.init(x, y, z, w)
+    public init(eulerAngles: Vec3f) {
+        self = Self.fromEulerAngles_321(eulerAngles)
     }
 
     /// Calculate the local yaw element of this quaternion in radians.
@@ -79,7 +70,8 @@ extension Quat4f {
     /// Yaw is used when driving a car.
     @inlinable public var yaw: Float {
         /// https://github.com/OGRECave/ogre/blob/master/OgreMain/src/OgreQuaternion.cpp#L508
-        asin(-2 * (x * z - w * y))
+        // asin(-2 * (x * z - w * y))
+        return eulerAngles.y
     }
 
     /// Calculate the local pitch element of this quaternion in radians.
@@ -92,7 +84,8 @@ extension Quat4f {
     /// Pitch is used when flying a jet down or up, or when driving up hill or down.
     @inlinable public var pitch: Float {
         /// https://github.com/OGRECave/ogre/blob/master/OgreMain/src/OgreQuaternion.cpp#L484
-        atan2(2.0 * (y * z + w * x), w * w - x * x - y * y + z * z)
+        // atan2(2.0 * (y * z + w * x), w * w - x * x - y * y + z * z)
+        return eulerAngles.x
     }
 
     /// Calculate the local roll element of this quaternion in radians.
@@ -105,32 +98,13 @@ extension Quat4f {
     /// Roll is literally what happens to your car when you take a curve too fast!
     @inlinable public var roll: Float {
         /// https://github.com/OGRECave/ogre/blob/master/OgreMain/src/OgreQuaternion.cpp#L459
-        atan2(2.0 * (x * y + w * z), w * w + x * x - y * y - z * z)
+        // atan2(2.0 * (x * y + w * z), w * w + x * x - y * y - z * z)
+        return eulerAngles.z
     }
 
     /// x: yaw, y: pitch, z: roll
-    @inlinable public var eulerAngles: Vec3f {
-        /// https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
-
-        let sinrcosp: Float = +2.0 * (w * x + y * z)
-        let cosrcosp: Float = +1.0 - 2.0 * (x * x + y * y)
-        let pitch: Float = atan2(sinrcosp, cosrcosp)
-
-        // y-axis rotation
-        let sinp: Float = +2.0 * (w * y - z * x)
-        let yaw: Float
-        if abs(sinp) >= 1 {
-            yaw = copysign(.pi / 2.0, sinp) // use 90 degrees if out of range
-        } else {
-            yaw = asin(sinp)
-        }
-
-        // z-axis rotation
-        let sinycosp: Float = +2.0 * (w * z + x * y)
-        let cosycosp: Float = +1.0 - 2.0 * (y * y + z * z)
-        let roll = atan2(sinycosp, cosycosp)
-
-        return Vec3f(yaw, pitch, roll)
+    public var eulerAngles: Vec3f {
+        quaternionToEulerAngles_321(self)
     }
 
     /// Returns the rotation angle of the quaternion in radians.

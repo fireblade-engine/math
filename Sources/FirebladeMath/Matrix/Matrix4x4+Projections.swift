@@ -141,7 +141,7 @@ extension Mat4x4f {
          */
 
         let m00: Float = 2.0 / (right - left) // 2/(r-l)
-        let m03: Float = (left + right) / (left - right) //(l+r)/(l-r)
+        let m03: Float = (left + right) / (left - right) // (l+r)/(l-r)
         let m11: Float = 2.0 / (top - bottom) //  2/(t-b)
         let m13: Float = (top + bottom) / (bottom - top) // (t+b)/(b-t)
         let m22: Float = 1.0 / (zFar - zNear) // 1/(zf-zn)
