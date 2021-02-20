@@ -25,6 +25,9 @@ genLinuxTests:
 test: 
 	swift test -c release --skip-update --parallel --enable-code-coverage
 
+buildRelease:
+	swift build -c release
+
 # Package
 latest:
 	swift package update
