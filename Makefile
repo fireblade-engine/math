@@ -22,8 +22,11 @@ genLinuxTests:
 	swift test --generate-linuxmain
 	swiftlint autocorrect --format --path Tests/
 
-test: genLinuxTests
-	swift test
+test: 
+	swift test -c release --skip-update --parallel --enable-code-coverage
+
+buildRelease:
+	swift build -c release
 
 # Package
 latest:
@@ -42,10 +45,10 @@ genXcodeOpen: genXcode
 # Clean
 clean:
 	swift package reset
-	rm -rdf .swiftpm/xcode
-	rm -rdf .build/
-	rm Package.resolved
-	rm .DS_Store
+	-rm -rdf .swiftpm/xcode
+	-rm -rdf .build/
+	-rm Package.resolved
+	-rm .DS_Store
 
 cleanArtifacts:
 	swift package clean

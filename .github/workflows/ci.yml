@@ -11,20 +11,18 @@ jobs:
     runs-on: macOS-latest
     strategy:
       matrix:
-        xcode: ["11.7", "12.1"]
+        xcode: ["11.7", "12.4"]
     steps:
       - name: Checkout
         uses: actions/checkout@master
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app
-      - name: Swift version
-        run: swift --version
       - name: Test
-        run: swift test -v --skip-update --parallel --enable-test-discovery --enable-code-coverage
+        run: make test
         env:
           DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
       - name: Build Release
-        run: swift build -c release
+        run: make buildRelease
         env:
           DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
 
@@ -38,28 +36,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@master
-      - name: "Update APT"
-        shell: bash
-        run: "apt update"
-      - name: "Install curl"
-        shell: bash
-        run: "apt-get install -y curl"
-      - name: Swift version
-        run: swift --version
       - name: Test
-        run: swift test -v --skip-update --parallel --enable-test-discovery --enable-code-coverage
+        run: make test
       - name: Build Release
-        run: swift build -c release
-        
-
-#  webAssembly:
-#    runs-on: ubuntu-20.04
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@master
-#      - name: Swift version
-#        run: swift --version
-#      - name: Build
-#        uses: swiftwasm/swiftwasm-action@main
-#        with:
-#          shell-action: carton test
+        run: make buildRelease
