@@ -13,10 +13,16 @@ swiftSettings.append(.define("FRB_MATH_USE_SIMD"))
 
 #if canImport(Darwin)
 swiftSettings.append(.define("FRB_MATH_DARWIN"))
+#elseif canImport(Glibc)
+swiftSettings.append(.define("FRB_MATH_GLIBC"))
+#elseif canImport(Foundation)
+swiftSettings.append(.define("FRB_MATH_FOUNDATION"))
 #endif
 
-#if canImport(Glibc)
-swiftSettings.append(.define("FRB_MATH_GLIBC"))
+#if os(Windows)
+let libraryType : Product.Library.LibraryType = .dynamic
+#else
+let libraryType : Product.Library.LibraryType = .static
 #endif
 
 let package = Package(
@@ -24,7 +30,7 @@ let package = Package(
     products: [
         .library(
             name: "FirebladeMath",
-            type: .static,
+            type: libraryType,
             targets: ["FirebladeMath"])
     ],
     targets: [

@@ -1,3 +1,7 @@
+#if FRB_MATH_FOUNDATION
+import Foundation
+#endif
+
 #if FRB_MATH_DARWIN
 import Darwin.C.math
 #endif
@@ -20,6 +24,10 @@ public func exp2(_ power: Float) -> Float {
     #if FRB_MATH_GLIBC
     return Glibc.exp2f(power)
     #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.exp2f(power)
+    #endif
 }
 
 /// Computes 2 raised to the given power n.
@@ -35,5 +43,9 @@ public func exp2(_ power: Double) -> Double {
 
     #if FRB_MATH_GLIBC
     return Glibc.exp2(power)
+    #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.exp2(power)
     #endif
 }

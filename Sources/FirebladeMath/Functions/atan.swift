@@ -1,3 +1,7 @@
+#if FRB_MATH_FOUNDATION
+import Foundation
+#endif
+
 #if FRB_MATH_DARWIN
 import Darwin.C.math
 #endif
@@ -19,6 +23,10 @@ public func atan(_ double: Double) -> Double {
     #if FRB_MATH_GLIBC
     return Glibc.atan(double)
     #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.atan(double)
+    #endif
 }
 
 /// Computes the principal value of the arc tangent of arg.
@@ -33,5 +41,9 @@ public func atan(_ float: Float) -> Float {
 
     #if FRB_MATH_GLIBC
     return Glibc.atanf(float)
+    #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.atanf(float)
     #endif
 }

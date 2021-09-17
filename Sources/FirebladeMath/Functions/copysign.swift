@@ -1,3 +1,7 @@
+#if FRB_MATH_FOUNDATION
+import Foundation
+#endif
+
 #if FRB_MATH_DARWIN
 import Darwin.C.math
 #endif
@@ -23,6 +27,10 @@ public func copysign(_ x: Double, _ y: Double) -> Double {
     #if FRB_MATH_GLIBC
     return Glibc.copysign(x, y)
     #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.copysign(x, y)
+    #endif
 }
 
 /// Composes a floating point value with the magnitude of x and the sign of y.
@@ -41,5 +49,9 @@ public func copysign(_ x: Float, _ y: Float) -> Float {
 
     #if FRB_MATH_GLIBC
     return Glibc.copysignf(x, y)
+    #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.copysignf(x, y)
     #endif
 }

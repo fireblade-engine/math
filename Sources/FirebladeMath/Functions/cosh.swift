@@ -1,3 +1,7 @@
+#if FRB_MATH_FOUNDATION
+import Foundation
+#endif
+
 #if FRB_MATH_DARWIN
 import Darwin.C.math
 #endif
@@ -19,6 +23,10 @@ public func cosh(_ float: Float) -> Float {
     #if FRB_MATH_GLIBC
     return Glibc.coshf(float)
     #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.coshf(float)
+    #endif
 }
 
 /// Computes the hyperbolic cosine of arg.
@@ -33,5 +41,9 @@ public func cosh(_ double: Double) -> Double {
 
     #if FRB_MATH_GLIBC
     return Glibc.cosh(double)
+    #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.cosh(double)
     #endif
 }

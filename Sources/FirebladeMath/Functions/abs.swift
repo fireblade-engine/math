@@ -1,3 +1,7 @@
+#if FRB_MATH_FOUNDATION
+import Foundation
+#endif
+
 #if FRB_MATH_DARWIN
 import Darwin.C.math
 #endif
@@ -25,5 +29,9 @@ public func abs(_ double: Double) -> Double {
 
     #if FRB_MATH_GLIBC
     return Glibc.fabs(double)
+    #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.fabs(double)
     #endif
 }

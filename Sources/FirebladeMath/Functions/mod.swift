@@ -1,3 +1,7 @@
+#if FRB_MATH_FOUNDATION
+import Foundation
+#endif
+
 #if FRB_MATH_DARWIN
 import Darwin.C.math
 #endif
@@ -23,6 +27,10 @@ public func mod(_ x: Float, _ y: Float) -> Float {
     #if FRB_MATH_GLIBC
     return Glibc.fmodf(x, y)
     #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.fmodf(x, y)
+    #endif
 }
 
 /// Computes the floating-point remainder of the division operation x/y.
@@ -41,5 +49,9 @@ public func mod(_ x: Double, _ y: Double) -> Double {
 
     #if FRB_MATH_GLIBC
     return Glibc.fmod(x, y)
+    #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.fmod(x, y)
     #endif
 }

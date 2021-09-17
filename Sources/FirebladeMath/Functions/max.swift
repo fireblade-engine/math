@@ -1,3 +1,7 @@
+#if FRB_MATH_FOUNDATION
+import Foundation
+#endif
+
 #if FRB_MATH_DARWIN
 import Darwin.C.math
 #endif
@@ -19,6 +23,10 @@ public func max(_ x: Float, _ y: Float) -> Float {
 
     #if FRB_MATH_GLIBC
     return Glibc.fmaxf(x, y)
+    #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.fmaxf(x, y)
     #endif
 }
 

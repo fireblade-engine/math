@@ -1,3 +1,7 @@
+#if FRB_MATH_FOUNDATION
+import Foundation
+#endif
+
 #if FRB_MATH_DARWIN
 import Darwin.C.math
 #endif
@@ -20,6 +24,10 @@ public func asin(_ double: Double) -> Double {
     #if FRB_MATH_GLIBC
     return Glibc.asin(double)
     #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.asin(double)
+    #endif
 }
 
 /// Computes the principal values of the arc sine of arg.
@@ -35,5 +43,9 @@ public func asin(_ float: Float) -> Float {
 
     #if FRB_MATH_GLIBC
     return Glibc.asinf(float)
+    #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.asinf(float)
     #endif
 }

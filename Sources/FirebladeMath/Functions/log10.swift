@@ -1,3 +1,7 @@
+#if FRB_MATH_FOUNDATION
+import Foundation
+#endif
+
 #if FRB_MATH_DARWIN
 import Darwin.C.math
 #endif
@@ -20,6 +24,10 @@ public func log10(_ float: Float) -> Float {
     #if FRB_MATH_GLIBC
     return Glibc.log10f(float)
     #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.log10f(float)
+    #endif
 }
 
 /// Computes the common (base-10) logarithm of arg.
@@ -35,5 +43,9 @@ public func log10(_ double: Double) -> Double {
 
     #if FRB_MATH_GLIBC
     return Glibc.log10(double)
+    #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.log10(double)
     #endif
 }

@@ -1,3 +1,7 @@
+#if FRB_MATH_FOUNDATION
+import Foundation
+#endif
+
 #if FRB_MATH_DARWIN
 import Darwin.C.math
 #endif
@@ -12,7 +16,11 @@ import Glibc
 /// - Returns: If no errors occur, the hyperbolic tangent of arg (tanh(arg), or (e^arg*-e^-arg)/(e^arg*+e^-arg)) is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func tanh(_ float: Float) -> Float {
+    #if FRB_MATH_FOUNDATION
+    Foundation.tanhf(float)
+    #else
     tanhf(float)
+    #endif
 }
 
 /// Computes the hyperbolic tangent of arg.
@@ -27,5 +35,9 @@ public func tanh(_ double: Double) -> Double {
 
     #if FRB_MATH_GLIBC
     return Glibc.tanh(double)
+    #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.tanh(double)
     #endif
 }
