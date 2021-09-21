@@ -28,7 +28,7 @@ final class FunctionTests: XCTestCase {
         XCTAssertEqual(FirebladeMath.asin(Float(0.5)), 0.5235988)
     }
     func test_asinh() {
-        XCTAssertEqual(FirebladeMath.asinh(Double(123)), 5.505348060078276)
+        XCTAssertEqual(FirebladeMath.asinh(Double(123)), 5.505348060078276, accuracy: 1e-14)
         XCTAssertEqual(FirebladeMath.asinh(Float(123)), 5.505348)
     }
     func test_atan() {
