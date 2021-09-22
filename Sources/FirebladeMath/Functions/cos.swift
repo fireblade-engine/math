@@ -1,3 +1,7 @@
+#if FRB_MATH_FOUNDATION
+import Foundation
+#endif
+
 #if FRB_MATH_DARWIN
 import Darwin.C.math
 #endif
@@ -20,6 +24,10 @@ public func cos(_ angleRad: Float) -> Float {
     #if FRB_MATH_GLIBC
     return Glibc.cosf(angleRad)
     #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.cosf(angleRad)
+    #endif
 }
 
 /// Computes the cosine of arg (measured in radians).
@@ -35,5 +43,9 @@ public func cos(_ angleRad: Double) -> Double {
 
     #if FRB_MATH_GLIBC
     return Glibc.cos(angleRad)
+    #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.cos(angleRad)
     #endif
 }

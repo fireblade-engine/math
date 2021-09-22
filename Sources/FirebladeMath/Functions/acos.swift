@@ -1,3 +1,7 @@
+#if FRB_MATH_FOUNDATION
+import Foundation
+#endif
+
 #if FRB_MATH_DARWIN
 import Darwin.C.math
 #endif
@@ -20,6 +24,10 @@ public func acos(_ float: Float) -> Float {
     #if FRB_MATH_GLIBC
     return Glibc.acosf(float)
     #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.acosf(float)
+    #endif
 }
 
 /// Computes the principal value of the arc cosine of arg.
@@ -35,5 +43,9 @@ public func acos(_ double: Double) -> Double {
 
     #if FRB_MATH_GLIBC
     return Glibc.acos(double)
+    #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.acos(double)
     #endif
 }

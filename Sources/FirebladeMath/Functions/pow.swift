@@ -1,3 +1,7 @@
+#if FRB_MATH_FOUNDATION
+import Foundation
+#endif
+
 #if FRB_MATH_DARWIN
 import Darwin.C.math
 #endif
@@ -23,6 +27,10 @@ public func pow(_ base: Float, _ exponent: Float) -> Float {
     #if FRB_MATH_GLIBC
     return Glibc.powf(base, exponent)
     #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.powf(base, exponent)
+    #endif
 }
 
 /// Computes the value of base raised to the power exponent.
@@ -41,5 +49,9 @@ public func pow(_ base: Double, _ exponent: Double) -> Double {
 
     #if FRB_MATH_GLIBC
     return Glibc.pow(base, exponent)
+    #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.pow(base, exponent)
     #endif
 }

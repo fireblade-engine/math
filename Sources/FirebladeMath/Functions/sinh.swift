@@ -1,3 +1,7 @@
+#if FRB_MATH_FOUNDATION
+import Foundation
+#endif
+
 #if FRB_MATH_DARWIN
 import Darwin.C.math
 #endif
@@ -20,6 +24,10 @@ public func sinh(_ float: Float) -> Float {
     #if FRB_MATH_GLIBC
     return Glibc.sinhf(float)
     #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.sinhf(float)
+    #endif
 }
 
 /// Computes hyperbolic sine of arg.
@@ -35,5 +43,9 @@ public func sinh(_ double: Double) -> Double {
 
     #if FRB_MATH_GLIBC
     return Glibc.sinh(double)
+    #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.sinh(double)
     #endif
 }

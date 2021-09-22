@@ -1,3 +1,7 @@
+#if FRB_MATH_FOUNDATION
+import Foundation
+#endif
+
 #if FRB_MATH_DARWIN
 import Darwin.C.math
 #endif
@@ -18,6 +22,10 @@ public func floor(_ float: Float) -> Float {
     #if FRB_MATH_GLIBC
     return Glibc.floorf(float)
     #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.floorf(float)
+    #endif
 }
 
 /// Computes the largest integer value not greater than arg.
@@ -31,5 +39,9 @@ public func floor(_ double: Double) -> Double {
 
     #if FRB_MATH_GLIBC
     return Glibc.floor(double)
+    #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.floor(double)
     #endif
 }

@@ -1,3 +1,7 @@
+#if FRB_MATH_FOUNDATION
+import Foundation
+#endif
+
 #if FRB_MATH_DARWIN
 import Darwin.C.math
 #endif
@@ -20,6 +24,10 @@ public func sqrt(_ float: Float) -> Float {
     #if FRB_MATH_GLIBC
     return Glibc.sqrtf(float)
     #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.sqrtf(float)
+    #endif
 }
 
 /// Computes square root of arg.
@@ -35,5 +43,9 @@ public func sqrt(_ double: Double) -> Double {
 
     #if FRB_MATH_GLIBC
     return Glibc.sqrt(double)
+    #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.sqrt(double)
     #endif
 }

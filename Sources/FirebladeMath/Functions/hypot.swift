@@ -1,3 +1,7 @@
+#if FRB_MATH_FOUNDATION
+import Foundation
+#endif
+
 #if FRB_MATH_DARWIN
 import Darwin.C.math
 #endif
@@ -17,6 +21,10 @@ public func hypot(_ x: Float, _ y: Float) -> Float {
     #if FRB_MATH_GLIBC
     return Glibc.hypotf(x, y)
     #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.hypotf(x, y)
+    #endif
 }
 
 /// Returns the hypotenuse of a right-angled triangle whose legs are x and y.
@@ -29,5 +37,9 @@ public func hypot(_ x: Double, _ y: Double) -> Double {
 
     #if FRB_MATH_GLIBC
     return Glibc.hypot(x, y)
+    #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.hypot(x, y)
     #endif
 }

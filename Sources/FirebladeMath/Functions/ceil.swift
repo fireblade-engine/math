@@ -1,3 +1,7 @@
+#if FRB_MATH_FOUNDATION
+import Foundation
+#endif
+
 #if FRB_MATH_DARWIN
 import Darwin.C.math
 #endif
@@ -18,6 +22,10 @@ public func ceil(_ float: Float) -> Float {
     #if FRB_MATH_GLIBC
     return Glibc.ceilf(float)
     #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.ceilf(float)
+    #endif
 }
 
 /// Computes the smallest integer value not less than arg.
@@ -31,5 +39,9 @@ public func ceil(_ double: Double) -> Double {
 
     #if FRB_MATH_GLIBC
     return Glibc.ceil(double)
+    #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.ceil(double)
     #endif
 }

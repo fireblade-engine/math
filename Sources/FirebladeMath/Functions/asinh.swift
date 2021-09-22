@@ -1,3 +1,7 @@
+#if FRB_MATH_FOUNDATION
+import Foundation
+#endif
+
 #if FRB_MATH_DARWIN
 import Darwin.C.math
 #endif
@@ -20,6 +24,10 @@ public func asinh(_ double: Double) -> Double {
 
     return Glibc.asinh(double)
     #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.asinh(double)
+    #endif
 }
 
 /// Computes the inverse hyperbolic sine of arg.
@@ -33,7 +41,10 @@ public func asinh(_ float: Float) -> Float {
     #endif
 
     #if FRB_MATH_GLIBC
-
     return Glibc.asinhf(float)
+    #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.asinhf(float)
     #endif
 }

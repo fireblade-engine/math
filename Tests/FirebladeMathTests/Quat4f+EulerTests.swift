@@ -71,9 +71,9 @@ class Quat4f_EulerTests: XCTestCase {
         XCTAssertEqual(quat.z, 0, accuracy: 1e-7)
         XCTAssertEqual(quat.w, 0, accuracy: 1e-7)
         // gimbal lock
-        XCTAssertEqual(quat.pitch, .pi)
+        XCTAssertEqual(quat.pitch, .pi, accuracy: 1e-6)
         XCTAssertEqual(quat.yaw, 0, accuracy: 1e-6)
-        XCTAssertEqual(quat.roll, .pi)
+        XCTAssertEqual(quat.roll, .pi, accuracy: 1e-6)
     }
     
     func testQuatFromEulerAngles_0_n90_0() {
@@ -88,9 +88,9 @@ class Quat4f_EulerTests: XCTestCase {
         XCTAssertEqual(quat.z, 0, accuracy: 1e-7)
         XCTAssertEqual(quat.w, 0, accuracy: 1e-7)
         // gimbal lock
-        XCTAssertEqual(quat.pitch, .pi)
+        XCTAssertEqual(quat.pitch, .pi, accuracy: 1e-6)
         XCTAssertEqual(quat.yaw, 0, accuracy: 1e-6)
-        XCTAssertEqual(quat.roll, .pi)
+        XCTAssertEqual(quat.roll, .pi, accuracy: 1e-6)
     }
     
     func testQuatFromEulerAngles_0_0_90() {

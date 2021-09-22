@@ -1,3 +1,7 @@
+#if FRB_MATH_FOUNDATION
+import Foundation
+#endif
+
 #if FRB_MATH_DARWIN
 import Darwin.C.math
 #endif
@@ -20,6 +24,10 @@ public func sin(_ angleRad: Float) -> Float {
     #if FRB_MATH_GLIBC
     return Glibc.sinf(angleRad)
     #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.sinf(angleRad)
+    #endif
 }
 
 /// Computes the sine of arg (measured in radians).
@@ -35,5 +43,9 @@ public func sin(_ angleRad: Double) -> Double {
 
     #if FRB_MATH_GLIBC
     return Glibc.sin(angleRad)
+    #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.sin(angleRad)
     #endif
 }

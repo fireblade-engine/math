@@ -1,3 +1,7 @@
+#if FRB_MATH_FOUNDATION
+import Foundation
+#endif
+
 #if FRB_MATH_DARWIN
 import Darwin.C.math
 #endif
@@ -20,6 +24,10 @@ public func exp(_ power: Float) -> Float {
     #if FRB_MATH_GLIBC
     return Glibc.expf(power)
     #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.expf(power)
+    #endif
 }
 
 ///  Computes the e (Euler's number, 2.7182818) raised to the given power arg.
@@ -35,5 +43,9 @@ public func exp(_ power: Double) -> Double {
 
     #if FRB_MATH_GLIBC
     return Glibc.exp(power)
+    #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.exp(power)
     #endif
 }

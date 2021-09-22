@@ -1,3 +1,7 @@
+#if FRB_MATH_FOUNDATION
+import Foundation
+#endif
+
 #if FRB_MATH_DARWIN
 import Darwin.C.math
 #endif
@@ -19,6 +23,10 @@ public func tanh(_ float: Float) -> Float {
     #if FRB_MATH_GLIBC
     return Glibc.tanhf(float)
     #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.tanhf(float)
+    #endif
 }
 
 /// Computes the hyperbolic tangent of arg.
@@ -33,5 +41,9 @@ public func tanh(_ double: Double) -> Double {
 
     #if FRB_MATH_GLIBC
     return Glibc.tanh(double)
+    #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.tanh(double)
     #endif
 }

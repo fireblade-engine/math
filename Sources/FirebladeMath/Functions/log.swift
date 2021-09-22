@@ -1,3 +1,7 @@
+#if FRB_MATH_FOUNDATION
+import Foundation
+#endif
+
 #if FRB_MATH_DARWIN
 import Darwin.C.math
 #endif
@@ -20,6 +24,10 @@ public func log(_ float: Float) -> Float {
     #if FRB_MATH_GLIBC
     return Glibc.logf(float)
     #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.logf(float)
+    #endif
 }
 
 /// Computes the natural (base e) logarithm of arg.
@@ -35,5 +43,9 @@ public func log(_ double: Double) -> Double {
 
     #if FRB_MATH_GLIBC
     return Glibc.log(double)
+    #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.log(double)
     #endif
 }

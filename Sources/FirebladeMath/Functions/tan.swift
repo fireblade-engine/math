@@ -1,3 +1,7 @@
+#if FRB_MATH_FOUNDATION
+import Foundation
+#endif
+
 #if FRB_MATH_DARWIN
 import Darwin.C.math
 #endif
@@ -20,6 +24,10 @@ public func tan(_ angleRad: Float) -> Float {
     #if FRB_MATH_GLIBC
     return Glibc.tanf(angleRad)
     #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.tanf(angleRad)
+    #endif
 }
 
 /// Computes the tangent of arg (measured in radians).
@@ -35,5 +43,9 @@ public func tan(_ angleRad: Double) -> Double {
 
     #if FRB_MATH_GLIBC
     return Glibc.tan(angleRad)
+    #endif
+
+    #if FRB_MATH_FOUNDATION
+    return Foundation.tan(angleRad)
     #endif
 }

@@ -4,7 +4,6 @@
 [![macOS](https://github.com/fireblade-engine/math/actions/workflows/ci-macos.yml/badge.svg)](https://github.com/fireblade-engine/math/actions/workflows/ci-macos.yml)
 [![Linux](https://github.com/fireblade-engine/math/actions/workflows/ci-linux.yml/badge.svg)](https://github.com/fireblade-engine/math/actions/workflows/ci-linux.yml)
 [![Windows](https://github.com/fireblade-engine/math/actions/workflows/ci-windows.yml/badge.svg)](https://github.com/fireblade-engine/math/actions/workflows/ci-windows.yml)
-[![WASM](https://github.com/fireblade-engine/math/actions/workflows/ci-wasm.yml/badge.svg)](https://github.com/fireblade-engine/math/actions/workflows/ci-wasm.yml)
 [![swift-version-compatibility](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Ffireblade-engine%2Fmath%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/fireblade-engine/math) 
 [![platform-compatilibilty](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Ffireblade-engine%2Fmath%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/fireblade-engine/math) 
 <!--[![platform-webassembly](https://img.shields.io/badge/Platform-WebAssembly-blue.svg)](https://github.com/swiftwasm/swift#swiftwasm)-->
