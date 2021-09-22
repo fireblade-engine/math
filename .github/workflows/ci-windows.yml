@@ -10,7 +10,7 @@ jobs:
   windows-test-build-release:
     runs-on: windows-latest
     env:
-        SNAPSHOT: "https://swift.org/builds/swift-5.4.1-release/windows10/swift-5.4.1-RELEASE/swift-5.4.1-RELEASE-windows10.exe"
+        SNAPSHOT: "https://swift.org/builds/swift-5.5-release/windows10/swift-5.5-RELEASE/swift-5.5-RELEASE-windows10.exe"
     steps:
     - uses: actions/checkout@master
     - uses: seanmiddleditch/gha-setup-vsdevenv@master
