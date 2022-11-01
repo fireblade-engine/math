@@ -199,7 +199,7 @@ public func multiply(_ lhs: Mat2x2d, _ rhs: Vec2d) -> Vec2d {
     #endif
 }
 
-// MARK: - Mat4x4f
+// MARK: - Mat2x2f
 @inlinable
 public func multiply(_ lhs: Mat2x2f, _ rhs: Mat2x2f) -> Mat2x2f {
     #if FRB_MATH_USE_SIMD
@@ -224,9 +224,7 @@ public func multiply(_ lhs: Float, _ rhs: Mat2x2f) -> Mat2x2f {
     return Mat2x2f(storage: simd_mul(lhs, rhs.storage))
     #else
     return Mat2x2f(lhs * rhs.storage.column0,
-                   lhs * rhs.storage.column1,
-                   lhs * rhs.storage.column2,
-                   lhs * rhs.storage.column3)
+                   lhs * rhs.storage.column1)
     #endif
 }
 
