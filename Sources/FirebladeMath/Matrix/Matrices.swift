@@ -27,8 +27,8 @@ public typealias Mat4x4f = Matrix4x4<Storage4x4<Float>>
 public typealias Mat4x4d = Matrix4x4<Storage4x4<Double>>
 public typealias Mat3x3f = Matrix3x3<Storage3x3<Float>>
 public typealias Mat3x3d = Matrix3x3<Storage3x3<Double>>
-public typealias Mat3x3f = Matrix2x2<Storage2x2<Float>>
-public typealias Mat3x3d = Matrix2x2<Storage2x2<Double>>
+public typealias Mat2x2f = Matrix2x2<Storage2x2<Float>>
+public typealias Mat2x2d = Matrix2x2<Storage2x2<Double>>
 
 #endif
 
