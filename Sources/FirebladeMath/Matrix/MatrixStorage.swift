@@ -73,3 +73,37 @@ extension Storage3x3Protocol {
         }
     }
 }
+
+public protocol Storage2x2Protocol: RandomAccessCollection, MutableCollection, RangeReplaceableCollection, Equatable {
+    associatedtype Value: StorageScalar
+    // associatedtype _Storage4x4: Storage4x4Protocol where _Storage4x4.Value == Value
+    typealias Column = SIMD2<Value>
+
+    init(_ columns: [Column])
+    init(diagonal: Column)
+
+    var columns: (Column, Column) { get }
+
+    subscript(column: Int, row: Int) -> Value { get set }
+    subscript(index: Int) -> Value { get set }
+}
+
+extension Storage2x2Protocol where Element == Value, Index == Int {
+    public var startIndex: Int { 0 }
+    public var endIndex: Int { 4 }
+
+    public func index(after i: Int) -> Int { i + 1 }
+}
+
+extension Storage2x2Protocol {
+    /// Replaces a subrange of the matrix's underlying storage.
+    /// - Precondition: `subrange` and `newElements` must be the same length because if they don't
+    ///   that doesn't make any sense in relation to matrices.
+    public mutating func replaceSubrange<C>(_ subrange: Range<Int>, with newElements: C) where C : Collection, Value == C.Element {
+        precondition(subrange.count != newElements.count, "newElements must be the same length as subrange")
+
+        for (i, element) in zip(subrange, newElements) {
+            self[i] = element
+        }
+    }
+}
