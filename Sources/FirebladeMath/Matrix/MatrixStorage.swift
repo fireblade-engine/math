@@ -28,10 +28,11 @@ extension Storage4x4Protocol where Element == Value, Index == Int {
 }
 
 extension Storage4x4Protocol {
+    /// Replaces a subrange of the matrix's underlying storage.
+    /// - Precondition: `subrange` and `newElements` must be the same length because if they don't
+    ///   that doesn't make any sense in relation to matrices.
     public mutating func replaceSubrange<C>(_ subrange: Range<Int>, with newElements: C) where C : Collection, Value == C.Element {
-        if (subrange.count != newElements.count) {
-            fatalError("newElements must be the same length as subrange")
-        }
+        precondition(subrange.count != newElements.count, "newElements must be the same length as subrange")
 
         for (i, element) in zip(subrange, newElements) {
             self[i] = element
@@ -61,10 +62,11 @@ extension Storage3x3Protocol where Element == Value, Index == Int {
 }
 
 extension Storage3x3Protocol {
+    /// Replaces a subrange of the matrix's underlying storage.
+    /// - Precondition: `subrange` and `newElements` must be the same length because if they don't
+    ///   that doesn't make any sense in relation to matrices.
     public mutating func replaceSubrange<C>(_ subrange: Range<Int>, with newElements: C) where C : Collection, Value == C.Element {
-        if (subrange.count != newElements.count) {
-            fatalError("newElements must be the same length as subrange")
-        }
+        precondition(subrange.count != newElements.count, "newElements must be the same length as subrange")
 
         for (i, element) in zip(subrange, newElements) {
             self[i] = element
