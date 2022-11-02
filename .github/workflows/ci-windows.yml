@@ -13,14 +13,14 @@ jobs:
     strategy:
       matrix:
         include:
-          - tag: 5.5-RELEASE
-            branch: swift-5.5-release
+          - tag: 5.7-RELEASE
+            branch: swift-5.7-release
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2.5.0
         with:
           fetch-depth: 1
 
-      - uses: seanmiddleditch/gha-setup-vsdevenv@master
+      - uses: seanmiddleditch/gha-setup-vsdevenv@v4
 
       - name: Install Swift ${{ matrix.tag }}
         run: |
@@ -41,7 +41,7 @@ jobs:
             Copy-Item "$env:SDKROOT\usr\share\winsdk.modulemap" -destination "$env:UniversalCRTSdkDir\Include\$env:UCRTVersion\um\module.modulemap"
 
       - name: Test
-        run: swift test -v --skip-update --parallel --enable-test-discovery
+        run: swift test
 
       - name: Build Release
         run: swift build -c release
