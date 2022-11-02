@@ -17,8 +17,8 @@ jobs:
       image: swift:${{ matrix.swift }}
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v2.5.0
       - name: Test
-        run: make test
+        run: swift test -c release --skip-update --parallel --enable-code-coverage
       - name: Build Release
-        run: make buildRelease
+        run: swift build -c release
