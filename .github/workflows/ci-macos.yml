@@ -9,13 +9,13 @@ on:
 
 jobs:
   macos-test-build-release-xcode:
-    runs-on: macOS-11
+    runs-on: macos-latest
     strategy:
       matrix:
-        xcode: ["11.7", "12.5.1", "13.0"]
+        xcode: ["11.7", "12.5.1", "13.2.1"]
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v2.5.0
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app
       - name: Test
@@ -24,7 +24,7 @@ jobs:
           DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
       - name: Upload test artifacts
         if: failure()
-        uses: actions/upload-artifact@v2.2.3
+        uses: actions/upload-artifact@v3.1.1
         with:
           name: test-artifacts-${{ matrix.xcode }}-${{ github.run_id }}
           path: |
@@ -36,7 +36,7 @@ jobs:
           DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
       - name: Upload build artifacts
         if: failure()
-        uses: actions/upload-artifact@v2.2.3
+        uses: actions/upload-artifact@v3.1.1
         with:
           name: build-artifacts-${{ matrix.xcode }}-${{ github.run_id }}
           path: |
