@@ -100,7 +100,7 @@ extension Storage2x2Protocol {
     /// - Precondition: `subrange` and `newElements` must be the same length because if they don't
     ///   that doesn't make any sense in relation to matrices.
     public mutating func replaceSubrange<C>(_ subrange: Range<Int>, with newElements: C) where C : Collection, Value == C.Element {
-        precondition(subrange.count != newElements.count, "newElements must be the same length as subrange")
+        precondition(subrange.count == newElements.count, "newElements must be the same length as subrange")
 
         for (i, element) in zip(subrange, newElements) {
             self[i] = element
