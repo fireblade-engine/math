@@ -9,7 +9,7 @@ on:
 
 jobs:
   macos-test-build-release-xcode:
-    runs-on: macos-11
+    runs-on: macos-13
     strategy:
       matrix:
         xcode: [11.7, 12.5.1]
