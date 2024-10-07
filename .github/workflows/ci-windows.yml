@@ -17,7 +17,7 @@ jobs:
           tag: 5.7-RELEASE
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Build Release
         run: swift build -c release --verbose
