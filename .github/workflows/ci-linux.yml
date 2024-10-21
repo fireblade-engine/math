@@ -12,13 +12,32 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        swift: ["5.1", "latest"]
+        swift: ["latest"]
     container:
       image: swift:${{ matrix.swift }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.5.2
+        uses: actions/checkout@v4
+      
       - name: Test
-        run: swift test -c release --skip-update --parallel --enable-code-coverage
-      - name: Build Release
-        run: swift build -c release
+        run: swift test -c release --enable-xctest --parallel --xunit-output .build/xUnit-output.xml
+
+      - name: Upload  artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifacts-linux-${{ matrix.swift }}-${{ github.run_id }}
+          path: |
+            .build/**/*.a
+            .build/**/*.bundle
+            .build/**/*.dSYM
+            .build/**/*.gdb
+            .build/**/*.json
+            .build/**/*.txt
+            .build/**/*.xctest
+            .build/*.json
+            .build/*.txt
+            .build/*.xml
+            .build/*.yaml
+          if-no-files-found: warn
+          include-hidden-files: true
