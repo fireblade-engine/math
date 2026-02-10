@@ -33,8 +33,8 @@ Modernize and stabilize the macOS CI pipeline to support Swift 6.1 and 6.2 with 
 ## Phase 3: Verification & Finalization
 Ensure the CI system behaves as expected and satisfies all specification requirements.
 
-- [ ] Task: Verify CI deactivation
-    - [ ] Ensure Linux, Windows, and iOS workflows only have `workflow_dispatch`.
+- [x] Task: Verify CI deactivation
+    - [x] Ensure Linux, Windows, and iOS workflows only have `workflow_dispatch`.
 - [ ] Task: Final project-wide check
     - [ ] Run `make lint` locally to ensure no formatting/linting issues remain.
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Verification & Finalization' (Protocol in workflow.md)
