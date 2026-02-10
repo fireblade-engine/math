@@ -3,6 +3,7 @@ import func simd.simd_matrix4x4
 #endif
 
 // MARK: - Float
+
 extension Mat4x4f {
     /// Perspective projection matrix in right-handed coordinates.
     public static func perspectiveRH(fovy fovyRad: Float, aspect: Float, zNear: Float, zFar: Float) -> Self {
@@ -82,10 +83,11 @@ extension Mat4x4f {
 }
 
 // MARK: - Double
+
 extension Mat4x4d {
     /// Perspective projection matrix in right-handed coordinates.
     public static func perspectiveRH(fovy fovyRad: Double, aspect: Double, zNear: Double, zFar: Double) -> Self {
-        let yScale: Double = 1.0 / tan(fovyRad / 2.0)
+        let yScale = 1.0 / tan(fovyRad / 2.0)
         let xScale: Double = yScale / aspect
 
         let m00: Double = xScale
@@ -93,7 +95,7 @@ extension Mat4x4d {
         let m22: Double = zFar / (zNear - zFar)
         let m23: Double = -1.0
         let m32: Double = (zNear * zFar) / (zNear - zFar)
-        let m33: Double = 0.0
+        let m33 = 0.0
 
         let P = Vector(m00, 0.0, 0.0, 0.0)
         let Q = Vector(0.0, m11, 0.0, 0.0)
@@ -105,15 +107,15 @@ extension Mat4x4d {
 
     /// Perspective projection matrix in left-handed coordinates.
     public static func perspectiveLH(fovy fovyRad: Double, aspect: Double, zNear: Double, zFar: Double) -> Self {
-        let yScale: Double = 1.0 / tan(fovyRad / 2.0)
+        let yScale = 1.0 / tan(fovyRad / 2.0)
         let xScale: Double = yScale / aspect
 
         let m00: Double = xScale
         let m11: Double = yScale
         let m22: Double = zFar / (zFar - zNear)
-        let m23: Double = 1.0
+        let m23 = 1.0
         let m32: Double = -(zNear * zFar) / (zFar - zNear)
-        let m33: Double = 0.0
+        let m33 = 0.0
 
         let P = Vector(m00, 0.0, 0.0, 0.0)
         let Q = Vector(0.0, m11, 0.0, 0.0)
@@ -125,13 +127,13 @@ extension Mat4x4d {
 
     /// Orthographic projection matrix in right-handed coordinates.
     public static func orthographicRH(left: Double, right: Double, top: Double, bottom: Double, zNear: Double, zFar: Double) -> Self {
-        let m00: Double = 2.0 / (right - left)
+        let m00 = 2.0 / (right - left)
         let m03: Double = (left + right) / (left - right)
-        let m11: Double = 2.0 / (top - bottom)
+        let m11 = 2.0 / (top - bottom)
         let m13: Double = (top + bottom) / (bottom - top)
-        let m22: Double = 1.0 / (zNear - zFar)
+        let m22 = 1.0 / (zNear - zFar)
         let m23: Double = zNear / (zNear - zFar)
-        let m33: Double = 1.0
+        let m33 = 1.0
 
         let P = Vector(m00, 0.0, 0.0, 0.0)
         let Q = Vector(0.0, m11, 0.0, 0.0)
@@ -143,13 +145,13 @@ extension Mat4x4d {
 
     /// Orthographic projection matrix in left-handed coordinates.
     public static func orthographicLH(left: Double, right: Double, top: Double, bottom: Double, zNear: Double, zFar: Double) -> Self {
-        let m00: Double = 2.0 / (right - left)
+        let m00 = 2.0 / (right - left)
         let m03: Double = (left + right) / (left - right)
-        let m11: Double = 2.0 / (top - bottom)
+        let m11 = 2.0 / (top - bottom)
         let m13: Double = (top + bottom) / (bottom - top)
-        let m22: Double = 1.0 / (zFar - zNear)
+        let m22 = 1.0 / (zFar - zNear)
         let m23: Double = zNear / (zNear - zFar)
-        let m33: Double = 1.0
+        let m33 = 1.0
 
         let P = Vector(m00, 0.0, 0.0, 0.0)
         let Q = Vector(0.0, m11, 0.0, 0.0)
