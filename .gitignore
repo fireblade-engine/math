@@ -6,3 +6,4 @@ build*/
 gha-creds-*.json
 xcuserdata/
 contents.xcworkspacedata
+conductor
