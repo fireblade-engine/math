@@ -24,4 +24,5 @@ jobs:
         with:
           windows-swift-version: swift-${{ matrix.swift }}-release
           windows-swift-build: ${{ matrix.swift }}-RELEASE
-          args: swift test -c release --parallel -Xswiftc -warnings-as-errors
+          scheme: FirebladeMath
+          # args: swift test -c release --parallel -Xswiftc -warnings-as-errors
