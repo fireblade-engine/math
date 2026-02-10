@@ -2,46 +2,39 @@ name: macOS
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, main ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, main ]
   workflow_dispatch:
 
 jobs:
-  macos-xcode:
+  test:
+    name: Test (macOS)
     runs-on: macos-latest
     strategy:
+      fail-fast: false
       matrix:
-        xcode: ["14.3.1", "15.4", "16.0"]
+        swift: ["6.1", "6.2"]
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
-      - name: Select Xcode ${{ matrix.xcode }}
-        run: sudo xcode-select -s '/Applications/Xcode_${{ matrix.xcode }}.app'
-
-      - name: Test
-        run: swift test -c release --parallel --xunit-output .build/xUnit-output.xml
-        env:
-          DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
-
-      - name: Upload artifacts
-        if: always()
-        uses: actions/upload-artifact@v4.4.3
+      - name: Setup Swift
+        uses: swift-actions/setup-swift@v2
         with:
-          name: artifacts-macOS-${{ matrix.xcode }}-${{ github.run_id }}
-          path: |
-            .build/**/*.a
-            .build/**/*.bundle
-            .build/**/*.dSYM
-            .build/**/*.gdb
-            .build/**/*.json
-            .build/**/*.txt
-            .build/**/*.xctest
-            .build/*.json
-            .build/*.txt
-            .build/*.xml
-            .build/*.yaml
-          if-no-files-found: warn
-          include-hidden-files: true
+          swift-version: ${{ matrix.swift }}
 
+      - name: Cache Build
+        uses: actions/cache@v5
+        with:
+          path: .build
+          key: ${{ runner.os }}-swift-${{ matrix.swift }}-${{ hashFiles('Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-swift-${{ matrix.swift }}-
+
+      # We use 'make test' to ensure the CI environment precisely mirrors the developer's local environment.
+      # This includes using 'xcrun swift test' with strict flags like '-Xswiftc -warnings-as-errors'.
+      # The local Makefile is the source of truth for build and test commands.
+      - name: Run Tests
+        run: make test

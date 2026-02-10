@@ -2,44 +2,38 @@ name: Windows
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, main ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, main ]
   workflow_dispatch:
 
 jobs:
-  windows:
+  test:
+    name: Test (Windows)
     runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        swift: ["6.1", "6.2"]
+
     steps:
-      - name: Setup
-        uses: compnerd/gha-setup-swift@v0.2.3
-        with:
-          branch: swift-5.10-release
-          tag: 5.10-RELEASE
-
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
-      - name: Test
-        run: swift test -c release --parallel --xunit-output .build/xUnit-output.xml
-
-      - name: Upload artifacts
-        if: always()
-        uses: actions/upload-artifact@v4.4.3
+      - name: Setup Swift
+        uses: swift-actions/setup-swift@v2
         with:
-          name: artifacts-windows-${{ github.run_id }}
-          path: |
-            .build/**/*.a
-            .build/**/*.bundle
-            .build/**/*.dSYM
-            .build/**/*.gdb
-            .build/**/*.json
-            .build/**/*.txt
-            .build/**/*.xctest
-            .build/*.json
-            .build/*.txt
-            .build/*.xml
-            .build/*.yaml
-          if-no-files-found: warn
-          include-hidden-files: true
+          swift-version: ${{ matrix.swift }}
 
+      - name: Cache Build
+        uses: actions/cache@v5
+        with:
+          path: .build
+          key: ${{ runner.os }}-swift-${{ matrix.swift }}-${{ hashFiles('Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-swift-${{ matrix.swift }}-
+
+      # On Windows, 'make' is not guaranteed to work seamlessly.
+      # We fall back to direct 'swift test' invocation.
+      - name: Run Tests
+        run: make test

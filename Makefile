@@ -1,5 +1,3 @@
-# FirebladeMath Makefile
-
 UNAME_S := $(shell uname -s)
 SWIFT_FLAGS ?= --disable-sandbox
 PACKAGE_SWIFT_VERSION := $(shell grep "swift-tools-version" Package.swift | head -n 1 | cut -d ":" -f 2 | xargs)
@@ -22,7 +20,7 @@ lint-fix:
 	mint run swiftlint --fix --config .swiftlint.yml Sources/ Tests/
 
 test:
-	xcrun swift test $(SWIFT_FLAGS) --parallel --enable-code-coverage -Xswiftc -warnings-as-errors
+	swift test $(SWIFT_FLAGS) --parallel --enable-code-coverage -Xswiftc -warnings-as-errors
 
 test-coverage:
 	$(MAKE) test
