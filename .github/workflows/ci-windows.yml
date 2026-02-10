@@ -9,22 +9,15 @@ on:
 
 jobs:
   windows:
-    name: Windows (Swift 6.0)
+    name: Windows (Swift 6.1)
     runs-on: windows-latest
-    strategy:
-      fail-fast: false
-
     steps:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Setup Swift
-        uses: compnerd/gha-setup-swift@main
+      - name: Test Windows
+        uses: brightdigit/swift-build@v1.5.0
         with:
-          branch: swift-6.1-release
-          tag: 6.1-RELEASE
-
-      - name: Run Tests
-        uses: brightdigit/swift-build@v1
-        with:
+          windows-swift-version: swift-6.1-release
+          windows-swift-build: 6.1-RELEASE
           args: swift test -c release --parallel -Xswiftc -warnings-as-errors
