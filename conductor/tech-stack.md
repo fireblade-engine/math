@@ -53,6 +53,7 @@
 *   **Framework:** `Testing` module (Swift 6 native testing).
 *   **Constraint:** `XCTest` is **strictly prohibited**.
 *   **Standard:** All tests must pass with **zero warnings**.
+*   **CI Execution:** macOS CI builds and tests in Release mode (`-c release`) with strict warnings (`-Xswiftc -warnings-as-errors`).
 
 ## Error Handling & Safety
 *   **Primary Strategy:** Use Swift's `throw` / `try` / `catch` for all synchronous error propagation.
