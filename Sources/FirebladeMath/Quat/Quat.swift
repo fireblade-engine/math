@@ -1,11 +1,5 @@
-//
-//  Quaternion.swift
-//
-//
-//  Created by Christian Treffs on 06.09.19.
-//
-
-public struct Quaternion<Storage> where Storage: QuaternionStorageProtocol {
+@frozen
+public struct Quaternion<Storage: QuaternionStorageProtocol>: Sendable {
     public typealias Value = Storage.Value
     @usableFromInline var storage: Storage
 
@@ -29,6 +23,11 @@ extension Quaternion {
     public init(_ x: Value, _ y: Value, _ z: Value, _ w: Value) {
         self.init(storage: Storage(x, y, z, w))
     }
+
+    @inlinable
+    public init() {
+        self.init(Value.zero, Value.zero, Value.zero, Value.one)
+    }
 }
 
 extension Quaternion {
@@ -36,14 +35,17 @@ extension Quaternion {
         get { storage.x }
         set { storage.x = newValue }
     }
+
     @inlinable public var y: Value {
         get { storage.y }
         set { storage.y = newValue }
     }
+
     @inlinable public var z: Value {
         get { storage.z }
         set { storage.z = newValue }
     }
+
     @inlinable public var w: Value {
         get { storage.w }
         set { storage.w = newValue }
@@ -51,13 +53,12 @@ extension Quaternion {
 }
 
 extension Quaternion: Sequence {
-    public func makeIterator() -> AnyIterator<Value> {
-        var iter = self.storage.makeIterator()
-        return AnyIterator { iter.next() as? Value }
+    public func makeIterator() -> Storage.Iterator {
+        storage.makeIterator()
     }
 
     @inlinable public var elements: [Value] {
-        Array(AnyIterator(makeIterator()))
+        Array(storage)
     }
 }
 

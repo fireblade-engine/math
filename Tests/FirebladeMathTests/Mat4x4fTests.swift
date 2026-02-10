@@ -6,30 +6,25 @@
 //
 
 import FirebladeMath
+import Testing
 
-import class XCTest.XCTestCase
-import func XCTest.XCTAssertEqual
-import func XCTest.XCTAssertTrue
-import func XCTest.XCTAssertFalse
-import func XCTest.XCTAssertNotNil
-
-class Mat4x4fTests: XCTestCase {
-    func testIdentity() {
+struct Mat4x4fTests {
+    @Test func identity() {
         let identity: Mat4x4f = .identity
         let values: [Float] = [1, 0, 0, 0,
                                0, 1, 0, 0,
                                0, 0, 1, 0,
                                0, 0, 0, 1]
-        XCTAssertEqual(identity.elements, values)
+        #expect(identity.elements == values)
     }
 
-    func testInitArrayValues() {
+    @Test func initArrayValues() {
         let values: [Float] = rnd(16)
         let mat = Mat4x4f(values)
-        XCTAssertEqual(mat.elements, values)
+        #expect(mat.elements == values)
     }
 
-    func testInitVectorColumns() {
+    @Test func initVectorColumns() {
         let values: [Float] = rnd(16)
 
         let a = Vec4f(values[0...3])
@@ -39,10 +34,10 @@ class Mat4x4fTests: XCTestCase {
 
         let mat = Mat4x4f(a, b, c, d)
 
-        XCTAssertEqual(mat.elements, values)
+        #expect(mat.elements == values)
     }
 
-    func testInitDiagonal() {
+    @Test func initDiagonal() {
         let vec = Vec4f(rnd(4))
 
         let values: [Float] = [vec.x, 0, 0, 0,
@@ -52,67 +47,67 @@ class Mat4x4fTests: XCTestCase {
 
         let mat = Mat4x4f(diagonal: vec)
 
-        XCTAssertEqual(mat.elements, values)
+        #expect(mat.elements == values)
     }
 
-    func testEquality() {
-        XCTAssertTrue(Mat4x4f.identity == Mat4x4f.identity)
-        XCTAssertFalse(Mat4x4f(diagonal: [1, 2, 3, 4]) == Mat4x4f.identity)
+    @Test func equality() {
+        #expect(Mat4x4f.identity == Mat4x4f.identity)
+        #expect(Mat4x4f(diagonal: [1, 2, 3, 4]) != Mat4x4f.identity)
     }
 
-    func testSubscriptColumnRow() {
+    @Test func subscriptColumnRow() {
         let values: [Float] = rnd(16)
 
         let mat = Mat4x4f(values)
 
-        XCTAssertEqual(mat[0, 0], values[0])
-        XCTAssertEqual(mat[0, 1], values[1])
-        XCTAssertEqual(mat[0, 2], values[2])
-        XCTAssertEqual(mat[0, 3], values[3])
+        #expect(mat[0, 0] == values[0])
+        #expect(mat[0, 1] == values[1])
+        #expect(mat[0, 2] == values[2])
+        #expect(mat[0, 3] == values[3])
 
-        XCTAssertEqual(mat[1, 0], values[4])
-        XCTAssertEqual(mat[1, 1], values[5])
-        XCTAssertEqual(mat[1, 2], values[6])
-        XCTAssertEqual(mat[1, 3], values[7])
+        #expect(mat[1, 0] == values[4])
+        #expect(mat[1, 1] == values[5])
+        #expect(mat[1, 2] == values[6])
+        #expect(mat[1, 3] == values[7])
 
-        XCTAssertEqual(mat[2, 0], values[8])
-        XCTAssertEqual(mat[2, 1], values[9])
-        XCTAssertEqual(mat[2, 2], values[10])
-        XCTAssertEqual(mat[2, 3], values[11])
+        #expect(mat[2, 0] == values[8])
+        #expect(mat[2, 1] == values[9])
+        #expect(mat[2, 2] == values[10])
+        #expect(mat[2, 3] == values[11])
 
-        XCTAssertEqual(mat[3, 0], values[12])
-        XCTAssertEqual(mat[3, 1], values[13])
-        XCTAssertEqual(mat[3, 2], values[14])
-        XCTAssertEqual(mat[3, 3], values[15])
+        #expect(mat[3, 0] == values[12])
+        #expect(mat[3, 1] == values[13])
+        #expect(mat[3, 2] == values[14])
+        #expect(mat[3, 3] == values[15])
     }
 
-    func testSubscriptIndex() {
+    @Test func subscriptIndex() {
         let values: [Float] = rnd(16)
 
         let mat = Mat4x4f(values)
 
-        XCTAssertEqual(mat[0], values[0])
-        XCTAssertEqual(mat[1], values[1])
-        XCTAssertEqual(mat[2], values[2])
-        XCTAssertEqual(mat[3], values[3])
+        #expect(mat[0] == values[0])
+        #expect(mat[1] == values[1])
+        #expect(mat[2] == values[2])
+        #expect(mat[3] == values[3])
 
-        XCTAssertEqual(mat[4], values[4])
-        XCTAssertEqual(mat[5], values[5])
-        XCTAssertEqual(mat[6], values[6])
-        XCTAssertEqual(mat[7], values[7])
+        #expect(mat[4] == values[4])
+        #expect(mat[5] == values[5])
+        #expect(mat[6] == values[6])
+        #expect(mat[7] == values[7])
 
-        XCTAssertEqual(mat[8], values[8])
-        XCTAssertEqual(mat[9], values[9])
-        XCTAssertEqual(mat[10], values[10])
-        XCTAssertEqual(mat[11], values[11])
+        #expect(mat[8] == values[8])
+        #expect(mat[9] == values[9])
+        #expect(mat[10] == values[10])
+        #expect(mat[11] == values[11])
 
-        XCTAssertEqual(mat[12], values[12])
-        XCTAssertEqual(mat[13], values[13])
-        XCTAssertEqual(mat[14], values[14])
-        XCTAssertEqual(mat[15], values[15])
+        #expect(mat[12] == values[12])
+        #expect(mat[13] == values[13])
+        #expect(mat[14] == values[14])
+        #expect(mat[15] == values[15])
     }
 
-    func testTranslationInit() {
+    @Test func translationInit() {
         let vec = Vec3f(rnd(3))
 
         let mat = Mat4x4f(translation: vec)
@@ -124,10 +119,10 @@ class Mat4x4fTests: XCTestCase {
             vec.x, vec.y, vec.z, 1.000_000
         ]
 
-        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
+        expectEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
-    func testScaleInit() {
+    @Test func scaleInit() {
         let vec = Vec3f(rnd(3))
 
         let mat = Mat4x4f(scale: vec)
@@ -137,10 +132,10 @@ class Mat4x4fTests: XCTestCase {
                                0, 0, vec.z, 0,
                                0, 0, 0, 1]
 
-        XCTAssertEqual(mat.elements, values)
+        #expect(mat.elements == values)
     }
 
-    func testRotationInitX() {
+    @Test func rotationInitX() {
         let angle: Float = radians(13)
         let axis: Vec3f = .axisX
 
@@ -152,10 +147,10 @@ class Mat4x4fTests: XCTestCase {
         ]
 
         let mat = Mat4x4f(rotation: angle, axis: axis)
-        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
+        expectEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
-    func testRotationInitY() {
+    @Test func rotationInitY() {
         let angle: Float = radians(53)
         let axis: Vec3f = .axisY
 
@@ -167,10 +162,10 @@ class Mat4x4fTests: XCTestCase {
         ]
 
         let mat = Mat4x4f(rotation: angle, axis: axis)
-        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
+        expectEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
-    func testRotationInitZ() {
+    @Test func rotationInitZ() {
         let angle: Float = radians(79)
         let axis: Vec3f = .axisZ
 
@@ -182,10 +177,10 @@ class Mat4x4fTests: XCTestCase {
         ]
 
         let mat = Mat4x4f(rotation: angle, axis: axis)
-        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
+        expectEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
-    func testRotationInitXZ() {
+    @Test func rotationInitXZ() {
         let angle: Float = radians(33)
         let axis: Vec3f = [1, 0, 1]
 
@@ -197,10 +192,10 @@ class Mat4x4fTests: XCTestCase {
         ]
 
         let mat = Mat4x4f(rotation: angle, axis: axis)
-        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
+        expectEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
-    func testQuaternionInit() {
+    @Test func quaternionInit() {
         let vec: Vec4f = [1.23, 4.56, 7.89, 0.12]
 
         let values: [Float] = [
@@ -212,10 +207,10 @@ class Mat4x4fTests: XCTestCase {
 
         let mat = Mat4x4f(orientation: Quat4f(vec))
 
-        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
+        expectEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
-    func testUpperLeft() {
+    @Test func upperLeft() {
         let vec0 = Vec3f(rnd(3))
         let vec1 = Vec3f(rnd(3))
         let vec2 = Vec3f(rnd(3))
@@ -226,10 +221,10 @@ class Mat4x4fTests: XCTestCase {
 
         let mat3x3 = mat.upperLeft
 
-        XCTAssertEqual(mat3x3, mat3x3exp)
+        #expect(mat3x3 == mat3x3exp)
     }
 
-    func testTranslateMatrixByVector() {
+    @Test func translateMatrixByVector() {
         let values: [Float] = [
             -0.963_882, 0.155_028, 0.216_558, 0.000_000,
             0.110_248, -0.507_928, 0.854_315, 0.000_000,
@@ -246,19 +241,19 @@ class Mat4x4fTests: XCTestCase {
 
         mat.translate(by: [7.56, 33.44, 98.32])
 
-        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
+        expectEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
-    func testTranslation() {
+    @Test func translation() {
         var mat: Mat4x4f = .identity
 
-        XCTAssertEqual(mat.translation, [0, 0, 0])
+        #expect(mat.translation == [0, 0, 0])
 
         mat.translation = [1, 2, 3]
-        XCTAssertEqual(mat.translation, [1, 2, 3])
+        #expect(mat.translation == [1, 2, 3])
     }
 
-    func testScaleMatrixByVector() {
+    @Test func scaleMatrixByVector() {
         let values: [Float] = [
             -3.113_339, 0.500_740, 0.699_482, 0.000_000,
             0.059_865, -0.275_805, 0.463_893, 0.000_000,
@@ -275,10 +270,10 @@ class Mat4x4fTests: XCTestCase {
 
         mat.scale(by: [3.23, 0.543, -4.5])
 
-        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
+        expectEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
-    func testRotateMatrixByAngleAroundAxes() {
+    @Test func rotateMatrixByAngleAroundAxes() {
         let values: [Float] = [
             -0.076_637, -0.960_875, 0.266_170, 0.000_000,
             0.858_961, 0.071_925, 0.506_965, 0.000_000,
@@ -295,10 +290,10 @@ class Mat4x4fTests: XCTestCase {
 
         mat.rotate(by: radians(91), axis: [0, 1, 1])
 
-        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
+        expectEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
-    func testLookAt() {
+    @Test func lookAt() {
         let eye: Vec3f = [10, 45, -3]
         let center: Vec3f = [4, 6.4, 0.45]
         let up: Vec3f = .axisY
@@ -312,10 +307,10 @@ class Mat4x4fTests: XCTestCase {
 
         let mat: Mat4x4f = .look(from: eye, at: center, up: up)
 
-        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
+        expectEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
-    func testPerspective() {
+    @Test func perspective() {
         let values: [Float] = [
             0.697_798, 0.000_000, 0.000_000, 0.000_000,
             0.000_000, 1.116_477, 0.000_000, 0.000_000,
@@ -328,10 +323,10 @@ class Mat4x4fTests: XCTestCase {
                                           zNear: 0.001,
                                           zFar: 100.0)
 
-        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
+        expectEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
-    func testOrthographic() {
+    @Test func orthographic() {
         let width: Float = 2880.0
         let height: Float = 1800.0
 
@@ -349,10 +344,10 @@ class Mat4x4fTests: XCTestCase {
                                          zNear: 0.001,
                                          zFar: 100.0)
 
-        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
+        expectEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
-    func testMultiply() {
+    @Test func multiplyMatrices() {
         let m0 = Mat4x4f(rotation: radians(51), axis: [1, 0, 1])
         let m1 = Mat4x4f(translation: [1, 2, 3])
 
@@ -364,25 +359,25 @@ class Mat4x4fTests: XCTestCase {
         ]
 
         var mat: Mat4x4f = multiply(m0, m1)
-        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
+        expectEqualElements(mat.elements, values, accuracy: 1e-6)
 
         mat = m0 * m1
-        XCTAssertEqualElements(mat.elements, values, accuracy: 1e-6)
+        expectEqualElements(mat.elements, values, accuracy: 1e-6)
     }
 
-    func testMultiplyVec4f() {
+    @Test func multiplyVec4f() {
         let m0 = Mat4x4f(rotation: radians(51), axis: [1, 0, 1])
         let m1 = Mat4x4f(translation: [1, 2, 3])
         let mat00 = m0 * m1
 
         var mat = multiply(mat00, Vec4f(78.0, 3.02, -32, 1.0))
-        XCTAssertEqualElements(mat.elements, [56.224686, 62.507904, -6.2246857, 1.0], accuracy: 1e-5)
+        expectEqualElements(mat.elements, [56.224686, 62.507904, -6.2246857, 1.0], accuracy: 1e-5)
 
         mat = mat00 * Vec4f(78.0, 3.02, -32, 1.0)
-        XCTAssertEqualElements(mat.elements, [56.224686, 62.507904, -6.2246857, 1.0], accuracy: 1e-5)
+        expectEqualElements(mat.elements, [56.224686, 62.507904, -6.2246857, 1.0], accuracy: 1e-5)
     }
 
-    func testInverse() {
+    @Test func inverse() {
         let values: [Float] = [
             -0.963_882, 0.110_248, 0.242_439, 0.000_000,
             0.155_028, -0.507_928, 0.847_335, 0.000_000,
@@ -397,55 +392,123 @@ class Mat4x4fTests: XCTestCase {
         ]
 
         let iMat = mat.inverted
-        #if FRB_MATH_USE_SIMD
-        XCTAssertEqualElements(iMat.elements, values, accuracy: 1e-5)
-        #else
-        #warning("accuracy too low!")
-        XCTAssertEqualElements(iMat.elements, values, accuracy: 1)
-        #endif
+        expectEqualElements(iMat.elements, values, accuracy: 1e-5)
     }
 
-    func testMatrixForcedContiguousStorage () throws {
+    @Test func transformations() {
+        let mat = Mat4x4f(translation: [1, 2, 3], scale: [2, 2, 2])
+        
+        let p = Vec3f(1, 1, 1)
+        let tp = mat.transformPoint(p)
+        #expect(tp == [3, 4, 5]) // (1,1,1) * 2 + (1,2,3)
+        
+        let d = Vec3f(1, 1, 1)
+        let td = mat.transformDirection(d)
+        #expect(td == [2, 2, 2]) // (1,1,1) * 2
+    }
+    
+    @Test func orientationProperties() {
+        var mat = Mat4x4f.identity
+        mat.right = [1, 2, 3]
+        mat.up = [4, 5, 6]
+        mat.forward = [7, 8, 9]
+        
+        #expect(mat.right == [1, 2, 3])
+        #expect(mat.up == [4, 5, 6])
+        #expect(mat.forward == [7, 8, 9])
+    }
+    
+    @Test func eulerAngles() {
+        let mat = Mat4x4f(rotation: 0.5, axis: [1, 0, 0])
+        #expect(abs(mat.eulerAnglesXYZ.x - (-0.5)) < 1e-6)
+    }
+    
+    @Test func rotationProperty() {
+        let q = Quat4f(angle: .pi / 2, axis: [0, 1, 0])
+        let mat = Mat4x4f(rotation: .pi / 2, axis: [0, 1, 0])
+        let rot = mat.rotation
+        #expect(abs(rot.y - q.y) < 1e-6)
+    }
+    
+    @Test func staticInitializers() {
+        let t = Mat4x4f.translation(x: 1, y: 2, z: 3)
+        #expect(t.translation == [1, 2, 3])
+        
+        let s = Mat4x4f.scaling(x: 2, y: 3, z: 4)
+        #expect(s.scale == [2, 3, 4])
+        
+        let r = Mat4x4f.rotation(angle: 0.5, axis: [1, 0, 0])
+        #expect(abs(r.eulerAnglesXYZ.x - (-0.5)) < 1e-6)
+    }
+    
+    @Test func pitchYawRoll() {
+        var mat = Mat4x4f.identity
+        mat.pitch(by: 0.1)
+        mat.yaw(by: 0.2)
+        mat.roll(by: 0.3)
+        // Just verify it doesn't crash and changes the matrix
+        #expect(mat != .identity)
+    }
+
+    @Test func collectionConformance() {
+        let mat = Mat4x4f.identity
+        #expect(mat.startIndex == 0)
+        #expect(mat.endIndex == 16)
+        #expect(mat.index(after: 0) == 1)
+        #expect(mat.index(before: 1) == 0)
+        #expect(mat.count == 16)
+    }
+
+    @Test func matrixForcedContiguousStorage () throws {
         let mat = Mat4x4f(diagonal: Vec4f(1, 2, 3, 4))
 
-        let exp = expectation(description: "\(#function)_immutable")
         try mat.withForcedContiguousStorage { buffer in
-            XCTAssertNotNil(buffer.baseAddress)
-            XCTAssertEqual(buffer[0], 1)
-            XCTAssertEqual(buffer[5], 2)
-            XCTAssertEqual(buffer[10], 3)
-            XCTAssertEqual(buffer[15], 4)
-            exp.fulfill()
+            #expect(buffer.baseAddress != nil)
+            #expect(buffer[0] == 1)
+            #expect(buffer[5] == 2)
+            #expect(buffer[10] == 3)
+            #expect(buffer[15] == 4)
         }
 
-        XCTAssertEqual(mat[0], 1)
-        XCTAssertEqual(mat[5], 2)
-        XCTAssertEqual(mat[10], 3)
-        XCTAssertEqual(mat[15], 4)
-
-        wait(for: [exp], timeout: 0.1)
+        #expect(mat[0] == 1)
+        #expect(mat[5] == 2)
+        #expect(mat[10] == 3)
+        #expect(mat[15] == 4)
 
         var mutableMat: Mat4x4f = Mat4x4f(diagonal: Vec4f(1, 2, 3, 4))
-        let exp2 = expectation(description: "\(#function)_mutable")
         try mutableMat.withForcedContiguousMutableStorage { buffer in
-            XCTAssertNotNil(buffer.baseAddress)
-            XCTAssertEqual(buffer[0], 1)
+            #expect(buffer.baseAddress != nil)
+            #expect(buffer[0] == 1)
             buffer[0] = 123
-            XCTAssertEqual(buffer[5], 2)
+            #expect(buffer[5] == 2)
             buffer[5] = 456
-            XCTAssertEqual(buffer[10], 3)
+            #expect(buffer[10] == 3)
             buffer[10] = 789
-            XCTAssertEqual(buffer[15], 4)
+            #expect(buffer[15] == 4)
             buffer[15] = 012
-            exp2.fulfill()
         }
 
-        XCTAssertEqual(mutableMat[0], 123)
-        XCTAssertEqual(mutableMat[5], 456)
-        XCTAssertEqual(mutableMat[10], 789)
-        XCTAssertEqual(mutableMat[15], 012)
-
-        wait(for: [exp2], timeout: 0.1)
+        #expect(mutableMat[0] == 123)
+        #expect(mutableMat[5] == 456)
+        #expect(mutableMat[10] == 789)
+        #expect(mutableMat[15] == 012)
     }
+}
 
+private func expectEqualElements<T, S>(_ expression1: @autoclosure () throws -> S,
+                                       _ expression2: @autoclosure () throws -> S,
+                                       accuracy: T,
+                                       _ message: @autoclosure () -> String = "",
+                                       sourceLocation: SourceLocation = #_sourceLocation) where T: FloatingPoint, S: Sequence, S.Element == T {
+    do {
+        let s1 = try expression1()
+        let s2 = try expression2()
+        for (index, elements) in zip(s1, s2).enumerated() {
+            let diff = abs(elements.0 - elements.1)
+            let comment = Comment(stringLiteral: "[element:\(index + 1)] \(elements.0) is not equal to \(elements.1) +/- \(accuracy) " + message())
+            #expect(diff <= accuracy, comment, sourceLocation: sourceLocation)
+        }
+    } catch {
+        Issue.record(error, Comment(stringLiteral: "Error thrown during element comparison"), sourceLocation: sourceLocation)
+    }
 }

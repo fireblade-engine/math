@@ -1,13 +1,8 @@
-//
-//  MatrixStorage+NO_SIMD.swift
-//
-//
-//  Created by Christian Treffs on 06.09.19.
-//
-
 #if !FRB_MATH_USE_SIMD
-// MARK: - Storage3x3
-public struct Storage2x2<Value>: Storage2x2Protocol where Value: StorageScalar {
+
+// MARK: - Storage2x2
+
+public struct Storage2x2<Value: StorageScalar>: Storage2x2Protocol {
     public typealias Column = SIMD2<Value>
     public typealias Storage3x3Ref = Storage3x3<Value>
     public typealias Storage4x4Ref = Storage4x4<Value>
@@ -28,13 +23,14 @@ public struct Storage2x2<Value>: Storage2x2Protocol where Value: StorageScalar {
 
     @inlinable
     public init(diagonal: Column) {
-        let zero: Value = 0
+        let zero = Value.zero
         column0 = Column(diagonal.x, zero)
         column1 = Column(zero, diagonal.y)
     }
 
     public init() {
-        self.init(diagonal: Column(0, 0))
+        let zero = Value.zero
+        self.init(diagonal: Column(zero, zero))
     }
 
     public func makeIterator() -> IndexingIterator<[Value]> {
@@ -46,10 +42,10 @@ public struct Storage2x2<Value>: Storage2x2Protocol where Value: StorageScalar {
         get {
             switch column {
             case 0:
-                return column0[row]
+                column0[row]
 
             case 1:
-                return column1[row]
+                column1[row]
 
             default:
                 fatalError("column out of bounds \(column)")
@@ -88,8 +84,11 @@ extension Storage2x2: Equatable {
     }
 }
 
+extension Storage2x2: @unchecked Sendable where Value: Sendable {}
+
 // MARK: - Storage3x3
-public struct Storage3x3<Value>: Storage3x3Protocol where Value: StorageScalar {
+
+public struct Storage3x3<Value: StorageScalar>: Storage3x3Protocol {
     public typealias Column = SIMD3<Value>
     public typealias Storage2x2Ref = Storage2x2<Value>
     public typealias Storage4x4Ref = Storage4x4<Value>
@@ -112,14 +111,15 @@ public struct Storage3x3<Value>: Storage3x3Protocol where Value: StorageScalar {
 
     @inlinable
     public init(diagonal: Column) {
-        let zero: Value = 0
+        let zero = Value.zero
         column0 = Column(diagonal.x, zero, zero)
         column1 = Column(zero, diagonal.y, zero)
         column2 = Column(zero, zero, diagonal.z)
     }
 
     public init() {
-        self.init(diagonal: Column(0, 0, 0))
+        let zero = Value.zero
+        self.init(diagonal: Column(zero, zero, zero))
     }
 
     public func makeIterator() -> IndexingIterator<[Value]> {
@@ -131,13 +131,13 @@ public struct Storage3x3<Value>: Storage3x3Protocol where Value: StorageScalar {
         get {
             switch column {
             case 0:
-                return column0[row]
+                column0[row]
 
             case 1:
-                return column1[row]
+                column1[row]
 
             case 2:
-                return column2[row]
+                column2[row]
 
             default:
                 fatalError("column out of bounds \(column)")
@@ -180,8 +180,11 @@ extension Storage3x3: Equatable {
     }
 }
 
+extension Storage3x3: @unchecked Sendable where Value: Sendable {}
+
 // MARK: - Storage4x4Ref
-public struct Storage4x4<Value>: Storage4x4Protocol where Value: StorageScalar {
+
+public struct Storage4x4<Value: StorageScalar>: Storage4x4Protocol {
     public typealias Column = SIMD4<Value>
     public typealias Storage2x2Ref = Storage2x2<Value>
     public typealias Storage3x3Ref = Storage3x3<Value>
@@ -209,7 +212,7 @@ public struct Storage4x4<Value>: Storage4x4Protocol where Value: StorageScalar {
 
     @inlinable
     public init(diagonal: Column) {
-        let zero: Value = 0
+        let zero = Value.zero
         column0 = Column(diagonal.x, zero, zero, zero)
         column1 = Column(zero, diagonal.y, zero, zero)
         column2 = Column(zero, zero, diagonal.z, zero)
@@ -217,7 +220,8 @@ public struct Storage4x4<Value>: Storage4x4Protocol where Value: StorageScalar {
     }
 
     public init() {
-        self.init(diagonal: Column(0, 0, 0, 0))
+        let zero = Value.zero
+        self.init(diagonal: Column(zero, zero, zero, zero))
     }
 
     public func makeIterator() -> IndexingIterator<[Value]> {
@@ -228,16 +232,16 @@ public struct Storage4x4<Value>: Storage4x4Protocol where Value: StorageScalar {
         get {
             switch column {
             case 0:
-                return column0[row]
+                column0[row]
 
             case 1:
-                return column1[row]
+                column1[row]
 
             case 2:
-                return column2[row]
+                column2[row]
 
             case 3:
-                return column3[row]
+                column3[row]
 
             default:
                 fatalError("column out of bounds \(column)")
@@ -283,4 +287,6 @@ extension Storage4x4: Equatable {
             lhs.column3 == rhs.column3
     }
 }
+
+extension Storage4x4: @unchecked Sendable where Value: Sendable {}
 #endif

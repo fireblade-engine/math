@@ -1,10 +1,3 @@
-//
-//  step.swift
-//  FirebladeMath
-//
-//  Created by Christian Treffs on 26.08.19.
-//
-
 #if FRB_MATH_USE_SIMD
 import func simd.step
 #endif
@@ -17,6 +10,7 @@ public func step(_ x: Double, _ edge: Double) -> Double {
     return (x < edge) ? 0 : 1
     #endif
 }
+
 /// Returns 0.0 if x < edge, and 1.0 otherwise.
 public func step(_ x: Float, _ edge: Float) -> Float {
     #if FRB_MATH_USE_SIMD

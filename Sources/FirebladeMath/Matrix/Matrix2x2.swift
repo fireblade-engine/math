@@ -1,12 +1,5 @@
-//
-//  Matrix2x2.swift
-//
-//
-//  Created by stackotter on 01.11.22.
-//
-
 @frozen
-public struct Matrix2x2<Storage>: RandomAccessCollection, MutableCollection where Storage: Storage2x2Protocol, Storage.Value == Storage.Element {
+public struct Matrix2x2<Storage: Storage2x2Protocol>: RandomAccessCollection, MutableCollection, Sendable where Storage.Value == Storage.Element {
     public typealias Element = Storage.Element
     public typealias Index = Storage.Index
     public typealias Value = Storage.Value
@@ -14,22 +7,43 @@ public struct Matrix2x2<Storage>: RandomAccessCollection, MutableCollection wher
 
     @usableFromInline var storage: Storage
 
-    public var startIndex: Index { storage.startIndex }
-    public var endIndex: Index { storage.endIndex }
-    public func index(after i: Index) -> Index { storage.index(after: i) }
-    public func index(before i: Index) -> Index { storage.index(before: i) }
+    public var startIndex: Index {
+        storage.startIndex
+    }
+
+    public var endIndex: Index {
+        storage.endIndex
+    }
+
+    public func index(after i: Index) -> Index {
+        storage.index(after: i)
+    }
+
+    public func index(before i: Index) -> Index {
+        storage.index(before: i)
+    }
 
     @usableFromInline init(storage: Storage) {
         self.storage = storage
     }
 
+    @inlinable
+    public static var identity: Matrix2x2<Storage> {
+        Matrix2x2(diagonal: Vector(repeating: 1))
+    }
+
+    @inlinable
+    public init() {
+        self = .identity
+    }
+
     public init(diagonal: Vector) {
-        self.storage = Storage(diagonal: diagonal)
+        storage = Storage(diagonal: diagonal)
     }
 
     public init(_ columns: [Vector]) {
         precondition(columns.count == 2, "Matrix needs exactly 2 Vector vectors")
-        self.storage = Storage(columns)
+        storage = Storage(columns)
     }
 
     public init(_ column0: Vector, _ column1: Vector) {
@@ -52,12 +66,16 @@ public struct Matrix2x2<Storage>: RandomAccessCollection, MutableCollection wher
         set { storage[column, row] = newValue }
     }
 
+    public mutating func replaceSubrange<C: Collection>(_ subrange: Range<Int>, with newElements: C) where Value == C.Element {
+        storage.replaceSubrange(subrange, with: newElements)
+    }
+
     @inlinable public var columns: (Vector, Vector) {
         storage.columns
     }
 
     @inlinable public var elements: [Value] {
-        [Value](AnyIterator(self.storage.makeIterator()))
+        [Value](AnyIterator(storage.makeIterator()))
     }
 
     @inlinable public func withForcedContiguousStorage<R>(_ body: (UnsafeBufferPointer<Element>) -> R) throws -> R? {
@@ -77,15 +95,21 @@ public struct Matrix2x2<Storage>: RandomAccessCollection, MutableCollection wher
 
         var array = ContiguousArray(self)
         let result = array.withContiguousMutableStorageIfAvailable(body)
-        for (idx, arrayIdx) in zip(self.indices, array.indices) {
+        for (idx, arrayIdx) in zip(indices, array.indices) {
             self[idx] = array[arrayIdx]
         }
         return result
     }
 }
 
+extension Matrix2x2: ExpressibleByArrayLiteral {
+    public init(arrayLiteral elements: Value...) {
+        self.init(elements)
+    }
+}
+
 extension Matrix2x2: Equatable {
-    public static func ==(lhs: Matrix2x2<Storage>, rhs: Matrix2x2<Storage>) -> Bool {
+    public static func == (lhs: Matrix2x2<Storage>, rhs: Matrix2x2<Storage>) -> Bool {
         lhs.storage == rhs.storage
     }
 }

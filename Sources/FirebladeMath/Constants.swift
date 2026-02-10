@@ -1,10 +1,3 @@
-//
-//  Constants.swift
-//
-//
-//  Created by Christian Treffs on 23.07.19.
-//
-
 public let kDegreeToRadians64 = Double.pi / 180.0
 public let kDegreeToRadians32 = Float(kDegreeToRadians64)
 

@@ -1,11 +1,4 @@
-//
-//  SIMD3.swift
-//
-//
-//  Created by Christian Treffs on 25.08.19.
-//
-
-extension SIMD3: Sequence { }
+extension SIMD3: @retroactive Sequence {}
 
 extension SIMD3 where Scalar: FloatingPoint {
     @inlinable public var isNaN: Bool {
@@ -19,7 +12,22 @@ extension SIMD3 where Scalar == Double {
     }
 
     @inlinable public var normalized: SIMD3<Scalar> {
-        normalize(self)
+        FirebladeMath.normalize(self)
+    }
+
+    @inlinable
+    public func normalize() -> SIMD3<Scalar> {
+        FirebladeMath.normalize(self)
+    }
+
+    @inlinable
+    public func cross(_ other: SIMD3<Scalar>) -> SIMD3<Scalar> {
+        FirebladeMath.cross(self, other)
+    }
+
+    @inlinable
+    public func dot(_ other: SIMD3<Scalar>) -> Scalar {
+        FirebladeMath.dot(self, other)
     }
 }
 
@@ -29,6 +37,21 @@ extension SIMD3 where Scalar == Float {
     }
 
     @inlinable public var normalized: SIMD3<Scalar> {
-        normalize(self)
+        FirebladeMath.normalize(self)
+    }
+
+    @inlinable
+    public func normalize() -> SIMD3<Scalar> {
+        FirebladeMath.normalize(self)
+    }
+
+    @inlinable
+    public func cross(_ other: SIMD3<Scalar>) -> SIMD3<Scalar> {
+        FirebladeMath.cross(self, other)
+    }
+
+    @inlinable
+    public func dot(_ other: SIMD3<Scalar>) -> Scalar {
+        FirebladeMath.dot(self, other)
     }
 }

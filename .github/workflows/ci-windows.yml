@@ -2,44 +2,27 @@ name: Windows
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, main ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, main ]
   workflow_dispatch:
 
 jobs:
   windows:
+    name: Windows (Swift ${{ matrix.swift }})
     runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        swift: ["6.1", "6.2"]
     steps:
-      - name: Setup
-        uses: compnerd/gha-setup-swift@v0.2.3
-        with:
-          branch: swift-5.10-release
-          tag: 5.10-RELEASE
-
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
-      - name: Test
-        run: swift test -c release --parallel --xunit-output .build/xUnit-output.xml
-
-      - name: Upload artifacts
-        if: always()
-        uses: actions/upload-artifact@v4.4.3
+      - name: Test Windows
+        uses: brightdigit/swift-build@v1.5.0
         with:
-          name: artifacts-windows-${{ github.run_id }}
-          path: |
-            .build/**/*.a
-            .build/**/*.bundle
-            .build/**/*.dSYM
-            .build/**/*.gdb
-            .build/**/*.json
-            .build/**/*.txt
-            .build/**/*.xctest
-            .build/*.json
-            .build/*.txt
-            .build/*.xml
-            .build/*.yaml
-          if-no-files-found: warn
-          include-hidden-files: true
-
+          windows-swift-version: swift-${{ matrix.swift }}-release
+          windows-swift-build: ${{ matrix.swift }}-RELEASE
+          scheme: FirebladeMath
+          # args: swift test -c release --parallel -Xswiftc -warnings-as-errors

@@ -1,12 +1,5 @@
-//
-//  Size.swift
-//
-//
-//  Created by Christian Treffs on 02.09.20.
-//
-
 @frozen
-public struct Size<Value> where Value: Numeric {
+public struct Size<Value: Numeric> {
     public var width: Value
     public var height: Value
 
@@ -22,9 +15,9 @@ extension Size {
     }
 }
 
-extension Size: Equatable where Value: Equatable { }
-extension Size: Hashable where Value: Hashable { }
-extension Size: Codable where Value: Codable { }
+extension Size: Equatable where Value: Equatable {}
+extension Size: Hashable where Value: Hashable {}
+extension Size: Codable where Value: Codable {}
 
 extension Size where Value: FloatingPoint & ExpressibleByFloatLiteral {
     public var center: Point<Value> {

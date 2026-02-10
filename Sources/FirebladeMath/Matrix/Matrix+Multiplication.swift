@@ -1,15 +1,9 @@
-//
-//  Matrix+Multiplication.swift
-//  FirebladeMath
-//
-//  Created by Christian Treffs on 26.08.19.
-//
-
 #if FRB_MATH_USE_SIMD
 import func simd.simd_mul
 #endif
 
 // MARK: - Mat4x4d
+
 @inlinable
 public func multiply(_ lhs: Mat4x4d, _ rhs: Mat4x4d) -> Mat4x4d {
     #if FRB_MATH_USE_SIMD
@@ -49,10 +43,10 @@ public func multiply(_ lhs: Double, _ rhs: Mat4x4d) -> Mat4x4d {
     #if FRB_MATH_USE_SIMD
     return Mat4x4d(storage: simd_mul(lhs, rhs.storage))
     #else
-    return Mat4x4d(lhs * rhs.storage.columns.0,
-                   lhs * rhs.storage.columns.1,
-                   lhs * rhs.storage.columns.2,
-                   lhs * rhs.storage.columns.3)
+    return Mat4x4d(lhs * rhs.storage.column0,
+                   lhs * rhs.storage.column1,
+                   lhs * rhs.storage.column2,
+                   lhs * rhs.storage.column3)
     #endif
 }
 
@@ -61,8 +55,12 @@ public func multiply(_ lhs: Vec4d, _ rhs: Mat4x4d) -> Vec4d {
     #if FRB_MATH_USE_SIMD
     return simd_mul(lhs, rhs.storage)
     #else
-    #warning("implementation missing")
-    return Vec4d.zero
+    return Vec4d(
+        lhs.x * rhs[0, 0] + lhs.y * rhs[0, 1] + lhs.z * rhs[0, 2] + lhs.w * rhs[0, 3],
+        lhs.x * rhs[1, 0] + lhs.y * rhs[1, 1] + lhs.z * rhs[1, 2] + lhs.w * rhs[1, 3],
+        lhs.x * rhs[2, 0] + lhs.y * rhs[2, 1] + lhs.z * rhs[2, 2] + lhs.w * rhs[2, 3],
+        lhs.x * rhs[3, 0] + lhs.y * rhs[3, 1] + lhs.z * rhs[3, 2] + lhs.w * rhs[3, 3]
+    )
     #endif
 }
 
@@ -80,6 +78,7 @@ public func multiply(_ lhs: Mat4x4d, _ rhs: Vec4d) -> Vec4d {
 }
 
 // MARK: - Mat4x4f
+
 @inlinable
 public func multiply(_ lhs: Mat4x4f, _ rhs: Mat4x4f) -> Mat4x4f {
     #if FRB_MATH_USE_SIMD
@@ -131,8 +130,12 @@ public func multiply(_ lhs: Vec4f, _ rhs: Mat4x4f) -> Vec4f {
     #if FRB_MATH_USE_SIMD
     return simd_mul(lhs, rhs.storage)
     #else
-    #warning("implementation missing")
-    return Vec4f.zero
+    return Vec4f(
+        lhs.x * rhs[0, 0] + lhs.y * rhs[0, 1] + lhs.z * rhs[0, 2] + lhs.w * rhs[0, 3],
+        lhs.x * rhs[1, 0] + lhs.y * rhs[1, 1] + lhs.z * rhs[1, 2] + lhs.w * rhs[1, 3],
+        lhs.x * rhs[2, 0] + lhs.y * rhs[2, 1] + lhs.z * rhs[2, 2] + lhs.w * rhs[2, 3],
+        lhs.x * rhs[3, 0] + lhs.y * rhs[3, 1] + lhs.z * rhs[3, 2] + lhs.w * rhs[3, 3]
+    )
     #endif
 }
 
@@ -149,7 +152,134 @@ public func multiply(_ lhs: Mat4x4f, _ rhs: Vec4f) -> Vec4f {
     #endif
 }
 
+// MARK: - Mat3x3d
+
+@inlinable
+public func multiply(_ lhs: Mat3x3d, _ rhs: Mat3x3d) -> Mat3x3d {
+    #if FRB_MATH_USE_SIMD
+    return Mat3x3d(storage: simd_mul(lhs.storage, rhs.storage))
+    #else
+    return Mat3x3d(
+        Vec3d(
+            lhs[0, 0] * rhs[0, 0] + lhs[1, 0] * rhs[0, 1] + lhs[2, 0] * rhs[0, 2],
+            lhs[0, 1] * rhs[0, 0] + lhs[1, 1] * rhs[0, 1] + lhs[2, 1] * rhs[0, 2],
+            lhs[0, 2] * rhs[0, 0] + lhs[1, 2] * rhs[0, 1] + lhs[2, 2] * rhs[0, 2]
+        ),
+        Vec3d(
+            lhs[0, 0] * rhs[1, 0] + lhs[1, 0] * rhs[1, 1] + lhs[2, 0] * rhs[1, 2],
+            lhs[0, 1] * rhs[1, 0] + lhs[1, 1] * rhs[1, 1] + lhs[2, 1] * rhs[1, 2],
+            lhs[0, 2] * rhs[1, 0] + lhs[1, 2] * rhs[1, 1] + lhs[2, 2] * rhs[1, 2]
+        ),
+        Vec3d(
+            lhs[0, 0] * rhs[2, 0] + lhs[1, 0] * rhs[2, 1] + lhs[2, 0] * rhs[2, 2],
+            lhs[0, 1] * rhs[2, 0] + lhs[1, 1] * rhs[2, 1] + lhs[2, 1] * rhs[2, 2],
+            lhs[0, 2] * rhs[2, 0] + lhs[1, 2] * rhs[2, 1] + lhs[2, 2] * rhs[2, 2]
+        )
+    )
+    #endif
+}
+
+@inlinable
+public func multiply(_ lhs: Double, _ rhs: Mat3x3d) -> Mat3x3d {
+    #if FRB_MATH_USE_SIMD
+    return Mat3x3d(storage: simd_mul(lhs, rhs.storage))
+    #else
+    return Mat3x3d(lhs * rhs.storage.column0,
+                   lhs * rhs.storage.column1,
+                   lhs * rhs.storage.column2)
+    #endif
+}
+
+@inlinable
+public func multiply(_ lhs: Vec3d, _ rhs: Mat3x3d) -> Vec3d {
+    #if FRB_MATH_USE_SIMD
+    return simd_mul(lhs, rhs.storage)
+    #else
+    return Vec3d(
+        lhs.x * rhs[0, 0] + lhs.y * rhs[0, 1] + lhs.z * rhs[0, 2],
+        lhs.x * rhs[1, 0] + lhs.y * rhs[1, 1] + lhs.z * rhs[1, 2],
+        lhs.x * rhs[2, 0] + lhs.y * rhs[2, 1] + lhs.z * rhs[2, 2]
+    )
+    #endif
+}
+
+@inlinable
+public func multiply(_ lhs: Mat3x3d, _ rhs: Vec3d) -> Vec3d {
+    #if FRB_MATH_USE_SIMD
+    return simd_mul(lhs.storage, rhs)
+    #else
+    let Q = lhs[0, 0] * rhs[0] + lhs[1, 0] * rhs[1] + lhs[2, 0] * rhs[2]
+    let R = lhs[0, 1] * rhs[0] + lhs[1, 1] * rhs[1] + lhs[2, 1] * rhs[2]
+    let S = lhs[0, 2] * rhs[0] + lhs[1, 2] * rhs[1] + lhs[2, 2] * rhs[2]
+    return SIMD3<Double>(Q, R, S)
+    #endif
+}
+
+// MARK: - Mat3x3f
+
+@inlinable
+public func multiply(_ lhs: Mat3x3f, _ rhs: Mat3x3f) -> Mat3x3f {
+    #if FRB_MATH_USE_SIMD
+    return Mat3x3f(storage: simd_mul(lhs.storage, rhs.storage))
+    #else
+    return Mat3x3f(
+        Vec3f(
+            lhs[0, 0] * rhs[0, 0] + lhs[1, 0] * rhs[0, 1] + lhs[2, 0] * rhs[0, 2],
+            lhs[0, 1] * rhs[0, 0] + lhs[1, 1] * rhs[0, 1] + lhs[2, 1] * rhs[0, 2],
+            lhs[0, 2] * rhs[0, 0] + lhs[1, 2] * rhs[0, 1] + lhs[2, 2] * rhs[0, 2]
+        ),
+        Vec3f(
+            lhs[0, 0] * rhs[1, 0] + lhs[1, 0] * rhs[1, 1] + lhs[2, 0] * rhs[1, 2],
+            lhs[0, 1] * rhs[1, 0] + lhs[1, 1] * rhs[1, 1] + lhs[2, 1] * rhs[1, 2],
+            lhs[0, 2] * rhs[1, 0] + lhs[1, 2] * rhs[1, 1] + lhs[2, 2] * rhs[1, 2]
+        ),
+        Vec3f(
+            lhs[0, 0] * rhs[2, 0] + lhs[1, 0] * rhs[2, 1] + lhs[2, 0] * rhs[2, 2],
+            lhs[0, 1] * rhs[2, 0] + lhs[1, 1] * rhs[2, 1] + lhs[2, 1] * rhs[2, 2],
+            lhs[0, 2] * rhs[2, 0] + lhs[1, 2] * rhs[2, 1] + lhs[2, 2] * rhs[2, 2]
+        )
+    )
+    #endif
+}
+
+@inlinable
+public func multiply(_ lhs: Float, _ rhs: Mat3x3f) -> Mat3x3f {
+    #if FRB_MATH_USE_SIMD
+    return Mat3x3f(storage: simd_mul(lhs, rhs.storage))
+    #else
+    return Mat3x3f(lhs * rhs.storage.column0,
+                   lhs * rhs.storage.column1,
+                   lhs * rhs.storage.column2)
+    #endif
+}
+
+@inlinable
+public func multiply(_ lhs: Vec3f, _ rhs: Mat3x3f) -> Vec3f {
+    #if FRB_MATH_USE_SIMD
+    return simd_mul(lhs, rhs.storage)
+    #else
+    return Vec3f(
+        lhs.x * rhs[0, 0] + lhs.y * rhs[0, 1] + lhs.z * rhs[0, 2],
+        lhs.x * rhs[1, 0] + lhs.y * rhs[1, 1] + lhs.z * rhs[1, 2],
+        lhs.x * rhs[2, 0] + lhs.y * rhs[2, 1] + lhs.z * rhs[2, 2]
+    )
+    #endif
+}
+
+@inlinable
+public func multiply(_ lhs: Mat3x3f, _ rhs: Vec3f) -> Vec3f {
+    #if FRB_MATH_USE_SIMD
+    return simd_mul(lhs.storage, rhs)
+    #else
+    let Q = lhs[0, 0] * rhs[0] + lhs[1, 0] * rhs[1] + lhs[2, 0] * rhs[2]
+    let R = lhs[0, 1] * rhs[0] + lhs[1, 1] * rhs[1] + lhs[2, 1] * rhs[2]
+    let S = lhs[0, 2] * rhs[0] + lhs[1, 2] * rhs[1] + lhs[2, 2] * rhs[2]
+    return SIMD3<Float>(Q, R, S)
+    #endif
+}
+
 // MARK: - Mat2x2d
+
 @inlinable
 public func multiply(_ lhs: Mat2x2d, _ rhs: Mat2x2d) -> Mat2x2d {
     #if FRB_MATH_USE_SIMD
@@ -173,8 +303,8 @@ public func multiply(_ lhs: Double, _ rhs: Mat2x2d) -> Mat2x2d {
     #if FRB_MATH_USE_SIMD
     return Mat2x2d(storage: simd_mul(lhs, rhs.storage))
     #else
-    return Mat2x2d(lhs * rhs.storage.columns.0,
-                   lhs * rhs.storage.columns.1)
+    return Mat2x2d(lhs * rhs.storage.column0,
+                   lhs * rhs.storage.column1)
     #endif
 }
 
@@ -183,8 +313,10 @@ public func multiply(_ lhs: Vec2d, _ rhs: Mat2x2d) -> Vec2d {
     #if FRB_MATH_USE_SIMD
     return simd_mul(lhs, rhs.storage)
     #else
-    #warning("implementation missing")
-    return Vec2d.zero
+    return Vec2d(
+        lhs.x * rhs[0, 0] + lhs.y * rhs[0, 1],
+        lhs.x * rhs[1, 0] + lhs.y * rhs[1, 1]
+    )
     #endif
 }
 
@@ -200,6 +332,7 @@ public func multiply(_ lhs: Mat2x2d, _ rhs: Vec2d) -> Vec2d {
 }
 
 // MARK: - Mat2x2f
+
 @inlinable
 public func multiply(_ lhs: Mat2x2f, _ rhs: Mat2x2f) -> Mat2x2f {
     #if FRB_MATH_USE_SIMD
@@ -233,8 +366,10 @@ public func multiply(_ lhs: Vec2f, _ rhs: Mat2x2f) -> Vec2f {
     #if FRB_MATH_USE_SIMD
     return simd_mul(lhs, rhs.storage)
     #else
-    #warning("implementation missing")
-    return Vec2f.zero
+    return Vec2f(
+        lhs.x * rhs[0, 0] + lhs.y * rhs[0, 1],
+        lhs.x * rhs[1, 0] + lhs.y * rhs[1, 1]
+    )
     #endif
 }
 

@@ -1,28 +1,17 @@
-// swift-tools-version:5.1
+// swift-tools-version: 6.1
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
-/// We define global swift settings to control SIMD usage.
-/// The gist is, that we will import and use SIMD implementations where available.
-/// Otherwise we fall back to our own implementation.
-var swiftSettings: [SwiftSetting] = []
-#if canImport(simd)
-swiftSettings.append(.define("FRB_MATH_USE_SIMD"))
-#endif
+let swiftSettings: [SwiftSetting] = [
+    .define("FRB_MATH_USE_SIMD", .when(traits: ["simd"]))
+]
 
-#if canImport(Darwin)
-swiftSettings.append(.define("FRB_MATH_DARWIN"))
-#elseif canImport(Glibc)
-swiftSettings.append(.define("FRB_MATH_GLIBC"))
-#elseif canImport(Foundation)
-swiftSettings.append(.define("FRB_MATH_FOUNDATION"))
-#endif
-
-#if os(Windows)
-let libraryType : Product.Library.LibraryType = .dynamic
+let defaultTraits: [String]
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS) || os(visionOS)
+defaultTraits = ["simd"]
 #else
-let libraryType : Product.Library.LibraryType = .static
+defaultTraits = []
 #endif
 
 let package = Package(
@@ -30,8 +19,11 @@ let package = Package(
     products: [
         .library(
             name: "FirebladeMath",
-            type: libraryType,
             targets: ["FirebladeMath"])
+    ],
+    traits: [
+        .trait(name: "simd"),
+        .trait(name: "default", enabledTraits: Set(defaultTraits))
     ],
     targets: [
         .target(

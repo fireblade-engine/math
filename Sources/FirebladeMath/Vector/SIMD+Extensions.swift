@@ -1,10 +1,3 @@
-//
-//  Vector4.swift
-//
-//
-//  Created by Christian Treffs on 23.08.19.
-//
-
 extension SIMD {
     public func makeIterator() -> SIMDScalarIterator<Self> {
         SIMDScalarIterator(self)
@@ -15,14 +8,14 @@ extension SIMD {
     }
 }
 
-public struct SIMDScalarIterator<Vector>: IteratorProtocol where Vector: SIMD {
+public struct SIMDScalarIterator<Vector: SIMD>: IteratorProtocol {
     private var index: Int
     private let endIndex: Int
     private let vector: Vector
 
     init(_ vector: Vector) {
-        self.index = vector.indices.startIndex
-        self.endIndex = vector.indices.endIndex
+        index = vector.indices.startIndex
+        endIndex = vector.indices.endIndex
         self.vector = vector
     }
 

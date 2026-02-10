@@ -1,10 +1,3 @@
-//
-//  inverse.swift
-//
-//
-//  Created by Christian Treffs on 09.09.19.
-//
-
 #if FRB_MATH_USE_SIMD
 import func simd.simd_inverse
 #endif
@@ -13,8 +6,9 @@ public func inverse(_ matrix: Mat3x3f) -> Mat3x3f {
     #if FRB_MATH_USE_SIMD
     return Mat3x3f(storage: simd.simd_inverse(matrix.storage))
     #else
-    #warning("implementation missing")
-    return Mat3x3f.identity
+    let adj: Mat3x3f = adjugate(matrix)
+    let det: Float = determinant(matrix)
+    return multiply(1.0 / det, adj)
     #endif
 }
 
@@ -22,8 +16,9 @@ public func inverse(_ matrix: Mat3x3d) -> Mat3x3d {
     #if FRB_MATH_USE_SIMD
     return Mat3x3d(storage: simd.simd_inverse(matrix.storage))
     #else
-    #warning("implementation missing")
-    return Mat3x3d.identity
+    let adj: Mat3x3d = adjugate(matrix)
+    let det: Double = determinant(matrix)
+    return multiply(1.0 / det, adj)
     #endif
 }
 
@@ -32,8 +27,8 @@ public func inverse(_ matrix: Mat4x4f) -> Mat4x4f {
     return Mat4x4f(storage: simd.simd_inverse(matrix.storage))
     #else
     let adj: Mat4x4f = adjugate(matrix)
-    let value: Float = 1.0 / determinant(adj)
-    return multiply(value, adj)
+    let det: Float = determinant(matrix)
+    return multiply(1.0 / det, adj)
     #endif
 }
 
@@ -42,8 +37,8 @@ public func inverse(_ matrix: Mat4x4d) -> Mat4x4d {
     return Mat4x4d(storage: simd.simd_inverse(matrix.storage))
     #else
     let adj: Mat4x4d = adjugate(matrix)
-    let value: Double = 1.0 / determinant(adj)
-    return multiply(value, adj)
+    let det: Double = determinant(matrix)
+    return multiply(1.0 / det, adj)
     #endif
 }
 

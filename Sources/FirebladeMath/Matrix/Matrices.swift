@@ -1,18 +1,11 @@
-//
-//  Matrices.swift
-//  FirebladeMath
-//
-//  Created by Christian Treffs on 26.08.19.
-//
-
 #if FRB_MATH_USE_SIMD
-
-import struct simd.matrix.simd_float4x4
-import struct simd.matrix.simd_double4x4
-import struct simd.matrix.simd_float3x3
-import struct simd.matrix.simd_double3x3
-import struct simd.matrix.simd_float2x2
-import struct simd.matrix.simd_double2x2
+import struct simd.simd_double2x2
+import struct simd.simd_double3x3
+import struct simd.simd_double4x4
+import struct simd.simd_float2x2
+import struct simd.simd_float3x3
+import struct simd.simd_float4x4
+import func simd.simd_mul
 
 public typealias Mat4x4f = Matrix4x4<simd_float4x4>
 public typealias Mat4x4d = Matrix4x4<simd_double4x4>

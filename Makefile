@@ -1,72 +1,47 @@
-# Version 1.0.0
 UNAME_S := $(shell uname -s)
+SWIFT_FLAGS ?= --disable-sandbox
+PACKAGE_SWIFT_VERSION := $(shell grep "swift-tools-version" Package.swift | head -n 1 | cut -d ":" -f 2 | xargs)
 
-# Lint
+# Targets
+.PHONY: setup lint lint-fix test test-coverage clean pre-commit
+
+setup:
+	@echo "Detected Package Swift Version: $(PACKAGE_SWIFT_VERSION)"
+	@which mint > /dev/null || (echo "Mint not found. Installing via Homebrew..." && brew install mint)
+	mint bootstrap
+	swift package resolve $(SWIFT_FLAGS)
+
 lint:
-	swiftlint autocorrect --format
-	swiftlint lint --quiet
+	mint run swiftlint lint --quiet
+	mint run swiftformat --lint --swiftversion $(PACKAGE_SWIFT_VERSION) Sources/ Tests/
 
-lintErrorOnly:
-	@swiftlint autocorrect --format --quiet
-	@swiftlint lint --quiet | grep error
+lint-fix:
+	mint run swiftformat --swiftversion $(PACKAGE_SWIFT_VERSION) --config .swiftformat Sources/ Tests/
+	mint run swiftlint --fix --config .swiftlint.yml Sources/ Tests/
 
-# Git
-precommit: lint genLinuxTests
+test:
+	swift test $(SWIFT_FLAGS) --parallel --enable-code-coverage -Xswiftc -warnings-as-errors
 
-submodule:
-	git submodule init
-	git submodule update --recursive
+test-coverage:
+	$(MAKE) test
+	@XCTEST_PATH=$$(find .build -name "*.xctest" | grep "FirebladeMath" | head -n 1); \
+	if [ -z "$$XCTEST_PATH" ]; then \
+		echo "Could not find .xctest bundle"; \
+		exit 1; \
+	fi; \
+	if [ "$(UNAME_S)" = "Darwin" ]; then \
+		BINARY_PATH=$$(find "$$XCTEST_PATH" -type f -perm +111 | grep -v "CodeResources" | head -n 1); \
+	else \
+		BINARY_PATH="$$XCTEST_PATH/FirebladeMathPackageTests"; \
+	fi; \
+	xcrun llvm-cov report \
+		"$$BINARY_PATH" \
+		-instr-profile=.build/debug/codecov/default.profdata \
+		-ignore-filename-regex=".build|Tests"
 
-# Tests
-genLinuxTests:
-	swift test --generate-linuxmain
-	swiftlint autocorrect --format --path Tests/
+pre-commit: lint-fix test
 
-test: 
-	swift test -c release --skip-update --parallel --enable-code-coverage
-
-buildRelease:
-	swift build -c release
-
-# Package
-latest:
-	swift package update
-
-resolve:
-	swift package resolve
-
-# Xcode
-genXcode:
-	swift package generate-xcodeproj --enable-code-coverage --skip-extra-files
-
-genXcodeOpen: genXcode
-	open *.xcodeproj
-
-# Clean
 clean:
-	swift package reset
-	-rm -rdf .swiftpm/xcode
-	-rm -rdf .build/
-	-rm Package.resolved
-	-rm .DS_Store
-
-cleanArtifacts:
 	swift package clean
-
-# Test links in README
-# requires <https://github.com/tcort/markdown-link-check>
-testReadme:
-	markdown-link-check -p -v ./README.md
-
-brewInstallDeps: brewUpdate
-	brew install swiftenv
-	brew install swiftlint
-
-brewSetup:
-	which -s brew || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-
-brewUpdate: brewSetup
-	brew update
-
-setupEnvironment: brewInstallDeps
-	open Package.swift
+	rm -rf .build
+	rm -rf .swiftpm

@@ -1,10 +1,3 @@
-//
-//  clamp.swift
-//  FirebladeMath
-//
-//  Created by Christian Treffs on 26.08.19.
-//
-
 #if FRB_MATH_USE_SIMD
 import func simd.simd_clamp
 #endif
@@ -16,7 +9,7 @@ import func simd.simd_clamp
 ///   - min: min range bound
 ///   - max: max range bound
 /// - Returns: x clamped to the range [min, max]
-public func clamp<Value>(_ x: Value, min minVal: Value, max maxVal: Value) -> Value where Value: Comparable {
+public func clamp<Value: Comparable>(_ x: Value, min minVal: Value, max maxVal: Value) -> Value {
     min(max(x, minVal), maxVal)
 }
 

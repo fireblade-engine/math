@@ -1,8 +1,15 @@
-//
-//  StorageScalar.swift
-//
-//
-//  Created by Christian Treffs on 06.09.19.
-//
+public protocol StorageScalar: SIMDScalar, BinaryFloatingPoint, Sendable, Codable {
+    static var one: Self { get }
+}
 
-public typealias StorageScalar = SIMDScalar & ExpressibleByIntegerLiteral
+extension Float: StorageScalar {
+    public static var one: Float {
+        1.0
+    }
+}
+
+extension Double: StorageScalar {
+    public static var one: Double {
+        1.0
+    }
+}

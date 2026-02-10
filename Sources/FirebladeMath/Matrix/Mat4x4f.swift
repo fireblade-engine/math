@@ -1,47 +1,37 @@
-//
-//  Mat4x4f.swift
-//
-//
-//  Created by Christian Treffs on 06.09.19.
-//
+#if FRB_MATH_USE_SIMD
+import simd
+#endif
 
 extension Mat4x4f {
-    /*public init(rotation angleRadians: Float, axis: SIMD3<Float>) {
-     let quat = Quat4f(angle: angleRadians, axis: axis)
-     self = matrix4x4(from: quat)
-     }*/
-
     public init(rotation angleRadians: Float, axis: SIMD3<Float>) {
         // see: <GLKit.framework/.../Headers/GLKMatrix4.h>
-        let v: SIMD3<Float> = normalize(axis)
-        let icos: Storage.Value = cos(angleRadians)
-        let icosp: Storage.Value = 1.0 - icos
-        let isin: Storage.Value = sin(angleRadians)
+        let v = normalize(axis)
+        let icos = cos(angleRadians)
+        let icosp = 1.0 - icos
+        let isin = sin(angleRadians)
 
         self.init(
-            Vector( icos + icosp * v.x * v.x,
-                    icosp * v.x * v.y + v.z * isin,
-                    icosp * v.x * v.z - v.y * isin,
-                    0),
-            Vector( icosp * v.x * v.y - v.z * isin,
-                    icos + icosp * v.y * v.y,
-                    icosp * v.y * v.z + v.x * isin,
-                    0),
-            Vector( icosp * v.x * v.z + v.y * isin,
-                    icosp * v.y * v.z - v.x * isin,
-                    icos + icosp * v.z * v.z,
-                    0),
+            Vector(icos + icosp * v.x * v.x,
+                   icosp * v.x * v.y + v.z * isin,
+                   icosp * v.x * v.z - v.y * isin,
+                   0),
+            Vector(icosp * v.x * v.y - v.z * isin,
+                   icos + icosp * v.y * v.y,
+                   icosp * v.y * v.z + v.x * isin,
+                   0),
+            Vector(icosp * v.x * v.z + v.y * isin,
+                   icosp * v.y * v.z - v.x * isin,
+                   icos + icosp * v.z * v.z,
+                   0),
             Vector(0, 0, 0, 1)
         )
     }
 
     @inlinable public var scale: SIMD3<Float> {
-        get {
-            let sx = storage.columns.0.length
-            let sy = storage.columns.1.length
-            let sz = storage.columns.2.length
-            return SIMD3<Float>(sx, sy, sz)
-        }
+        let sx = length(storage.columns.0)
+        let sy = length(storage.columns.1)
+        let sz = length(storage.columns.2)
+        return SIMD3<Float>(sx, sy, sz)
     }
 
     public init(upperLeft matrix3x3: Mat3x3f) {
@@ -52,36 +42,31 @@ extension Mat4x4f {
     }
 
     @inlinable public var upperLeft: Mat3x3f {
-        Mat3x3f(SIMD3<Float>(columns.0.xyz),
-                SIMD3<Float>(columns.1.xyz),
-                SIMD3<Float>(columns.2.xyz))
+        Mat3x3f(SIMD3<Float>(columns.0.x, columns.0.y, columns.0.z),
+                SIMD3<Float>(columns.1.x, columns.1.y, columns.1.z),
+                SIMD3<Float>(columns.2.x, columns.2.y, columns.2.z))
     }
 
     @inlinable public var translation: SIMD3<Float> {
         get {
-            SIMD3<Float>(columns.3[0],
-                         columns.3[1],
-                         columns.3[2])
+            let c3 = columns.3
+            return SIMD3<Float>(c3[0], c3[1], c3[2])
         }
         set {
-            storage[3, 0] = newValue.x
-            storage[3, 1] = newValue.y
-            storage[3, 2] = newValue.z
+            self[3, 0] = newValue.x
+            self[3, 1] = newValue.y
+            self[3, 2] = newValue.z
         }
     }
 
     @inlinable public var rotation: SIMD4<Float> {
-        get {
-            SIMD4<Float>(Quat4f(rotation: self))
-        }
+        let quat = Quat4f(rotation: self)
+        return SIMD4<Float>(quat.x, quat.y, quat.z, quat.w)
     }
 
     public init(translation tVec: SIMD3<Float> = .zero, scale sVec: SIMD3<Float> = .one) {
-        let values: [Float] = [sVec.x, 0, 0, 0,
-                               0, sVec.y, 0, 0,
-                               0, 0, sVec.z, 0,
-                               tVec.x, tVec.y, tVec.z, 1]
-        self.init(values)
+        self.init(diagonal: Vector(sVec.x, sVec.y, sVec.z, 1.0))
+        translation = tVec
     }
 
     @discardableResult
@@ -94,7 +79,7 @@ extension Mat4x4f {
     @discardableResult
     @inlinable
     public mutating func scale(by vec: SIMD3<Float>) -> Mat4x4f {
-        self = multiply(self, Mat4x4f(scale: vec))
+        self = multiply(self, Mat4x4f(translation: .zero, scale: vec))
         return self
     }
 
@@ -116,13 +101,13 @@ extension Mat4x4f {
     @inlinable
     public static func look(from eyePosition: SIMD3<Float>, at lookAtPosition: SIMD3<Float>, up: SIMD3<Float>) -> Mat4x4f {
         // see: <GLKit.framework/.../Headers/GLKMatrix4.h>
-        let ev: SIMD3<Float> = eyePosition
-        let cv: SIMD3<Float> = lookAtPosition
-        let uv: SIMD3<Float> = up
+        let ev = eyePosition
+        let cv = lookAtPosition
+        let uv = up
 
-        let n: SIMD3<Float> = normalize(ev - cv)
-        let u: SIMD3<Float> = normalize(cross(uv, n))
-        let v: SIMD3<Float> = cross(n, u)
+        let n = normalize(ev - cv)
+        let u = normalize(cross(uv, n))
+        let v = cross(n, u)
 
         return Mat4x4f(
             Vector(u.x, v.x, n.x, 0.0),
@@ -132,22 +117,56 @@ extension Mat4x4f {
         )
     }
 
-    // Around x-axis
+    @inlinable
+    public static func lookAt(eye: Vec3f, center: Vec3f, up: Vec3f) -> Mat4x4f {
+        look(from: eye, at: center, up: up)
+    }
+
+    @inlinable
+    public static func rotation(angle: Float, axis: Vec3f) -> Mat4x4f {
+        Mat4x4f(rotation: angle, axis: axis)
+    }
+
+    @inlinable
+    public static func translation(x: Float, y: Float, z: Float) -> Mat4x4f {
+        Mat4x4f(translation: Vec3f(x, y, z))
+    }
+
+    @inlinable
+    public static func scaling(x: Float, y: Float, z: Float) -> Mat4x4f {
+        Mat4x4f(translation: .zero, scale: Vec3f(x, y, z))
+    }
+
+    @inlinable
+    public func transformPoint(_ point: Vec3f) -> Vec3f {
+        let p4 = Vec4f(point.x, point.y, point.z, 1.0)
+        let res = multiply(self, p4)
+        return Vec3f(res.x, res.y, res.z)
+    }
+
+    @inlinable
+    public func transformDirection(_ dir: Vec3f) -> Vec3f {
+        let d4 = Vec4f(dir.x, dir.y, dir.z, 0.0)
+        let res = multiply(self, d4)
+        return Vec3f(res.x, res.y, res.z)
+    }
+
+    /// Around x-axis
     @inlinable
     public mutating func pitch(by angle: Float) {
-        self.rotate(by: angle, axis: .axisX)
+        rotate(by: angle, axis: Vec3f(1, 0, 0))
     }
 
     /// Around y-axis
     @inlinable
     public mutating func yaw(by angle: Float) {
-        self.rotate(by: angle, axis: .axisY)
+        rotate(by: angle, axis: Vec3f(0, 1, 0))
     }
 
     /// Around z-axis
     @inlinable
     public mutating func roll(by angle: Float) {
-        self.rotate(by: angle, axis: .axisZ)
+        rotate(by: angle, axis: Vec3f(0, 0, 1))
     }
 
     /// Along x-axis

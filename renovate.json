@@ -1,15 +1,25 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"],
+  "extends": [
+    "config:base"
+  ],
   "prConcurrentLimit": 3,
   "prHourlyLimit": 1,
   "recreateWhen": "auto",
   "prCreation": "not-pending",
   "packageRules": [
     {
-      "groupName": "all dependencies",
-      "matchUpdateTypes": ["minor", "patch"]
+      "description": "Accumulate non-major updates into one pull request",
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "matchCurrentVersion": ">=1",
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch"
     }
   ],
-  "labels": ["dependencies"]
+  "labels": [
+    "dependencies"
+  ]
 }
