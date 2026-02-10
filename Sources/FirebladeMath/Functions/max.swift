@@ -1,12 +1,8 @@
-#if FRB_MATH_FOUNDATION
 import Foundation
-#endif
 
-#if FRB_MATH_DARWIN
-import Darwin.C.math
-#endif
-
-#if FRB_MATH_GLIBC
+#if canImport(Darwin)
+import Darwin
+#elseif canImport(Glibc)
 import Glibc
 #endif
 
@@ -17,15 +13,11 @@ import Glibc
 ///   - y: floating point value
 /// - Returns: If successful, returns the larger of two floating point values. The value returned is exact and does not depend on any rounding modes.
 public func max(_ x: Float, _ y: Float) -> Float {
-    #if FRB_MATH_DARWIN
+    #if canImport(Darwin)
     return Darwin.fmaxf(x, y)
-    #endif
-
-    #if FRB_MATH_GLIBC
+    #elseif canImport(Glibc)
     return Glibc.fmaxf(x, y)
-    #endif
-
-    #if FRB_MATH_FOUNDATION
+    #else
     return Foundation.fmaxf(x, y)
     #endif
 }
@@ -37,5 +29,11 @@ public func max(_ x: Float, _ y: Float) -> Float {
 ///   - y: floating point value
 /// - Returns: If successful, returns the larger of two floating point values. The value returned is exact and does not depend on any rounding modes.
 public func max(_ x: Double, _ y: Double) -> Double {
-    fmax(x, y)
+    #if canImport(Darwin)
+    return Darwin.fmax(x, y)
+    #elseif canImport(Glibc)
+    return Glibc.fmax(x, y)
+    #else
+    return Foundation.fmax(x, y)
+    #endif
 }

@@ -1,13 +1,8 @@
-//
-//  QuaternionStorage+NO_SIMD.swift
-//
-//
-//  Created by Christian Treffs on 06.09.19.
-//
-
 #if !FRB_MATH_USE_SIMD
 
-public struct QuaternionStorage<Value>: QuaternionStorageProtocol where Value: StorageScalar {
+public struct QuaternionStorage<Value: StorageScalar>: QuaternionStorageProtocol {
+    public typealias Element = Value
+
     @usableFromInline var storage: SIMD4<Value>
 
     public init(_ x: Value, _ y: Value, _ z: Value, _ w: Value) {
@@ -48,5 +43,7 @@ extension QuaternionStorage: Equatable {
         lhs.storage == rhs.storage
     }
 }
+
+extension QuaternionStorage: @unchecked Sendable where Value: Sendable {}
 
 #endif

@@ -1,12 +1,8 @@
-#if FRB_MATH_FOUNDATION
 import Foundation
-#endif
 
-#if FRB_MATH_DARWIN
-import Darwin.C.math
-#endif
-
-#if FRB_MATH_GLIBC
+#if canImport(Darwin)
+import Darwin
+#elseif canImport(Glibc)
 import Glibc
 #endif
 
@@ -15,15 +11,11 @@ import Glibc
 /// - Parameter float:     floating point value
 /// - Returns: If no errors occur, the smallest integer value not less than arg, that is ⌈arg⌉, is returned.
 public func ceil(_ float: Float) -> Float {
-    #if FRB_MATH_DARWIN
+    #if canImport(Darwin)
     return Darwin.ceilf(float)
-    #endif
-
-    #if FRB_MATH_GLIBC
+    #elseif canImport(Glibc)
     return Glibc.ceilf(float)
-    #endif
-
-    #if FRB_MATH_FOUNDATION
+    #else
     return Foundation.ceilf(float)
     #endif
 }
@@ -33,15 +25,11 @@ public func ceil(_ float: Float) -> Float {
 /// - Parameter double:     floating point value
 /// - Returns: If no errors occur, the smallest integer value not less than arg, that is ⌈arg⌉, is returned.
 public func ceil(_ double: Double) -> Double {
-    #if FRB_MATH_DARWIN
+    #if canImport(Darwin)
     return Darwin.ceil(double)
-    #endif
-
-    #if FRB_MATH_GLIBC
+    #elseif canImport(Glibc)
     return Glibc.ceil(double)
-    #endif
-
-    #if FRB_MATH_FOUNDATION
+    #else
     return Foundation.ceil(double)
     #endif
 }

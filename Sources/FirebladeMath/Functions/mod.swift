@@ -1,12 +1,8 @@
-#if FRB_MATH_FOUNDATION
 import Foundation
-#endif
 
-#if FRB_MATH_DARWIN
-import Darwin.C.math
-#endif
-
-#if FRB_MATH_GLIBC
+#if canImport(Darwin)
+import Darwin
+#elseif canImport(Glibc)
 import Glibc
 #endif
 
@@ -20,15 +16,11 @@ import Glibc
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func mod(_ x: Float, _ y: Float) -> Float {
-    #if FRB_MATH_DARWIN
+    #if canImport(Darwin)
     return Darwin.fmodf(x, y)
-    #endif
-
-    #if FRB_MATH_GLIBC
+    #elseif canImport(Glibc)
     return Glibc.fmodf(x, y)
-    #endif
-
-    #if FRB_MATH_FOUNDATION
+    #else
     return Foundation.fmodf(x, y)
     #endif
 }
@@ -43,15 +35,11 @@ public func mod(_ x: Float, _ y: Float) -> Float {
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func mod(_ x: Double, _ y: Double) -> Double {
-    #if FRB_MATH_DARWIN
+    #if canImport(Darwin)
     return Darwin.fmod(x, y)
-    #endif
-
-    #if FRB_MATH_GLIBC
+    #elseif canImport(Glibc)
     return Glibc.fmod(x, y)
-    #endif
-
-    #if FRB_MATH_FOUNDATION
+    #else
     return Foundation.fmod(x, y)
     #endif
 }

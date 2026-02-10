@@ -1,12 +1,8 @@
-#if FRB_MATH_FOUNDATION
 import Foundation
-#endif
 
-#if FRB_MATH_DARWIN
-import Darwin.C.math
-#endif
-
-#if FRB_MATH_GLIBC
+#if canImport(Darwin)
+import Darwin
+#elseif canImport(Glibc)
 import Glibc
 #endif
 
@@ -17,15 +13,11 @@ import Glibc
 ///    (arg), or arcosh(arg)) on the interval [0, +∞], is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 public func acosh(_ double: Double) -> Double {
-    #if FRB_MATH_DARWIN
+    #if canImport(Darwin)
     return Darwin.acosh(double)
-    #endif
-
-    #if FRB_MATH_GLIBC
+    #elseif canImport(Glibc)
     return Glibc.acosh(double)
-    #endif
-
-    #if FRB_MATH_FOUNDATION    
+    #else
     return Foundation.acosh(double)
     #endif
 }
@@ -37,15 +29,11 @@ public func acosh(_ double: Double) -> Double {
 ///    (arg), or arcosh(arg)) on the interval [0, +∞], is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 public func acosh(_ float: Float) -> Float {
-    #if FRB_MATH_DARWIN
+    #if canImport(Darwin)
     return Darwin.acoshf(float)
-    #endif
-
-    #if FRB_MATH_GLIBC
+    #elseif canImport(Glibc)
     return Glibc.acoshf(float)
-    #endif
-
-    #if FRB_MATH_FOUNDATION    
+    #else
     return Foundation.acoshf(float)
     #endif
 }

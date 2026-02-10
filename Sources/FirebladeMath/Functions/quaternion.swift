@@ -1,10 +1,3 @@
-//
-//  quaternion.swift
-//
-//
-//  Created by Christian Treffs on 09.09.19.
-//
-
 #if FRB_MATH_USE_SIMD
 import func simd.simd_quaternion
 #endif
@@ -67,7 +60,7 @@ public func quaternion(matrix mat: Mat3x3f) -> Quat4f {
                       rinv * (mat[2, 0] - mat[0, 2]),
                       rinv * (mat[0, 1] - mat[1, 0]),
                       r / 4)
-    } else if mat[0, 0] >= mat[1, 1] && mat[0, 0] >= mat[2, 2] {
+    } else if mat[0, 0] >= mat[1, 1], mat[0, 0] >= mat[2, 2] {
         let r = 2 * sqrt(1 - mat[1, 1] - mat[2, 2] + mat[0, 0])
         let rinv = 1 / r
         return Quat4f(r / 4,
@@ -104,7 +97,7 @@ public func quaternion(matrix mat: Mat3x3d) -> Quat4d {
                       rinv * (mat[2, 0] - mat[0, 2]),
                       rinv * (mat[0, 1] - mat[1, 0]),
                       r / 4)
-    } else if mat[0, 0] >= mat[1, 1] && mat[0, 0] >= mat[2, 2] {
+    } else if mat[0, 0] >= mat[1, 1], mat[0, 0] >= mat[2, 2] {
         let r = 2 * sqrt(1 - mat[1, 1] - mat[2, 2] + mat[0, 0])
         let rinv = 1 / r
         return Quat4d(r / 4,
@@ -142,7 +135,7 @@ public func quaternion(matrix mat: Mat4x4f) -> Quat4f {
                       rinv * (mat[2, 0] - mat[0, 2]),
                       rinv * (mat[0, 1] - mat[1, 0]),
                       r / 4)
-    } else if mat[0, 0] >= mat[1, 1] && mat[0, 0] >= mat[2, 2] {
+    } else if mat[0, 0] >= mat[1, 1], mat[0, 0] >= mat[2, 2] {
         let r = 2 * sqrt(1 - mat[1, 1] - mat[2, 2] + mat[0, 0])
         let rinv = 1 / r
         return Quat4f(r / 4,
@@ -180,7 +173,7 @@ public func quaternion(matrix mat: Mat4x4d) -> Quat4d {
                       rinv * (mat[2, 0] - mat[0, 2]),
                       rinv * (mat[0, 1] - mat[1, 0]),
                       r / 4)
-    } else if mat[0, 0] >= mat[1, 1] && mat[0, 0] >= mat[2, 2] {
+    } else if mat[0, 0] >= mat[1, 1], mat[0, 0] >= mat[2, 2] {
         let r = 2 * sqrt(1 - mat[1, 1] - mat[2, 2] + mat[0, 0])
         let rinv = 1 / r
         return Quat4d(r / 4,

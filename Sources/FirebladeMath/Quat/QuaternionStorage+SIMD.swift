@@ -1,16 +1,9 @@
-//
-//  QuaternionStorage+SIMD.swift
-//
-//
-//  Created by Christian Treffs on 06.09.19.
-//
-
 #if FRB_MATH_USE_SIMD
 import struct simd.quaternion.simd_quatd
 import struct simd.quaternion.simd_quatf
 import func simd.simd_quaternion
 
-extension simd_quatf: QuaternionStorageProtocol {
+extension simd_quatf: QuaternionStorageProtocol, @retroactive Sequence {
     public init(_ vector: SIMD4<Float>) {
         self = simd_quaternion(vector)
     }
@@ -44,7 +37,7 @@ extension simd_quatf: QuaternionStorageProtocol {
     }
 }
 
-extension simd_quatd: QuaternionStorageProtocol {
+extension simd_quatd: QuaternionStorageProtocol, @retroactive Sequence {
     public init(_ vector: SIMD4<Double>) {
         self = simd_quaternion(vector)
     }

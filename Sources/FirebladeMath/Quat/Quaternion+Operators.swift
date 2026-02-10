@@ -1,10 +1,3 @@
-//
-//  Quaternion+Operators.swift
-//  FirebladeMath
-//
-//  Created by Christian Treffs on 26.08.19.
-//
-
 public func * (lhs: Float, rhs: Quat4f) -> Quat4f {
     multiply(lhs, rhs)
 }
@@ -46,6 +39,11 @@ public func * (lhs: Quat4d, rhs: Double) -> Quat4d {
 /// Returns the product of two quaternions.
 public func * (lhs: Quat4d, rhs: Quat4d) -> Quat4d {
     multiply(lhs, rhs)
+}
+
+/// Returns a vector rotated by a quaternion.
+public func * (lhs: Quat4d, rhs: Vec3d) -> Vec3d {
+    act(lhs, rhs)
 }
 
 public func *= (lhs: inout Quat4d, rhs: Quat4d) {

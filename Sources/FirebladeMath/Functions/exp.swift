@@ -1,12 +1,8 @@
-#if FRB_MATH_FOUNDATION
 import Foundation
-#endif
 
-#if FRB_MATH_DARWIN
-import Darwin.C.math
-#endif
-
-#if FRB_MATH_GLIBC
+#if canImport(Darwin)
+import Darwin
+#elseif canImport(Glibc)
 import Glibc
 #endif
 
@@ -17,15 +13,11 @@ import Glibc
 /// If a range error due to overflow occurs, +HUGE_VAL, +HUGE_VALF, or +HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func exp(_ power: Float) -> Float {
-    #if FRB_MATH_DARWIN
+    #if canImport(Darwin)
     return Darwin.expf(power)
-    #endif
-
-    #if FRB_MATH_GLIBC
+    #elseif canImport(Glibc)
     return Glibc.expf(power)
-    #endif
-
-    #if FRB_MATH_FOUNDATION
+    #else
     return Foundation.expf(power)
     #endif
 }
@@ -37,15 +29,11 @@ public func exp(_ power: Float) -> Float {
 /// If a range error due to overflow occurs, +HUGE_VAL, +HUGE_VALF, or +HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func exp(_ power: Double) -> Double {
-    #if FRB_MATH_DARWIN
+    #if canImport(Darwin)
     return Darwin.exp(power)
-    #endif
-
-    #if FRB_MATH_GLIBC
+    #elseif canImport(Glibc)
     return Glibc.exp(power)
-    #endif
-
-    #if FRB_MATH_FOUNDATION
+    #else
     return Foundation.exp(power)
     #endif
 }

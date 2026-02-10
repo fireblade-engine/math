@@ -1,10 +1,3 @@
-//
-//  smoothstep.swift
-//  FirebladeMath
-//
-//  Created by Christian Treffs on 26.08.19.
-//
-
 #if FRB_MATH_USE_SIMD
 import func simd.simd_smoothstep
 #endif

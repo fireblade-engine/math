@@ -1,15 +1,8 @@
-//
-//  lerp.swift
-//  FirebladeMath
-//
-//  Created by Christian Treffs on 10.09.19.
-//
-
 #if FRB_MATH_USE_SIMD
 import func simd.simd_mix
 #endif
 
-public func interpolate<Value>(_ v0: Value, _ v1: Value, _ t: Value) -> Value where Value: FloatingPoint {
+public func interpolate<Value: FloatingPoint>(_ v0: Value, _ v1: Value, _ t: Value) -> Value {
     lerp(v0, v1, t)
 }
 
@@ -21,11 +14,11 @@ public func interpolate<Value>(_ v0: Value, _ v1: Value, _ t: Value) -> Value wh
 /// - parameter t: interpolant
 ///
 /// - returns: v0 value interpolated from v0 to v1
-public func lerpPrecise<Value>(_ v0: Value, _ v1: Value, _ t: Value) -> Value where Value: FloatingPoint {
+public func lerpPrecise<Value: FloatingPoint>(_ v0: Value, _ v1: Value, _ t: Value) -> Value {
     (1 - t) * v0 + t * v1
 }
 
-public func lerp<Value>(_ v0: Value, _ v1: Value, _ t: Value) -> Value where Value: FloatingPoint {
+public func lerp<Value: FloatingPoint>(_ v0: Value, _ v1: Value, _ t: Value) -> Value {
     v0 + t * (v1 - v0)
 }
 
@@ -56,8 +49,7 @@ extension FloatingPoint {
         let y0: Self = rangeOut.lowerBound
         let y1: Self = rangeOut.upperBound
         let frac: Self = (y1 - y0) / (x1 - x0)
-        let y: Self = y0 + (x - x0) * frac
-        return y
+        return y0 + (x - x0) * frac
     }
 
     @inlinable

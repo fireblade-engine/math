@@ -1,10 +1,3 @@
-//
-//  Quat4f+Euler.swift
-//
-//
-//  Created by Christian Treffs on 19.02.21.
-//
-
 // https://www.geometrictools.com/Documentation/EulerAngles.pdf
 // https://ntrs.nasa.gov/api/citations/19770024290/downloads/19770024290.pdf
 // https://marc-b-reynolds.github.io/math/2017/04/18/TaitEuler.html
@@ -182,6 +175,31 @@ extension Quat4f {
         let q1 = s1 * c2 * c3 - c1 * s2 * s3
 
         return Quat4f(q1, q2, q3, q4)
+    }
+
+    @inlinable
+    public init(pitch: Float, yaw: Float, roll: Float) {
+        self = Quat4f.fromEulerAngles_321(Vec3f(pitch, yaw, roll))
+    }
+
+    @inlinable
+    public var eulerAngles: Vec3f {
+        quaternionToEulerAngles_321(self)
+    }
+
+    @inlinable
+    public var pitch: Float {
+        eulerAngles.x
+    }
+
+    @inlinable
+    public var yaw: Float {
+        eulerAngles.y
+    }
+
+    @inlinable
+    public var roll: Float {
+        eulerAngles.z
     }
 
     // public static func fromEulerAngles_323(_ e: Vec3f) -> Quat4f {

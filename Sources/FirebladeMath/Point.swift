@@ -1,12 +1,5 @@
-//
-//  Point.swift
-//
-//
-//  Created by Christian Treffs on 02.09.20.
-//
-
 @frozen
-public struct Point<Value> where Value: Numeric {
+public struct Point<Value: Numeric> {
     public var x: Value
     public var y: Value
 
@@ -22,9 +15,9 @@ extension Point {
     }
 }
 
-extension Point: Equatable where Value: Equatable { }
-extension Point: Hashable where Value: Hashable { }
-extension Point: Codable where Value: Codable { }
+extension Point: Equatable where Value: Equatable {}
+extension Point: Hashable where Value: Hashable {}
+extension Point: Codable where Value: Codable {}
 
 extension Point where Value == Float {
     public init(_ vector: Vec2f) {
@@ -55,6 +48,7 @@ extension Point where Value == Double {
         self.init(x: vector.x, y: vector.y)
     }
 }
+
 extension Vec2d {
     public init(_ point: Point<Double>) {
         self.init(x: point.x, y: point.y)

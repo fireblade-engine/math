@@ -1,12 +1,8 @@
-#if FRB_MATH_FOUNDATION
 import Foundation
-#endif
 
-#if FRB_MATH_DARWIN
-import Darwin.C.math
-#endif
-
-#if FRB_MATH_GLIBC
+#if canImport(Darwin)
+import Darwin
+#elseif canImport(Glibc)
 import Glibc
 #endif
 
@@ -17,15 +13,11 @@ import Glibc
 ///               If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 ///                If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func acos(_ float: Float) -> Float {
-    #if FRB_MATH_DARWIN
+    #if canImport(Darwin)
     return Darwin.acosf(float)
-    #endif
-
-    #if FRB_MATH_GLIBC
+    #elseif canImport(Glibc)
     return Glibc.acosf(float)
-    #endif
-
-    #if FRB_MATH_FOUNDATION
+    #else
     return Foundation.acosf(float)
     #endif
 }
@@ -37,15 +29,11 @@ public func acos(_ float: Float) -> Float {
 ///               If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 ///                If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func acos(_ double: Double) -> Double {
-    #if FRB_MATH_DARWIN
+    #if canImport(Darwin)
     return Darwin.acos(double)
-    #endif
-
-    #if FRB_MATH_GLIBC
+    #elseif canImport(Glibc)
     return Glibc.acos(double)
-    #endif
-
-    #if FRB_MATH_FOUNDATION
+    #else
     return Foundation.acos(double)
     #endif
 }

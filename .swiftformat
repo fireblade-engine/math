@@ -1,0 +1,20 @@
+# format options
+
+--commas inline
+--disable opaqueGenericParameters
+--disable preferKeyPath
+--exclude .build,.github,.swiftpm,Scripts
+--extensionacl on-declarations
+--header strip
+--ifdef no-indent
+--maxwidth 220
+--ranges no-space
+--self remove
+--selfrequired get
+--semicolons never
+--stripunusedargs closure-only
+
+# file options
+
+--exclude **/**/*.generated.swift
+--exclude Tests/**/*.swift

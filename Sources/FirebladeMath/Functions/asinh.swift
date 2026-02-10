@@ -1,12 +1,8 @@
-#if FRB_MATH_FOUNDATION
 import Foundation
-#endif
 
-#if FRB_MATH_DARWIN
-import Darwin.C.math
-#endif
-
-#if FRB_MATH_GLIBC
+#if canImport(Darwin)
+import Darwin
+#elseif canImport(Glibc)
 import Glibc
 #endif
 
@@ -16,16 +12,11 @@ import Glibc
 /// - Returns: If no errors occur, the inverse hyperbolic sine of arg (sinh^-1(arg), or arsinh(arg)), is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func asinh(_ double: Double) -> Double {
-    #if FRB_MATH_DARWIN
+    #if canImport(Darwin)
     return Darwin.asinh(double)
-    #endif
-
-    #if FRB_MATH_GLIBC
-
+    #elseif canImport(Glibc)
     return Glibc.asinh(double)
-    #endif
-
-    #if FRB_MATH_FOUNDATION
+    #else
     return Foundation.asinh(double)
     #endif
 }
@@ -36,15 +27,11 @@ public func asinh(_ double: Double) -> Double {
 /// - Returns: If no errors occur, the inverse hyperbolic sine of arg (sinh^-1(arg), or arsinh(arg)), is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func asinh(_ float: Float) -> Float {
-    #if FRB_MATH_DARWIN
+    #if canImport(Darwin)
     return Darwin.asinhf(float)
-    #endif
-
-    #if FRB_MATH_GLIBC
+    #elseif canImport(Glibc)
     return Glibc.asinhf(float)
-    #endif
-
-    #if FRB_MATH_FOUNDATION
+    #else
     return Foundation.asinhf(float)
     #endif
 }

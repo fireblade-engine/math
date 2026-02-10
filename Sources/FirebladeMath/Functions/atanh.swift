@@ -1,12 +1,8 @@
-#if FRB_MATH_FOUNDATION
 import Foundation
-#endif
 
-#if FRB_MATH_DARWIN
-import Darwin.C.math
-#endif
-
-#if FRB_MATH_GLIBC
+#if canImport(Darwin)
+import Darwin
+#elseif canImport(Glibc)
 import Glibc
 #endif
 
@@ -18,15 +14,11 @@ import Glibc
 /// If a pole error occurs, ±HUGE_VAL, ±HUGE_VALF, or ±HUGE_VALL is returned (with the correct sign).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func atanh(_ float: Float) -> Float {
-    #if FRB_MATH_DARWIN
+    #if canImport(Darwin)
     return Darwin.atanhf(float)
-    #endif
-
-    #if FRB_MATH_GLIBC
+    #elseif canImport(Glibc)
     return Glibc.atanhf(float)
-    #endif
-
-    #if FRB_MATH_FOUNDATION
+    #else
     return Foundation.atanhf(float)
     #endif
 }
@@ -39,15 +31,11 @@ public func atanh(_ float: Float) -> Float {
 /// If a pole error occurs, ±HUGE_VAL, ±HUGE_VALF, or ±HUGE_VALL is returned (with the correct sign).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 public func atanh(_ double: Double) -> Double {
-    #if FRB_MATH_DARWIN
+    #if canImport(Darwin)
     return Darwin.atanh(double)
-    #endif
-
-    #if FRB_MATH_GLIBC
+    #elseif canImport(Glibc)
     return Glibc.atanh(double)
-    #endif
-
-    #if FRB_MATH_FOUNDATION
+    #else
     return Foundation.atanh(double)
     #endif
 }

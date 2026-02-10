@@ -1,12 +1,8 @@
-#if FRB_MATH_FOUNDATION
 import Foundation
-#endif
 
-#if FRB_MATH_DARWIN
-import Darwin.C.math
-#endif
-
-#if FRB_MATH_GLIBC
+#if canImport(Darwin)
+import Darwin
+#elseif canImport(Glibc)
 import Glibc
 #endif
 
@@ -20,15 +16,11 @@ import Glibc
 ///            If y is -0, the result is only negative if the implementation supports the signed zero consistently in
 ///            arithmetic operations.
 public func copysign(_ x: Double, _ y: Double) -> Double {
-    #if FRB_MATH_DARWIN
+    #if canImport(Darwin)
     return Darwin.copysign(x, y)
-    #endif
-
-    #if FRB_MATH_GLIBC
+    #elseif canImport(Glibc)
     return Glibc.copysign(x, y)
-    #endif
-
-    #if FRB_MATH_FOUNDATION
+    #else
     return Foundation.copysign(x, y)
     #endif
 }
@@ -43,15 +35,11 @@ public func copysign(_ x: Double, _ y: Double) -> Double {
 ///            If y is -0, the result is only negative if the implementation supports the signed zero consistently in
 ///            arithmetic operations.
 public func copysign(_ x: Float, _ y: Float) -> Float {
-    #if FRB_MATH_DARWIN
+    #if canImport(Darwin)
     return Darwin.copysignf(x, y)
-    #endif
-
-    #if FRB_MATH_GLIBC
+    #elseif canImport(Glibc)
     return Glibc.copysignf(x, y)
-    #endif
-
-    #if FRB_MATH_FOUNDATION
+    #else
     return Foundation.copysignf(x, y)
     #endif
 }

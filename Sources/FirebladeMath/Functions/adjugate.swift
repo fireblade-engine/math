@@ -1,146 +1,90 @@
-//
-//  adjugate.swift
-//
-//
-//  Created by Christian Treffs on 02.09.20.
-//
+public func adjugate(_ inMat: Mat3x3f) -> Mat3x3f {
+    var out = Mat3x3f.identity
 
-public func adjugate(_ inMat: Mat4x4f) -> Mat4x4f {
-    var out = Mat4x4f.identity
+    out[0, 0] = inMat[1, 1] * inMat[2, 2] - inMat[1, 2] * inMat[2, 1]
+    out[0, 1] = -(inMat[0, 1] * inMat[2, 2] - inMat[0, 2] * inMat[2, 1])
+    out[0, 2] = inMat[0, 1] * inMat[1, 2] - inMat[0, 2] * inMat[1, 1]
 
-    out[0, 0] = inMat[1, 1] * inMat[2, 2] * inMat[3, 3] - inMat[1, 1] * inMat[2, 3] * inMat[3, 2]
-    out[0, 0] += -inMat[2, 1] * inMat[1, 2] * inMat[3, 3] + inMat[2, 1] * inMat[1, 3] * inMat[3, 2]
-    out[0, 0] += inMat[3, 1] * inMat[1, 2] * inMat[2, 3] - inMat[3, 1] * inMat[1, 3] * inMat[2, 2]
+    out[1, 0] = -(inMat[1, 0] * inMat[2, 2] - inMat[1, 2] * inMat[2, 0])
+    out[1, 1] = inMat[0, 0] * inMat[2, 2] - inMat[0, 2] * inMat[2, 0]
+    out[1, 2] = -(inMat[0, 0] * inMat[1, 2] - inMat[0, 2] * inMat[1, 0])
 
-    out[1, 0] = -inMat[1, 0] * inMat[2, 2] * inMat[3, 3] + inMat[1, 0] * inMat[2, 3] * inMat[3, 2]
-    out[1, 0] += inMat[2, 0] * inMat[1, 2] * inMat[3, 3] - inMat[2, 0] * inMat[1, 3] * inMat[3, 2]
-    out[1, 0] += -inMat[3, 0] * inMat[1, 2] * inMat[2, 3] + inMat[3, 0] * inMat[1, 3] * inMat[2, 2]
-
-    out[2, 0] = inMat[1, 0] * inMat[2, 1] * inMat[3, 3] - inMat[1, 0] * inMat[2, 3] * inMat[3, 1]
-    out[2, 0] += -inMat[2, 0] * inMat[1, 1] * inMat[3, 3] + inMat[2, 0] * inMat[1, 3] * inMat[3, 1]
-    out[2, 0] += inMat[3, 0] * inMat[1, 1] * inMat[2, 3] - inMat[3, 0] * inMat[1, 3] * inMat[2, 1]
-
-    out[3, 0] = -inMat[1, 0] * inMat[2, 1] * inMat[3, 2] + inMat[1, 0] * inMat[2, 2] * inMat[3, 1]
-    out[3, 0] += inMat[2, 0] * inMat[1, 1] * inMat[3, 2] - inMat[2, 0] * inMat[1, 2] * inMat[3, 1]
-    out[3, 0] += -inMat[3, 0] * inMat[1, 1] * inMat[2, 2] + inMat[3, 0] * inMat[1, 2] * inMat[2, 1]
-
-    out[0, 1] = -inMat[0, 1] * inMat[2, 2] * inMat[3, 3] + inMat[0, 1] * inMat[2, 3] * inMat[3, 2]
-    out[0, 1] += inMat[2, 1] * inMat[0, 2] * inMat[3, 3] - inMat[2, 1] * inMat[0, 3] * inMat[3, 2]
-    out[0, 1] += -inMat[3, 1] * inMat[0, 2] * inMat[2, 3] + inMat[3, 1] * inMat[0, 3] * inMat[2, 2]
-
-    out[1, 1] = inMat[0, 0] * inMat[2, 2] * inMat[3, 3] - inMat[0, 0] * inMat[2, 3] * inMat[3, 2]
-    out[1, 1] += -inMat[2, 0] * inMat[0, 2] * inMat[3, 3] + inMat[2, 0] * inMat[0, 3] * inMat[3, 2]
-    out[1, 1] += inMat[3, 0] * inMat[0, 2] * inMat[2, 3] - inMat[3, 0] * inMat[0, 3] * inMat[2, 2]
-
-    out[2, 1] = -inMat[0, 0] * inMat[2, 1] * inMat[3, 3] + inMat[0, 0] * inMat[2, 3] * inMat[3, 1]
-    out[2, 1] += inMat[2, 0] * inMat[0, 1] * inMat[3, 3] - inMat[2, 0] * inMat[0, 3] * inMat[3, 1]
-    out[2, 1] += -inMat[3, 0] * inMat[0, 1] * inMat[2, 3] + inMat[3, 0] * inMat[0, 3] * inMat[2, 1]
-
-    out[3, 1] = inMat[0, 0] * inMat[2, 1] * inMat[3, 2] - inMat[0, 0] * inMat[2, 2] * inMat[3, 1]
-    out[3, 1] += -inMat[2, 0] * inMat[0, 1] * inMat[3, 2] + inMat[2, 0] * inMat[0, 2] * inMat[3, 1]
-    out[3, 1] += inMat[3, 0] * inMat[0, 1] * inMat[2, 2] - inMat[3, 0] * inMat[0, 2] * inMat[2, 1]
-
-    out[0, 2] = inMat[0, 1] * inMat[1, 2] * inMat[3, 3] - inMat[0, 1] * inMat[1, 3] * inMat[3, 2]
-    out[0, 2] += -inMat[1, 1] * inMat[0, 2] * inMat[3, 3] + inMat[1, 1] * inMat[0, 3] * inMat[3, 2]
-    out[0, 2] += inMat[3, 1] * inMat[0, 2] * inMat[1, 3] - inMat[3, 1] * inMat[0, 3] * inMat[1, 2]
-
-    out[1, 2] = -inMat[0, 0] * inMat[1, 2] * inMat[3, 3] + inMat[0, 0] * inMat[1, 3] * inMat[3, 2]
-    out[1, 2] += inMat[1, 0] * inMat[0, 2] * inMat[3, 3] - inMat[1, 0] * inMat[0, 3] * inMat[3, 2]
-    out[1, 2] += -inMat[3, 0] * inMat[0, 2] * inMat[1, 3] + inMat[3, 0] * inMat[0, 3] * inMat[1, 2]
-
-    out[2, 2] = inMat[0, 0] * inMat[1, 1] * inMat[3, 3] - inMat[0, 0] * inMat[1, 3] * inMat[3, 1]
-    out[2, 2] += -inMat[1, 0] * inMat[0, 1] * inMat[3, 3] + inMat[1, 0] * inMat[0, 3] * inMat[3, 1]
-    out[2, 2] += inMat[3, 0] * inMat[0, 1] * inMat[1, 3] - inMat[3, 0] * inMat[0, 3] * inMat[1, 1]
-
-    out[3, 2] = -inMat[0, 0] * inMat[1, 1] * inMat[3, 2] + inMat[0, 0] * inMat[1, 2] * inMat[3, 1]
-    out[3, 2] += inMat[1, 0] * inMat[0, 1] * inMat[3, 2] - inMat[1, 0] * inMat[0, 2] * inMat[3, 1]
-    out[3, 2] += -inMat[3, 0] * inMat[0, 1] * inMat[1, 2] + inMat[3, 0] * inMat[0, 2] * inMat[1, 1]
-
-    out[0, 3] = -inMat[0, 1] * inMat[1, 2] * inMat[2, 3] + inMat[0, 1] * inMat[1, 3] * inMat[2, 2]
-    out[0, 3] += inMat[1, 1] * inMat[0, 2] * inMat[2, 3] - inMat[1, 1] * inMat[0, 3] * inMat[2, 2]
-    out[0, 3] += -inMat[2, 1] * inMat[0, 2] * inMat[1, 3] + inMat[2, 1] * inMat[0, 3] * inMat[1, 2]
-
-    out[1, 3] = inMat[0, 0] * inMat[1, 2] * inMat[2, 3] - inMat[0, 0] * inMat[1, 3] * inMat[2, 2]
-    out[1, 3] += -inMat[1, 0] * inMat[0, 2] * inMat[2, 3] + inMat[1, 0] * inMat[0, 3] * inMat[2, 2]
-    out[1, 3] += inMat[2, 0] * inMat[0, 2] * inMat[1, 3] - inMat[2, 0] * inMat[0, 3] * inMat[1, 2]
-
-    out[2, 3] = -inMat[0, 0] * inMat[1, 1] * inMat[2, 3] + inMat[0, 0] * inMat[1, 3] * inMat[2, 1]
-    out[2, 3] += inMat[1, 0] * inMat[0, 1] * inMat[2, 3] - inMat[1, 0] * inMat[0, 3] * inMat[2, 1]
-    out[2, 3] += -inMat[2, 0] * inMat[0, 1] * inMat[1, 3] + inMat[2, 0] * inMat[0, 3] * inMat[1, 1]
-
-    out[3, 3] = inMat[0, 0] * inMat[1, 1] * inMat[2, 2] - inMat[0, 0] * inMat[1, 2] * inMat[2, 1]
-    out[3, 3] += -inMat[1, 0] * inMat[0, 1] * inMat[2, 2] + inMat[1, 0] * inMat[0, 2] * inMat[2, 1]
-    out[3, 3] += inMat[2, 0] * inMat[0, 1] * inMat[1, 2] - inMat[2, 0] * inMat[0, 2] * inMat[1, 1]
+    out[2, 0] = inMat[1, 0] * inMat[2, 1] - inMat[1, 1] * inMat[2, 0]
+    out[2, 1] = -(inMat[0, 0] * inMat[2, 1] - inMat[0, 1] * inMat[2, 0])
+    out[2, 2] = inMat[0, 0] * inMat[1, 1] - inMat[0, 1] * inMat[1, 0]
 
     return out
 }
 
-public func adjugate(_ inMat: Mat4x4d) -> Mat4x4d {
-    var out = Mat4x4d.identity
+public func adjugate(_ inMat: Mat3x3d) -> Mat3x3d {
+    var out = Mat3x3d.identity
 
-    out[0, 0] = inMat[1, 1] * inMat[2, 2] * inMat[3, 3] - inMat[1, 1] * inMat[2, 3] * inMat[3, 2]
-    out[0, 0] += -inMat[2, 1] * inMat[1, 2] * inMat[3, 3] + inMat[2, 1] * inMat[1, 3] * inMat[3, 2]
-    out[0, 0] += inMat[3, 1] * inMat[1, 2] * inMat[2, 3] - inMat[3, 1] * inMat[1, 3] * inMat[2, 2]
+    out[0, 0] = inMat[1, 1] * inMat[2, 2] - inMat[1, 2] * inMat[2, 1]
+    out[0, 1] = -(inMat[0, 1] * inMat[2, 2] - inMat[0, 2] * inMat[2, 1])
+    out[0, 2] = inMat[0, 1] * inMat[1, 2] - inMat[0, 2] * inMat[1, 1]
 
-    out[1, 0] = -inMat[1, 0] * inMat[2, 2] * inMat[3, 3] + inMat[1, 0] * inMat[2, 3] * inMat[3, 2]
-    out[1, 0] += inMat[2, 0] * inMat[1, 2] * inMat[3, 3] - inMat[2, 0] * inMat[1, 3] * inMat[3, 2]
-    out[1, 0] += -inMat[3, 0] * inMat[1, 2] * inMat[2, 3] + inMat[3, 0] * inMat[1, 3] * inMat[2, 2]
+    out[1, 0] = -(inMat[1, 0] * inMat[2, 2] - inMat[1, 2] * inMat[2, 0])
+    out[1, 1] = inMat[0, 0] * inMat[2, 2] - inMat[0, 2] * inMat[2, 0]
+    out[1, 2] = -(inMat[0, 0] * inMat[1, 2] - inMat[0, 2] * inMat[1, 0])
 
-    out[2, 0] = inMat[1, 0] * inMat[2, 1] * inMat[3, 3] - inMat[1, 0] * inMat[2, 3] * inMat[3, 1]
-    out[2, 0] += -inMat[2, 0] * inMat[1, 1] * inMat[3, 3] + inMat[2, 0] * inMat[1, 3] * inMat[3, 1]
-    out[2, 0] += inMat[3, 0] * inMat[1, 1] * inMat[2, 3] - inMat[3, 0] * inMat[1, 3] * inMat[2, 1]
-
-    out[3, 0] = -inMat[1, 0] * inMat[2, 1] * inMat[3, 2] + inMat[1, 0] * inMat[2, 2] * inMat[3, 1]
-    out[3, 0] += inMat[2, 0] * inMat[1, 1] * inMat[3, 2] - inMat[2, 0] * inMat[1, 2] * inMat[3, 1]
-    out[3, 0] += -inMat[3, 0] * inMat[1, 1] * inMat[2, 2] + inMat[3, 0] * inMat[1, 2] * inMat[2, 1]
-
-    out[0, 1] = -inMat[0, 1] * inMat[2, 2] * inMat[3, 3] + inMat[0, 1] * inMat[2, 3] * inMat[3, 2]
-    out[0, 1] += inMat[2, 1] * inMat[0, 2] * inMat[3, 3] - inMat[2, 1] * inMat[0, 3] * inMat[3, 2]
-    out[0, 1] += -inMat[3, 1] * inMat[0, 2] * inMat[2, 3] + inMat[3, 1] * inMat[0, 3] * inMat[2, 2]
-
-    out[1, 1] = inMat[0, 0] * inMat[2, 2] * inMat[3, 3] - inMat[0, 0] * inMat[2, 3] * inMat[3, 2]
-    out[1, 1] += -inMat[2, 0] * inMat[0, 2] * inMat[3, 3] + inMat[2, 0] * inMat[0, 3] * inMat[3, 2]
-    out[1, 1] += inMat[3, 0] * inMat[0, 2] * inMat[2, 3] - inMat[3, 0] * inMat[0, 3] * inMat[2, 2]
-
-    out[2, 1] = -inMat[0, 0] * inMat[2, 1] * inMat[3, 3] + inMat[0, 0] * inMat[2, 3] * inMat[3, 1]
-    out[2, 1] += inMat[2, 0] * inMat[0, 1] * inMat[3, 3] - inMat[2, 0] * inMat[0, 3] * inMat[3, 1]
-    out[2, 1] += -inMat[3, 0] * inMat[0, 1] * inMat[2, 3] + inMat[3, 0] * inMat[0, 3] * inMat[2, 1]
-
-    out[3, 1] = inMat[0, 0] * inMat[2, 1] * inMat[3, 2] - inMat[0, 0] * inMat[2, 2] * inMat[3, 1]
-    out[3, 1] += -inMat[2, 0] * inMat[0, 1] * inMat[3, 2] + inMat[2, 0] * inMat[0, 2] * inMat[3, 1]
-    out[3, 1] += inMat[3, 0] * inMat[0, 1] * inMat[2, 2] - inMat[3, 0] * inMat[0, 2] * inMat[2, 1]
-
-    out[0, 2] = inMat[0, 1] * inMat[1, 2] * inMat[3, 3] - inMat[0, 1] * inMat[1, 3] * inMat[3, 2]
-    out[0, 2] += -inMat[1, 1] * inMat[0, 2] * inMat[3, 3] + inMat[1, 1] * inMat[0, 3] * inMat[3, 2]
-    out[0, 2] += inMat[3, 1] * inMat[0, 2] * inMat[1, 3] - inMat[3, 1] * inMat[0, 3] * inMat[1, 2]
-
-    out[1, 2] = -inMat[0, 0] * inMat[1, 2] * inMat[3, 3] + inMat[0, 0] * inMat[1, 3] * inMat[3, 2]
-    out[1, 2] += inMat[1, 0] * inMat[0, 2] * inMat[3, 3] - inMat[1, 0] * inMat[0, 3] * inMat[3, 2]
-    out[1, 2] += -inMat[3, 0] * inMat[0, 2] * inMat[1, 3] + inMat[3, 0] * inMat[0, 3] * inMat[1, 2]
-
-    out[2, 2] = inMat[0, 0] * inMat[1, 1] * inMat[3, 3] - inMat[0, 0] * inMat[1, 3] * inMat[3, 1]
-    out[2, 2] += -inMat[1, 0] * inMat[0, 1] * inMat[3, 3] + inMat[1, 0] * inMat[0, 3] * inMat[3, 1]
-    out[2, 2] += inMat[3, 0] * inMat[0, 1] * inMat[1, 3] - inMat[3, 0] * inMat[0, 3] * inMat[1, 1]
-
-    out[3, 2] = -inMat[0, 0] * inMat[1, 1] * inMat[3, 2] + inMat[0, 0] * inMat[1, 2] * inMat[3, 1]
-    out[3, 2] += inMat[1, 0] * inMat[0, 1] * inMat[3, 2] - inMat[1, 0] * inMat[0, 2] * inMat[3, 1]
-    out[3, 2] += -inMat[3, 0] * inMat[0, 1] * inMat[1, 2] + inMat[3, 0] * inMat[0, 2] * inMat[1, 1]
-
-    out[0, 3] = -inMat[0, 1] * inMat[1, 2] * inMat[2, 3] + inMat[0, 1] * inMat[1, 3] * inMat[2, 2]
-    out[0, 3] += inMat[1, 1] * inMat[0, 2] * inMat[2, 3] - inMat[1, 1] * inMat[0, 3] * inMat[2, 2]
-    out[0, 3] += -inMat[2, 1] * inMat[0, 2] * inMat[1, 3] + inMat[2, 1] * inMat[0, 3] * inMat[1, 2]
-
-    out[1, 3] = inMat[0, 0] * inMat[1, 2] * inMat[2, 3] - inMat[0, 0] * inMat[1, 3] * inMat[2, 2]
-    out[1, 3] += -inMat[1, 0] * inMat[0, 2] * inMat[2, 3] + inMat[1, 0] * inMat[0, 3] * inMat[2, 2]
-    out[1, 3] += inMat[2, 0] * inMat[0, 2] * inMat[1, 3] - inMat[2, 0] * inMat[0, 3] * inMat[1, 2]
-
-    out[2, 3] = -inMat[0, 0] * inMat[1, 1] * inMat[2, 3] + inMat[0, 0] * inMat[1, 3] * inMat[2, 1]
-    out[2, 3] += inMat[1, 0] * inMat[0, 1] * inMat[2, 3] - inMat[1, 0] * inMat[0, 3] * inMat[2, 1]
-    out[2, 3] += -inMat[2, 0] * inMat[0, 1] * inMat[1, 3] + inMat[2, 0] * inMat[0, 3] * inMat[1, 1]
-
-    out[3, 3] = inMat[0, 0] * inMat[1, 1] * inMat[2, 2] - inMat[0, 0] * inMat[1, 2] * inMat[2, 1]
-    out[3, 3] += -inMat[1, 0] * inMat[0, 1] * inMat[2, 2] + inMat[1, 0] * inMat[0, 2] * inMat[2, 1]
-    out[3, 3] += inMat[2, 0] * inMat[0, 1] * inMat[1, 2] - inMat[2, 0] * inMat[0, 2] * inMat[1, 1]
+    out[2, 0] = inMat[1, 0] * inMat[2, 1] - inMat[1, 1] * inMat[2, 0]
+    out[2, 1] = -(inMat[0, 0] * inMat[2, 1] - inMat[0, 1] * inMat[2, 0])
+    out[2, 2] = inMat[0, 0] * inMat[1, 1] - inMat[0, 1] * inMat[1, 0]
 
     return out
+}
+
+public func adjugate(_ m: Mat4x4f) -> Mat4x4f {
+    // Adjugate is the transpose of the cofactor matrix.
+    // cofactor(i, j) = (-1)^(i+j) * minor(i, j)
+    // Here we use m[col, row] indexing.
+    var res = Mat4x4f.identity
+
+    res[0, 0] = m[1, 1] * (m[2, 2] * m[3, 3] - m[2, 3] * m[3, 2]) - m[2, 1] * (m[1, 2] * m[3, 3] - m[1, 3] * m[3, 2]) + m[3, 1] * (m[1, 2] * m[2, 3] - m[1, 3] * m[2, 2])
+    res[1, 0] = -(m[1, 0] * (m[2, 2] * m[3, 3] - m[2, 3] * m[3, 2]) - m[2, 0] * (m[1, 2] * m[3, 3] - m[1, 3] * m[3, 2]) + m[3, 0] * (m[1, 2] * m[2, 3] - m[1, 3] * m[2, 2]))
+    res[2, 0] = m[1, 0] * (m[2, 1] * m[3, 3] - m[2, 3] * m[3, 1]) - m[2, 0] * (m[1, 1] * m[3, 3] - m[1, 3] * m[3, 1]) + m[3, 0] * (m[1, 1] * m[2, 3] - m[1, 3] * m[2, 1])
+    res[3, 0] = -(m[1, 0] * (m[2, 1] * m[3, 2] - m[2, 2] * m[3, 1]) - m[2, 0] * (m[1, 1] * m[3, 2] - m[1, 2] * m[3, 1]) + m[3, 0] * (m[1, 1] * m[2, 2] - m[1, 2] * m[2, 1]))
+
+    res[0, 1] = -(m[0, 1] * (m[2, 2] * m[3, 3] - m[2, 3] * m[3, 2]) - m[2, 1] * (m[0, 2] * m[3, 3] - m[0, 3] * m[3, 2]) + m[3, 1] * (m[0, 2] * m[2, 3] - m[0, 3] * m[2, 2]))
+    res[1, 1] = m[0, 0] * (m[2, 2] * m[3, 3] - m[2, 3] * m[3, 2]) - m[2, 0] * (m[0, 2] * m[3, 3] - m[0, 3] * m[3, 2]) + m[3, 0] * (m[0, 2] * m[2, 3] - m[0, 3] * m[2, 2])
+    res[2, 1] = -(m[0, 0] * (m[2, 1] * m[3, 3] - m[2, 3] * m[3, 1]) - m[2, 0] * (m[0, 1] * m[3, 3] - m[0, 3] * m[3, 1]) + m[3, 0] * (m[0, 1] * m[2, 3] - m[0, 3] * m[2, 1]))
+    res[3, 1] = m[0, 0] * (m[2, 1] * m[3, 2] - m[2, 2] * m[3, 1]) - m[2, 0] * (m[0, 1] * m[3, 2] - m[0, 2] * m[3, 1]) + m[3, 0] * (m[0, 1] * m[2, 2] - m[0, 2] * m[2, 1])
+
+    res[0, 2] = m[0, 1] * (m[1, 2] * m[3, 3] - m[1, 3] * m[3, 2]) - m[1, 1] * (m[0, 2] * m[3, 3] - m[0, 3] * m[3, 2]) + m[3, 1] * (m[0, 2] * m[1, 3] - m[0, 3] * m[1, 2])
+    res[1, 2] = -(m[0, 0] * (m[1, 2] * m[3, 3] - m[1, 3] * m[3, 2]) - m[1, 0] * (m[0, 2] * m[3, 3] - m[0, 3] * m[3, 2]) + m[3, 0] * (m[0, 2] * m[1, 3] - m[0, 3] * m[1, 2]))
+    res[2, 2] = m[0, 0] * (m[1, 1] * m[3, 3] - m[1, 3] * m[3, 1]) - m[1, 0] * (m[0, 1] * m[3, 3] - m[0, 3] * m[3, 1]) + m[3, 0] * (m[0, 1] * m[1, 3] - m[0, 3] * m[1, 1])
+    res[3, 2] = -(m[0, 0] * (m[1, 1] * m[3, 2] - m[1, 2] * m[3, 1]) - m[1, 0] * (m[0, 1] * m[3, 2] - m[0, 2] * m[3, 1]) + m[3, 0] * (m[0, 1] * m[1, 2] - m[0, 2] * m[1, 1]))
+
+    res[0, 3] = -(m[0, 1] * (m[1, 2] * m[2, 3] - m[1, 3] * m[2, 2]) - m[1, 1] * (m[0, 2] * m[2, 3] - m[0, 3] * m[2, 2]) + m[2, 1] * (m[0, 2] * m[1, 3] - m[0, 3] * m[1, 2]))
+    res[1, 3] = m[0, 0] * (m[1, 2] * m[2, 3] - m[1, 3] * m[2, 2]) - m[1, 0] * (m[0, 2] * m[2, 3] - m[0, 3] * m[2, 2]) + m[2, 0] * (m[0, 2] * m[1, 3] - m[0, 3] * m[1, 2])
+    res[2, 3] = -(m[0, 0] * (m[1, 1] * m[2, 3] - m[1, 3] * m[2, 1]) - m[1, 0] * (m[0, 1] * m[2, 3] - m[0, 3] * m[2, 1]) + m[2, 0] * (m[0, 1] * m[1, 3] - m[0, 3] * m[1, 1]))
+    res[3, 3] = m[0, 0] * (m[1, 1] * m[2, 2] - m[1, 2] * m[2, 1]) - m[1, 0] * (m[0, 1] * m[2, 2] - m[0, 2] * m[2, 1]) + m[2, 0] * (m[0, 1] * m[1, 2] - m[0, 2] * m[1, 1])
+
+    return res
+}
+
+public func adjugate(_ m: Mat4x4d) -> Mat4x4d {
+    var res = Mat4x4d.identity
+
+    res[0, 0] = m[1, 1] * (m[2, 2] * m[3, 3] - m[2, 3] * m[3, 2]) - m[2, 1] * (m[1, 2] * m[3, 3] - m[1, 3] * m[3, 2]) + m[3, 1] * (m[1, 2] * m[2, 3] - m[1, 3] * m[2, 2])
+    res[1, 0] = -(m[1, 0] * (m[2, 2] * m[3, 3] - m[2, 3] * m[3, 2]) - m[2, 0] * (m[1, 2] * m[3, 3] - m[1, 3] * m[3, 2]) + m[3, 0] * (m[1, 2] * m[2, 3] - m[1, 3] * m[2, 2]))
+    res[2, 0] = m[1, 0] * (m[2, 1] * m[3, 3] - m[2, 3] * m[3, 1]) - m[2, 0] * (m[1, 1] * m[3, 3] - m[1, 3] * m[3, 1]) + m[3, 0] * (m[1, 1] * m[2, 3] - m[1, 3] * m[2, 1])
+    res[3, 0] = -(m[1, 0] * (m[2, 1] * m[3, 2] - m[2, 2] * m[3, 1]) - m[2, 0] * (m[1, 1] * m[3, 2] - m[1, 2] * m[3, 1]) + m[3, 0] * (m[1, 1] * m[2, 2] - m[1, 2] * m[2, 1]))
+
+    res[0, 1] = -(m[0, 1] * (m[2, 2] * m[3, 3] - m[2, 3] * m[3, 2]) - m[2, 1] * (m[0, 2] * m[3, 3] - m[0, 3] * m[3, 2]) + m[3, 1] * (m[0, 2] * m[2, 3] - m[0, 3] * m[2, 2]))
+    res[1, 1] = m[0, 0] * (m[2, 2] * m[3, 3] - m[2, 3] * m[3, 2]) - m[2, 0] * (m[0, 2] * m[3, 3] - m[0, 3] * m[3, 2]) + m[3, 0] * (m[0, 2] * m[2, 3] - m[0, 3] * m[2, 2])
+    res[2, 1] = -(m[0, 0] * (m[2, 1] * m[3, 3] - m[2, 3] * m[3, 1]) - m[2, 0] * (m[0, 1] * m[3, 3] - m[0, 3] * m[3, 1]) + m[3, 0] * (m[0, 1] * m[2, 3] - m[0, 3] * m[2, 1]))
+    res[3, 1] = m[0, 0] * (m[2, 1] * m[3, 2] - m[2, 2] * m[3, 1]) - m[2, 0] * (m[0, 1] * m[3, 2] - m[0, 2] * m[3, 1]) + m[3, 0] * (m[0, 1] * m[2, 2] - m[0, 2] * m[2, 1])
+
+    res[0, 2] = m[0, 1] * (m[1, 2] * m[3, 3] - m[1, 3] * m[3, 2]) - m[1, 1] * (m[0, 2] * m[3, 3] - m[0, 3] * m[3, 2]) + m[3, 1] * (m[0, 2] * m[1, 3] - m[0, 3] * m[1, 2])
+    res[1, 2] = -(m[0, 0] * (m[1, 2] * m[3, 3] - m[1, 3] * m[3, 2]) - m[1, 0] * (m[0, 2] * m[3, 3] - m[0, 3] * m[3, 2]) + m[3, 0] * (m[0, 2] * m[1, 3] - m[0, 3] * m[1, 2]))
+    res[2, 2] = m[0, 0] * (m[1, 1] * m[3, 3] - m[1, 3] * m[3, 1]) - m[1, 0] * (m[0, 1] * m[3, 3] - m[0, 3] * m[3, 1]) + m[3, 0] * (m[0, 1] * m[1, 3] - m[0, 3] * m[1, 1])
+    res[3, 2] = -(m[0, 0] * (m[1, 1] * m[3, 2] - m[1, 2] * m[3, 1]) - m[1, 0] * (m[0, 1] * m[3, 2] - m[0, 2] * m[3, 1]) + m[3, 0] * (m[0, 1] * m[1, 2] - m[0, 2] * m[1, 1]))
+
+    res[0, 3] = -(m[0, 1] * (m[1, 2] * m[2, 3] - m[1, 3] * m[2, 2]) - m[1, 1] * (m[0, 2] * m[2, 3] - m[0, 3] * m[2, 2]) + m[2, 1] * (m[0, 2] * m[1, 3] - m[0, 3] * m[1, 2]))
+    res[1, 3] = m[0, 0] * (m[1, 2] * m[2, 3] - m[1, 3] * m[2, 2]) - m[1, 0] * (m[0, 2] * m[2, 3] - m[0, 3] * m[2, 2]) + m[2, 0] * (m[0, 2] * m[1, 3] - m[0, 3] * m[1, 2])
+    res[2, 3] = -(m[0, 0] * (m[1, 1] * m[2, 3] - m[1, 3] * m[2, 1]) - m[1, 0] * (m[0, 1] * m[2, 3] - m[0, 3] * m[2, 1]) + m[2, 0] * (m[0, 1] * m[1, 3] - m[0, 3] * m[1, 1]))
+    res[3, 3] = m[0, 0] * (m[1, 1] * m[2, 2] - m[1, 2] * m[2, 1]) - m[1, 0] * (m[0, 1] * m[2, 2] - m[0, 2] * m[2, 1]) + m[2, 0] * (m[0, 1] * m[1, 2] - m[0, 2] * m[1, 1])
+
+    return res
 }

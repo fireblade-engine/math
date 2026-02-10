@@ -1,20 +1,16 @@
-//
-//  simd_float3x3.swift
-//
-//
-//  Created by Christian Treffs on 06.09.19.
-//
-
 #if FRB_MATH_USE_SIMD
-import struct simd.matrix.simd_float4x4
-import struct simd.matrix.simd_double4x4
-import struct simd.matrix.simd_float3x3
-import struct simd.matrix.simd_double3x3
-import struct simd.matrix.simd_float2x2
 import struct simd.matrix.simd_double2x2
+import struct simd.matrix.simd_double3x3
+import struct simd.matrix.simd_double4x4
+import struct simd.matrix.simd_float2x2
+import struct simd.matrix.simd_float3x3
+import struct simd.matrix.simd_float4x4
 
 // MARK: - Storage2x2
-extension simd_float2x2: Storage2x2Protocol {
+
+extension simd_float2x2: Storage2x2Protocol, @retroactive RandomAccessCollection, @retroactive MutableCollection, @retroactive RangeReplaceableCollection, @retroactive BidirectionalCollection, @retroactive Collection,
+    @retroactive Sequence
+{
     public typealias Element = Float
     public typealias Column = SIMD2<Float>
     public typealias Value = Float
@@ -51,7 +47,9 @@ extension simd_float2x2: Storage2x2Protocol {
     }
 }
 
-extension simd_double2x2: Storage2x2Protocol {
+extension simd_double2x2: Storage2x2Protocol, @retroactive RandomAccessCollection, @retroactive MutableCollection, @retroactive RangeReplaceableCollection, @retroactive BidirectionalCollection, @retroactive Collection,
+    @retroactive Sequence
+{
     public typealias Element = Double
     public typealias Column = SIMD2<Double>
     public typealias Value = Double
@@ -89,7 +87,10 @@ extension simd_double2x2: Storage2x2Protocol {
 }
 
 // MARK: - Storage3x3
-extension simd_float3x3: Storage3x3Protocol {
+
+extension simd_float3x3: Storage3x3Protocol, @retroactive RandomAccessCollection, @retroactive MutableCollection, @retroactive RangeReplaceableCollection, @retroactive BidirectionalCollection, @retroactive Collection,
+    @retroactive Sequence
+{
     public typealias Element = Float
     public typealias Column = SIMD3<Float>
     public typealias Value = Float
@@ -132,7 +133,9 @@ extension simd_float3x3: Storage3x3Protocol {
     }
 }
 
-extension simd_double3x3: Storage3x3Protocol {
+extension simd_double3x3: Storage3x3Protocol, @retroactive RandomAccessCollection, @retroactive MutableCollection, @retroactive RangeReplaceableCollection, @retroactive BidirectionalCollection, @retroactive Collection,
+    @retroactive Sequence
+{
     public typealias Element = Double
     public typealias Column = SIMD3<Double>
     public typealias Value = Double
@@ -176,7 +179,10 @@ extension simd_double3x3: Storage3x3Protocol {
 }
 
 // MARK: - Storage4x4
-extension simd_float4x4: Storage4x4Protocol {
+
+extension simd_float4x4: Storage4x4Protocol, @retroactive RandomAccessCollection, @retroactive MutableCollection, @retroactive RangeReplaceableCollection, @retroactive BidirectionalCollection, @retroactive Collection,
+    @retroactive Sequence
+{
     public typealias Element = Float
     public typealias Column = SIMD4<Float>
     public typealias Value = Float
@@ -225,7 +231,9 @@ extension simd_float4x4: Storage4x4Protocol {
     }
 }
 
-extension simd_double4x4: Storage4x4Protocol {
+extension simd_double4x4: Storage4x4Protocol, @retroactive RandomAccessCollection, @retroactive MutableCollection, @retroactive RangeReplaceableCollection, @retroactive BidirectionalCollection, @retroactive Collection,
+    @retroactive Sequence
+{
     public typealias Element = Double
     public typealias Column = SIMD4<Double>
     public typealias Value = Double

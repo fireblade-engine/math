@@ -1,10 +1,3 @@
-//
-//  Matrix+Quaternion.swift
-//  FirebladeMath
-//
-//  Created by Christian Treffs on 27.08.19.
-//
-
 extension Mat4x4f {
     /// Creates a new matrix from the specified quaternion.
     /// Quaternion will be normalized.

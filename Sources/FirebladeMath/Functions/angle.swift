@@ -1,10 +1,3 @@
-//
-//  angle.swift
-//
-//
-//  Created by Christian Treffs on 09.09.19.
-//
-
 #if FRB_MATH_USE_SIMD
 import func simd.simd_angle
 #endif
