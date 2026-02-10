@@ -52,4 +52,5 @@ jobs:
             -destination "${{ steps.select_sim.outputs.destination }}" \
             -configuration Release \
             -skipPackagePluginValidation \
+            ENABLE_TESTABILITY=YES \
             OTHER_SWIFT_FLAGS='-warnings-as-errors'
