@@ -9,8 +9,12 @@ on:
 
 jobs:
   windows:
-    name: Windows (Swift 6.1)
+    name: Windows (Swift ${{ matrix.swift }})
     runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        swift: ["6.1", "6.2"]
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -18,6 +22,6 @@ jobs:
       - name: Test Windows
         uses: brightdigit/swift-build@v1.5.0
         with:
-          windows-swift-version: swift-6.1-release
-          windows-swift-build: 6.1-RELEASE
+          windows-swift-version: swift-${{ matrix.swift }}-release
+          windows-swift-build: ${{ matrix.swift }}-RELEASE
           args: swift test -c release --parallel -Xswiftc -warnings-as-errors
