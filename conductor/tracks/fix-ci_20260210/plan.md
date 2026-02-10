@@ -1,6 +1,6 @@
 # Implementation Plan: Fix GitHub Actions CI
 
-## Phase 1: Preparation & Deactivation
+## Phase 1: Preparation & Deactivation [checkpoint: e889d55]
 Configure the CI landscape by isolating macOS CI and deactivating other automated workflows.
 
 - [x] Task: Create `ci-ios.yml` from `ci-macos.yml`
@@ -10,7 +10,7 @@ Configure the CI landscape by isolating macOS CI and deactivating other automate
 - [x] Task: Deactivate automated runs for Linux and Windows CI
     - [x] Modify `.github/workflows/ci-linux.yml` to use `workflow_dispatch:` only.
     - [x] Modify `.github/workflows/ci-windows.yml` to use `workflow_dispatch:` only.
-- [~] Task: Conductor - User Manual Verification 'Phase 1: Preparation & Deactivation' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Preparation & Deactivation' (Protocol in workflow.md)
 
 ## Phase 2: Fix macOS CI Implementation
 Modernize and stabilize the macOS CI pipeline to support Swift 6.1 and 6.2 with strict warning policies.
