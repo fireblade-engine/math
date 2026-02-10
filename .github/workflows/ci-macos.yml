@@ -1,4 +1,4 @@
-name: macOS
+name: Apple
 
 on:
   push:
@@ -8,13 +8,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-macos:
-    name: Test macOS (Swift ${{ matrix.swift }})
+  test-apple:
+    name: Test ${{ matrix.platform }} (Swift ${{ matrix.swift }})
     runs-on: macos-latest
     strategy:
       fail-fast: false
       matrix:
         swift: ["6.1", "6.2"]
+        platform: ["macOS", "iOS"]
 
     steps:
       - name: Checkout
@@ -33,18 +34,27 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-swift-${{ matrix.swift }}-
 
-      - name: Run Tests
+      - name: Run Tests (macOS)
+        if: matrix.platform == 'macOS'
         run: make test
 
-  macos-gate:
-    name: macOS CI
-    needs: test-macos
+      - name: Run Tests (iOS)
+        if: matrix.platform == 'iOS'
+        run: |
+          xcodebuild test \
+            -scheme FirebladeMath \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            -skipPackagePluginValidation
+
+  apple-gate:
+    name: Apple CI
+    needs: test-apple
     runs-on: ubuntu-latest
     if: always()
     steps:
       - name: All tests passed
-        if: ${{ !(contains(needs.test-macos.result, 'failure') || contains(needs.test-macos.result, 'cancelled')) }}
+        if: ${{ !(contains(needs.test-apple.result, 'failure') || contains(needs.test-apple.result, 'cancelled')) }}
         run: exit 0
       - name: Some tests failed
-        if: ${{ contains(needs.test-macos.result, 'failure') || contains(needs.test-macos.result, 'cancelled') }}
+        if: ${{ contains(needs.test-apple.result, 'failure') || contains(needs.test-apple.result, 'cancelled') }}
         run: exit 1
