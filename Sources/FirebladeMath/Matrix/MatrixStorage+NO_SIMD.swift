@@ -1,8 +1,4 @@
 #if !FRB_MATH_USE_SIMD
-@inlinable
-func columnRow(index: Int, width: Int) -> (column: Int, row: Int) {
-    (index / width, index % width)
-}
 
 // MARK: - Storage2x2
 
