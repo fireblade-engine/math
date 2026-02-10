@@ -12,7 +12,7 @@ Configure the CI landscape by isolating macOS CI and deactivating other automate
     - [x] Modify `.github/workflows/ci-windows.yml` to use `workflow_dispatch:` only.
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Preparation & Deactivation' (Protocol in workflow.md)
 
-## Phase 2: Fix macOS CI Implementation
+## Phase 2: Fix macOS CI Implementation [checkpoint: b251efd]
 Modernize and stabilize the macOS CI pipeline to support Swift 6.1 and 6.2 with strict warning policies.
 
 - [x] Task: Modernize `ci-macos.yml` setup
@@ -28,7 +28,7 @@ Modernize and stabilize the macOS CI pipeline to support Swift 6.1 and 6.2 with 
     - [x] Rename job/workflow to 'Apple macOS' / 'apple-macos'.
     - [x] Remove 'macos-gate' job.
     - [x] Ensure strict warnings via `-Xswiftc -warnings-as-errors`.
-- [~] Task: Conductor - User Manual Verification 'Phase 2: Fix macOS CI Implementation' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Fix macOS CI Implementation' (Protocol in workflow.md)
 
 ## Phase 3: Verification & Finalization
 Ensure the CI system behaves as expected and satisfies all specification requirements.
