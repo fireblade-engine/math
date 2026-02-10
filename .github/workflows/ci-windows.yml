@@ -21,8 +21,10 @@ jobs:
       - name: Setup Swift
         uses: compnerd/gha-setup-swift@main
         with:
-          branch: swift-6.0-release
-          tag: 6.0-RELEASE
+          branch: swift-6.1-release
+          tag: 6.1-RELEASE
 
-      - name: Run Tests (Release)
-        run: swift test -c release --parallel -Xswiftc -warnings-as-errors
+      - name: Run Tests
+        uses: brightdigit/swift-build@v1
+        with:
+          args: swift test -c release --parallel -Xswiftc -warnings-as-errors
