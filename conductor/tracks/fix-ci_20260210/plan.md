@@ -23,9 +23,12 @@ Modernize and stabilize the macOS CI pipeline to support Swift 6.1 and 6.2 with 
     - [x] Configure `actions/cache@v4` (or latest) for `.build` directory.
     - [x] Ensure cache key includes `Package.resolved` hash and Swift version.
 - [x] Task: Configure test execution with strict warnings
-    - [x] Use `make test` for execution.
-    - [x] Verify `Makefile` correctly passes `-Xswiftc -warnings-as-errors`.
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Fix macOS CI Implementation' (Protocol in workflow.md)
+    - [x] Use plain `swift test` for execution.
+    - [x] Update workflow to build and test in Release mode (`-c release`).
+    - [x] Rename job/workflow to 'Apple macOS' / 'apple-macos'.
+    - [x] Remove 'macos-gate' job.
+    - [x] Ensure strict warnings via `-Xswiftc -warnings-as-errors`.
+- [~] Task: Conductor - User Manual Verification 'Phase 2: Fix macOS CI Implementation' (Protocol in workflow.md)
 
 ## Phase 3: Verification & Finalization
 Ensure the CI system behaves as expected and satisfies all specification requirements.

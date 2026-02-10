@@ -1,4 +1,4 @@
-name: macOS
+name: Apple macOS
 
 on:
   push:
@@ -8,8 +8,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-macos:
-    name: Test macOS (Swift ${{ matrix.swift }})
+  apple-macos:
+    name: macOS (Swift ${{ matrix.swift }})
     runs-on: macos-latest
     strategy:
       fail-fast: false
@@ -29,22 +29,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: .build
-          key: ${{ runner.os }}-macos-spm-${{ matrix.swift }}-${{ hashFiles('Package.resolved') }}
+          key: ${{ runner.os }}-macos-spm-release-${{ matrix.swift }}-${{ hashFiles('Package.resolved') }}
           restore-keys: |
-            ${{ runner.os }}-macos-spm-${{ matrix.swift }}-
+            ${{ runner.os }}-macos-spm-release-${{ matrix.swift }}-
 
-      - name: Run Tests (macOS)
-        run: make test
-
-  macos-gate:
-    name: macOS CI
-    needs: test-macos
-    runs-on: ubuntu-latest
-    if: always()
-    steps:
-      - name: All tests passed
-        if: ${{ !(contains(needs.test-macos.result, 'failure') || contains(needs.test-macos.result, 'cancelled')) }}
-        run: exit 0
-      - name: Some tests failed
-        if: ${{ contains(needs.test-macos.result, 'failure') || contains(needs.test-macos.result, 'cancelled') }}
-        run: exit 1
+      - name: Run Tests (Release)
+        run: swift test -c release --parallel -Xswiftc -warnings-as-errors
