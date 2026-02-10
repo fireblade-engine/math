@@ -8,8 +8,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
-    name: Test (macOS)
+  test-macos:
+    name: Test macOS (Swift ${{ matrix.swift }})
     runs-on: macos-latest
     strategy:
       fail-fast: false
@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Setup Swift
         uses: swift-actions/setup-swift@v2
@@ -26,15 +26,25 @@ jobs:
           swift-version: ${{ matrix.swift }}
 
       - name: Cache Build
-        uses: actions/cache@v5
+        uses: actions/cache@v4
         with:
           path: .build
           key: ${{ runner.os }}-swift-${{ matrix.swift }}-${{ hashFiles('Package.resolved') }}
           restore-keys: |
             ${{ runner.os }}-swift-${{ matrix.swift }}-
 
-      # We use 'make test' to ensure the CI environment precisely mirrors the developer's local environment.
-      # This includes using 'xcrun swift test' with strict flags like '-Xswiftc -warnings-as-errors'.
-      # The local Makefile is the source of truth for build and test commands.
       - name: Run Tests
         run: make test
+
+  macos-gate:
+    name: macOS CI
+    needs: test-macos
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: All tests passed
+        if: ${{ !(contains(needs.test-macos.result, 'failure') || contains(needs.test-macos.result, 'cancelled')) }}
+        run: exit 0
+      - name: Some tests failed
+        if: ${{ contains(needs.test-macos.result, 'failure') || contains(needs.test-macos.result, 'cancelled') }}
+        run: exit 1

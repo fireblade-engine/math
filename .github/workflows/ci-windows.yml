@@ -8,8 +8,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
-    name: Test (Windows)
+  test-windows:
+    name: Test Windows (Swift ${{ matrix.swift }})
     runs-on: windows-latest
     strategy:
       fail-fast: false
@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Setup Swift
         uses: swift-actions/setup-swift@v2
@@ -26,14 +26,25 @@ jobs:
           swift-version: ${{ matrix.swift }}
 
       - name: Cache Build
-        uses: actions/cache@v5
+        uses: actions/cache@v4
         with:
           path: .build
           key: ${{ runner.os }}-swift-${{ matrix.swift }}-${{ hashFiles('Package.resolved') }}
           restore-keys: |
             ${{ runner.os }}-swift-${{ matrix.swift }}-
 
-      # On Windows, 'make' is not guaranteed to work seamlessly.
-      # We fall back to direct 'swift test' invocation.
       - name: Run Tests
         run: swift test --parallel -Xswiftc -warnings-as-errors
+
+  windows-gate:
+    name: Windows CI
+    needs: test-windows
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: All tests passed
+        if: ${{ !(contains(needs.test-windows.result, 'failure') || contains(needs.test-windows.result, 'cancelled')) }}
+        run: exit 0
+      - name: Some tests failed
+        if: ${{ contains(needs.test-windows.result, 'failure') || contains(needs.test-windows.result, 'cancelled') }}
+        run: exit 1
