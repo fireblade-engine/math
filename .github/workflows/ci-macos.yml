@@ -29,9 +29,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: .build
-          key: ${{ runner.os }}-macos-swift-${{ matrix.swift }}-${{ hashFiles('Package.resolved') }}
+          key: ${{ runner.os }}-macos-spm-${{ matrix.swift }}-${{ hashFiles('Package.resolved') }}
           restore-keys: |
-            ${{ runner.os }}-macos-swift-${{ matrix.swift }}-
+            ${{ runner.os }}-macos-spm-${{ matrix.swift }}-
 
       - name: Run Tests (macOS)
         run: make test

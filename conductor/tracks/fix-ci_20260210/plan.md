@@ -19,9 +19,9 @@ Modernize and stabilize the macOS CI pipeline to support Swift 6.1 and 6.2 with 
     - [x] Remove iOS job/matrix entries from `ci-macos.yml`.
     - [x] Update to `swift-actions/setup-swift@v2`.
     - [x] Ensure matrix targets Swift `6.1` and `6.2`.
-- [ ] Task: Implement optimized caching for SPM
-    - [ ] Configure `actions/cache@v4` (or latest) for `.build` directory.
-    - [ ] Ensure cache key includes `Package.resolved` hash and Swift version.
+- [x] Task: Implement optimized caching for SPM
+    - [x] Configure `actions/cache@v4` (or latest) for `.build` directory.
+    - [x] Ensure cache key includes `Package.resolved` hash and Swift version.
 - [ ] Task: Configure test execution with strict warnings
     - [ ] Use `make test` for execution.
     - [ ] Verify `Makefile` correctly passes `-Xswiftc -warnings-as-errors`.
