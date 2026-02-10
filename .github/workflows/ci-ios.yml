@@ -1,11 +1,15 @@
 name: iOS
 
 on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
   workflow_dispatch:
 
 jobs:
-  test-ios:
-    name: Test iOS (Swift ${{ matrix.swift }})
+  ios:
+    name: iOS (Swift ${{ matrix.swift }})
     runs-on: macos-latest
     strategy:
       fail-fast: false
@@ -21,17 +25,11 @@ jobs:
         with:
           swift-version: ${{ matrix.swift }}
 
-      - name: Cache Build
-        uses: actions/cache@v5
-        with:
-          path: .build
-          key: ${{ runner.os }}-ios-swift-${{ matrix.swift }}-${{ hashFiles('Package.resolved') }}
-          restore-keys: |
-            ${{ runner.os }}-ios-swift-${{ matrix.swift }}-
-
       - name: Run Tests (iOS)
         run: |
           xcodebuild test \
             -scheme FirebladeMath \
             -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
-            -skipPackagePluginValidation
+            -configuration Release \
+            -skipPackagePluginValidation \
+            OTHER_SWIFT_FLAGS='-warnings-as-errors'
