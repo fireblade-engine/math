@@ -8,7 +8,7 @@ import struct simd.matrix.simd_float4x4
 
 // MARK: - Storage2x2
 
-extension simd_float2x2: Storage2x2Protocol, @retroactive RandomAccessCollection, @retroactive MutableCollection, @retroactive RangeReplaceableCollection, @retroactive BidirectionalCollection, @retroactive Collection,
+extension simd_float2x2: Storage2x2Protocol, @retroactive @unchecked Sendable, @retroactive RandomAccessCollection, @retroactive MutableCollection, @retroactive RangeReplaceableCollection, @retroactive BidirectionalCollection, @retroactive Collection,
     @retroactive Sequence
 {
     public typealias Element = Float
@@ -47,7 +47,7 @@ extension simd_float2x2: Storage2x2Protocol, @retroactive RandomAccessCollection
     }
 }
 
-extension simd_double2x2: Storage2x2Protocol, @retroactive RandomAccessCollection, @retroactive MutableCollection, @retroactive RangeReplaceableCollection, @retroactive BidirectionalCollection, @retroactive Collection,
+extension simd_double2x2: Storage2x2Protocol, @retroactive @unchecked Sendable, @retroactive RandomAccessCollection, @retroactive MutableCollection, @retroactive RangeReplaceableCollection, @retroactive BidirectionalCollection, @retroactive Collection,
     @retroactive Sequence
 {
     public typealias Element = Double
@@ -88,7 +88,7 @@ extension simd_double2x2: Storage2x2Protocol, @retroactive RandomAccessCollectio
 
 // MARK: - Storage3x3
 
-extension simd_float3x3: Storage3x3Protocol, @retroactive RandomAccessCollection, @retroactive MutableCollection, @retroactive RangeReplaceableCollection, @retroactive BidirectionalCollection, @retroactive Collection,
+extension simd_float3x3: Storage3x3Protocol, @retroactive @unchecked Sendable, @retroactive RandomAccessCollection, @retroactive MutableCollection, @retroactive RangeReplaceableCollection, @retroactive BidirectionalCollection, @retroactive Collection,
     @retroactive Sequence
 {
     public typealias Element = Float
@@ -133,7 +133,7 @@ extension simd_float3x3: Storage3x3Protocol, @retroactive RandomAccessCollection
     }
 }
 
-extension simd_double3x3: Storage3x3Protocol, @retroactive RandomAccessCollection, @retroactive MutableCollection, @retroactive RangeReplaceableCollection, @retroactive BidirectionalCollection, @retroactive Collection,
+extension simd_double3x3: Storage3x3Protocol, @retroactive @unchecked Sendable, @retroactive RandomAccessCollection, @retroactive MutableCollection, @retroactive RangeReplaceableCollection, @retroactive BidirectionalCollection, @retroactive Collection,
     @retroactive Sequence
 {
     public typealias Element = Double
@@ -180,7 +180,7 @@ extension simd_double3x3: Storage3x3Protocol, @retroactive RandomAccessCollectio
 
 // MARK: - Storage4x4
 
-extension simd_float4x4: Storage4x4Protocol, @retroactive RandomAccessCollection, @retroactive MutableCollection, @retroactive RangeReplaceableCollection, @retroactive BidirectionalCollection, @retroactive Collection,
+extension simd_float4x4: Storage4x4Protocol, @retroactive @unchecked Sendable, @retroactive RandomAccessCollection, @retroactive MutableCollection, @retroactive RangeReplaceableCollection, @retroactive BidirectionalCollection, @retroactive Collection,
     @retroactive Sequence
 {
     public typealias Element = Float
@@ -231,7 +231,7 @@ extension simd_float4x4: Storage4x4Protocol, @retroactive RandomAccessCollection
     }
 }
 
-extension simd_double4x4: Storage4x4Protocol, @retroactive RandomAccessCollection, @retroactive MutableCollection, @retroactive RangeReplaceableCollection, @retroactive BidirectionalCollection, @retroactive Collection,
+extension simd_double4x4: Storage4x4Protocol, @retroactive @unchecked Sendable, @retroactive RandomAccessCollection, @retroactive MutableCollection, @retroactive RangeReplaceableCollection, @retroactive BidirectionalCollection, @retroactive Collection,
     @retroactive Sequence
 {
     public typealias Element = Double
