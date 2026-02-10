@@ -36,4 +36,4 @@ jobs:
       # On Windows, 'make' is not guaranteed to work seamlessly.
       # We fall back to direct 'swift test' invocation.
       - name: Run Tests
-        run: make test
+        run: swift test --parallel -Xswiftc -warnings-as-errors
