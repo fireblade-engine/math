@@ -35,6 +35,6 @@ Ensure the CI system behaves as expected and satisfies all specification require
 
 - [x] Task: Verify CI deactivation
     - [x] Ensure Linux, Windows, and iOS workflows only have `workflow_dispatch`.
-- [ ] Task: Final project-wide check
-    - [ ] Run `make lint` locally to ensure no formatting/linting issues remain.
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Verification & Finalization' (Protocol in workflow.md)
+- [x] Task: Final project-wide check
+    - [x] Run `make lint` locally to ensure no formatting/linting issues remain.
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Verification & Finalization' (Protocol in workflow.md) [checkpoint: e81340e]
