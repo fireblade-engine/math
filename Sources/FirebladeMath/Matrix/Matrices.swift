@@ -31,7 +31,7 @@ public typealias Mat2x2d = Matrix2x2<Storage2x2<Double>>
 /// - Parameter width: The width of a column.
 @inlinable
 public func index(column: Int, row: Int, width: Int) -> Int {
-    (column * width) + row
+    (row * width) + column
 }
 
 /// Get column and row for matrix by index.
