@@ -6,37 +6,38 @@
 [![Windows](https://github.com/fireblade-engine/math/actions/workflows/ci-windows.yml/badge.svg)](https://github.com/fireblade-engine/math/actions/workflows/ci-windows.yml)
 [![swift-version-compatibility](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Ffireblade-engine%2Fmath%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/fireblade-engine/math) 
 [![platform-compatilibilty](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Ffireblade-engine%2Fmath%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/fireblade-engine/math) 
-<!--[![platform-webassembly](https://img.shields.io/badge/Platform-WebAssembly-blue.svg)](https://github.com/swiftwasm/swift#swiftwasm)-->
 
+A dependency-free, lightweight, fast math library for 2D and 3D vectors, quaternions, and matrices in Swift with (optional) SIMD support. It is developed and maintained as part of the [Fireblade Game Engine project](https://github.com/fireblade-engine).
 
-A dependency free, lightweight, fast math library for 2D and 3D vectors, quaternions and matrices in Swift with (optional) SIMD support.  It is developed and maintained as part of the [Fireblade Game Engine project](https://github.com/fireblade-engine).
+## ✨ Features
 
+- **Vectors:** `Vec2`, `Vec3`, `Vec4` for `Float`, `Double`, `Int`, and `UInt`.
+- **Matrices:** `Mat2x2`, `Mat3x3`, `Mat4x4` for `Float` and `Double`.
+- **Quaternions:** `Quat4f` and `Quat4d`.
+- **Geometric Types:** `Point`, `Size`, `Rect`.
+- **Math Functions:** A comprehensive set of functions including `sin`, `cos`, `tan`, `asin`, `acos`, `atan2`, `dot`, `cross`, `normalize`, `reflect`, `refract`, and many more.
+- **SIMD Support:** Leveraging hardware acceleration where available, with a fallback implementation when SIMD is not supported.
+- **Swift 6 Ready:** Fully compatible with Swift 6 and `Sendable` conformance.
 
 ## 🚀 Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine and provide a code example.
-
 ### 📋 Prerequisites
 
-* [Swift Package Manager (SPM)](https://github.com/apple/swift-package-manager)
-* [Swiftlint](https://github.com/realm/SwiftLint) for linting - (optional)
-* [SwiftEnv](https://swiftenv.fuller.li/) for Swift version management - (optional)
+* Swift 6.1 or higher
+* Swift Package Manager (SPM)
 
-### 💻 Installing
+### 💻 Installation
 
-Fireblade Math is available for all platforms that support [Swift 5.1](https://swift.org/) and higher and the [Swift Package Manager (SPM)](https://github.com/apple/swift-package-manager).
-
-Extend the following lines in your `Package.swift` file or use it to create a new project.
+Add Fireblade Math as a dependency to your `Package.swift` file:
 
 ```swift
-// swift-tools-version:5.1
-
+// swift-tools-version: 6.1
 import PackageDescription
 
 let package = Package(
     name: "YourPackageName",
     dependencies: [
-        .package(url: "https://github.com/fireblade-engine/math.git", from: "0.9.1")
+        .package(url: "https://github.com/fireblade-engine/math.git", from: "1.0.0")
     ],
     targets: [
         .target(
@@ -44,20 +45,59 @@ let package = Package(
             dependencies: ["FirebladeMath"])
     ]
 )
+```
 
+### 🛠 SIMD Traits
+
+Starting with version 1.0.0, FirebladeMath uses Swift traits to manage SIMD support. By default, SIMD is enabled on Apple platforms. You can manually control it in your package configuration if needed.
+
+## 📖 Usage Examples
+
+### Vectors
+
+```swift
+import FirebladeMath
+
+let v1 = Vec3f(1, 2, 3)
+let v2 = Vec3f(4, 5, 6)
+
+let dotProduct = dot(v1, v2)
+let crossProduct = cross(v1, v2)
+let unitVector = normalize(v1)
+```
+
+### Matrices
+
+```swift
+import FirebladeMath
+
+// Create a transformation matrix
+var modelMatrix = Mat4x4f.identity
+modelMatrix.translate(by: [10, 20, 30])
+modelMatrix.rotate(by: .pi / 2, axis: [0, 1, 0])
+
+// Project a point
+let projection = Mat4x4f.perspectiveRH(fovy: .pi / 4, aspect: 16/9, zNear: 0.1, zFar: 100)
+```
+
+### Quaternions
+
+```swift
+import FirebladeMath
+
+let q = Quat4f(angle: .pi / 4, axis: [0, 1, 0])
+let rotatedVector = q * Vec3f(1, 0, 0)
 ```
 
 ## 💁 How to contribute
 
 If you want to contribute please see the [CONTRIBUTION GUIDE](CONTRIBUTING.md) first. 
 
-To start your project contribution run these in your command line:
-
-1. `git clone git@github.com:fireblade-engine/math.git fireblade-math`
-2. `cd fireblade-math`
+1. `git clone git@github.com:fireblade-engine/math.git`
+2. `cd math`
 3. `make setupEnvironment`
 
-Before commiting code please ensure to run:
+Before committing code please ensure to run:
 
 - `make precommit`
 
@@ -66,7 +106,7 @@ See also the list of [contributors](https://github.com/fireblade-engine/math/con
 
 ## 🔏 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## ♻ Alternatives
 
