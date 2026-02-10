@@ -1,11 +1,15 @@
 name: Linux
 
 on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
   workflow_dispatch:
 
 jobs:
-  test-linux:
-    name: Test Linux (Swift ${{ matrix.swift }})
+  linux:
+    name: Linux (Swift ${{ matrix.swift }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -21,26 +25,5 @@ jobs:
         with:
           swift-version: ${{ matrix.swift }}
 
-      - name: Cache Build
-        uses: actions/cache@v5
-        with:
-          path: .build
-          key: ${{ runner.os }}-swift-${{ matrix.swift }}-${{ hashFiles('Package.resolved') }}
-          restore-keys: |
-            ${{ runner.os }}-swift-${{ matrix.swift }}-
-
-      - name: Run Tests
-        run: make test
-
-  linux-gate:
-    name: Linux CI
-    needs: test-linux
-    runs-on: ubuntu-latest
-    if: always()
-    steps:
-      - name: All tests passed
-        if: ${{ !(contains(needs.test-linux.result, 'failure') || contains(needs.test-linux.result, 'cancelled')) }}
-        run: exit 0
-      - name: Some tests failed
-        if: ${{ contains(needs.test-linux.result, 'failure') || contains(needs.test-linux.result, 'cancelled') }}
-        run: exit 1
+      - name: Run Tests (Release)
+        run: swift test -c release --parallel -Xswiftc -warnings-as-errors
