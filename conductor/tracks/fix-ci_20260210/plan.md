@@ -22,9 +22,9 @@ Modernize and stabilize the macOS CI pipeline to support Swift 6.1 and 6.2 with 
 - [x] Task: Implement optimized caching for SPM
     - [x] Configure `actions/cache@v4` (or latest) for `.build` directory.
     - [x] Ensure cache key includes `Package.resolved` hash and Swift version.
-- [ ] Task: Configure test execution with strict warnings
-    - [ ] Use `make test` for execution.
-    - [ ] Verify `Makefile` correctly passes `-Xswiftc -warnings-as-errors`.
+- [x] Task: Configure test execution with strict warnings
+    - [x] Use `make test` for execution.
+    - [x] Verify `Makefile` correctly passes `-Xswiftc -warnings-as-errors`.
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Fix macOS CI Implementation' (Protocol in workflow.md)
 
 ## Phase 3: Verification & Finalization
