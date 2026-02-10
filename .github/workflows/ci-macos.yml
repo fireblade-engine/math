@@ -1,4 +1,4 @@
-name: Apple
+name: macOS
 
 on:
   push:
@@ -8,14 +8,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-apple:
-    name: Test ${{ matrix.platform }} (Swift ${{ matrix.swift }})
+  test-macos:
+    name: Test macOS (Swift ${{ matrix.swift }})
     runs-on: macos-latest
     strategy:
       fail-fast: false
       matrix:
         swift: ["6.1", "6.2"]
-        platform: ["macOS", "iOS"]
 
     steps:
       - name: Checkout
@@ -30,31 +29,22 @@ jobs:
         uses: actions/cache@v5
         with:
           path: .build
-          key: ${{ runner.os }}-swift-${{ matrix.swift }}-${{ hashFiles('Package.resolved') }}
+          key: ${{ runner.os }}-macos-swift-${{ matrix.swift }}-${{ hashFiles('Package.resolved') }}
           restore-keys: |
-            ${{ runner.os }}-swift-${{ matrix.swift }}-
+            ${{ runner.os }}-macos-swift-${{ matrix.swift }}-
 
       - name: Run Tests (macOS)
-        if: matrix.platform == 'macOS'
         run: make test
 
-      - name: Run Tests (iOS)
-        if: matrix.platform == 'iOS'
-        run: |
-          xcodebuild test \
-            -scheme FirebladeMath \
-            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
-            -skipPackagePluginValidation
-
-  apple-gate:
-    name: Apple CI
-    needs: test-apple
+  macos-gate:
+    name: macOS CI
+    needs: test-macos
     runs-on: ubuntu-latest
     if: always()
     steps:
       - name: All tests passed
-        if: ${{ !(contains(needs.test-apple.result, 'failure') || contains(needs.test-apple.result, 'cancelled')) }}
+        if: ${{ !(contains(needs.test-macos.result, 'failure') || contains(needs.test-macos.result, 'cancelled')) }}
         run: exit 0
       - name: Some tests failed
-        if: ${{ contains(needs.test-apple.result, 'failure') || contains(needs.test-apple.result, 'cancelled') }}
+        if: ${{ contains(needs.test-macos.result, 'failure') || contains(needs.test-macos.result, 'cancelled') }}
         run: exit 1

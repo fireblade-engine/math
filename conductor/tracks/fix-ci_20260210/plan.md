@@ -15,10 +15,10 @@ Configure the CI landscape by isolating macOS CI and deactivating other automate
 ## Phase 2: Fix macOS CI Implementation
 Modernize and stabilize the macOS CI pipeline to support Swift 6.1 and 6.2 with strict warning policies.
 
-- [ ] Task: Modernize `ci-macos.yml` setup
-    - [ ] Remove iOS job/matrix entries from `ci-macos.yml`.
-    - [ ] Update to `swift-actions/setup-swift@v2`.
-    - [ ] Ensure matrix targets Swift `6.1` and `6.2`.
+- [x] Task: Modernize `ci-macos.yml` setup
+    - [x] Remove iOS job/matrix entries from `ci-macos.yml`.
+    - [x] Update to `swift-actions/setup-swift@v2`.
+    - [x] Ensure matrix targets Swift `6.1` and `6.2`.
 - [ ] Task: Implement optimized caching for SPM
     - [ ] Configure `actions/cache@v4` (or latest) for `.build` directory.
     - [ ] Ensure cache key includes `Package.resolved` hash and Swift version.
