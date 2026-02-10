@@ -23,7 +23,7 @@ let package = Package(
     ],
     traits: [
         .trait(name: "simd"),
-        .trait(name: "default", enabledTraits: defaultTraits)
+        .trait(name: "default", enabledTraits: Set(defaultTraits))
     ],
     targets: [
         .target(
