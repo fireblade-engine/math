@@ -7,7 +7,8 @@ public func angle(_ quat: Quat4f) -> Float {
     #if FRB_MATH_USE_SIMD
     return simd.simd_angle(quat.storage)
     #else
-    return 2.0 * atan2(length(quat), quat.w)
+    let vecLen = sqrt(quat.x * quat.x + quat.y * quat.y + quat.z * quat.z)
+    return 2.0 * atan2(vecLen, quat.w)
     #endif
 }
 
@@ -16,6 +17,7 @@ public func angle(_ quat: Quat4d) -> Double {
     #if FRB_MATH_USE_SIMD
     return simd.simd_angle(quat.storage)
     #else
-    return 2.0 * atan2(length(quat), quat.w)
+    let vecLen = sqrt(quat.x * quat.x + quat.y * quat.y + quat.z * quat.z)
+    return 2.0 * atan2(vecLen, quat.w)
     #endif
 }

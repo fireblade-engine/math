@@ -21,7 +21,7 @@ public func determinant(_ mat: Mat4x4f) -> Float {
     let subFactor22 = mat[1, 3] * (mat[2, 0] * mat[3, 1] - mat[2, 1] * mat[3, 0])
     let det2 = mat[0, 2] * (subFactor20 - subFactor21 + subFactor22)
 
-    let subFactor30 = mat[1, 0] * (mat[2, 1] * mat[3, 2] - mat[2, 2] * mat[3, 0])
+    let subFactor30 = mat[1, 0] * (mat[2, 1] * mat[3, 2] - mat[2, 2] * mat[3, 1])
     let subFactor31 = mat[1, 1] * (mat[2, 0] * mat[3, 2] - mat[2, 2] * mat[3, 0])
     let subFactor32 = mat[1, 2] * (mat[2, 0] * mat[3, 1] - mat[2, 1] * mat[3, 0])
     let det3 = mat[0, 3] * (subFactor30 - subFactor31 + subFactor32)
@@ -60,7 +60,7 @@ public func determinant(_ mat: Mat4x4d) -> Double {
     let subFactor22 = mat[1, 3] * (mat[2, 0] * mat[3, 1] - mat[2, 1] * mat[3, 0])
     let det2 = mat[0, 2] * (subFactor20 - subFactor21 + subFactor22)
 
-    let subFactor30 = mat[1, 0] * (mat[2, 1] * mat[3, 2] - mat[2, 2] * mat[3, 0])
+    let subFactor30 = mat[1, 0] * (mat[2, 1] * mat[3, 2] - mat[2, 2] * mat[3, 1])
     let subFactor31 = mat[1, 1] * (mat[2, 0] * mat[3, 2] - mat[2, 2] * mat[3, 0])
     let subFactor32 = mat[1, 2] * (mat[2, 0] * mat[3, 1] - mat[2, 1] * mat[3, 0])
     let det3 = mat[0, 3] * (subFactor30 - subFactor31 + subFactor32)
