@@ -9,29 +9,25 @@ on:
 
 jobs:
   test-windows:
-    name: Test Windows (Swift ${{ matrix.swift }})
+    name: Test Windows (Swift 6.0)
     runs-on: windows-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        swift: ["5.10", "6.0"]
-
     steps:
+      - name: Setup Swift
+        uses: compnerd/gha-setup-swift@v0.2.3
+        with:
+          branch: swift-6.0-release
+          tag: 6.0.3-RELEASE
+
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Setup Swift
-        uses: swift-actions/setup-swift@v2
-        with:
-          swift-version: ${{ matrix.swift }}
 
       - name: Cache Build
         uses: actions/cache@v4
         with:
           path: .build
-          key: ${{ runner.os }}-swift-${{ matrix.swift }}-${{ hashFiles('Package.resolved') }}
+          key: ${{ runner.os }}-swift-6.0-${{ hashFiles('Package.resolved') }}
           restore-keys: |
-            ${{ runner.os }}-swift-${{ matrix.swift }}-
+            ${{ runner.os }}-swift-6.0-
 
       - name: Run Tests
         run: swift test --parallel -Xswiftc -warnings-as-errors
