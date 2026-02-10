@@ -1,0 +1,8 @@
+{
+  "track_id": "fix-ci_20260210",
+  "type": "chore",
+  "status": "new",
+  "created_at": "2026-02-10T14:30:00Z",
+  "updated_at": "2026-02-10T14:30:00Z",
+  "description": "Github Actions fix. Fix macOS CI, split iOS, deactivate others."
+}
