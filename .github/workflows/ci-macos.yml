@@ -1,14 +1,14 @@
-name: Apple macOS
+name: macOS
 
 on:
   push:
-    branches: [ master, main, track/* ]
+    branches: [ master, main ]
   pull_request:
     branches: [ master, main ]
   workflow_dispatch:
 
 jobs:
-  apple-macos:
+  macos:
     name: macOS (Swift ${{ matrix.swift }})
     runs-on: macos-latest
     strategy:
@@ -24,14 +24,6 @@ jobs:
         uses: swift-actions/setup-swift@v2
         with:
           swift-version: ${{ matrix.swift }}
-
-      - name: Cache Build
-        uses: actions/cache@v5
-        with:
-          path: .build
-          key: ${{ runner.os }}-macos-spm-release-${{ matrix.swift }}-${{ hashFiles('Package.resolved') }}
-          restore-keys: |
-            ${{ runner.os }}-macos-spm-release-${{ matrix.swift }}-
 
       - name: Run Tests (Release)
         run: swift test -c release --parallel -Xswiftc -warnings-as-errors
