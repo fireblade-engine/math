@@ -3,10 +3,10 @@
 ## Phase 1: Preparation & Deactivation
 Configure the CI landscape by isolating macOS CI and deactivating other automated workflows.
 
-- [ ] Task: Create `ci-ios.yml` from `ci-macos.yml`
-    - [ ] Extract iOS job from `ci-macos.yml`.
-    - [ ] Create `.github/workflows/ci-ios.yml`.
-    - [ ] Set `on:` to `workflow_dispatch:` only for `ci-ios.yml`.
+- [x] Task: Create `ci-ios.yml` from `ci-macos.yml`
+    - [x] Extract iOS job from `ci-macos.yml`.
+    - [x] Create `.github/workflows/ci-ios.yml`.
+    - [x] Set `on:` to `workflow_dispatch:` only for `ci-ios.yml`.
 - [ ] Task: Deactivate automated runs for Linux and Windows CI
     - [ ] Modify `.github/workflows/ci-linux.yml` to use `workflow_dispatch:` only.
     - [ ] Modify `.github/workflows/ci-windows.yml` to use `workflow_dispatch:` only.
