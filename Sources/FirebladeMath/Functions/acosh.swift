@@ -6,34 +6,34 @@ import Darwin
 import Glibc
 #endif
 
-///  Computes the inverse hyperbolic cosine of arg.
+///  Computes the inverse hyperbolic cosine of x.
 ///
-/// - Parameter double:     floating point value representing the area of a hyperbolic sector
-/// - Returns: If no errors occur, the inverse hyperbolic cosine of arg (cosh-1
-///    (arg), or arcosh(arg)) on the interval [0, +∞], is returned.
+/// - Parameter x: floating point value representing the area of a hyperbolic sector
+/// - Returns: If no errors occur, the inverse hyperbolic cosine of x (cosh-1
+///    (x), or arcosh(x)) on the interval [0, +∞], is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
-public func acosh(_ double: Double) -> Double {
+public func acosh(_ x: Double) -> Double {
     #if canImport(Darwin)
-    return Darwin.acosh(double)
+    return Darwin.acosh(x)
     #elseif canImport(Glibc)
-    return Glibc.acosh(double)
+    return Glibc.acosh(x)
     #else
-    return Foundation.acosh(double)
+    return Foundation.acosh(x)
     #endif
 }
 
-///  Computes the inverse hyperbolic cosine of arg.
+///  Computes the inverse hyperbolic cosine of x.
 ///
-/// - Parameter float:     floating point value representing the area of a hyperbolic sector
-/// - Returns: If no errors occur, the inverse hyperbolic cosine of arg (cosh-1
-///    (arg), or arcosh(arg)) on the interval [0, +∞], is returned.
+/// - Parameter x: floating point value representing the area of a hyperbolic sector
+/// - Returns: If no errors occur, the inverse hyperbolic cosine of x (cosh-1
+///    (x), or arcosh(x)) on the interval [0, +∞], is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
-public func acosh(_ float: Float) -> Float {
+public func acosh(_ x: Float) -> Float {
     #if canImport(Darwin)
-    return Darwin.acoshf(float)
+    return Darwin.acoshf(x)
     #elseif canImport(Glibc)
-    return Glibc.acoshf(float)
+    return Glibc.acoshf(x)
     #else
-    return Foundation.acoshf(float)
+    return Foundation.acoshf(x)
     #endif
 }

@@ -1,3 +1,5 @@
+/// A 3x3 matrix.
+/// Matrices are stored in column-major order.
 @frozen
 public struct Matrix3x3<Storage: Storage3x3Protocol>: RandomAccessCollection, MutableCollection, Sendable where Storage.Value == Storage.Element {
     public typealias Element = Storage.Element
@@ -7,18 +9,22 @@ public struct Matrix3x3<Storage: Storage3x3Protocol>: RandomAccessCollection, Mu
 
     @usableFromInline var storage: Storage
 
+    /// The start index of the matrix (0).
     public var startIndex: Index {
         storage.startIndex
     }
 
+    /// The end index of the matrix (9).
     public var endIndex: Index {
         storage.endIndex
     }
 
+    /// Returns the index after the given index.
     public func index(after i: Index) -> Index {
         storage.index(after: i)
     }
 
+    /// Returns the index before the given index.
     public func index(before i: Index) -> Index {
         storage.index(before: i)
     }
@@ -27,29 +33,42 @@ public struct Matrix3x3<Storage: Storage3x3Protocol>: RandomAccessCollection, Mu
         self.storage = storage
     }
 
+    /// The 3x3 identity matrix.
     @inlinable
     public static var identity: Matrix3x3<Storage> {
         Matrix3x3(diagonal: Vector(repeating: 1))
     }
 
+    /// Creates a new 3x3 identity matrix.
     @inlinable
     public init() {
         self = .identity
     }
 
+    /// Creates a new 3x3 matrix with the specified diagonal values.
+    /// - Parameter diagonal: The values to place on the diagonal.
     public init(diagonal: Vector) {
         storage = Storage(diagonal: diagonal)
     }
 
+    /// Creates a new 3x3 matrix from an array of column vectors.
+    /// - Parameter columns: An array of 3 column vectors.
     public init(_ columns: [Vector]) {
         precondition(columns.count == 3, "Matrix needs exactly 3 Vector vectors")
         storage = Storage(columns)
     }
 
+    /// Creates a new 3x3 matrix from three column vectors.
+    /// - Parameters:
+    ///   - column0: The first column vector.
+    ///   - column1: The second column vector.
+    ///   - column2: The third column vector.
     public init(_ column0: Vector, _ column1: Vector, _ column2: Vector) {
         self.init([column0, column1, column2])
     }
 
+    /// Creates a new 3x3 matrix from an array of values in column-major order.
+    /// - Parameter values: An array of 9 values.
     public init(_ values: [Storage.Value]) {
         precondition(values.count == 9, "Matrix needs exactly 9 values")
         self.init([Vector(values[0...2]),
@@ -57,28 +76,37 @@ public struct Matrix3x3<Storage: Storage3x3Protocol>: RandomAccessCollection, Mu
                    Vector(values[6...8])])
     }
 
+    /// Accesses the value at the specified flat index in column-major order.
     public subscript(index: Index) -> Element {
         get { storage[index] }
         set { storage[index] = newValue }
     }
 
+    /// Accesses the value at the specified column and row.
+    /// - Parameters:
+    ///   - column: The column index (0-2).
+    ///   - row: The row index (0-2).
     public subscript(column: Int, row: Int) -> Value {
         get { storage[column, row] }
         set { storage[column, row] = newValue }
     }
 
+    /// Replaces the specified subrange of elements with the given collection.
     public mutating func replaceSubrange<C: Collection>(_ subrange: Range<Int>, with newElements: C) where Value == C.Element {
         storage.replaceSubrange(subrange, with: newElements)
     }
 
+    /// The column vectors of the matrix.
     @inlinable public var columns: (Vector, Vector, Vector) {
         storage.columns
     }
 
+    /// An array containing the elements of the matrix in column-major order.
     @inlinable public var elements: [Value] {
         [Value](AnyIterator(storage.makeIterator()))
     }
 
+    /// Provides access to the underlying memory as a contiguous buffer.
     @inlinable public func withForcedContiguousStorage<R>(_ body: (UnsafeBufferPointer<Element>) -> R) throws -> R? {
         // https://forums.swift.org/t/se-0256-introduce-mutable-contiguouscollection-protocol/22569/7
         if let result = withContiguousStorageIfAvailable(body) {
@@ -88,6 +116,7 @@ public struct Matrix3x3<Storage: Storage3x3Protocol>: RandomAccessCollection, Mu
         return ContiguousArray(self).withContiguousStorageIfAvailable(body)
     }
 
+    /// Provides mutable access to the underlying memory as a contiguous buffer.
     @inlinable public mutating func withForcedContiguousMutableStorage<R>(_ body: (inout UnsafeMutableBufferPointer<Element>) -> R) throws -> R? {
         // https://forums.swift.org/t/se-0256-introduce-mutable-contiguouscollection-protocol/22569/7
         if let result = withContiguousMutableStorageIfAvailable(body) {
@@ -104,198 +133,15 @@ public struct Matrix3x3<Storage: Storage3x3Protocol>: RandomAccessCollection, Mu
 }
 
 extension Matrix3x3: ExpressibleByArrayLiteral {
+    /// Creates a 3x3 matrix from an array literal in column-major order.
     public init(arrayLiteral elements: Value...) {
         self.init(elements)
     }
 }
 
 extension Matrix3x3: Equatable {
+    /// Returns a Boolean value indicating whether two matrices are equal.
     public static func == (lhs: Matrix3x3<Storage>, rhs: Matrix3x3<Storage>) -> Bool {
         lhs.storage == rhs.storage
     }
 }
-
-/*
- extension Matrix3x3 where Storage.Value: AdditiveArithmetic & FloatingPoint & Numeric {
- public init(rotation angleRadians: Storage.Value, axis: Vector) {
- // see: <GLKit.framework/.../Headers/GLKMatrix4.h>
- let v: Vector = normalize(axis)
- let icos: Storage.Value = cos(angleRadians)
- let icosp: Storage.Value = 1.0 - icos
- let isin: Storage.Value = sin(angleRadians)
-
- self.init(
- Vector( icos + icosp * v.x * v.x,
- icosp * v.x * v.y + v.z * isin,
- icosp * v.x * v.z - v.y * isin),
- Vector( icosp * v.x * v.y - v.z * isin,
- icos + icosp * v.y * v.y,
- icosp * v.y * v.z + v.x * isin),
- Vector( icosp * v.x * v.z + v.y * isin,
- icosp * v.y * v.z - v.x * isin,
- icos + icosp * v.z * v.z)
- )
- }
-
- public init(eulerAngles angles: Vector) {
- // see: https://en.wikipedia.org/wiki/Rotation_formalisms_in_three_dimensions#Conversion_formulae_between_formalisms
- // right handed coordinate system
-
- let sinϕ: Storage.Value = sin(angles.x)
- let sinθ: Storage.Value = sin(angles.y)
- let sinψ: Storage.Value = sin(angles.z)
-
- let cosϕ: Storage.Value = cos(angles.x)
- let cosθ: Storage.Value = cos(angles.y)
- let cosψ: Storage.Value = cos(angles.z)
-
- let m00: Storage.Value = cosθ * cosψ
-
- let m01: Storage.Value = -cosϕ * sinψ + sinϕ * sinθ * cosψ
- let m02: Storage.Value = sinϕ * sinψ + cosϕ * sinθ * cosψ
-
- let m10: Storage.Value = cosθ * sinψ
- let m11: Storage.Value = cosϕ * cosψ + sinϕ * sinθ * sinψ
- let m12: Storage.Value = -sinϕ * cosψ + cosϕ * sinθ * sinψ
-
- let m20: Storage.Value = -sinθ
- let m21: Storage.Value = sinϕ * cosθ
- let m22: Storage.Value = cosϕ * cosθ
-
- self.init(Vector(m00, m10, m20),
- Vector(m01, m11, m21),
- Vector(m02, m12, m22))
- }
-
- @inlinable public var rotationAngles: Vector {
- let rotX = atan2( self[1][2], self[2][2])
- let rotY = atan2(-self[0][2], hypot(self[1][2], self[2][2]))
- let rotZ = atan2( self[0][1], self[0][0])
- return Vector(rotX, rotY, rotZ)
- }
- }
-
- // MARK: - euler
- extension Matrix3x3 {
- @inlinable public var eulerAnglesXYZ: Vector {
- /// https://github.com/OGRECave/ogre/blob/master/OgreMain/src/OgreMatrix3.cpp#L995
- let yaw: Storage.Value
- let pitch: Storage.Value = radians(asin(self[0][2]))
- let roll: Storage.Value
- if pitch < radians(.halfPi) {
- if ( pitch > radians(-.halfPi) ) {
- yaw = atan2(-self[1][2], self[2][2])
- roll = atan2(-self[0][1], self[0][0])
- } else {
- // WARNING.  Not a unique solution.
- let fRmY: Storage.Value = atan2(self[1][0], self[1][1])
- roll = radians(0.0)  // any angle works
- yaw = roll - fRmY
- }
- } else {
- // WARNING.  Not a unique solution.
- let fRpY: Storage.Value = atan2(self[1][0], self[1][1])
- roll = radians(0.0)  // any angle works
- yaw = fRpY - roll
- }
-
- return Vector(yaw, pitch, roll)
- }
-
- @inlinable public var eulerAnglesXZY: Vector {
- /// https://github.com/OGRECave/ogre/blob/master/OgreMain/src/OgreMatrix3.cpp#L1030
- let yaw: Storage.Value
- let pitch: Storage.Value = asin(-self[0][1])
- let roll: Storage.Value
- if pitch < radians(.halfPi) {
- if pitch > radians(-.halfPi) {
- yaw = atan2(self[2][1], self[1][1])
- roll = atan2(self[0][2], self[0][0])
- } else {
- // WARNING.  Not a unique solution.
- let fRmY: Storage.Value = atan2(-self[2][0], self[2][2])
- roll = radians(0.0)  // any angle works
- yaw = roll - fRmY
- }
- } else {
- // WARNING.  Not a unique solution.
- let fRpY: Storage.Value = atan2(-self[2][0], self[2][2])
- roll = radians(0.0)  // any angle works
- yaw = fRpY - roll
- }
- return Vector(yaw, pitch, roll)
- }
-
- @inlinable public var eulerAnglesYXZ: Vector {
- /// https://github.com/OGRECave/ogre/blob/master/OgreMain/src/OgreMatrix3.cpp#L1065
- let yaw: Storage.Value
- let pitch: Storage.Value = asin(-self[1][2])
- let roll: Storage.Value
- if  pitch < radians(.halfPi) {
- if pitch > radians(-.halfPi) {
- yaw = atan2(self[0][2], self[2][2])
- roll = atan2(self[1][0], self[1][1])
- } else {
- // WARNING.  Not a unique solution.
- let fRmY: Storage.Value = atan2(-self[0][1], self[0][0])
- roll = radians(0.0)  // any angle works
- yaw = roll - fRmY
- }
- } else {
- // WARNING.  Not a unique solution.
- let fRpY: Storage.Value = atan2(-self[0][1], self[0][0])
- roll = radians(0.0)  // any angle works
- yaw = fRpY - roll
- }
- return Vector(yaw, pitch, roll)
- }
-
- @inlinable public var eulerAnglesZXY: Vector {
- /// https://github.com/OGRECave/ogre/blob/master/OgreMain/src/OgreMatrix3.cpp#L1135
- let yaw: Storage.Value
- let pitch: Storage.Value = asin(self[2][1])
- let roll: Storage.Value
- if  pitch < radians(.halfPi) {
- if pitch > radians(-.halfPi) {
- yaw = atan2(-self[0][1], self[1][1])
- roll = atan2(-self[2][0], self[2][2])
- } else {
- // WARNING.  Not a unique solution.
- let fRmY: Storage.Value = atan2(self[0][2], self[0][0])
- roll = radians(0.0)  // any angle works
- yaw = roll - fRmY
- }
- } else {
- // WARNING.  Not a unique solution.
- let fRpY: Storage.Value = atan2(self[0][2], self[0][0])
- roll = radians(0.0)  // any angle works
- yaw = fRpY - roll
- }
- return Vector(yaw, pitch, roll)
- }
-
- @inlinable public var eulerAnglesZYX: Vector {
- /// https://github.com/OGRECave/ogre/blob/master/OgreMain/src/OgreMatrix3.cpp#L1170
- let yaw: Storage.Value
- let pitch: Storage.Value = asin(-self[2][0])
- let roll: Storage.Value
- if pitch < radians(.halfPi) {
- if pitch > radians(-.halfPi) {
- yaw = atan2(self[1][0], self[0][0])
- roll = atan2(self[2][1], self[2][2])
- } else {
- // WARNING.  Not a unique solution.
- let fRmY: Storage.Value = atan2(-self[0][1], self[0][2])
- roll = radians(0.0);  // any angle works
- yaw = roll - fRmY
- }
- } else {
- // WARNING.  Not a unique solution.
- let fRpY: Storage.Value = atan2(-self[0][1], self[0][2])
- roll = radians(0.0);  // any angle works
- yaw = fRpY - roll
- }
- return Vector(yaw, pitch, roll)
- }
- }
- */

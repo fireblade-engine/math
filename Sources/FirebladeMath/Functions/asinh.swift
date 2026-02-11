@@ -6,32 +6,32 @@ import Darwin
 import Glibc
 #endif
 
-/// Computes the inverse hyperbolic sine of arg.
+/// Computes the inverse hyperbolic sine of x.
 ///
-/// - Parameter double: floating point value representing the area of a hyperbolic sector
-/// - Returns: If no errors occur, the inverse hyperbolic sine of arg (sinh^-1(arg), or arsinh(arg)), is returned.
+/// - Parameter x: floating point value representing the area of a hyperbolic sector
+/// - Returns: If no errors occur, the inverse hyperbolic sine of x (sinh^-1(x), or arsinh(x)), is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func asinh(_ double: Double) -> Double {
+public func asinh(_ x: Double) -> Double {
     #if canImport(Darwin)
-    return Darwin.asinh(double)
+    return Darwin.asinh(x)
     #elseif canImport(Glibc)
-    return Glibc.asinh(double)
+    return Glibc.asinh(x)
     #else
-    return Foundation.asinh(double)
+    return Foundation.asinh(x)
     #endif
 }
 
-/// Computes the inverse hyperbolic sine of arg.
+/// Computes the inverse hyperbolic sine of x.
 ///
-/// - Parameter float: floating point value representing the area of a hyperbolic sector
-/// - Returns: If no errors occur, the inverse hyperbolic sine of arg (sinh^-1(arg), or arsinh(arg)), is returned.
+/// - Parameter x: floating point value representing the area of a hyperbolic sector
+/// - Returns: If no errors occur, the inverse hyperbolic sine of x (sinh^-1(x), or arsinh(x)), is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func asinh(_ float: Float) -> Float {
+public func asinh(_ x: Float) -> Float {
     #if canImport(Darwin)
-    return Darwin.asinhf(float)
+    return Darwin.asinhf(x)
     #elseif canImport(Glibc)
-    return Glibc.asinhf(float)
+    return Glibc.asinhf(x)
     #else
-    return Foundation.asinhf(float)
+    return Foundation.asinhf(x)
     #endif
 }

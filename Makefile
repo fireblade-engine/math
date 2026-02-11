@@ -3,13 +3,16 @@ SWIFT_FLAGS ?= --disable-sandbox
 PACKAGE_SWIFT_VERSION := $(shell grep "swift-tools-version" Package.swift | head -n 1 | cut -d ":" -f 2 | xargs)
 
 # Targets
-.PHONY: setup lint lint-fix test test-coverage clean pre-commit
+.PHONY: setup lint lint-fix test test-coverage clean pre-commit docs
 
 setup:
 	@echo "Detected Package Swift Version: $(PACKAGE_SWIFT_VERSION)"
 	@which mint > /dev/null || (echo "Mint not found. Installing via Homebrew..." && brew install mint)
 	mint bootstrap
 	swift package resolve $(SWIFT_FLAGS)
+
+docs:
+	swift package generate-documentation --target FirebladeMath
 
 lint:
 	mint run swiftlint lint --quiet

@@ -6,34 +6,34 @@ import Darwin
 import Glibc
 #endif
 
-/// Computes hyperbolic sine of arg.
+/// Computes hyperbolic sine of x.
 ///
-/// - Parameter float:     floating point value representing a hyperbolic angle
-/// - Returns: If no errors occur, the hyperbolic sine of arg (sinh(arg), or (e^arg*-e-arg)/2) is returned.
+/// - Parameter x:     floating point value representing a hyperbolic angle
+/// - Returns: If no errors occur, the hyperbolic sine of x (sinh(x), or (e^x*-e-x)/2) is returned.
 /// If a range error due to overflow occurs, ±HUGE_VAL, ±HUGE_VALF, or ±HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func sinh(_ float: Float) -> Float {
+public func sinh(_ x: Float) -> Float {
     #if canImport(Darwin)
-    return Darwin.sinhf(float)
+    return Darwin.sinhf(x)
     #elseif canImport(Glibc)
-    return Glibc.sinhf(float)
+    return Glibc.sinhf(x)
     #else
-    return Foundation.sinhf(float)
+    return Foundation.sinhf(x)
     #endif
 }
 
-/// Computes hyperbolic sine of arg.
+/// Computes hyperbolic sine of x.
 ///
-/// - Parameter double:     floating point value representing a hyperbolic angle
-/// - Returns: If no errors occur, the hyperbolic sine of arg (sinh(arg), or (e^arg*-e-arg)/2) is returned.
+/// - Parameter x:     floating point value representing a hyperbolic angle
+/// - Returns: If no errors occur, the hyperbolic sine of x (sinh(x), or (e^x*-e-x)/2) is returned.
 /// If a range error due to overflow occurs, ±HUGE_VAL, ±HUGE_VALF, or ±HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func sinh(_ double: Double) -> Double {
+public func sinh(_ x: Double) -> Double {
     #if canImport(Darwin)
-    return Darwin.sinh(double)
+    return Darwin.sinh(x)
     #elseif canImport(Glibc)
-    return Glibc.sinh(double)
+    return Glibc.sinh(x)
     #else
-    return Foundation.sinh(double)
+    return Foundation.sinh(x)
     #endif
 }

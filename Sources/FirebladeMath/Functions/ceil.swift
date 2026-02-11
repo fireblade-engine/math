@@ -6,30 +6,30 @@ import Darwin
 import Glibc
 #endif
 
-/// Computes the smallest integer value not less than arg.
+/// Computes the smallest integer value not less than x.
 ///
-/// - Parameter float:     floating point value
-/// - Returns: If no errors occur, the smallest integer value not less than arg, that is ⌈arg⌉, is returned.
-public func ceil(_ float: Float) -> Float {
+/// - Parameter x:     floating point value
+/// - Returns: If no errors occur, the smallest integer value not less than x, that is ⌈x⌉, is returned.
+public func ceil(_ x: Float) -> Float {
     #if canImport(Darwin)
-    return Darwin.ceilf(float)
+    return Darwin.ceilf(x)
     #elseif canImport(Glibc)
-    return Glibc.ceilf(float)
+    return Glibc.ceilf(x)
     #else
-    return Foundation.ceilf(float)
+    return Foundation.ceilf(x)
     #endif
 }
 
-/// Computes the smallest integer value not less than arg.
+/// Computes the smallest integer value not less than x.
 ///
-/// - Parameter double:     floating point value
-/// - Returns: If no errors occur, the smallest integer value not less than arg, that is ⌈arg⌉, is returned.
-public func ceil(_ double: Double) -> Double {
+/// - Parameter x:     floating point value
+/// - Returns: If no errors occur, the smallest integer value not less than x, that is ⌈x⌉, is returned.
+public func ceil(_ x: Double) -> Double {
     #if canImport(Darwin)
-    return Darwin.ceil(double)
+    return Darwin.ceil(x)
     #elseif canImport(Glibc)
-    return Glibc.ceil(double)
+    return Glibc.ceil(x)
     #else
-    return Foundation.ceil(double)
+    return Foundation.ceil(x)
     #endif
 }

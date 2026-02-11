@@ -6,34 +6,34 @@ import Darwin
 import Glibc
 #endif
 
-/// Computes the principal value of the arc cosine of arg.
+/// Computes the principal value of the arc cosine of x.
 ///
-/// - Parameter float: floating point value
-/// - Returns: If no errors occur, the arc cosine of arg (arccos(arg)) in the range [0 ; π], is returned.
+/// - Parameter x: floating point value
+/// - Returns: If no errors occur, the arc cosine of x (arccos(x)) in the range [0 ; π], is returned.
 ///               If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 ///                If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func acos(_ float: Float) -> Float {
+public func acos(_ x: Float) -> Float {
     #if canImport(Darwin)
-    return Darwin.acosf(float)
+    return Darwin.acosf(x)
     #elseif canImport(Glibc)
-    return Glibc.acosf(float)
+    return Glibc.acosf(x)
     #else
-    return Foundation.acosf(float)
+    return Foundation.acosf(x)
     #endif
 }
 
-/// Computes the principal value of the arc cosine of arg.
+/// Computes the principal value of the arc cosine of x.
 ///
-/// - Parameter double: floating point value
-/// - Returns: If no errors occur, the arc cosine of arg (arccos(arg)) in the range [0 ; π], is returned.
+/// - Parameter x: floating point value
+/// - Returns: If no errors occur, the arc cosine of x (arccos(x)) in the range [0 ; π], is returned.
 ///               If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 ///                If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func acos(_ double: Double) -> Double {
+public func acos(_ x: Double) -> Double {
     #if canImport(Darwin)
-    return Darwin.acos(double)
+    return Darwin.acos(x)
     #elseif canImport(Glibc)
-    return Glibc.acos(double)
+    return Glibc.acos(x)
     #else
-    return Foundation.acos(double)
+    return Foundation.acos(x)
     #endif
 }

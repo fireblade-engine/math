@@ -4,6 +4,11 @@ import func simd.simd_smoothstep
 
 /// Interpolates smoothly between 0 at edge0 and 1 at edge1
 /// You can use a scalar value for edge0 and edge1 if you want to clamp all lanes at the same points.
+/// - Parameters:
+///   - edge0: lower edge
+///   - edge1: upper edge
+///   - x: source value
+/// - Returns: 0 if x <= edge0, 1 if x >= edge1, and smooth hermite interpolation between 0 and 1 otherwise.
 public func smoothstep(_ edge0: Double, _ edge1: Double, _ x: Double) -> Double {
     #if FRB_MATH_USE_SIMD
     return simd.simd_smoothstep(edge0, edge1, x)
@@ -15,6 +20,11 @@ public func smoothstep(_ edge0: Double, _ edge1: Double, _ x: Double) -> Double 
 
 /// Interpolates smoothly between 0 at edge0 and 1 at edge1
 /// You can use a scalar value for edge0 and edge1 if you want to clamp all lanes at the same points.
+/// - Parameters:
+///   - edge0: lower edge
+///   - edge1: upper edge
+///   - x: source value
+/// - Returns: 0 if x <= edge0, 1 if x >= edge1, and smooth hermite interpolation between 0 and 1 otherwise.
 public func smoothstep(_ edge0: Float, _ edge1: Float, _ x: Float) -> Float {
     #if FRB_MATH_USE_SIMD
     return simd.simd_smoothstep(edge0, edge1, x)

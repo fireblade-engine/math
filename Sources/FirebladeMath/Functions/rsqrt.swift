@@ -4,7 +4,7 @@ import func simd.simd_rsqrt
 
 /// Reciprocal square root.
 ///
-/// - Parameter float: floating point value
+/// - Parameter x: floating point value
 /// - Returns: 1 / sqrt(arg)
 public func rsqrt(_ x: Double) -> Double {
     #if FRB_MATH_USE_SIMD
@@ -16,7 +16,7 @@ public func rsqrt(_ x: Double) -> Double {
 
 /// Reciprocal square root.
 ///
-/// - Parameter float: floating point value
+/// - Parameter x: floating point value
 /// - Returns: 1 / sqrt(arg)
 public func rsqrt(_ x: Float) -> Float {
     #if FRB_MATH_USE_SIMD

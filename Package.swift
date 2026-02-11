@@ -25,6 +25,9 @@ let package = Package(
         .trait(name: "simd"),
         .trait(name: "default", enabledTraits: Set(defaultTraits))
     ],
+    dependencies: [
+        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.4.6")
+    ],
     targets: [
         .target(
             name: "FirebladeMath",

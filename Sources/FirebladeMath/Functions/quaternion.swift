@@ -2,6 +2,11 @@
 import func simd.simd_quaternion
 #endif
 
+/// Creates a quaternion from an angle and an axis.
+/// - Parameters:
+///   - angle: The angle of rotation in radians.
+///   - axis: The axis of rotation.
+/// - Returns: The quaternion.
 public func quaternion(angle: Float, axis: SIMD3<Float>) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd_quaternion(angle, axis))
@@ -10,6 +15,11 @@ public func quaternion(angle: Float, axis: SIMD3<Float>) -> Quat4f {
     #endif
 }
 
+/// Creates a quaternion from an angle and an axis.
+/// - Parameters:
+///   - angle: The angle of rotation in radians.
+///   - axis: The axis of rotation.
+/// - Returns: The quaternion.
 public func quaternion(angle: Double, axis: SIMD3<Double>) -> Quat4d {
     #if FRB_MATH_USE_SIMD
     return Quat4d(storage: simd_quaternion(angle, axis))
@@ -18,14 +28,16 @@ public func quaternion(angle: Double, axis: SIMD3<Double>) -> Quat4d {
     #endif
 }
 
-/** @abstract Construct a quaternion that rotates from one vector to another.
- *
- *  @param from A normalized three-element vector.
- *  @param to A normalized three-element vector.
- *
- *  @discussion The rotation axis is `simd_cross(from, to)`. If `from` and
- *  `to` point in opposite directions (to within machine precision), an
- *  arbitrary rotation axis is chosen, and the angle is pi radians.           */
+/// Construct a quaternion that rotates from one vector to another.
+///
+/// The rotation axis is `simd_cross(from, to)`. If `from` and
+/// `to` point in opposite directions (to within machine precision), an
+/// arbitrary rotation axis is chosen, and the angle is pi radians.
+///
+/// - Parameters:
+///   - from: A normalized three-element vector.
+///   - to: A normalized three-element vector.
+/// - Returns: The quaternion.
 public func quaternion(from: SIMD3<Float>, to: SIMD3<Float>) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd.simd_quaternion(from, to))
@@ -37,6 +49,16 @@ public func quaternion(from: SIMD3<Float>, to: SIMD3<Float>) -> Quat4f {
     #endif
 }
 
+/// Construct a quaternion that rotates from one vector to another.
+///
+/// The rotation axis is `simd_cross(from, to)`. If `from` and
+/// `to` point in opposite directions (to within machine precision), an
+/// arbitrary rotation axis is chosen, and the angle is pi radians.
+///
+/// - Parameters:
+///   - from: A normalized three-element vector.
+///   - to: A normalized three-element vector.
+/// - Returns: The quaternion.
 public func quaternion(from: SIMD3<Double>, to: SIMD3<Double>) -> Quat4d {
     #if FRB_MATH_USE_SIMD
     return Quat4d(storage: simd.simd_quaternion(from, to))
@@ -48,6 +70,9 @@ public func quaternion(from: SIMD3<Double>, to: SIMD3<Double>) -> Quat4d {
     #endif
 }
 
+/// Creates a quaternion from a 3x3 rotation matrix.
+/// - Parameter mat: The 3x3 rotation matrix.
+/// - Returns: The quaternion.
 public func quaternion(matrix mat: Mat3x3f) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd_quaternion(mat.storage))
@@ -85,6 +110,9 @@ public func quaternion(matrix mat: Mat3x3f) -> Quat4f {
     #endif
 }
 
+/// Creates a quaternion from a 3x3 rotation matrix.
+/// - Parameter mat: The 3x3 rotation matrix.
+/// - Returns: The quaternion.
 public func quaternion(matrix mat: Mat3x3d) -> Quat4d {
     #if FRB_MATH_USE_SIMD
     return Quat4d(storage: simd_quaternion(mat.storage))
@@ -122,6 +150,9 @@ public func quaternion(matrix mat: Mat3x3d) -> Quat4d {
     #endif
 }
 
+/// Creates a quaternion from a 4x4 rotation matrix.
+/// - Parameter mat: The 4x4 rotation matrix.
+/// - Returns: The quaternion.
 public func quaternion(matrix mat: Mat4x4f) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd_quaternion(mat.storage))
@@ -160,6 +191,9 @@ public func quaternion(matrix mat: Mat4x4f) -> Quat4f {
     #endif
 }
 
+/// Creates a quaternion from a 4x4 rotation matrix.
+/// - Parameter mat: The 4x4 rotation matrix.
+/// - Returns: The quaternion.
 public func quaternion(matrix mat: Mat4x4d) -> Quat4d {
     #if FRB_MATH_USE_SIMD
     return Quat4d(storage: simd_quaternion(mat.storage))

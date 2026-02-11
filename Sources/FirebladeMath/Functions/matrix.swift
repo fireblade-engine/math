@@ -3,6 +3,9 @@ import func simd.simd_matrix3x3
 import func simd.simd_matrix4x4
 #endif
 
+/// Creates a 3x3 rotation matrix from a quaternion.
+/// - Parameter quat: The quaternion.
+/// - Returns: The 3x3 rotation matrix.
 public func matrix3x3(from quat: Quat4f) -> Mat3x3f {
     #if FRB_MATH_USE_SIMD
     return Mat3x3f(storage: simd_matrix3x3(quat.storage))
@@ -22,6 +25,9 @@ public func matrix3x3(from quat: Quat4f) -> Mat3x3f {
     #endif
 }
 
+/// Creates a 3x3 rotation matrix from a quaternion.
+/// - Parameter quat: The quaternion.
+/// - Returns: The 3x3 rotation matrix.
 public func matrix3x3(from quat: Quat4d) -> Mat3x3d {
     #if FRB_MATH_USE_SIMD
     return Mat3x3d(storage: simd_matrix3x3(quat.storage))
@@ -41,6 +47,9 @@ public func matrix3x3(from quat: Quat4d) -> Mat3x3d {
     #endif
 }
 
+/// Creates a 4x4 rotation matrix from a quaternion.
+/// - Parameter quat: The quaternion.
+/// - Returns: The 4x4 rotation matrix.
 public func matrix4x4(from quat: Quat4f) -> Mat4x4f {
     #if FRB_MATH_USE_SIMD
     return Mat4x4f(storage: simd_matrix4x4(quat.storage))
@@ -61,6 +70,9 @@ public func matrix4x4(from quat: Quat4f) -> Mat4x4f {
     #endif
 }
 
+/// Creates a 4x4 rotation matrix from a quaternion.
+/// - Parameter quat: The quaternion.
+/// - Returns: The 4x4 rotation matrix.
 public func matrix4x4(from quat: Quat4d) -> Mat4x4d {
     #if FRB_MATH_USE_SIMD
     return Mat4x4d(storage: simd_matrix4x4(quat.storage))
