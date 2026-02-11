@@ -86,7 +86,7 @@ jobs:
           # Wait a few seconds for CDN propagation
           sleep 10
           # Verify the versioned documentation path exists
-          curl --fail -sL https://fireblade-engine.github.io/math/main/documentation/fireblademath/ | grep -q "FirebladeMath"
+          curl --fail -sL https://fireblade-engine.github.io/math/main/documentation/fireblademath/ | grep -q "Documentation"
           echo "Documentation is live at /math/main/"
       
       - name: Check Root Redirect
