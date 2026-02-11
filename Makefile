@@ -25,14 +25,14 @@ docs-preview:
 	swift package --disable-sandbox preview-documentation --target FirebladeMath
 
 docs-generate:
-        mkdir -p .build/documentation/$(DOCS_VERSION_PATH)
-        swift package --disable-sandbox \
-                --allow-writing-to-directory .build/documentation \
-                generate-documentation --target FirebladeMath \
-                --disable-indexing \
-                --transform-for-static-hosting \
-                --hosting-base-path $(HOSTING_BASE_PATH) \
-                --output-path .build/documentation/$(DOCS_VERSION_PATH)
+	mkdir -p .build/documentation/$(DOCS_VERSION_PATH)
+	swift package --disable-sandbox \
+		--allow-writing-to-directory .build/documentation \
+		generate-documentation --target FirebladeMath \
+		--disable-indexing \
+		--transform-for-static-hosting \
+		--hosting-base-path $(HOSTING_BASE_PATH) \
+		--output-path .build/documentation/$(DOCS_VERSION_PATH)
 docs-coverage: docs-check-coverage
 
 docs-check-coverage:
