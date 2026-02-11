@@ -6,32 +6,32 @@ import Darwin
 import Glibc
 #endif
 
-/// Computes the principal value of the arc tangent of arg.
+/// Computes the principal value of the arc tangent of x.
 ///
-/// - Parameter double: floating point value
-/// - Returns: If no errors occur, the arc tangent of arg (arctan(arg)) in the range [-π/2;+π/2] radians, is returned.
+/// - Parameter x: floating point value
+/// - Returns: If no errors occur, the arc tangent of x (arctan(x)) in the range [-π/2;+π/2] radians, is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func atan(_ double: Double) -> Double {
+public func atan(_ x: Double) -> Double {
     #if canImport(Darwin)
-    return Darwin.atan(double)
+    return Darwin.atan(x)
     #elseif canImport(Glibc)
-    return Glibc.atan(double)
+    return Glibc.atan(x)
     #else
-    return Foundation.atan(double)
+    return Foundation.atan(x)
     #endif
 }
 
-/// Computes the principal value of the arc tangent of arg.
+/// Computes the principal value of the arc tangent of x.
 ///
-/// - Parameter float: floating point value
-/// - Returns: If no errors occur, the arc tangent of arg (arctan(arg)) in the range [-π/2;+π/2] radians, is returned.
+/// - Parameter x: floating point value
+/// - Returns: If no errors occur, the arc tangent of x (arctan(x)) in the range [-π/2;+π/2] radians, is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
-public func atan(_ float: Float) -> Float {
+public func atan(_ x: Float) -> Float {
     #if canImport(Darwin)
-    return Darwin.atanf(float)
+    return Darwin.atanf(x)
     #elseif canImport(Glibc)
-    return Glibc.atanf(float)
+    return Glibc.atanf(x)
     #else
-    return Foundation.atanf(float)
+    return Foundation.atanf(x)
     #endif
 }

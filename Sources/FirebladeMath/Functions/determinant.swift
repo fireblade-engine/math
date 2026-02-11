@@ -2,6 +2,9 @@
 import func simd.simd_determinant
 #endif
 
+/// Computes the determinant of a 4x4 matrix.
+/// - Parameter mat: The matrix.
+/// - Returns: The determinant.
 public func determinant(_ mat: Mat4x4f) -> Float {
     #if FRB_MATH_USE_SIMD
     return simd.simd_determinant(mat.storage)
@@ -30,6 +33,9 @@ public func determinant(_ mat: Mat4x4f) -> Float {
     #endif
 }
 
+/// Computes the determinant of a 3x3 matrix.
+/// - Parameter mat: The matrix.
+/// - Returns: The determinant.
 public func determinant(_ mat: Mat3x3f) -> Float {
     #if FRB_MATH_USE_SIMD
     return simd.simd_determinant(mat.storage)
@@ -41,6 +47,9 @@ public func determinant(_ mat: Mat3x3f) -> Float {
     #endif
 }
 
+/// Computes the determinant of a 4x4 matrix.
+/// - Parameter mat: The matrix.
+/// - Returns: The determinant.
 public func determinant(_ mat: Mat4x4d) -> Double {
     #if FRB_MATH_USE_SIMD
     return simd.simd_determinant(mat.storage)
@@ -69,6 +78,9 @@ public func determinant(_ mat: Mat4x4d) -> Double {
     #endif
 }
 
+/// Computes the determinant of a 3x3 matrix.
+/// - Parameter mat: The matrix.
+/// - Returns: The determinant.
 public func determinant(_ mat: Mat3x3d) -> Double {
     #if FRB_MATH_USE_SIMD
     return simd.simd_determinant(mat.storage)

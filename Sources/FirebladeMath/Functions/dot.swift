@@ -2,6 +2,11 @@
 import func simd.simd_dot
 #endif
 
+/// Computes the dot product of two vectors.
+/// - Parameters:
+///   - x: The first vector.
+///   - y: The second vector.
+/// - Returns: The dot product.
 @inlinable
 public func dot(_ x: SIMD2<Double>, _ y: SIMD2<Double>) -> Double {
     #if FRB_MATH_USE_SIMD
@@ -11,6 +16,11 @@ public func dot(_ x: SIMD2<Double>, _ y: SIMD2<Double>) -> Double {
     #endif
 }
 
+/// Computes the dot product of two vectors.
+/// - Parameters:
+///   - x: The first vector.
+///   - y: The second vector.
+/// - Returns: The dot product.
 @inlinable
 public func dot(_ x: SIMD2<Float>, _ y: SIMD2<Float>) -> Float {
     #if FRB_MATH_USE_SIMD
@@ -20,6 +30,11 @@ public func dot(_ x: SIMD2<Float>, _ y: SIMD2<Float>) -> Float {
     #endif
 }
 
+/// Computes the dot product of two vectors.
+/// - Parameters:
+///   - x: The first vector.
+///   - y: The second vector.
+/// - Returns: The dot product.
 @inlinable
 public func dot(_ x: SIMD3<Double>, _ y: SIMD3<Double>) -> Double {
     #if FRB_MATH_USE_SIMD
@@ -29,6 +44,11 @@ public func dot(_ x: SIMD3<Double>, _ y: SIMD3<Double>) -> Double {
     #endif
 }
 
+/// Computes the dot product of two vectors.
+/// - Parameters:
+///   - x: The first vector.
+///   - y: The second vector.
+/// - Returns: The dot product.
 @inlinable
 public func dot(_ x: SIMD3<Float>, _ y: SIMD3<Float>) -> Float {
     #if FRB_MATH_USE_SIMD
@@ -38,6 +58,11 @@ public func dot(_ x: SIMD3<Float>, _ y: SIMD3<Float>) -> Float {
     #endif
 }
 
+/// Computes the dot product of two vectors.
+/// - Parameters:
+///   - x: The first vector.
+///   - y: The second vector.
+/// - Returns: The dot product.
 @inlinable
 public func dot(_ x: SIMD4<Double>, _ y: SIMD4<Double>) -> Double {
     #if FRB_MATH_USE_SIMD
@@ -50,6 +75,11 @@ public func dot(_ x: SIMD4<Double>, _ y: SIMD4<Double>) -> Double {
     #endif
 }
 
+/// Computes the dot product of two vectors.
+/// - Parameters:
+///   - x: The first vector.
+///   - y: The second vector.
+/// - Returns: The dot product.
 @inlinable
 public func dot(_ x: SIMD4<Float>, _ y: SIMD4<Float>) -> Float {
     #if FRB_MATH_USE_SIMD

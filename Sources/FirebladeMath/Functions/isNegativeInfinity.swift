@@ -1,7 +1,13 @@
-public func isNegativeInfinity(_ float: Float) -> Bool {
-    float.floatingPointClass == .negativeInfinity
+/// Returns true if the value is negative infinity.
+/// - Parameter x: floating point value
+/// - Returns: true if the value is negative infinity, false otherwise.
+public func isNegativeInfinity(_ x: Float) -> Bool {
+    x.floatingPointClass == .negativeInfinity
 }
 
-public func isNegativeInfinity(_ double: Double) -> Bool {
-    double.floatingPointClass == .negativeInfinity
+/// Returns true if the value is negative infinity.
+/// - Parameter x: floating point value
+/// - Returns: true if the value is negative infinity, false otherwise.
+public func isNegativeInfinity(_ x: Double) -> Bool {
+    x.floatingPointClass == .negativeInfinity
 }

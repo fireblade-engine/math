@@ -2,6 +2,9 @@
 import func simd.simd_transpose
 #endif
 
+/// Returns the transpose of a matrix.
+/// - Parameter matrix: The matrix to transpose.
+/// - Returns: The transposed matrix.
 public func transpose(_ matrix: Mat3x3f) -> Mat3x3f {
     #if FRB_MATH_USE_SIMD
     return Mat3x3f(storage: simd.simd_transpose(matrix.storage))
@@ -14,6 +17,9 @@ public func transpose(_ matrix: Mat3x3f) -> Mat3x3f {
     #endif
 }
 
+/// Returns the transpose of a matrix.
+/// - Parameter matrix: The matrix to transpose.
+/// - Returns: The transposed matrix.
 public func transpose(_ matrix: Mat3x3d) -> Mat3x3d {
     #if FRB_MATH_USE_SIMD
     return Mat3x3d(storage: simd.simd_transpose(matrix.storage))
@@ -26,6 +32,9 @@ public func transpose(_ matrix: Mat3x3d) -> Mat3x3d {
     #endif
 }
 
+/// Returns the transpose of a matrix.
+/// - Parameter matrix: The matrix to transpose.
+/// - Returns: The transposed matrix.
 public func transpose(_ matrix: Mat4x4f) -> Mat4x4f {
     #if FRB_MATH_USE_SIMD
     return Mat4x4f(storage: simd.simd_transpose(matrix.storage))
@@ -39,6 +48,9 @@ public func transpose(_ matrix: Mat4x4f) -> Mat4x4f {
     #endif
 }
 
+/// Returns the transpose of a matrix.
+/// - Parameter matrix: The matrix to transpose.
+/// - Returns: The transposed matrix.
 public func transpose(_ matrix: Mat4x4d) -> Mat4x4d {
     #if FRB_MATH_USE_SIMD
     return Mat4x4d(storage: simd.simd_transpose(matrix.storage))

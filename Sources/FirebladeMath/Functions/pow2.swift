@@ -6,6 +6,8 @@ import Darwin
 import Glibc
 #endif
 /// Computes the value of base 2 raised to the power exponent.
+/// - Parameter exponent: The exponent.
+/// - Returns: 2 raised to the power of exponent.
 public func pow2(_ exponent: Float) -> Float {
     #if canImport(Darwin)
     return Darwin.powf(2, exponent)
@@ -17,6 +19,8 @@ public func pow2(_ exponent: Float) -> Float {
 }
 
 /// Computes the value of base 2 raised to the power exponent.
+/// - Parameter exponent: The exponent.
+/// - Returns: 2 raised to the power of exponent.
 public func pow2(_ exponent: Double) -> Double {
     #if canImport(Darwin)
     return Darwin.pow(2, exponent)

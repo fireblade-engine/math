@@ -2,6 +2,9 @@
 import func simd.simd_normalize
 #endif
 
+/// Returns a normalized copy of the vector.
+/// - Parameter x: The vector to normalize.
+/// - Returns: A vector with the same direction as x but with a length of 1.0.
 @inlinable
 public func normalize(_ x: SIMD2<Double>) -> SIMD2<Double> {
     #if FRB_MATH_USE_SIMD
@@ -12,6 +15,9 @@ public func normalize(_ x: SIMD2<Double>) -> SIMD2<Double> {
     #endif
 }
 
+/// Returns a normalized copy of the vector.
+/// - Parameter x: The vector to normalize.
+/// - Returns: A vector with the same direction as x but with a length of 1.0.
 @inlinable
 public func normalize(_ x: SIMD2<Float>) -> SIMD2<Float> {
     #if FRB_MATH_USE_SIMD
@@ -22,6 +28,9 @@ public func normalize(_ x: SIMD2<Float>) -> SIMD2<Float> {
     #endif
 }
 
+/// Returns a normalized copy of the vector.
+/// - Parameter x: The vector to normalize.
+/// - Returns: A vector with the same direction as x but with a length of 1.0.
 @inlinable
 public func normalize(_ x: SIMD3<Double>) -> SIMD3<Double> {
     #if FRB_MATH_USE_SIMD
@@ -32,6 +41,9 @@ public func normalize(_ x: SIMD3<Double>) -> SIMD3<Double> {
     #endif
 }
 
+/// Returns a normalized copy of the vector.
+/// - Parameter x: The vector to normalize.
+/// - Returns: A vector with the same direction as x but with a length of 1.0.
 @inlinable
 public func normalize(_ x: SIMD3<Float>) -> SIMD3<Float> {
     #if FRB_MATH_USE_SIMD
@@ -42,6 +54,9 @@ public func normalize(_ x: SIMD3<Float>) -> SIMD3<Float> {
     #endif
 }
 
+/// Returns a normalized copy of the vector.
+/// - Parameter x: The vector to normalize.
+/// - Returns: A vector with the same direction as x but with a length of 1.0.
 @inlinable
 public func normalize(_ x: SIMD4<Double>) -> SIMD4<Double> {
     #if FRB_MATH_USE_SIMD
@@ -52,6 +67,9 @@ public func normalize(_ x: SIMD4<Double>) -> SIMD4<Double> {
     #endif
 }
 
+/// Returns a normalized copy of the vector.
+/// - Parameter x: The vector to normalize.
+/// - Returns: A vector with the same direction as x but with a length of 1.0.
 @inlinable
 public func normalize(_ x: SIMD4<Float>) -> SIMD4<Float> {
     #if FRB_MATH_USE_SIMD
@@ -62,6 +80,9 @@ public func normalize(_ x: SIMD4<Float>) -> SIMD4<Float> {
     #endif
 }
 
+/// Returns a normalized copy of the quaternion.
+/// - Parameter x: The quaternion to normalize.
+/// - Returns: A quaternion with the same orientation as x but with a length of 1.0.
 @inlinable
 public func normalize(_ x: Quat4f) -> Quat4f {
     #if FRB_MATH_USE_SIMD
@@ -72,6 +93,9 @@ public func normalize(_ x: Quat4f) -> Quat4f {
     #endif
 }
 
+/// Returns a normalized copy of the quaternion.
+/// - Parameter x: The quaternion to normalize.
+/// - Returns: A quaternion with the same orientation as x but with a length of 1.0.
 @inlinable
 public func normalize(_ x: Quat4d) -> Quat4d {
     #if FRB_MATH_USE_SIMD

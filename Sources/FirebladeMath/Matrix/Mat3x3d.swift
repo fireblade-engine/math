@@ -3,6 +3,10 @@ import simd
 #endif
 
 extension Mat3x3d {
+    /// Creates a 3x3 rotation matrix.
+    /// - Parameters:
+    ///   - angleRadians: The angle of rotation in radians.
+    ///   - axis: The axis of rotation.
     public init(rotation angleRadians: Double, axis: SIMD3<Double>) {
         let v = normalize(axis)
         let icos = cos(angleRadians)
@@ -22,10 +26,8 @@ extension Mat3x3d {
         )
     }
 
-    /// x: pitch, y: yaw, z: roll
-    /// Returns the euler angles for this matrix.
-    ///
-    /// - Returns: euler angles.
+    /// Returns the Euler angles (pitch, yaw, roll) for this matrix in radians.
+    /// - Returns: A 3D vector where x is pitch, y is yaw, and z is roll.
     @inlinable public var eulerAngles: Vec3d {
         let thetaX: Double
         let thetaY: Double

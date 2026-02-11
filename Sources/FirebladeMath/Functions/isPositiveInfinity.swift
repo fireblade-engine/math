@@ -1,7 +1,13 @@
-public func isPositiveInfinity(_ float: Float) -> Bool {
-    float.floatingPointClass == .positiveInfinity
+/// Returns true if the value is positive infinity.
+/// - Parameter x: floating point value
+/// - Returns: true if the value is positive infinity, false otherwise.
+public func isPositiveInfinity(_ x: Float) -> Bool {
+    x.floatingPointClass == .positiveInfinity
 }
 
-public func isPositiveInfinity(_ double: Double) -> Bool {
-    double.floatingPointClass == .positiveInfinity
+/// Returns true if the value is positive infinity.
+/// - Parameter x: floating point value
+/// - Returns: true if the value is positive infinity, false otherwise.
+public func isPositiveInfinity(_ x: Double) -> Bool {
+    x.floatingPointClass == .positiveInfinity
 }

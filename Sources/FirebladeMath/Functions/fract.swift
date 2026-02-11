@@ -7,7 +7,7 @@ import func simd.simd_fract
 /// If x is positive and finite, then the two values are exactly equal.
 ///
 /// - Parameters:
-///     - v: floating point value
+///     - value: floating point value
 /// - Returns: The "fractional part" of x
 public func fract(_ value: Double) -> Double {
     #if FRB_MATH_USE_SIMD
@@ -22,7 +22,7 @@ public func fract(_ value: Double) -> Double {
 /// If x is positive and finite, then the two values are exactly equal.
 ///
 /// - Parameters:
-///     - v: floating point value
+///     - value: floating point value
 /// - Returns: The "fractional part" of x
 public func fract(_ value: Float) -> Float {
     #if FRB_MATH_USE_SIMD

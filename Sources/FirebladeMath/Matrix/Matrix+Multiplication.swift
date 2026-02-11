@@ -4,6 +4,11 @@ import func simd.simd_mul
 
 // MARK: - Mat4x4d
 
+/// Multiplies two 4x4 double matrices.
+/// - Parameters:
+///   - lhs: The left-hand side matrix.
+///   - rhs: The right-hand side matrix.
+/// - Returns: The product of the two matrices.
 @inlinable
 public func multiply(_ lhs: Mat4x4d, _ rhs: Mat4x4d) -> Mat4x4d {
     #if FRB_MATH_USE_SIMD
@@ -38,6 +43,11 @@ public func multiply(_ lhs: Mat4x4d, _ rhs: Mat4x4d) -> Mat4x4d {
     #endif
 }
 
+/// Multiplies a 4x4 double matrix by a scalar.
+/// - Parameters:
+///   - lhs: The scalar value.
+///   - rhs: The matrix.
+/// - Returns: The resulting matrix.
 @inlinable
 public func multiply(_ lhs: Double, _ rhs: Mat4x4d) -> Mat4x4d {
     #if FRB_MATH_USE_SIMD
@@ -50,6 +60,11 @@ public func multiply(_ lhs: Double, _ rhs: Mat4x4d) -> Mat4x4d {
     #endif
 }
 
+/// Multiplies a 4D double vector by a 4x4 double matrix.
+/// - Parameters:
+///   - lhs: The vector.
+///   - rhs: The matrix.
+/// - Returns: The resulting vector.
 @inlinable
 public func multiply(_ lhs: Vec4d, _ rhs: Mat4x4d) -> Vec4d {
     #if FRB_MATH_USE_SIMD
@@ -64,6 +79,11 @@ public func multiply(_ lhs: Vec4d, _ rhs: Mat4x4d) -> Vec4d {
     #endif
 }
 
+/// Multiplies a 4x4 double matrix by a 4D double vector.
+/// - Parameters:
+///   - lhs: The matrix.
+///   - rhs: The vector.
+/// - Returns: The resulting vector.
 @inlinable
 public func multiply(_ lhs: Mat4x4d, _ rhs: Vec4d) -> Vec4d {
     #if FRB_MATH_USE_SIMD
@@ -79,6 +99,11 @@ public func multiply(_ lhs: Mat4x4d, _ rhs: Vec4d) -> Vec4d {
 
 // MARK: - Mat4x4f
 
+/// Multiplies two 4x4 float matrices.
+/// - Parameters:
+///   - lhs: The left-hand side matrix.
+///   - rhs: The right-hand side matrix.
+/// - Returns: The product of the two matrices.
 @inlinable
 public func multiply(_ lhs: Mat4x4f, _ rhs: Mat4x4f) -> Mat4x4f {
     #if FRB_MATH_USE_SIMD
@@ -113,6 +138,11 @@ public func multiply(_ lhs: Mat4x4f, _ rhs: Mat4x4f) -> Mat4x4f {
     #endif
 }
 
+/// Multiplies a 4x4 float matrix by a scalar.
+/// - Parameters:
+///   - lhs: The scalar value.
+///   - rhs: The matrix.
+/// - Returns: The resulting matrix.
 @inlinable
 public func multiply(_ lhs: Float, _ rhs: Mat4x4f) -> Mat4x4f {
     #if FRB_MATH_USE_SIMD
@@ -125,6 +155,11 @@ public func multiply(_ lhs: Float, _ rhs: Mat4x4f) -> Mat4x4f {
     #endif
 }
 
+/// Multiplies a 4D float vector by a 4x4 float matrix.
+/// - Parameters:
+///   - lhs: The vector.
+///   - rhs: The matrix.
+/// - Returns: The resulting vector.
 @inlinable
 public func multiply(_ lhs: Vec4f, _ rhs: Mat4x4f) -> Vec4f {
     #if FRB_MATH_USE_SIMD
@@ -139,6 +174,11 @@ public func multiply(_ lhs: Vec4f, _ rhs: Mat4x4f) -> Vec4f {
     #endif
 }
 
+/// Multiplies a 4x4 float matrix by a 4D float vector.
+/// - Parameters:
+///   - lhs: The matrix.
+///   - rhs: The vector.
+/// - Returns: The resulting vector.
 @inlinable
 public func multiply(_ lhs: Mat4x4f, _ rhs: Vec4f) -> Vec4f {
     #if FRB_MATH_USE_SIMD
@@ -154,6 +194,11 @@ public func multiply(_ lhs: Mat4x4f, _ rhs: Vec4f) -> Vec4f {
 
 // MARK: - Mat3x3d
 
+/// Multiplies two 3x3 double matrices.
+/// - Parameters:
+///   - lhs: The left-hand side matrix.
+///   - rhs: The right-hand side matrix.
+/// - Returns: The product of the two matrices.
 @inlinable
 public func multiply(_ lhs: Mat3x3d, _ rhs: Mat3x3d) -> Mat3x3d {
     #if FRB_MATH_USE_SIMD
@@ -179,6 +224,11 @@ public func multiply(_ lhs: Mat3x3d, _ rhs: Mat3x3d) -> Mat3x3d {
     #endif
 }
 
+/// Multiplies a 3x3 double matrix by a scalar.
+/// - Parameters:
+///   - lhs: The scalar value.
+///   - rhs: The matrix.
+/// - Returns: The resulting matrix.
 @inlinable
 public func multiply(_ lhs: Double, _ rhs: Mat3x3d) -> Mat3x3d {
     #if FRB_MATH_USE_SIMD
@@ -190,6 +240,11 @@ public func multiply(_ lhs: Double, _ rhs: Mat3x3d) -> Mat3x3d {
     #endif
 }
 
+/// Multiplies a 3D double vector by a 3x3 double matrix.
+/// - Parameters:
+///   - lhs: The vector.
+///   - rhs: The matrix.
+/// - Returns: The resulting vector.
 @inlinable
 public func multiply(_ lhs: Vec3d, _ rhs: Mat3x3d) -> Vec3d {
     #if FRB_MATH_USE_SIMD
@@ -203,6 +258,11 @@ public func multiply(_ lhs: Vec3d, _ rhs: Mat3x3d) -> Vec3d {
     #endif
 }
 
+/// Multiplies a 3x3 double matrix by a 3D double vector.
+/// - Parameters:
+///   - lhs: The matrix.
+///   - rhs: The vector.
+/// - Returns: The resulting vector.
 @inlinable
 public func multiply(_ lhs: Mat3x3d, _ rhs: Vec3d) -> Vec3d {
     #if FRB_MATH_USE_SIMD
@@ -217,6 +277,11 @@ public func multiply(_ lhs: Mat3x3d, _ rhs: Vec3d) -> Vec3d {
 
 // MARK: - Mat3x3f
 
+/// Multiplies two 3x3 float matrices.
+/// - Parameters:
+///   - lhs: The left-hand side matrix.
+///   - rhs: The right-hand side matrix.
+/// - Returns: The product of the two matrices.
 @inlinable
 public func multiply(_ lhs: Mat3x3f, _ rhs: Mat3x3f) -> Mat3x3f {
     #if FRB_MATH_USE_SIMD
@@ -242,6 +307,11 @@ public func multiply(_ lhs: Mat3x3f, _ rhs: Mat3x3f) -> Mat3x3f {
     #endif
 }
 
+/// Multiplies a 3x3 float matrix by a scalar.
+/// - Parameters:
+///   - lhs: The scalar value.
+///   - rhs: The matrix.
+/// - Returns: The resulting matrix.
 @inlinable
 public func multiply(_ lhs: Float, _ rhs: Mat3x3f) -> Mat3x3f {
     #if FRB_MATH_USE_SIMD
@@ -253,6 +323,11 @@ public func multiply(_ lhs: Float, _ rhs: Mat3x3f) -> Mat3x3f {
     #endif
 }
 
+/// Multiplies a 3D float vector by a 3x3 float matrix.
+/// - Parameters:
+///   - lhs: The vector.
+///   - rhs: The matrix.
+/// - Returns: The resulting vector.
 @inlinable
 public func multiply(_ lhs: Vec3f, _ rhs: Mat3x3f) -> Vec3f {
     #if FRB_MATH_USE_SIMD
@@ -266,6 +341,11 @@ public func multiply(_ lhs: Vec3f, _ rhs: Mat3x3f) -> Vec3f {
     #endif
 }
 
+/// Multiplies a 3x3 float matrix by a 3D float vector.
+/// - Parameters:
+///   - lhs: The matrix.
+///   - rhs: The vector.
+/// - Returns: The resulting vector.
 @inlinable
 public func multiply(_ lhs: Mat3x3f, _ rhs: Vec3f) -> Vec3f {
     #if FRB_MATH_USE_SIMD
@@ -280,6 +360,11 @@ public func multiply(_ lhs: Mat3x3f, _ rhs: Vec3f) -> Vec3f {
 
 // MARK: - Mat2x2d
 
+/// Multiplies two 2x2 double matrices.
+/// - Parameters:
+///   - lhs: The left-hand side matrix.
+///   - rhs: The right-hand side matrix.
+/// - Returns: The product of the two matrices.
 @inlinable
 public func multiply(_ lhs: Mat2x2d, _ rhs: Mat2x2d) -> Mat2x2d {
     #if FRB_MATH_USE_SIMD
@@ -298,6 +383,11 @@ public func multiply(_ lhs: Mat2x2d, _ rhs: Mat2x2d) -> Mat2x2d {
     #endif
 }
 
+/// Multiplies a 2x2 double matrix by a scalar.
+/// - Parameters:
+///   - lhs: The scalar value.
+///   - rhs: The matrix.
+/// - Returns: The resulting matrix.
 @inlinable
 public func multiply(_ lhs: Double, _ rhs: Mat2x2d) -> Mat2x2d {
     #if FRB_MATH_USE_SIMD
@@ -308,6 +398,11 @@ public func multiply(_ lhs: Double, _ rhs: Mat2x2d) -> Mat2x2d {
     #endif
 }
 
+/// Multiplies a 2D double vector by a 2x2 double matrix.
+/// - Parameters:
+///   - lhs: The vector.
+///   - rhs: The matrix.
+/// - Returns: The resulting vector.
 @inlinable
 public func multiply(_ lhs: Vec2d, _ rhs: Mat2x2d) -> Vec2d {
     #if FRB_MATH_USE_SIMD
@@ -320,6 +415,11 @@ public func multiply(_ lhs: Vec2d, _ rhs: Mat2x2d) -> Vec2d {
     #endif
 }
 
+/// Multiplies a 2x2 double matrix by a 2D double vector.
+/// - Parameters:
+///   - lhs: The matrix.
+///   - rhs: The vector.
+/// - Returns: The resulting vector.
 @inlinable
 public func multiply(_ lhs: Mat2x2d, _ rhs: Vec2d) -> Vec2d {
     #if FRB_MATH_USE_SIMD
@@ -333,6 +433,11 @@ public func multiply(_ lhs: Mat2x2d, _ rhs: Vec2d) -> Vec2d {
 
 // MARK: - Mat2x2f
 
+/// Multiplies two 2x2 float matrices.
+/// - Parameters:
+///   - lhs: The left-hand side matrix.
+///   - rhs: The right-hand side matrix.
+/// - Returns: The product of the two matrices.
 @inlinable
 public func multiply(_ lhs: Mat2x2f, _ rhs: Mat2x2f) -> Mat2x2f {
     #if FRB_MATH_USE_SIMD
@@ -351,6 +456,11 @@ public func multiply(_ lhs: Mat2x2f, _ rhs: Mat2x2f) -> Mat2x2f {
     #endif
 }
 
+/// Multiplies a 2x2 float matrix by a scalar.
+/// - Parameters:
+///   - lhs: The scalar value.
+///   - rhs: The matrix.
+/// - Returns: The resulting matrix.
 @inlinable
 public func multiply(_ lhs: Float, _ rhs: Mat2x2f) -> Mat2x2f {
     #if FRB_MATH_USE_SIMD
@@ -361,6 +471,11 @@ public func multiply(_ lhs: Float, _ rhs: Mat2x2f) -> Mat2x2f {
     #endif
 }
 
+/// Multiplies a 2D float vector by a 2x2 float matrix.
+/// - Parameters:
+///   - lhs: The vector.
+///   - rhs: The matrix.
+/// - Returns: The resulting vector.
 @inlinable
 public func multiply(_ lhs: Vec2f, _ rhs: Mat2x2f) -> Vec2f {
     #if FRB_MATH_USE_SIMD
@@ -373,6 +488,11 @@ public func multiply(_ lhs: Vec2f, _ rhs: Mat2x2f) -> Vec2f {
     #endif
 }
 
+/// Multiplies a 2x2 float matrix by a 2D float vector.
+/// - Parameters:
+///   - lhs: The matrix.
+///   - rhs: The vector.
+/// - Returns: The resulting vector.
 @inlinable
 public func multiply(_ lhs: Mat2x2f, _ rhs: Vec2f) -> Vec2f {
     #if FRB_MATH_USE_SIMD

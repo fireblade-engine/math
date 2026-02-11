@@ -1,3 +1,6 @@
+/// Computes the adjugate of a 3x3 matrix.
+/// - Parameter inMat: The input matrix.
+/// - Returns: The adjugate of the input matrix.
 public func adjugate(_ inMat: Mat3x3f) -> Mat3x3f {
     var out = Mat3x3f.identity
 
@@ -16,6 +19,9 @@ public func adjugate(_ inMat: Mat3x3f) -> Mat3x3f {
     return out
 }
 
+/// Computes the adjugate of a 3x3 matrix.
+/// - Parameter inMat: The input matrix.
+/// - Returns: The adjugate of the input matrix.
 public func adjugate(_ inMat: Mat3x3d) -> Mat3x3d {
     var out = Mat3x3d.identity
 
@@ -34,6 +40,9 @@ public func adjugate(_ inMat: Mat3x3d) -> Mat3x3d {
     return out
 }
 
+/// Computes the adjugate of a 4x4 matrix.
+/// - Parameter m: The input matrix.
+/// - Returns: The adjugate of the input matrix.
 public func adjugate(_ m: Mat4x4f) -> Mat4x4f {
     // Adjugate is the transpose of the cofactor matrix.
     // cofactor(i, j) = (-1)^(i+j) * minor(i, j)
@@ -63,6 +72,9 @@ public func adjugate(_ m: Mat4x4f) -> Mat4x4f {
     return res
 }
 
+/// Computes the adjugate of a 4x4 matrix.
+/// - Parameter m: The input matrix.
+/// - Returns: The adjugate of the input matrix.
 public func adjugate(_ m: Mat4x4d) -> Mat4x4d {
     var res = Mat4x4d.identity
 

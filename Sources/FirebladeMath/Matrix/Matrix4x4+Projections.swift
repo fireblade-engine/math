@@ -6,6 +6,12 @@ import func simd.simd_matrix4x4
 
 extension Mat4x4f {
     /// Perspective projection matrix in right-handed coordinates.
+    /// - Parameters:
+    ///   - fovyRad: The field of view in radians.
+    ///   - aspect: The aspect ratio.
+    ///   - zNear: The distance to the near clipping plane.
+    ///   - zFar: The distance to the far clipping plane.
+    /// - Returns: The perspective projection matrix.
     public static func perspectiveRH(fovy fovyRad: Float, aspect: Float, zNear: Float, zFar: Float) -> Self {
         let yScale: Float = 1.0 / tan(fovyRad / 2.0)
         let xScale: Float = yScale / aspect
@@ -26,6 +32,12 @@ extension Mat4x4f {
     }
 
     /// Perspective projection matrix in left-handed coordinates.
+    /// - Parameters:
+    ///   - fovyRad: The field of view in radians.
+    ///   - aspect: The aspect ratio.
+    ///   - zNear: The distance to the near clipping plane.
+    ///   - zFar: The distance to the far clipping plane.
+    /// - Returns: The perspective projection matrix.
     public static func perspectiveLH(fovy fovyRad: Float, aspect: Float, zNear: Float, zFar: Float) -> Self {
         let yScale: Float = 1.0 / tan(fovyRad / 2.0)
         let xScale: Float = yScale / aspect
@@ -46,6 +58,14 @@ extension Mat4x4f {
     }
 
     /// Orthographic projection matrix in right-handed coordinates.
+    /// - Parameters:
+    ///   - left: The left boundary.
+    ///   - right: The right boundary.
+    ///   - top: The top boundary.
+    ///   - bottom: The bottom boundary.
+    ///   - zNear: The distance to the near clipping plane.
+    ///   - zFar: The distance to the far clipping plane.
+    /// - Returns: The orthographic projection matrix.
     public static func orthographicRH(left: Float, right: Float, top: Float, bottom: Float, zNear: Float, zFar: Float) -> Self {
         let m00: Float = 2.0 / (right - left)
         let m03: Float = (left + right) / (left - right)
@@ -64,6 +84,14 @@ extension Mat4x4f {
     }
 
     /// Orthographic projection matrix in left-handed coordinates.
+    /// - Parameters:
+    ///   - left: The left boundary.
+    ///   - right: The right boundary.
+    ///   - top: The top boundary.
+    ///   - bottom: The bottom boundary.
+    ///   - zNear: The distance to the near clipping plane.
+    ///   - zFar: The distance to the far clipping plane.
+    /// - Returns: The orthographic projection matrix.
     public static func orthographicLH(left: Float, right: Float, top: Float, bottom: Float, zNear: Float, zFar: Float) -> Self {
         let m00: Float = 2.0 / (right - left)
         let m03: Float = (left + right) / (left - right)
@@ -86,6 +114,12 @@ extension Mat4x4f {
 
 extension Mat4x4d {
     /// Perspective projection matrix in right-handed coordinates.
+    /// - Parameters:
+    ///   - fovyRad: The field of view in radians.
+    ///   - aspect: The aspect ratio.
+    ///   - zNear: The distance to the near clipping plane.
+    ///   - zFar: The distance to the far clipping plane.
+    /// - Returns: The perspective projection matrix.
     public static func perspectiveRH(fovy fovyRad: Double, aspect: Double, zNear: Double, zFar: Double) -> Self {
         let yScale = 1.0 / tan(fovyRad / 2.0)
         let xScale: Double = yScale / aspect
@@ -106,6 +140,12 @@ extension Mat4x4d {
     }
 
     /// Perspective projection matrix in left-handed coordinates.
+    /// - Parameters:
+    ///   - fovyRad: The field of view in radians.
+    ///   - aspect: The aspect ratio.
+    ///   - zNear: The distance to the near clipping plane.
+    ///   - zFar: The distance to the far clipping plane.
+    /// - Returns: The perspective projection matrix.
     public static func perspectiveLH(fovy fovyRad: Double, aspect: Double, zNear: Double, zFar: Double) -> Self {
         let yScale = 1.0 / tan(fovyRad / 2.0)
         let xScale: Double = yScale / aspect
@@ -126,6 +166,14 @@ extension Mat4x4d {
     }
 
     /// Orthographic projection matrix in right-handed coordinates.
+    /// - Parameters:
+    ///   - left: The left boundary.
+    ///   - right: The right boundary.
+    ///   - top: The top boundary.
+    ///   - bottom: The bottom boundary.
+    ///   - zNear: The distance to the near clipping plane.
+    ///   - zFar: The distance to the far clipping plane.
+    /// - Returns: The orthographic projection matrix.
     public static func orthographicRH(left: Double, right: Double, top: Double, bottom: Double, zNear: Double, zFar: Double) -> Self {
         let m00 = 2.0 / (right - left)
         let m03: Double = (left + right) / (left - right)
@@ -144,6 +192,14 @@ extension Mat4x4d {
     }
 
     /// Orthographic projection matrix in left-handed coordinates.
+    /// - Parameters:
+    ///   - left: The left boundary.
+    ///   - right: The right boundary.
+    ///   - top: The top boundary.
+    ///   - bottom: The bottom boundary.
+    ///   - zNear: The distance to the near clipping plane.
+    ///   - zFar: The distance to the far clipping plane.
+    /// - Returns: The orthographic projection matrix.
     public static func orthographicLH(left: Double, right: Double, top: Double, bottom: Double, zNear: Double, zFar: Double) -> Self {
         let m00 = 2.0 / (right - left)
         let m03: Double = (left + right) / (left - right)

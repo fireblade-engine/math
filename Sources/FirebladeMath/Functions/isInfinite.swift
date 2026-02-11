@@ -1,15 +1,15 @@
-/// Returns true if Float.infinity == arg.
+/// Returns true if Float.infinity == x.
 ///
-/// - Parameter float: floating point value
-/// - Returns: true if Float.infinity == arg, false otherwise
-public func isInfinite(_ float: Float) -> Bool {
-    Float.infinity == float
+/// - Parameter x: floating point value
+/// - Returns: true if Float.infinity == x, false otherwise
+public func isInfinite(_ x: Float) -> Bool {
+    Float.infinity == x
 }
 
-/// Returns true if Double.infinity == arg.
+/// Returns true if Double.infinity == x.
 ///
-/// - Parameter double: floating point value
-/// - Returns: true if Double.infinity == arg, false otherwise
-public func isInfinite(_ double: Double) -> Bool {
-    Double.infinity == double
+/// - Parameter x: floating point value
+/// - Returns: true if Double.infinity == x, false otherwise
+public func isInfinite(_ x: Double) -> Bool {
+    Double.infinity == x
 }

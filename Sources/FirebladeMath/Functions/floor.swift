@@ -6,30 +6,30 @@ import Darwin
 import Glibc
 #endif
 
-/// Computes the largest integer value not greater than arg.
+/// Computes the largest integer value not greater than x.
 ///
-/// - Parameter float: floating point value
-/// - Returns: If no errors occur, the largest integer value not greater than arg, that is ⌊arg⌋, is returned.
-public func floor(_ float: Float) -> Float {
+/// - Parameter x: floating point value
+/// - Returns: If no errors occur, the largest integer value not greater than x, that is ⌊x⌋, is returned.
+public func floor(_ x: Float) -> Float {
     #if canImport(Darwin)
-    return Darwin.floorf(float)
+    return Darwin.floorf(x)
     #elseif canImport(Glibc)
-    return Glibc.floorf(float)
+    return Glibc.floorf(x)
     #else
-    return Foundation.floorf(float)
+    return Foundation.floorf(x)
     #endif
 }
 
-/// Computes the largest integer value not greater than arg.
+/// Computes the largest integer value not greater than x.
 ///
-/// - Parameter double: floating point value
-/// - Returns: If no errors occur, the largest integer value not greater than arg, that is ⌊arg⌋, is returned.
-public func floor(_ double: Double) -> Double {
+/// - Parameter x: floating point value
+/// - Returns: If no errors occur, the largest integer value not greater than x, that is ⌊x⌋, is returned.
+public func floor(_ x: Double) -> Double {
     #if canImport(Darwin)
-    return Darwin.floor(double)
+    return Darwin.floor(x)
     #elseif canImport(Glibc)
-    return Glibc.floor(double)
+    return Glibc.floor(x)
     #else
-    return Foundation.floor(double)
+    return Foundation.floor(x)
     #endif
 }

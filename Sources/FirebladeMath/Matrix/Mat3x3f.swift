@@ -1,4 +1,8 @@
 extension Mat3x3f {
+    /// Creates a 3x3 rotation matrix.
+    /// - Parameters:
+    ///   - angleRadians: The angle of rotation in radians.
+    ///   - axis: The axis of rotation.
     public init(rotation angleRadians: Float, axis: SIMD3<Float>) {
         // see: <GLKit.framework/.../Headers/GLKMatrix4.h>
         let v = normalize(axis)
@@ -19,10 +23,8 @@ extension Mat3x3f {
         )
     }
 
-    /// x: pitch, y: yaw, z: roll
-    /// Returns the euler angles for this matrix.
-    ///
-    /// - Returns: euler angles.
+    /// Returns the Euler angles (pitch, yaw, roll) for this matrix in radians.
+    /// - Returns: A 3D vector where x is pitch, y is yaw, and z is roll.
     @inlinable public var eulerAngles: Vec3f {
         // https://github.com/OGRECave/ogre/blob/master/OgreMain/src/OgreMatrix3.cpp#L995
         let thetaX: Float

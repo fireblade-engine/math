@@ -6,32 +6,32 @@ import Darwin
 import Glibc
 #endif
 
-/// Computes the hyperbolic cosine of arg.
+/// Computes the hyperbolic cosine of x.
 ///
-/// - Parameter float: floating point value representing a hyperbolic angle
-/// - Returns: If no errors occur, the hyperbolic cosine of arg (cosh(arg), or (e^arg+e^-arg)/2) is returned.
+/// - Parameter x: floating point value representing a hyperbolic angle
+/// - Returns: If no errors occur, the hyperbolic cosine of x (cosh(x), or (e^x+e^-x)/2) is returned.
 /// If a range error due to overflow occurs, +HUGE_VAL, +HUGE_VALF, or +HUGE_VALL is returned.
-public func cosh(_ float: Float) -> Float {
+public func cosh(_ x: Float) -> Float {
     #if canImport(Darwin)
-    return Darwin.coshf(float)
+    return Darwin.coshf(x)
     #elseif canImport(Glibc)
-    return Glibc.coshf(float)
+    return Glibc.coshf(x)
     #else
-    return Foundation.coshf(float)
+    return Foundation.coshf(x)
     #endif
 }
 
-/// Computes the hyperbolic cosine of arg.
+/// Computes the hyperbolic cosine of x.
 ///
-/// - Parameter double: floating point value representing a hyperbolic angle
-/// - Returns: If no errors occur, the hyperbolic cosine of arg (cosh(arg), or (e^arg+e^-arg)/2) is returned.
+/// - Parameter x: floating point value representing a hyperbolic angle
+/// - Returns: If no errors occur, the hyperbolic cosine of x (cosh(x), or (e^x+e^-x)/2) is returned.
 /// If a range error due to overflow occurs, +HUGE_VAL, +HUGE_VALF, or +HUGE_VALL is returned.
-public func cosh(_ double: Double) -> Double {
+public func cosh(_ x: Double) -> Double {
     #if canImport(Darwin)
-    return Darwin.cosh(double)
+    return Darwin.cosh(x)
     #elseif canImport(Glibc)
-    return Glibc.cosh(double)
+    return Glibc.cosh(x)
     #else
-    return Foundation.cosh(double)
+    return Foundation.cosh(x)
     #endif
 }

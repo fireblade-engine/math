@@ -2,6 +2,12 @@
 import func simd.simd_cross
 #endif
 
+/// Computes the cross product of two 2D vectors.
+/// This is the z-component of the cross product of the vectors augmented to 3D.
+/// - Parameters:
+///   - x: The first vector.
+///   - y: The second vector.
+/// - Returns: The cross product.
 @inlinable
 public func cross(_ x: SIMD2<Double>, _ y: SIMD2<Double>) -> SIMD3<Double> {
     #if FRB_MATH_USE_SIMD
@@ -11,6 +17,12 @@ public func cross(_ x: SIMD2<Double>, _ y: SIMD2<Double>) -> SIMD3<Double> {
     #endif
 }
 
+/// Computes the cross product of two 2D vectors.
+/// This is the z-component of the cross product of the vectors augmented to 3D.
+/// - Parameters:
+///   - x: The first vector.
+///   - y: The second vector.
+/// - Returns: The cross product.
 @inlinable
 public func cross(_ x: SIMD2<Float>, _ y: SIMD2<Float>) -> SIMD3<Float> {
     #if FRB_MATH_USE_SIMD
@@ -20,6 +32,11 @@ public func cross(_ x: SIMD2<Float>, _ y: SIMD2<Float>) -> SIMD3<Float> {
     #endif
 }
 
+/// Computes the cross product of two 3D vectors.
+/// - Parameters:
+///   - x: The first vector.
+///   - y: The second vector.
+/// - Returns: The cross product.
 @inlinable
 public func cross(_ x: SIMD3<Double>, _ y: SIMD3<Double>) -> SIMD3<Double> {
     #if FRB_MATH_USE_SIMD
@@ -31,6 +48,11 @@ public func cross(_ x: SIMD3<Double>, _ y: SIMD3<Double>) -> SIMD3<Double> {
     #endif
 }
 
+/// Computes the cross product of two 3D vectors.
+/// - Parameters:
+///   - x: The first vector.
+///   - y: The second vector.
+/// - Returns: The cross product.
 @inlinable
 public func cross(_ x: SIMD3<Float>, _ y: SIMD3<Float>) -> SIMD3<Float> {
     #if FRB_MATH_USE_SIMD

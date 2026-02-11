@@ -8,8 +8,9 @@ import Glibc
 
 ///  The atan2() function computes the principal value of the arc tangent of y/x,
 ///  using the signs of both arguments to determine the quadrant of the return value.
-/// - Parameter y: y
-/// - Parameter x: x
+/// - Parameter y: The y coordinate.
+/// - Parameter x: The x coordinate.
+/// - Returns: The arc tangent of y/x in radians.
 public func atan2(_ y: Double, _ x: Double) -> Double {
     #if canImport(Darwin)
     return Darwin.atan2(y, x)
@@ -22,8 +23,9 @@ public func atan2(_ y: Double, _ x: Double) -> Double {
 
 ///  The atan2() function computes the principal value of the arc tangent of y/x,
 ///  using the signs of both arguments to determine the quadrant of the return value.
-/// - Parameter y: y
-/// - Parameter x: x
+/// - Parameter y: The y coordinate.
+/// - Parameter x: The x coordinate.
+/// - Returns: The arc tangent of y/x in radians.
 public func atan2(_ y: Float, _ x: Float) -> Float {
     #if canImport(Darwin)
     return Darwin.atan2f(y, x)
