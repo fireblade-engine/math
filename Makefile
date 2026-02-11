@@ -3,7 +3,7 @@ SWIFT_FLAGS ?= --disable-sandbox
 PACKAGE_SWIFT_VERSION := $(shell grep "swift-tools-version" Package.swift | head -n 1 | cut -d ":" -f 2 | xargs)
 
 # Targets
-.PHONY: setup lint lint-fix test test-coverage clean pre-commit docs
+.PHONY: setup lint lint-fix test test-coverage clean pre-commit docs docs-coverage
 
 setup:
 	@echo "Detected Package Swift Version: $(PACKAGE_SWIFT_VERSION)"
@@ -13,6 +13,9 @@ setup:
 
 docs:
 	swift package generate-documentation --target FirebladeMath
+
+docs-coverage:
+	swift package generate-documentation --target FirebladeMath --experimental-documentation-coverage --coverage-summary-level detailed
 
 lint:
 	mint run swiftlint lint --quiet
