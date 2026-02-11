@@ -27,8 +27,10 @@ docs-generate:
 		--hosting-base-path $(HOSTING_BASE_PATH) \
 		--output-path .build/documentation
 
-docs-coverage:
-	swift package --disable-sandbox generate-documentation --target FirebladeMath --experimental-documentation-coverage --coverage-summary-level detailed
+docs-coverage: docs-check-coverage
+
+docs-check-coverage:
+	swift package --disable-sandbox generate-documentation --target FirebladeMath --experimental-documentation-coverage --coverage-summary-level brief
 
 lint:
 	mint run swiftlint lint --quiet
