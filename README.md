@@ -6,6 +6,7 @@
 [![Windows](https://github.com/fireblade-engine/math/actions/workflows/ci-windows.yml/badge.svg)](https://github.com/fireblade-engine/math/actions/workflows/ci-windows.yml)
 [![swift-version-compatibility](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Ffireblade-engine%2Fmath%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/fireblade-engine/math) 
 [![platform-compatilibilty](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Ffireblade-engine%2Fmath%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/fireblade-engine/math) 
+[![Documentation](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Ffireblade-engine%2Fmath%2Fbadge%3Ftype%3Ddocumentation)](https://fireblade-engine.github.io/math/main/documentation/fireblademath/) 
 
 A dependency-free, lightweight, fast math library for 2D and 3D vectors, quaternions, and matrices in Swift with (optional) SIMD support. It is developed and maintained as part of the [Fireblade Game Engine project](https://github.com/fireblade-engine).
 
@@ -47,9 +48,17 @@ let package = Package(
 )
 ```
 
+For more detailed information and API reference, please refer to the [comprehensive documentation](https://fireblade-engine.github.io/math/main/documentation/fireblademath/).
+
 ### 🛠 SIMD Traits
 
 Starting with version 1.0.0, FirebladeMath uses Swift traits to manage SIMD support. By default, SIMD is enabled on Apple platforms. You can manually control it in your package configuration if needed.
+
+## 📖 Documentation
+
+Comprehensive documentation for FirebladeMath is available online:
+
+- [Documentation](https://fireblade-engine.github.io/math/main/documentation/fireblademath/)
 
 ## 📖 Usage Examples
 
