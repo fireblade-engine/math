@@ -3,7 +3,13 @@ name: Documentation
 on:
   push:
     branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
