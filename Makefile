@@ -32,6 +32,9 @@ docs-coverage: docs-check-coverage
 docs-check-coverage:
 	swift package --disable-sandbox generate-documentation --target FirebladeMath --experimental-documentation-coverage --coverage-summary-level brief
 
+docs-check-links:
+	swift package --disable-sandbox generate-documentation --target FirebladeMath --analyze --warnings-as-errors
+
 lint:
 	mint run swiftlint lint --quiet
 	mint run swiftformat --lint --swiftversion $(PACKAGE_SWIFT_VERSION) Sources/ Tests/
