@@ -64,22 +64,22 @@ jobs:
 
           # 1. Root -> latest/documentation/fireblademath/
           create_redirect ".build/documentation/index.html" \
-                          "latest/documentation/fireblademath/index.html" \
+                          "latest/documentation/fireblademath/" \
                           "Redirecting to Latest Docs"
 
           # 2. latest/ -> main/documentation/fireblademath/
           create_redirect ".build/documentation/latest/index.html" \
-                          "../main/documentation/fireblademath/index.html" \
+                          "../main/documentation/fireblademath/" \
                           "Redirecting to Main Docs"
 
           # 3. latest/documentation/fireblademath/ -> main/documentation/fireblademath/
           create_redirect ".build/documentation/latest/documentation/fireblademath/index.html" \
-                          "../../../main/documentation/fireblademath/index.html" \
+                          "../../../main/documentation/fireblademath/" \
                           "Redirecting to Main Docs"
 
           # 4. documentation/fireblademath/ -> main/documentation/fireblademath/
           create_redirect ".build/documentation/documentation/fireblademath/index.html" \
-                          "../../main/documentation/fireblademath/index.html" \
+                          "../../main/documentation/fireblademath/" \
                           "Redirecting to Main Docs"
 
       - name: Check Documentation Quality
