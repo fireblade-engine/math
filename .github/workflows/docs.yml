@@ -41,14 +41,14 @@ jobs:
           <head>
               <meta charset="utf-8">
               <title>Redirecting to Documentation</title>
-              <link rel="canonical" href="main/documentation/fireblademath/">
+              <link rel="canonical" href="main/documentation/fireblademath/index.html">
               <script>
-                  window.location.href = "main/documentation/fireblademath/" + window.location.hash;
+                  window.location.href = "main/documentation/fireblademath/index.html" + window.location.hash;
               </script>
-              <meta http-equiv="refresh" content="0;url=main/documentation/fireblademath/">
+              <meta http-equiv="refresh" content="0;url=main/documentation/fireblademath/index.html">
           </head>
           <body>
-              <p>Redirecting to <a href="main/documentation/fireblademath/">documentation</a>...</p>
+              <p>Redirecting to <a href="main/documentation/fireblademath/index.html">documentation</a>...</p>
           </body>
           </html>
           EOF
