@@ -2,8 +2,10 @@ UNAME_S := $(shell uname -s)
 SWIFT_FLAGS ?= --disable-sandbox
 PACKAGE_SWIFT_VERSION := $(shell grep "swift-tools-version" Package.swift | head -n 1 | cut -d ":" -f 2 | xargs)
 
+HOSTING_BASE_PATH ?= fireblade-math
+
 # Targets
-.PHONY: setup lint lint-fix test test-coverage clean pre-commit docs docs-coverage
+.PHONY: setup lint lint-fix test test-coverage clean pre-commit docs docs-preview docs-generate docs-coverage
 
 setup:
 	@echo "Detected Package Swift Version: $(PACKAGE_SWIFT_VERSION)"
@@ -11,11 +13,22 @@ setup:
 	mint bootstrap
 	swift package resolve $(SWIFT_FLAGS)
 
-docs:
-	swift package generate-documentation --target FirebladeMath
+docs: docs-generate
+
+docs-preview:
+	swift package --disable-sandbox preview-documentation --target FirebladeMath
+
+docs-generate:
+	swift package --disable-sandbox \
+		--allow-writing-to-directory .build/documentation \
+		generate-documentation --target FirebladeMath \
+		--disable-indexing \
+		--transform-for-static-hosting \
+		--hosting-base-path $(HOSTING_BASE_PATH) \
+		--output-path .build/documentation
 
 docs-coverage:
-	swift package generate-documentation --target FirebladeMath --experimental-documentation-coverage --coverage-summary-level detailed
+	swift package --disable-sandbox generate-documentation --target FirebladeMath --experimental-documentation-coverage --coverage-summary-level detailed
 
 lint:
 	mint run swiftlint lint --quiet
