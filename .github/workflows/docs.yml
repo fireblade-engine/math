@@ -25,7 +25,7 @@ jobs:
           swift-version: "6.1"
 
       - name: Build Documentation
-        run: make docs-generate
+        run: make docs-generate REPO_NAME=math DOCS_VERSION_PATH=main
 
       - name: Check Documentation Quality
         run: |
