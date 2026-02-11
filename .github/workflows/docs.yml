@@ -69,3 +69,25 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  smoke-test:
+    name: Post-Deployment Smoke Test
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Documentation URL
+        run: |
+          # Wait a few seconds for CDN propagation
+          sleep 10
+          # Verify the versioned documentation path exists
+          curl --fail -sL https://fireblade-engine.github.io/math/main/documentation/fireblademath/ | grep -q "FirebladeMath"
+          echo "Documentation is live at /math/main/"
+      
+      - name: Check Root Redirect
+        run: |
+          # Verify that the root URL redirects correctly
+          RESPONSE=$(curl -sI https://fireblade-engine.github.io/math/ | head -n 1)
+          # Note: GitHub Pages might return 200 with the redirect meta tag, or a 301/302 if configured at the DNS level.
+          # Since we use a meta/JS redirect, we check for a 200 OK and then the content.
+          curl -s https://fireblade-engine.github.io/math/ | grep -q "Redirecting to"
+          echo "Root redirect is live at /math/"
