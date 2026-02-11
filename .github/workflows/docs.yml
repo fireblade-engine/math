@@ -27,6 +27,9 @@ jobs:
       - name: Build Documentation
         run: make docs-generate REPO_NAME=math DOCS_VERSION_PATH=main
 
+      - name: Add Root Redirect
+        run: cp scripts/docs-redirect.html .build/documentation/index.html
+
       - name: Check Documentation Quality
         run: |
           make docs-check-coverage
