@@ -31,7 +31,7 @@ docs-generate:
 		--disable-indexing \
 		--transform-for-static-hosting \
 		--hosting-base-path $(HOSTING_BASE_PATH) \
-		--output-path .build/documentation/$(DOCS_VERSION_PATH)
+		--output-path .build/documentation/$(DOCS_VERSION_PATH) && mkdir -p .build/documentation/$(DOCS_VERSION_PATH)
 
 docs-coverage: docs-check-coverage
 
