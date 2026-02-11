@@ -33,25 +33,54 @@ jobs:
       - name: Build Documentation
         run: make docs-generate REPO_NAME=math DOCS_VERSION_PATH=main
 
-      - name: Add Root Redirect
+      - name: Setup Redirects
         run: |
-          cat <<EOF > .build/documentation/index.html
+          # Function to create a redirect file
+          create_redirect() {
+            local FILE_PATH=$1
+            local TARGET_URL=$2
+            local TITLE=$3
+            
+            mkdir -p "$(dirname "$FILE_PATH")"
+            
+            cat <<EOF > "$FILE_PATH"
           <!DOCTYPE html>
           <html>
           <head>
               <meta charset="utf-8">
-              <title>Redirecting to Documentation</title>
-              <link rel="canonical" href="main/documentation/fireblademath/index.html">
+              <title>$TITLE</title>
+              <link rel="canonical" href="$TARGET_URL">
               <script>
-                  window.location.href = "main/documentation/fireblademath/index.html" + window.location.hash;
+                  window.location.href = "$TARGET_URL" + window.location.hash;
               </script>
-              <meta http-equiv="refresh" content="0;url=main/documentation/fireblademath/index.html">
+              <meta http-equiv="refresh" content="0;url=$TARGET_URL">
           </head>
           <body>
-              <p>Redirecting to <a href="main/documentation/fireblademath/index.html">documentation</a>...</p>
+              <p>Redirecting to <a href="$TARGET_URL">$TITLE</a>...</p>
           </body>
           </html>
           EOF
+          }
+
+          # 1. Root -> latest/documentation/fireblademath/
+          create_redirect ".build/documentation/index.html" \
+                          "latest/documentation/fireblademath/index.html" \
+                          "Redirecting to Latest Docs"
+
+          # 2. latest/ -> main/documentation/fireblademath/
+          create_redirect ".build/documentation/latest/index.html" \
+                          "../main/documentation/fireblademath/index.html" \
+                          "Redirecting to Main Docs"
+
+          # 3. latest/documentation/fireblademath/ -> main/documentation/fireblademath/
+          create_redirect ".build/documentation/latest/documentation/fireblademath/index.html" \
+                          "../../../main/documentation/fireblademath/index.html" \
+                          "Redirecting to Main Docs"
+
+          # 4. documentation/fireblademath/ -> main/documentation/fireblademath/
+          create_redirect ".build/documentation/documentation/fireblademath/index.html" \
+                          "../../main/documentation/fireblademath/index.html" \
+                          "Redirecting to Main Docs"
 
       - name: Check Documentation Quality
         run: |
@@ -95,5 +124,5 @@ jobs:
           RESPONSE=$(curl -sI https://fireblade-engine.github.io/math/ | head -n 1)
           # Note: GitHub Pages might return 200 with the redirect meta tag, or a 301/302 if configured at the DNS level.
           # Since we use a meta/JS redirect, we check for a 200 OK and then the content.
-          curl -s https://fireblade-engine.github.io/math/ | grep -q "Redirecting to"
-          echo "Root redirect is live at /math/"
+          curl -s https://fireblade-engine.github.io/math/ | grep -q "Redirecting to Latest Docs"
+          echo "Root redirect is live at /math/ and points to latest docs"
