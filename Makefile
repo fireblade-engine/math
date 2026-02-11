@@ -2,7 +2,13 @@ UNAME_S := $(shell uname -s)
 SWIFT_FLAGS ?= --disable-sandbox
 PACKAGE_SWIFT_VERSION := $(shell grep "swift-tools-version" Package.swift | head -n 1 | cut -d ":" -f 2 | xargs)
 
-HOSTING_BASE_PATH ?= fireblade-math
+# Repository name on GitHub Pages
+REPO_NAME ?= math
+# Subdirectory for versioned documentation (e.g., main, 1.0.0)
+DOCS_VERSION_PATH ?= main
+
+# The full base path for hosting
+HOSTING_BASE_PATH ?= $(REPO_NAME)/$(DOCS_VERSION_PATH)
 
 # Targets
 .PHONY: setup lint lint-fix test test-coverage clean pre-commit docs docs-preview docs-generate docs-coverage
@@ -25,7 +31,7 @@ docs-generate:
 		--disable-indexing \
 		--transform-for-static-hosting \
 		--hosting-base-path $(HOSTING_BASE_PATH) \
-		--output-path .build/documentation
+		--output-path .build/documentation/$(DOCS_VERSION_PATH)
 
 docs-coverage: docs-check-coverage
 
