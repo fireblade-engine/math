@@ -26,7 +26,6 @@ let package = Package(
         .trait(name: "default", enabledTraits: Set(defaultTraits))
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.4.6")
     ],
     targets: [
         .target(
@@ -39,3 +38,9 @@ let package = Package(
             swiftSettings: swiftSettings)
     ]
 )
+
+#if os(macOS)
+package.dependencies.append(
+    .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.4.6")
+)
+#endif
