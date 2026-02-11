@@ -3,7 +3,13 @@ name: Documentation
 on:
   push:
     branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -25,7 +31,27 @@ jobs:
           swift-version: "6.1"
 
       - name: Build Documentation
-        run: make docs-generate
+        run: make docs-generate REPO_NAME=math DOCS_VERSION_PATH=main
+
+      - name: Add Root Redirect
+        run: |
+          cat <<EOF > .build/documentation/index.html
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <meta charset="utf-8">
+              <title>Redirecting to Documentation</title>
+              <link rel="canonical" href="main/documentation/fireblademath/index.html">
+              <script>
+                  window.location.href = "main/documentation/fireblademath/index.html" + window.location.hash;
+              </script>
+              <meta http-equiv="refresh" content="0;url=main/documentation/fireblademath/index.html">
+          </head>
+          <body>
+              <p>Redirecting to <a href="main/documentation/fireblademath/index.html">documentation</a>...</p>
+          </body>
+          </html>
+          EOF
 
       - name: Check Documentation Quality
         run: |
@@ -49,3 +75,25 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  smoke-test:
+    name: Post-Deployment Smoke Test
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Documentation URL
+        run: |
+          # Wait a few seconds for CDN propagation
+          sleep 10
+          # Verify the versioned documentation path exists
+          curl --fail -sL https://fireblade-engine.github.io/math/main/documentation/fireblademath/ | grep -q "FirebladeMath"
+          echo "Documentation is live at /math/main/"
+      
+      - name: Check Root Redirect
+        run: |
+          # Verify that the root URL redirects correctly
+          RESPONSE=$(curl -sI https://fireblade-engine.github.io/math/ | head -n 1)
+          # Note: GitHub Pages might return 200 with the redirect meta tag, or a 301/302 if configured at the DNS level.
+          # Since we use a meta/JS redirect, we check for a 200 OK and then the content.
+          curl -s https://fireblade-engine.github.io/math/ | grep -q "Redirecting to"
+          echo "Root redirect is live at /math/"
