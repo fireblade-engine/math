@@ -1,3 +1,4 @@
+/// Conformance to the Sequence protocol.
 extension SIMD4: @retroactive Sequence {}
 
 extension SIMD4 {

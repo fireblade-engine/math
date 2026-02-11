@@ -1,3 +1,4 @@
+/// Extension to add remapping functionality to FloatingPoint types.
 extension FloatingPoint {
     /// Remaps this value from one range to another, clamping the input to the input range.
     /// - Parameters:

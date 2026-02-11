@@ -1,3 +1,4 @@
+/// Conformance to the Sequence protocol.
 extension SIMD3: @retroactive Sequence {}
 
 extension SIMD3 where Scalar: FloatingPoint {

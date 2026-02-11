@@ -62,6 +62,7 @@ public func mix(_ v0: Float, _ v1: Float, _ t: Float) -> Float {
     #endif
 }
 
+/// Extension to add linear interpolation to FloatingPoint types.
 extension FloatingPoint {
     /// Linearly interpolates this value from one range to another.
     /// - Parameters:

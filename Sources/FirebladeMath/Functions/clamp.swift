@@ -43,7 +43,11 @@ public func clamp(_ x: Float, _ minVal: Float, _ maxVal: Float) -> Float {
     #endif
 }
 
+/// Extension to add clamping functionality to Comparable types.
 extension Comparable {
+    /// Returns the value clamped to the specified range.
+    /// - Parameter range: The closed range to clamp the value to.
+    /// - Returns: The clamped value.
     @inlinable
     public func clamped(to range: ClosedRange<Self>) -> Self {
         if self < range.lowerBound {
@@ -55,6 +59,8 @@ extension Comparable {
         return self
     }
 
+    /// Clamps the value to the specified range in place.
+    /// - Parameter range: The closed range to clamp the value to.
     @inlinable
     public mutating func clamp(to range: ClosedRange<Self>) {
         if self < range.lowerBound {

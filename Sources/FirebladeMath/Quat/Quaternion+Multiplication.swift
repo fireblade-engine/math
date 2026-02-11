@@ -5,6 +5,7 @@ import func simd.simd_mul
 import func simd.simd_sub
 #endif
 
+/// Multiplies a scalar and a quaternion.
 public func multiply(_ lhs: Float, _ rhs: Quat4f) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd.simd_mul(lhs, rhs.storage))
@@ -13,6 +14,7 @@ public func multiply(_ lhs: Float, _ rhs: Quat4f) -> Quat4f {
     #endif
 }
 
+/// Multiplies a quaternion and a scalar.
 public func multiply(_ lhs: Quat4f, _ rhs: Float) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd.simd_mul(lhs.storage, rhs))
@@ -34,6 +36,7 @@ public func multiply(_ lhs: Quat4f, _ rhs: Quat4f) -> Quat4f {
     #endif
 }
 
+/// Returns the sum of two quaternions.
 public func add(_ lhs: Quat4f, _ rhs: Quat4f) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd.simd_add(lhs.storage, rhs.storage))
@@ -47,6 +50,7 @@ public func add(_ lhs: Quat4f, _ rhs: Quat4f) -> Quat4f {
     #endif
 }
 
+/// Returns the difference of two quaternions.
 public func subtract(_ lhs: Quat4f, _ rhs: Quat4f) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd.simd_sub(lhs.storage, rhs.storage))
@@ -94,6 +98,7 @@ public func act(_ lhs: Quat4d, _ rhs: Vec3d) -> Vec3d {
     #endif
 }
 
+/// Multiplies a scalar and a quaternion.
 public func multiply(_ lhs: Double, _ rhs: Quat4d) -> Quat4d {
     #if FRB_MATH_USE_SIMD
     return Quat4d(storage: simd.simd_mul(lhs, rhs.storage))
@@ -102,6 +107,7 @@ public func multiply(_ lhs: Double, _ rhs: Quat4d) -> Quat4d {
     #endif
 }
 
+/// Multiplies a quaternion and a scalar.
 public func multiply(_ lhs: Quat4d, _ rhs: Double) -> Quat4d {
     #if FRB_MATH_USE_SIMD
     return Quat4d(storage: simd.simd_mul(lhs.storage, rhs))
@@ -123,6 +129,7 @@ public func multiply(_ lhs: Quat4d, _ rhs: Quat4d) -> Quat4d {
     #endif
 }
 
+/// Returns the sum of two quaternions.
 public func add(_ lhs: Quat4d, _ rhs: Quat4d) -> Quat4d {
     #if FRB_MATH_USE_SIMD
     return Quat4d(storage: simd.simd_add(lhs.storage, rhs.storage))
@@ -136,6 +143,7 @@ public func add(_ lhs: Quat4d, _ rhs: Quat4d) -> Quat4d {
     #endif
 }
 
+/// Returns the difference of two quaternions.
 public func subtract(_ lhs: Quat4d, _ rhs: Quat4d) -> Quat4d {
     #if FRB_MATH_USE_SIMD
     return Quat4d(storage: simd.simd_sub(lhs.storage, rhs.storage))

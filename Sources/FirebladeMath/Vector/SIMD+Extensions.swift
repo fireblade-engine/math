@@ -1,3 +1,4 @@
+/// Extension to add iteration support to SIMD vectors.
 extension SIMD {
     /// Creates an iterator that accesses the scalar components of the vector.
     /// - Returns: An iterator over the scalar components.

@@ -2,9 +2,13 @@
 /// Matrices are stored in column-major order.
 @frozen
 public struct Matrix4x4<Storage: Storage4x4Protocol>: RandomAccessCollection, MutableCollection, Sendable where Storage.Value == Storage.Element {
+    /// The element type of the matrix storage.
     public typealias Element = Storage.Element
+    /// The index type of the matrix storage.
     public typealias Index = Storage.Index
+    /// The scalar value type of the matrix.
     public typealias Value = Storage.Value
+    /// The column vector type of the matrix.
     public typealias Vector = Storage.Column
 
     @usableFromInline var storage: Storage
