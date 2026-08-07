@@ -29,6 +29,7 @@ extension Size {
 extension Size: Equatable where Value: Equatable {}
 extension Size: Hashable where Value: Hashable {}
 extension Size: Codable where Value: Codable {}
+extension Size: Sendable where Value: Sendable {}
 
 extension Size where Value: FloatingPoint & ExpressibleByFloatLiteral {
     /// The center point of the size, assuming a (0,0) origin.
