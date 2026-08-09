@@ -66,6 +66,7 @@ extension Rect {
 extension Rect: Equatable where Value: Equatable {}
 extension Rect: Hashable where Value: Hashable {}
 extension Rect: Codable where Value: Codable {}
+extension Rect: Sendable where Value: Sendable {}
 
 extension Rect {
     /// The minimum x-coordinate of the rectangle.

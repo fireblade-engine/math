@@ -29,6 +29,7 @@ extension Point {
 extension Point: Equatable where Value: Equatable {}
 extension Point: Hashable where Value: Hashable {}
 extension Point: Codable where Value: Codable {}
+extension Point: Sendable where Value: Sendable {}
 
 extension Point where Value == Float {
     /// Creates a point from a 2D float vector.
