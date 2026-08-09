@@ -3,20 +3,41 @@
   "extends": [
     "config:recommended"
   ],
-  "prConcurrentLimit": 3,
-  "prHourlyLimit": 1,
   "recreateWhen": "auto",
   "prCreation": "not-pending",
   "packageRules": [
     {
-      "description": "Accumulate non-major updates into one pull request",
+      "groupName": "Swift non-major dependencies",
+      "description": "Group all Swift package minor and patch updates together",
+      "matchManagers": [
+        "swift"
+      ],
       "matchUpdateTypes": [
         "minor",
         "patch"
+      ]
+    },
+    {
+      "groupName": "Mint non-major dependencies",
+      "description": "Group all Mint package minor and patch updates together",
+      "matchManagers": [
+        "mint"
       ],
-      "matchCurrentVersion": ">=1",
-      "groupName": "all non-major dependencies",
-      "groupSlug": "all-minor-patch"
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ]
+    },
+    {
+      "groupName": "GitHub Actions non-major dependencies",
+      "description": "Group all GitHub Actions minor and patch updates together",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ]
     }
   ],
   "labels": [
