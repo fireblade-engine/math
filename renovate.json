@@ -21,5 +21,12 @@
   ],
   "labels": [
     "dependencies"
+  ],
+  "reviewers": [],
+  "assignees": [],
+  "suppressNotifications": [
+    "prIgnoreNotification",
+    "prEditNotification",
+    "branchAutomergeFailure"
   ]
 }
