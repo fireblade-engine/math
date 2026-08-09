@@ -28,7 +28,7 @@ jobs:
       - name: Setup Swift
         uses: swift-actions/setup-swift@v2
         with:
-          swift-version: "6.1"
+          swift-version: "6.3"
 
       - name: Build Documentation
         run: make docs-generate REPO_NAME=math DOCS_VERSION_PATH=main
