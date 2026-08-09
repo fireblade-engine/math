@@ -1,20 +1,3 @@
-// https://www.geometrictools.com/Documentation/EulerAngles.pdf
-// https://ntrs.nasa.gov/api/citations/19770024290/downloads/19770024290.pdf
-// https://marc-b-reynolds.github.io/math/2017/04/18/TaitEuler.html
-// http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToEuler/
-// https://github.com/godotengine/godot/blob/master/core/math/basis.cpp
-// https://github.com/LinuxCNC/linuxcnc/blob/master/src/libnml/posemath/_posemath.c
-// https://github.com/OGRECave/ogre/blob/84ae9396322a39f766b7acaeb9a1b15f4c51d261/OgreMain/src/OgreMatrix3.cpp#L858
-// https://github.com/g-truc/glm/blob/master/glm/gtx/euler_angles.inl
-// https://github.com/bulletphysics/bullet3/blob/abea1a848411cf53385fb8288c89db05e5751ef7/src/Bullet3Common/b3Quaternion.h#L162
-// https://github.com/demianmnave/CML/blob/9ebc0ed72637959fe7323d2a6a12664236509031/cml/mathlib/quaternion/rotation.h#L101
-// http://de.mathworks.com/matlabcentral/fileexchange/20696-function-to-convert-between-dcm--euler-angles--quaternions--and-euler-vectors
-// https://scholar.google.de/scholar?cluster=3204262265835591787
-// http://de.mathworks.com/help/robotics/ref/quat2eul.html
-// https://math.stackexchange.com/a/1803746
-// https://hanspeterschaub.info/AVS-Code.html
-// https://marc-b-reynolds.github.io/math/2017/04/18/TaitEuler.html
-
 extension Quat4f {
     //  public static func fromEulerAngles_121(_ e: Vec3f) -> Quat4f {
     //      let e1 = e.x / 2

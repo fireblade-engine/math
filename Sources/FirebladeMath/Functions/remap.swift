@@ -7,7 +7,8 @@ extension FloatingPoint {
     /// - Returns: The remapped value.
     @inlinable
     public func remaped(clampingIn rangeClamp: ClosedRange<Self>,
-                        to rangeOut: ClosedRange<Self>) -> Self {
+                        to rangeOut: ClosedRange<Self>) -> Self
+    {
         var v = clamped(to: rangeClamp)
         v = v.lerped(from: rangeClamp, to: rangeOut)
         return v
@@ -19,7 +20,8 @@ extension FloatingPoint {
     ///   - rangeOut: The output range to map to.
     @inlinable
     public mutating func remap(clampingIn rangeClamp: ClosedRange<Self>,
-                               to rangeOut: ClosedRange<Self>) {
+                               to rangeOut: ClosedRange<Self>)
+    {
         clamp(to: rangeClamp)
         lerp(from: rangeClamp, to: rangeOut)
     }
