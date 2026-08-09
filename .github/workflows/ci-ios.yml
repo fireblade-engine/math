@@ -14,13 +14,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        swift: ["6.1", "6.2"]
+        swift: ["6.1", "6.3"]
 
     steps:
       - name: Checkout
         uses: actions/checkout@v6
 
       - name: Setup Swift
+        if: matrix.swift != '6.3'
         uses: swift-actions/setup-swift@v2
         with:
           swift-version: ${{ matrix.swift }}
