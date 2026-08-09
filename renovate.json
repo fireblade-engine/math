@@ -1,32 +1,53 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "assignees": [],
   "extends": [
     "config:recommended"
-  ],
-  "prConcurrentLimit": 3,
-  "prHourlyLimit": 1,
-  "recreateWhen": "auto",
-  "prCreation": "not-pending",
-  "packageRules": [
-    {
-      "description": "Accumulate non-major updates into one pull request",
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ],
-      "matchCurrentVersion": ">=1",
-      "groupName": "all non-major dependencies",
-      "groupSlug": "all-minor-patch"
-    }
   ],
   "labels": [
     "dependencies"
   ],
+  "packageRules": [
+    {
+      "description": "Group all Swift package minor and patch updates together",
+      "groupName": "Swift non-major dependencies",
+      "matchManagers": [
+        "swift"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ]
+    },
+    {
+      "description": "Group all Mint package minor and patch updates together",
+      "groupName": "Mint non-major dependencies",
+      "matchManagers": [
+        "mint"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ]
+    },
+    {
+      "description": "Group all GitHub Actions minor and patch updates together",
+      "groupName": "GitHub Actions non-major dependencies",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ]
+    }
+  ],
+  "prCreation": "not-pending",
+  "recreateWhen": "auto",
   "reviewers": [],
-  "assignees": [],
   "suppressNotifications": [
     "prIgnoreNotification",
-    "prEditNotification",
+    "prEditedNotification",
     "branchAutomergeFailure"
   ]
 }
