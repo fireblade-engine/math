@@ -31,13 +31,17 @@
       ]
     },
     {
-      "description": "Group and automerge all GitHub Actions updates together",
-      "groupName": "GitHub Actions dependencies",
+      "description": "Group and automerge non-major GitHub Actions updates",
+      "groupName": "GitHub Actions non-major dependencies",
       "matchManagers": [
         "github-actions"
       ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
       "automerge": true,
-      "automergeType": "branch"
+      "automergeType": "pr"
     }
   ],
   "prCreation": "not-pending",
