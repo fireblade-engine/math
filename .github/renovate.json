@@ -31,7 +31,7 @@
       ]
     },
     {
-      "description": "Group all GitHub Actions minor and patch updates together",
+      "description": "Group and automerge non-major GitHub Actions updates",
       "groupName": "GitHub Actions non-major dependencies",
       "matchManagers": [
         "github-actions"
@@ -39,12 +39,15 @@
       "matchUpdateTypes": [
         "minor",
         "patch"
-      ]
+      ],
+      "automerge": true,
+      "automergeType": "pr"
     }
   ],
   "prCreation": "not-pending",
   "recreateWhen": "auto",
   "reviewers": [],
+  "reviewersFromCodeOwners": false,
   "suppressNotifications": [
     "prIgnoreNotification",
     "prEditedNotification",
