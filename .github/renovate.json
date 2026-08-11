@@ -44,7 +44,6 @@
       "automergeType": "pr"
     }
   ],
-  "prCreation": "not-pending",
   "recreateWhen": "auto",
   "reviewers": [],
   "reviewersFromCodeOwners": false,
