@@ -1,6 +1,5 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "assignees": [],
   "extends": [
     "config:recommended"
   ],
@@ -40,14 +39,9 @@
         "minor",
         "patch"
       ],
-      "automerge": true,
-      "automergeType": "pr"
+      "automerge": true
     }
   ],
-  "prCreation": "not-pending",
-  "recreateWhen": "auto",
-  "reviewers": [],
-  "reviewersFromCodeOwners": false,
   "suppressNotifications": [
     "prIgnoreNotification",
     "prEditedNotification",
