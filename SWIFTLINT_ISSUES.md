@@ -16,13 +16,13 @@ Total Violations: **113** across 101 files.
 - [ ] `Sources/FirebladeMath/Functions/adjugate.swift` (2 violations: `m`)
 
 ### 3. Attribute Formatting (`attributes`) - 19 violations
-- [ ] `Sources/FirebladeMath/Quat/Quat4f+Euler.swift` (4 violations)
-- [ ] `Sources/FirebladeMath/Matrix/Matrix2x2.swift` (4 violations)
-- [ ] `Sources/FirebladeMath/Matrix/Matrix3x3.swift` (4 violations)
-- [ ] `Sources/FirebladeMath/Matrix/Matrix4x4.swift` (4 violations)
-- [ ] `Sources/FirebladeMath/Quat/Quat4d.swift` (1 violation)
-- [ ] `Sources/FirebladeMath/Matrix/Mat4x4d.swift` (1 violation)
-- [ ] `Sources/FirebladeMath/Matrix/Mat4x4f.swift` (1 violation)
+- [x] `Sources/FirebladeMath/Quat/Quat4f+Euler.swift` (4 violations)
+- [x] `Sources/FirebladeMath/Matrix/Matrix2x2.swift` (4 violations)
+- [x] `Sources/FirebladeMath/Matrix/Matrix3x3.swift` (4 violations)
+- [x] `Sources/FirebladeMath/Matrix/Matrix4x4.swift` (4 violations)
+- [x] `Sources/FirebladeMath/Quat/Quat4d.swift` (1 violation)
+- [x] `Sources/FirebladeMath/Matrix/Mat4x4d.swift` (1 violation)
+- [x] `Sources/FirebladeMath/Matrix/Mat4x4f.swift` (1 violation)
 
 ### 4. Opening Brace Spacing (`opening_brace`) - 6 violations
 - [x] `Sources/FirebladeMath/Matrix/MatrixStorage+SIMD.swift` (6 violations)

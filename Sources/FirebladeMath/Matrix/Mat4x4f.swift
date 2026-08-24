@@ -273,7 +273,8 @@ extension Mat4x4f {
 
     /// Returns the Euler angles (pitch, yaw, roll) for this matrix in radians.
     /// - Returns: A 3D vector where x is pitch, y is yaw, and z is roll.
-    @inline(__always) public var eulerAnglesXYZ: Vec3f {
+    @inline(__always)
+    public var eulerAnglesXYZ: Vec3f {
         // /// https://www.geometrictools.com/Documentation/EulerAngles.pdf
         let thetaX: Float
         let thetaY: Float

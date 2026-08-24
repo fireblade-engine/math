@@ -1,7 +1,8 @@
 extension Quat4d {
     /// Creates a double-precision quaternion from a single-precision quaternion.
     /// - Parameter quat: The single-precision quaternion.
-    @inlinable public init(_ quat: Quat4f) {
+    @inlinable
+    public init(_ quat: Quat4f) {
         self.init(Double(quat.x), Double(quat.y), Double(quat.z), Double(quat.w))
     }
 

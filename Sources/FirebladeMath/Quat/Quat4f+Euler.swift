@@ -165,23 +165,19 @@ extension Quat4f {
         self = Quat4f.fromEulerAngles_321(Vec3f(pitch, yaw, roll))
     }
 
-    @inlinable
-    public var eulerAngles: Vec3f {
+    @inlinable public var eulerAngles: Vec3f {
         quaternionToEulerAngles_321(self)
     }
 
-    @inlinable
-    public var pitch: Float {
+    @inlinable public var pitch: Float {
         eulerAngles.x
     }
 
-    @inlinable
-    public var yaw: Float {
+    @inlinable public var yaw: Float {
         eulerAngles.y
     }
 
-    @inlinable
-    public var roll: Float {
+    @inlinable public var roll: Float {
         eulerAngles.z
     }
 
