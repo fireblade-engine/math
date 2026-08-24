@@ -5,7 +5,7 @@
 /// - Returns: The scaled quaternion.
 @inlinable
 public func * (lhs: Float, rhs: Quat4f) -> Quat4f {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies a quaternion by a scalar.
@@ -15,7 +15,7 @@ public func * (lhs: Float, rhs: Quat4f) -> Quat4f {
 /// - Returns: The scaled quaternion.
 @inlinable
 public func * (lhs: Quat4f, rhs: Float) -> Quat4f {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Returns the product of two quaternions.
@@ -25,7 +25,7 @@ public func * (lhs: Quat4f, rhs: Float) -> Quat4f {
 /// - Returns: The product of the two quaternions.
 @inlinable
 public func * (lhs: Quat4f, rhs: Quat4f) -> Quat4f {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Returns a vector rotated by a quaternion.
@@ -35,7 +35,7 @@ public func * (lhs: Quat4f, rhs: Quat4f) -> Quat4f {
 /// - Returns: The rotated vector.
 @inlinable
 public func * (lhs: Quat4f, rhs: Vec3f) -> Vec3f {
-    act(lhs, rhs)
+    FirebladeMath.act(lhs, rhs)
 }
 
 /// Multiplies two quaternions and assigns the result to the left-hand side.
@@ -44,7 +44,7 @@ public func * (lhs: Quat4f, rhs: Vec3f) -> Vec3f {
 ///   - rhs: The right-hand side quaternion.
 @inlinable
 public func *= (lhs: inout Quat4f, rhs: Quat4f) {
-    lhs = multiply(lhs, rhs)
+    lhs = FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Adds two quaternions component-wise.
@@ -54,7 +54,7 @@ public func *= (lhs: inout Quat4f, rhs: Quat4f) {
 /// - Returns: The sum of the two quaternions.
 @inlinable
 public func + (lhs: Quat4f, rhs: Quat4f) -> Quat4f {
-    add(lhs, rhs)
+    FirebladeMath.add(lhs, rhs)
 }
 
 /// Subtracts the right-hand side quaternion from the left-hand side quaternion component-wise.
@@ -64,7 +64,7 @@ public func + (lhs: Quat4f, rhs: Quat4f) -> Quat4f {
 /// - Returns: The difference of the two quaternions.
 @inlinable
 public func - (lhs: Quat4f, rhs: Quat4f) -> Quat4f {
-    subtract(lhs, rhs)
+    FirebladeMath.subtrFirebladeMath.act(lhs, rhs)
 }
 
 /// Multiplies a scalar by a quaternion.
@@ -74,7 +74,7 @@ public func - (lhs: Quat4f, rhs: Quat4f) -> Quat4f {
 /// - Returns: The scaled quaternion.
 @inlinable
 public func * (lhs: Double, rhs: Quat4d) -> Quat4d {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies a quaternion by a scalar.
@@ -84,7 +84,7 @@ public func * (lhs: Double, rhs: Quat4d) -> Quat4d {
 /// - Returns: The scaled quaternion.
 @inlinable
 public func * (lhs: Quat4d, rhs: Double) -> Quat4d {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Returns the product of two quaternions.
@@ -94,7 +94,7 @@ public func * (lhs: Quat4d, rhs: Double) -> Quat4d {
 /// - Returns: The product of the two quaternions.
 @inlinable
 public func * (lhs: Quat4d, rhs: Quat4d) -> Quat4d {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Returns a vector rotated by a quaternion.
@@ -104,7 +104,7 @@ public func * (lhs: Quat4d, rhs: Quat4d) -> Quat4d {
 /// - Returns: The rotated vector.
 @inlinable
 public func * (lhs: Quat4d, rhs: Vec3d) -> Vec3d {
-    act(lhs, rhs)
+    FirebladeMath.act(lhs, rhs)
 }
 
 /// Multiplies two quaternions and assigns the result to the left-hand side.
@@ -113,7 +113,7 @@ public func * (lhs: Quat4d, rhs: Vec3d) -> Vec3d {
 ///   - rhs: The right-hand side quaternion.
 @inlinable
 public func *= (lhs: inout Quat4d, rhs: Quat4d) {
-    lhs = multiply(lhs, rhs)
+    lhs = FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Adds two quaternions component-wise.
@@ -123,7 +123,7 @@ public func *= (lhs: inout Quat4d, rhs: Quat4d) {
 /// - Returns: The sum of the two quaternions.
 @inlinable
 public func + (lhs: Quat4d, rhs: Quat4d) -> Quat4d {
-    add(lhs, rhs)
+    FirebladeMath.add(lhs, rhs)
 }
 
 /// Subtracts the right-hand side quaternion from the left-hand side quaternion component-wise.
@@ -133,5 +133,5 @@ public func + (lhs: Quat4d, rhs: Quat4d) -> Quat4d {
 /// - Returns: The difference of the two quaternions.
 @inlinable
 public func - (lhs: Quat4d, rhs: Quat4d) -> Quat4d {
-    subtract(lhs, rhs)
+    FirebladeMath.subtrFirebladeMath.act(lhs, rhs)
 }
