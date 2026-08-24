@@ -49,7 +49,7 @@ Total Violations: **113** across 101 files.
 - [ ] `Sources/FirebladeMath/Matrix/MatrixStorage+NO_SIMD.swift` (1 violation)
 
 ### 11. Variable Whitespace (`let_var_whitespace`) - 1 violation
-- [ ] `Sources/FirebladeMath/Quat/Quat.swift` (1 violation)
+- [x] `Sources/FirebladeMath/Quat/Quat.swift` (1 violation)
 
 ### 12. File Length (`file_length`) - 1 violation
 - [ ] `Sources/FirebladeMath/Matrix/Matrix+Multiplication.swift` (1 violation)
