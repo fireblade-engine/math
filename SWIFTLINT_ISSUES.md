@@ -37,9 +37,9 @@ Total Violations: **113** across 101 files.
 - [ ] `Sources/FirebladeMath/Matrix/Matrix4x4+Projections.swift` (4 violations)
 
 ### 8. Blanket Disable Commands (`blanket_disable_command`) - 3 violations
-- [ ] `Sources/FirebladeMath/Matrix/MatrixStorage.swift` (1 violation)
-- [ ] `Sources/FirebladeMath/Matrix/Matrix4x4.swift` (1 violation)
-- [ ] `Sources/FirebladeMath/Matrix/MatrixStorage+NO_SIMD.swift` (1 violation)
+- [x] `Sources/FirebladeMath/Matrix/MatrixStorage.swift` (1 violation)
+- [x] `Sources/FirebladeMath/Matrix/Matrix4x4.swift` (1 violation)
+- [x] `Sources/FirebladeMath/Matrix/MatrixStorage+NO_SIMD.swift` (1 violation)
 
 ### 9. Identical Operands (`identical_operands`) - 2 violations
 - [x] `Sources/FirebladeMath/Functions/sign.swift` (2 violations)

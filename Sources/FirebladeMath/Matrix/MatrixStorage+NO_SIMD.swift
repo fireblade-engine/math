@@ -196,7 +196,7 @@ public struct Storage4x4<Value: StorageScalar>: Storage4x4Protocol {
     @usableFromInline var column2: Column
     @usableFromInline var column3: Column
 
-    // swiftlint:disable large_tuple
+    // swiftlint:disable:next large_tuple
     @inlinable public var columns: (Column, Column, Column, Column) {
         (column0, column1, column2, column3)
     }

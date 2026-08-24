@@ -102,7 +102,7 @@ public struct Matrix4x4<Storage: Storage4x4Protocol>: RandomAccessCollection, Mu
         storage.replaceSubrange(subrange, with: newElements)
     }
 
-    // swiftlint:disable large_tuple
+    // swiftlint:disable:next large_tuple
     /// The column vectors of the matrix.
     @inlinable public var columns: (Vector, Vector, Vector, Vector) {
         storage.columns
