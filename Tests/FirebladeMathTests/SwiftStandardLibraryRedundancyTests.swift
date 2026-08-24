@@ -9,7 +9,9 @@ import Testing
 struct SwiftStandardLibraryRedundancyTests {
     // MARK: - Core Global Functions
 
-    @Test func testAbsRedundancy() {
+    @Test
+    @available(*, deprecated, message: "Testing deprecated API")
+    func testAbsRedundancy() {
         let doubleVal: Double = -123.45
         let floatVal: Float = -123.45
 
@@ -19,7 +21,9 @@ struct SwiftStandardLibraryRedundancyTests {
         #expect(FirebladeMath.abs(floatVal) == floatVal.magnitude)
     }
 
-    @Test func testMinRedundancy() {
+    @Test
+    @available(*, deprecated, message: "Testing deprecated API")
+    func testMinRedundancy() {
         let doubleA: Double = 12.34
         let doubleB: Double = 56.78
         let floatA: Float = 12.34
@@ -29,7 +33,9 @@ struct SwiftStandardLibraryRedundancyTests {
         #expect(FirebladeMath.min(floatA, floatB) == Swift.min(floatA, floatB))
     }
 
-    @Test func testMaxRedundancy() {
+    @Test
+    @available(*, deprecated, message: "Testing deprecated API")
+    func testMaxRedundancy() {
         let doubleA: Double = 12.34
         let doubleB: Double = 56.78
         let floatA: Float = 12.34

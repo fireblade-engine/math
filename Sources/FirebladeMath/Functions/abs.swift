@@ -10,6 +10,7 @@ import Foundation
 ///
 /// - Parameter x: floating point value
 /// - Returns: If successful, returns the absolute value of x (|x|). The value returned is exact and does not depend on any rounding modes.
+@_disfavoredOverload
 @available(*, deprecated, message: "Use Swift.abs(_:) or x.magnitude instead.", renamed: "Swift.abs")
 public func abs(_ x: Float) -> Float {
     #if canImport(Darwin)
@@ -25,6 +26,7 @@ public func abs(_ x: Float) -> Float {
 ///
 /// - Parameter x: floating point value
 /// - Returns: If successful, returns the absolute value of x (|x|). The value returned is exact and does not depend on any rounding modes.
+@_disfavoredOverload
 @available(*, deprecated, message: "Use Swift.abs(_:) or x.magnitude instead.", renamed: "Swift.abs")
 public func abs(_ x: Double) -> Double {
     #if canImport(Darwin)
