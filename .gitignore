@@ -2,6 +2,7 @@
 .gemini/
 *.DS_Store
 build*/
+_diagnostics/
 # conductor/
 gha-creds-*.json
 xcuserdata/
