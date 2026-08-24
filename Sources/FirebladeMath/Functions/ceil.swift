@@ -1,9 +1,9 @@
-import Foundation
-
 #if canImport(Darwin)
 import Darwin
 #elseif canImport(Glibc)
 import Glibc
+#else
+import Foundation
 #endif
 
 /// Computes the smallest integer value not less than x.

@@ -1,9 +1,9 @@
-import Foundation
-
 #if canImport(Darwin)
 import Darwin
 #elseif canImport(Glibc)
 import Glibc
+#else
+import Foundation
 #endif
 
 /// Computes the common (base-10) logarithm of x.

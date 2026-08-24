@@ -13,7 +13,7 @@ public func cross(_ x: SIMD2<Double>, _ y: SIMD2<Double>) -> SIMD3<Double> {
     #if FRB_MATH_USE_SIMD
     return simd.simd_cross(x, y)
     #else
-    return SIMD3<Double>(0, 0, (x.x * y.y) - (x.y * y.x))
+    return SIMD3<Double>(0.0, 0.0, (x.x * y.y) - (x.y * y.x))
     #endif
 }
 
@@ -28,7 +28,7 @@ public func cross(_ x: SIMD2<Float>, _ y: SIMD2<Float>) -> SIMD3<Float> {
     #if FRB_MATH_USE_SIMD
     return simd.simd_cross(x, y)
     #else
-    return SIMD3<Float>(0, 0, (x.x * y.y) - (x.y * y.x))
+    return SIMD3<Float>(0.0, 0.0, (x.x * y.y) - (x.y * y.x))
     #endif
 }
 

@@ -11,7 +11,7 @@ DOCS_VERSION_PATH ?= main
 HOSTING_BASE_PATH ?= $(REPO_NAME)/$(DOCS_VERSION_PATH)
 
 # Targets
-.PHONY: setup lint lint-fix test test-coverage clean pre-commit docs docs-preview docs-generate docs-coverage
+.PHONY: setup lint lint-fix test test-coverage clean pre-commit docs docs-preview docs-generate docs-coverage profile-stats benchmark-commits
 
 setup:
 	@echo "Detected Package Swift Version: $(PACKAGE_SWIFT_VERSION)"
@@ -75,3 +75,12 @@ clean:
 	swift package clean
 	rm -rf .build
 	rm -rf .swiftpm
+
+profile-stats:
+	chmod +x Scripts/profile-compiler-stats.sh
+	./Scripts/profile-compiler-stats.sh
+
+benchmark-commits:
+	chmod +x Scripts/profile-compiler-stats.sh
+	chmod +x Scripts/benchmark-commits.py
+	python3 Scripts/benchmark-commits.py

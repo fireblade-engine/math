@@ -5,8 +5,9 @@
 ///   - lhs: The left-hand side matrix.
 ///   - rhs: The right-hand side matrix.
 /// - Returns: The product of the two matrices.
+@inlinable
 public func * (lhs: Mat4x4f, rhs: Mat4x4f) -> Mat4x4f {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies a 4x4 float matrix by a scalar.
@@ -14,8 +15,9 @@ public func * (lhs: Mat4x4f, rhs: Mat4x4f) -> Mat4x4f {
 ///   - lhs: The scalar value.
 ///   - rhs: The matrix.
 /// - Returns: The resulting matrix.
+@inlinable
 public func * (lhs: Float, rhs: Mat4x4f) -> Mat4x4f {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies a 4D float vector by a 4x4 float matrix.
@@ -23,8 +25,9 @@ public func * (lhs: Float, rhs: Mat4x4f) -> Mat4x4f {
 ///   - lhs: The vector.
 ///   - rhs: The matrix.
 /// - Returns: The resulting vector.
+@inlinable
 public func * (lhs: Vec4f, rhs: Mat4x4f) -> Vec4f {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies a 4x4 float matrix by a 4D float vector.
@@ -32,16 +35,18 @@ public func * (lhs: Vec4f, rhs: Mat4x4f) -> Vec4f {
 ///   - lhs: The matrix.
 ///   - rhs: The vector.
 /// - Returns: The resulting vector.
+@inlinable
 public func * (lhs: Mat4x4f, rhs: Vec4f) -> Vec4f {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies two 4x4 float matrices and assigns the result to the first matrix.
 /// - Parameters:
 ///   - lhs: The left-hand side matrix to be updated.
 ///   - rhs: The right-hand side matrix.
+@inlinable
 public func *= (lhs: inout Mat4x4f, rhs: Mat4x4f) {
-    lhs = multiply(lhs, rhs)
+    lhs = FirebladeMath.multiply(lhs, rhs)
 }
 
 // MARK: 4x4d
@@ -51,8 +56,9 @@ public func *= (lhs: inout Mat4x4f, rhs: Mat4x4f) {
 ///   - lhs: The left-hand side matrix.
 ///   - rhs: The right-hand side matrix.
 /// - Returns: The product of the two matrices.
+@inlinable
 public func * (lhs: Mat4x4d, rhs: Mat4x4d) -> Mat4x4d {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies a 4x4 double matrix by a scalar.
@@ -60,8 +66,9 @@ public func * (lhs: Mat4x4d, rhs: Mat4x4d) -> Mat4x4d {
 ///   - lhs: The scalar value.
 ///   - rhs: The matrix.
 /// - Returns: The resulting matrix.
+@inlinable
 public func * (lhs: Double, rhs: Mat4x4d) -> Mat4x4d {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies a 4D double vector by a 4x4 double matrix.
@@ -69,8 +76,9 @@ public func * (lhs: Double, rhs: Mat4x4d) -> Mat4x4d {
 ///   - lhs: The vector.
 ///   - rhs: The matrix.
 /// - Returns: The resulting vector.
+@inlinable
 public func * (lhs: Vec4d, rhs: Mat4x4d) -> Vec4d {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies a 4x4 double matrix by a 4D double vector.
@@ -78,16 +86,18 @@ public func * (lhs: Vec4d, rhs: Mat4x4d) -> Vec4d {
 ///   - lhs: The matrix.
 ///   - rhs: The vector.
 /// - Returns: The resulting vector.
+@inlinable
 public func * (lhs: Mat4x4d, rhs: Vec4d) -> Vec4d {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies two 4x4 double matrices and assigns the result to the first matrix.
 /// - Parameters:
 ///   - lhs: The left-hand side matrix to be updated.
 ///   - rhs: The right-hand side matrix.
+@inlinable
 public func *= (lhs: inout Mat4x4d, rhs: Mat4x4d) {
-    lhs = multiply(lhs, rhs)
+    lhs = FirebladeMath.multiply(lhs, rhs)
 }
 
 // MARK: 3x3f
@@ -97,8 +107,9 @@ public func *= (lhs: inout Mat4x4d, rhs: Mat4x4d) {
 ///   - lhs: The left-hand side matrix.
 ///   - rhs: The right-hand side matrix.
 /// - Returns: The product of the two matrices.
+@inlinable
 public func * (lhs: Mat3x3f, rhs: Mat3x3f) -> Mat3x3f {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies a 3x3 float matrix by a scalar.
@@ -106,8 +117,9 @@ public func * (lhs: Mat3x3f, rhs: Mat3x3f) -> Mat3x3f {
 ///   - lhs: The scalar value.
 ///   - rhs: The matrix.
 /// - Returns: The resulting matrix.
+@inlinable
 public func * (lhs: Float, rhs: Mat3x3f) -> Mat3x3f {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies a 3D float vector by a 3x3 float matrix.
@@ -115,8 +127,9 @@ public func * (lhs: Float, rhs: Mat3x3f) -> Mat3x3f {
 ///   - lhs: The vector.
 ///   - rhs: The matrix.
 /// - Returns: The resulting vector.
+@inlinable
 public func * (lhs: Vec3f, rhs: Mat3x3f) -> Vec3f {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies a 3x3 float matrix by a 3D float vector.
@@ -124,16 +137,18 @@ public func * (lhs: Vec3f, rhs: Mat3x3f) -> Vec3f {
 ///   - lhs: The matrix.
 ///   - rhs: The vector.
 /// - Returns: The resulting vector.
+@inlinable
 public func * (lhs: Mat3x3f, rhs: Vec3f) -> Vec3f {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies two 3x3 float matrices and assigns the result to the first matrix.
 /// - Parameters:
 ///   - lhs: The left-hand side matrix to be updated.
 ///   - rhs: The right-hand side matrix.
+@inlinable
 public func *= (lhs: inout Mat3x3f, rhs: Mat3x3f) {
-    lhs = multiply(lhs, rhs)
+    lhs = FirebladeMath.multiply(lhs, rhs)
 }
 
 // MARK: 3x3d
@@ -143,8 +158,9 @@ public func *= (lhs: inout Mat3x3f, rhs: Mat3x3f) {
 ///   - lhs: The left-hand side matrix.
 ///   - rhs: The right-hand side matrix.
 /// - Returns: The product of the two matrices.
+@inlinable
 public func * (lhs: Mat3x3d, rhs: Mat3x3d) -> Mat3x3d {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies a 3x3 double matrix by a scalar.
@@ -152,8 +168,9 @@ public func * (lhs: Mat3x3d, rhs: Mat3x3d) -> Mat3x3d {
 ///   - lhs: The scalar value.
 ///   - rhs: The matrix.
 /// - Returns: The resulting matrix.
+@inlinable
 public func * (lhs: Double, rhs: Mat3x3d) -> Mat3x3d {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies a 3D double vector by a 3x3 double matrix.
@@ -161,8 +178,9 @@ public func * (lhs: Double, rhs: Mat3x3d) -> Mat3x3d {
 ///   - lhs: The vector.
 ///   - rhs: The matrix.
 /// - Returns: The resulting vector.
+@inlinable
 public func * (lhs: Vec3d, rhs: Mat3x3d) -> Vec3d {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies a 3x3 double matrix by a 3D double vector.
@@ -170,16 +188,18 @@ public func * (lhs: Vec3d, rhs: Mat3x3d) -> Vec3d {
 ///   - lhs: The matrix.
 ///   - rhs: The vector.
 /// - Returns: The resulting vector.
+@inlinable
 public func * (lhs: Mat3x3d, rhs: Vec3d) -> Vec3d {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies two 3x3 double matrices and assigns the result to the first matrix.
 /// - Parameters:
 ///   - lhs: The left-hand side matrix to be updated.
 ///   - rhs: The right-hand side matrix.
+@inlinable
 public func *= (lhs: inout Mat3x3d, rhs: Mat3x3d) {
-    lhs = multiply(lhs, rhs)
+    lhs = FirebladeMath.multiply(lhs, rhs)
 }
 
 // MARK: 2x2f
@@ -189,8 +209,9 @@ public func *= (lhs: inout Mat3x3d, rhs: Mat3x3d) {
 ///   - lhs: The left-hand side matrix.
 ///   - rhs: The right-hand side matrix.
 /// - Returns: The product of the two matrices.
+@inlinable
 public func * (lhs: Mat2x2f, rhs: Mat2x2f) -> Mat2x2f {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies a 2x2 float matrix by a scalar.
@@ -198,8 +219,9 @@ public func * (lhs: Mat2x2f, rhs: Mat2x2f) -> Mat2x2f {
 ///   - lhs: The scalar value.
 ///   - rhs: The matrix.
 /// - Returns: The resulting matrix.
+@inlinable
 public func * (lhs: Float, rhs: Mat2x2f) -> Mat2x2f {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies a 2D float vector by a 2x2 float matrix.
@@ -207,8 +229,9 @@ public func * (lhs: Float, rhs: Mat2x2f) -> Mat2x2f {
 ///   - lhs: The vector.
 ///   - rhs: The matrix.
 /// - Returns: The resulting vector.
+@inlinable
 public func * (lhs: Vec2f, rhs: Mat2x2f) -> Vec2f {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies a 2x2 float matrix by a 2D float vector.
@@ -216,16 +239,18 @@ public func * (lhs: Vec2f, rhs: Mat2x2f) -> Vec2f {
 ///   - lhs: The matrix.
 ///   - rhs: The vector.
 /// - Returns: The resulting vector.
+@inlinable
 public func * (lhs: Mat2x2f, rhs: Vec2f) -> Vec2f {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies two 2x2 float matrices and assigns the result to the first matrix.
 /// - Parameters:
 ///   - lhs: The left-hand side matrix to be updated.
 ///   - rhs: The right-hand side matrix.
+@inlinable
 public func *= (lhs: inout Mat2x2f, rhs: Mat2x2f) {
-    lhs = multiply(lhs, rhs)
+    lhs = FirebladeMath.multiply(lhs, rhs)
 }
 
 // MARK: 2x2d
@@ -235,8 +260,9 @@ public func *= (lhs: inout Mat2x2f, rhs: Mat2x2f) {
 ///   - lhs: The left-hand side matrix.
 ///   - rhs: The right-hand side matrix.
 /// - Returns: The product of the two matrices.
+@inlinable
 public func * (lhs: Mat2x2d, rhs: Mat2x2d) -> Mat2x2d {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies a 2x2 double matrix by a scalar.
@@ -244,8 +270,9 @@ public func * (lhs: Mat2x2d, rhs: Mat2x2d) -> Mat2x2d {
 ///   - lhs: The scalar value.
 ///   - rhs: The matrix.
 /// - Returns: The resulting matrix.
+@inlinable
 public func * (lhs: Double, rhs: Mat2x2d) -> Mat2x2d {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies a 2D double vector by a 2x2 double matrix.
@@ -253,8 +280,9 @@ public func * (lhs: Double, rhs: Mat2x2d) -> Mat2x2d {
 ///   - lhs: The vector.
 ///   - rhs: The matrix.
 /// - Returns: The resulting vector.
+@inlinable
 public func * (lhs: Vec2d, rhs: Mat2x2d) -> Vec2d {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies a 2x2 double matrix by a 2D double vector.
@@ -262,14 +290,16 @@ public func * (lhs: Vec2d, rhs: Mat2x2d) -> Vec2d {
 ///   - lhs: The matrix.
 ///   - rhs: The vector.
 /// - Returns: The resulting vector.
+@inlinable
 public func * (lhs: Mat2x2d, rhs: Vec2d) -> Vec2d {
-    multiply(lhs, rhs)
+    FirebladeMath.multiply(lhs, rhs)
 }
 
 /// Multiplies two 2x2 double matrices and assigns the result to the first matrix.
 /// - Parameters:
 ///   - lhs: The left-hand side matrix to be updated.
 ///   - rhs: The right-hand side matrix.
+@inlinable
 public func *= (lhs: inout Mat2x2d, rhs: Mat2x2d) {
-    lhs = multiply(lhs, rhs)
+    lhs = FirebladeMath.multiply(lhs, rhs)
 }

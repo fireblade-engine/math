@@ -1,9 +1,9 @@
-import Foundation
-
 #if canImport(Darwin)
 import Darwin
 #elseif canImport(Glibc)
 import Glibc
+#else
+import Foundation
 #endif
 /// Computes the value of base 2 raised to the power exponent.
 /// - Parameter exponent: The exponent.

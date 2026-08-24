@@ -9,8 +9,9 @@ import func simd.simd_clamp
 ///   - minVal: min range bound
 ///   - maxVal: max range bound
 /// - Returns: x clamped to the range [min, max]
+@inlinable
 public func clamp<Value: Comparable>(_ x: Value, min minVal: Value, max maxVal: Value) -> Value {
-    min(max(x, minVal), maxVal)
+    Swift.min(Swift.max(x, minVal), maxVal)
 }
 
 /// x clamped to the range [min, max], such that min ≤ x ≤ max.
@@ -20,11 +21,12 @@ public func clamp<Value: Comparable>(_ x: Value, min minVal: Value, max maxVal: 
 ///   - minVal: min range bound
 ///   - maxVal: max range bound
 /// - Returns: x clamped to the range [min, max]
+@inlinable
 public func clamp(_ x: Double, _ minVal: Double, _ maxVal: Double) -> Double {
     #if FRB_MATH_USE_SIMD
     return simd_clamp(x, minVal, maxVal)
     #else
-    return min(max(x, minVal), maxVal)
+    return FirebladeMath.min(FirebladeMath.max(x, minVal), maxVal)
     #endif
 }
 
@@ -35,11 +37,12 @@ public func clamp(_ x: Double, _ minVal: Double, _ maxVal: Double) -> Double {
 ///   - minVal: min range bound
 ///   - maxVal: max range bound
 /// - Returns: x clamped to the range [min, max]
+@inlinable
 public func clamp(_ x: Float, _ minVal: Float, _ maxVal: Float) -> Float {
     #if FRB_MATH_USE_SIMD
     return simd_clamp(x, minVal, maxVal)
     #else
-    return min(max(x, minVal), maxVal)
+    return FirebladeMath.min(FirebladeMath.max(x, minVal), maxVal)
     #endif
 }
 

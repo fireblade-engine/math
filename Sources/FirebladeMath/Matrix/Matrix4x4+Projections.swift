@@ -13,7 +13,7 @@ extension Mat4x4f {
     ///   - zFar: The distance to the far clipping plane.
     /// - Returns: The perspective projection matrix.
     public static func perspectiveRH(fovy fovyRad: Float, aspect: Float, zNear: Float, zFar: Float) -> Self {
-        let yScale: Float = 1.0 / tan(fovyRad / 2.0)
+        let yScale: Float = 1.0 / FirebladeMath.tan(fovyRad * 0.5)
         let xScale: Float = yScale / aspect
 
         let m00: Float = xScale
@@ -39,7 +39,7 @@ extension Mat4x4f {
     ///   - zFar: The distance to the far clipping plane.
     /// - Returns: The perspective projection matrix.
     public static func perspectiveLH(fovy fovyRad: Float, aspect: Float, zNear: Float, zFar: Float) -> Self {
-        let yScale: Float = 1.0 / tan(fovyRad / 2.0)
+        let yScale: Float = 1.0 / FirebladeMath.tan(fovyRad * 0.5)
         let xScale: Float = yScale / aspect
 
         let m00: Float = xScale
@@ -98,7 +98,7 @@ extension Mat4x4f {
         let m11: Float = 2.0 / (top - bottom)
         let m13: Float = (top + bottom) / (bottom - top)
         let m22: Float = 1.0 / (zFar - zNear)
-        let m23: Float = zNear / (zNear - zFar)
+        let m23: Float = -zNear / (zFar - zNear)
         let m33: Float = 1.0
 
         let P = Vector(m00, 0.0, 0.0, 0.0)
@@ -121,7 +121,7 @@ extension Mat4x4d {
     ///   - zFar: The distance to the far clipping plane.
     /// - Returns: The perspective projection matrix.
     public static func perspectiveRH(fovy fovyRad: Double, aspect: Double, zNear: Double, zFar: Double) -> Self {
-        let yScale = 1.0 / tan(fovyRad / 2.0)
+        let yScale: Double = 1.0 / FirebladeMath.tan(fovyRad * 0.5)
         let xScale: Double = yScale / aspect
 
         let m00: Double = xScale
@@ -129,7 +129,7 @@ extension Mat4x4d {
         let m22: Double = zFar / (zNear - zFar)
         let m23: Double = -1.0
         let m32: Double = (zNear * zFar) / (zNear - zFar)
-        let m33 = 0.0
+        let m33: Double = 0.0
 
         let P = Vector(m00, 0.0, 0.0, 0.0)
         let Q = Vector(0.0, m11, 0.0, 0.0)
@@ -147,15 +147,15 @@ extension Mat4x4d {
     ///   - zFar: The distance to the far clipping plane.
     /// - Returns: The perspective projection matrix.
     public static func perspectiveLH(fovy fovyRad: Double, aspect: Double, zNear: Double, zFar: Double) -> Self {
-        let yScale = 1.0 / tan(fovyRad / 2.0)
+        let yScale: Double = 1.0 / FirebladeMath.tan(fovyRad * 0.5)
         let xScale: Double = yScale / aspect
 
         let m00: Double = xScale
         let m11: Double = yScale
         let m22: Double = zFar / (zFar - zNear)
-        let m23 = 1.0
+        let m23: Double = 1.0
         let m32: Double = -(zNear * zFar) / (zFar - zNear)
-        let m33 = 0.0
+        let m33: Double = 0.0
 
         let P = Vector(m00, 0.0, 0.0, 0.0)
         let Q = Vector(0.0, m11, 0.0, 0.0)
@@ -175,13 +175,13 @@ extension Mat4x4d {
     ///   - zFar: The distance to the far clipping plane.
     /// - Returns: The orthographic projection matrix.
     public static func orthographicRH(left: Double, right: Double, top: Double, bottom: Double, zNear: Double, zFar: Double) -> Self {
-        let m00 = 2.0 / (right - left)
+        let m00: Double = 2.0 / (right - left)
         let m03: Double = (left + right) / (left - right)
-        let m11 = 2.0 / (top - bottom)
+        let m11: Double = 2.0 / (top - bottom)
         let m13: Double = (top + bottom) / (bottom - top)
-        let m22 = 1.0 / (zNear - zFar)
+        let m22: Double = 1.0 / (zNear - zFar)
         let m23: Double = zNear / (zNear - zFar)
-        let m33 = 1.0
+        let m33: Double = 1.0
 
         let P = Vector(m00, 0.0, 0.0, 0.0)
         let Q = Vector(0.0, m11, 0.0, 0.0)
@@ -201,13 +201,13 @@ extension Mat4x4d {
     ///   - zFar: The distance to the far clipping plane.
     /// - Returns: The orthographic projection matrix.
     public static func orthographicLH(left: Double, right: Double, top: Double, bottom: Double, zNear: Double, zFar: Double) -> Self {
-        let m00 = 2.0 / (right - left)
+        let m00: Double = 2.0 / (right - left)
         let m03: Double = (left + right) / (left - right)
-        let m11 = 2.0 / (top - bottom)
+        let m11: Double = 2.0 / (top - bottom)
         let m13: Double = (top + bottom) / (bottom - top)
-        let m22 = 1.0 / (zFar - zNear)
-        let m23: Double = zNear / (zNear - zFar)
-        let m33 = 1.0
+        let m22: Double = 1.0 / (zFar - zNear)
+        let m23: Double = -zNear / (zFar - zNear)
+        let m33: Double = 1.0
 
         let P = Vector(m00, 0.0, 0.0, 0.0)
         let Q = Vector(0.0, m11, 0.0, 0.0)

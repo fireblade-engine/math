@@ -22,6 +22,7 @@ extension Quaternion {
     /// Note that the imaginary (vector) part of the quaternion comes
     /// from lanes 0, 1, and 2 of the vector, and the real (scalar) part comes from
     /// lane 3.
+    @inlinable
     public init(_ vector: SIMD4<Value>) {
         self.init(storage: Storage(vector))
     }
@@ -32,6 +33,7 @@ extension Quaternion {
     ///   - y: The y component of the imaginary part.
     ///   - z: The z component of the imaginary part.
     ///   - w: The real component.
+    @inlinable
     public init(_ x: Value, _ y: Value, _ z: Value, _ w: Value) {
         self.init(storage: Storage(x, y, z, w))
     }
@@ -71,6 +73,7 @@ extension Quaternion {
 
 extension Quaternion: Sequence {
     /// Creates an iterator over the components of the quaternion.
+    @inlinable
     public func makeIterator() -> Storage.Iterator {
         storage.makeIterator()
     }
@@ -83,6 +86,7 @@ extension Quaternion: Sequence {
 
 extension Quaternion: ExpressibleByArrayLiteral {
     /// Creates a quaternion from an array literal.
+    @inlinable
     public init(arrayLiteral elements: Value...) {
         precondition(elements.count == 4, "Quaternion needs to be initialized with exactly 4 elements")
         self.init(storage: Storage(elements[0], elements[1], elements[2], elements[3]))
@@ -91,6 +95,7 @@ extension Quaternion: ExpressibleByArrayLiteral {
 
 extension Quaternion: Equatable where Value: Equatable {
     /// Returns a Boolean value indicating whether two quaternions are equal.
+    @inlinable
     public static func == (lhs: Quaternion<Storage>, rhs: Quaternion<Storage>) -> Bool {
         lhs.storage == rhs.storage
     }

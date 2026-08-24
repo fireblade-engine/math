@@ -1,9 +1,9 @@
-import Foundation
-
 #if canImport(Darwin)
 import Darwin
 #elseif canImport(Glibc)
 import Glibc
+#else
+import Foundation
 #endif
 
 ///  The atan2() function computes the principal value of the arc tangent of y/x,

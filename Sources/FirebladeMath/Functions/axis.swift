@@ -14,9 +14,10 @@ import func simd.simd_axis
 @inlinable
 public func axis(_ quat: Quat4f) -> SIMD3<Float> {
     #if FRB_MATH_USE_SIMD
-    return simd.simd_axis(quat.storage)
+    return simd_axis(quat.storage)
     #else
-    return normalize(Vec3f(quat.x, quat.y, quat.z))
+    let vec = Vec3f(quat.x, quat.y, quat.z)
+    return normalize(vec)
     #endif
 }
 
@@ -26,8 +27,9 @@ public func axis(_ quat: Quat4f) -> SIMD3<Float> {
 @inlinable
 public func axis(_ quat: Quat4d) -> SIMD3<Double> {
     #if FRB_MATH_USE_SIMD
-    return simd.simd_axis(quat.storage)
+    return simd_axis(quat.storage)
     #else
-    return normalize(Vec3d(quat.x, quat.y, quat.z))
+    let vec = Vec3d(quat.x, quat.y, quat.z)
+    return normalize(vec)
     #endif
 }

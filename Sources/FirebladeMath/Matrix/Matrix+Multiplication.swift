@@ -14,31 +14,31 @@ public func multiply(_ lhs: Mat4x4d, _ rhs: Mat4x4d) -> Mat4x4d {
     #if FRB_MATH_USE_SIMD
     return Mat4x4d(storage: simd_mul(lhs.storage, rhs.storage))
     #else
+    let c00: Double = lhs[0] * rhs[0] + lhs[4] * rhs[1] + lhs[8] * rhs[2] + lhs[12] * rhs[3]
+    let c01: Double = lhs[1] * rhs[0] + lhs[5] * rhs[1] + lhs[9] * rhs[2] + lhs[13] * rhs[3]
+    let c02: Double = lhs[2] * rhs[0] + lhs[6] * rhs[1] + lhs[10] * rhs[2] + lhs[14] * rhs[3]
+    let c03: Double = lhs[3] * rhs[0] + lhs[7] * rhs[1] + lhs[11] * rhs[2] + lhs[15] * rhs[3]
+
+    let c10: Double = lhs[0] * rhs[4] + lhs[4] * rhs[5] + lhs[8] * rhs[6] + lhs[12] * rhs[7]
+    let c11: Double = lhs[1] * rhs[4] + lhs[5] * rhs[5] + lhs[9] * rhs[6] + lhs[13] * rhs[7]
+    let c12: Double = lhs[2] * rhs[4] + lhs[6] * rhs[5] + lhs[10] * rhs[6] + lhs[14] * rhs[7]
+    let c13: Double = lhs[3] * rhs[4] + lhs[7] * rhs[5] + lhs[11] * rhs[6] + lhs[15] * rhs[7]
+
+    let c20: Double = lhs[0] * rhs[8] + lhs[4] * rhs[9] + lhs[8] * rhs[10] + lhs[12] * rhs[11]
+    let c21: Double = lhs[1] * rhs[8] + lhs[5] * rhs[9] + lhs[9] * rhs[10] + lhs[13] * rhs[11]
+    let c22: Double = lhs[2] * rhs[8] + lhs[6] * rhs[9] + lhs[10] * rhs[10] + lhs[14] * rhs[11]
+    let c23: Double = lhs[3] * rhs[8] + lhs[7] * rhs[9] + lhs[11] * rhs[10] + lhs[15] * rhs[11]
+
+    let c30: Double = lhs[0] * rhs[12] + lhs[4] * rhs[13] + lhs[8] * rhs[14] + lhs[12] * rhs[15]
+    let c31: Double = lhs[1] * rhs[12] + lhs[5] * rhs[13] + lhs[9] * rhs[14] + lhs[13] * rhs[15]
+    let c32: Double = lhs[2] * rhs[12] + lhs[6] * rhs[13] + lhs[10] * rhs[14] + lhs[14] * rhs[15]
+    let c33: Double = lhs[3] * rhs[12] + lhs[7] * rhs[13] + lhs[11] * rhs[14] + lhs[15] * rhs[15]
+
     return Mat4x4d(
-        Vec4d(
-            lhs[0] * rhs[0] + lhs[4] * rhs[1] + lhs[8] * rhs[2] + lhs[12] * rhs[3],
-            lhs[1] * rhs[0] + lhs[5] * rhs[1] + lhs[9] * rhs[2] + lhs[13] * rhs[3],
-            lhs[2] * rhs[0] + lhs[6] * rhs[1] + lhs[10] * rhs[2] + lhs[14] * rhs[3],
-            lhs[3] * rhs[0] + lhs[7] * rhs[1] + lhs[11] * rhs[2] + lhs[15] * rhs[3]
-        ),
-        Vec4d(
-            lhs[0] * rhs[4] + lhs[4] * rhs[5] + lhs[8] * rhs[6] + lhs[12] * rhs[7],
-            lhs[1] * rhs[4] + lhs[5] * rhs[5] + lhs[9] * rhs[6] + lhs[13] * rhs[7],
-            lhs[2] * rhs[4] + lhs[6] * rhs[5] + lhs[10] * rhs[6] + lhs[14] * rhs[7],
-            lhs[3] * rhs[4] + lhs[7] * rhs[5] + lhs[11] * rhs[6] + lhs[15] * rhs[7]
-        ),
-        Vec4d(
-            lhs[0] * rhs[8] + lhs[4] * rhs[9] + lhs[8] * rhs[10] + lhs[12] * rhs[11],
-            lhs[1] * rhs[8] + lhs[5] * rhs[9] + lhs[9] * rhs[10] + lhs[13] * rhs[11],
-            lhs[2] * rhs[8] + lhs[6] * rhs[9] + lhs[10] * rhs[10] + lhs[14] * rhs[11],
-            lhs[3] * rhs[8] + lhs[7] * rhs[9] + lhs[11] * rhs[10] + lhs[15] * rhs[11]
-        ),
-        Vec4d(
-            lhs[0] * rhs[12] + lhs[4] * rhs[13] + lhs[8] * rhs[14] + lhs[12] * rhs[15],
-            lhs[1] * rhs[12] + lhs[5] * rhs[13] + lhs[9] * rhs[14] + lhs[13] * rhs[15],
-            lhs[2] * rhs[12] + lhs[6] * rhs[13] + lhs[10] * rhs[14] + lhs[14] * rhs[15],
-            lhs[3] * rhs[12] + lhs[7] * rhs[13] + lhs[11] * rhs[14] + lhs[15] * rhs[15]
-        )
+        Vec4d(c00, c01, c02, c03),
+        Vec4d(c10, c11, c12, c13),
+        Vec4d(c20, c21, c22, c23),
+        Vec4d(c30, c31, c32, c33)
     )
     #endif
 }
@@ -109,31 +109,31 @@ public func multiply(_ lhs: Mat4x4f, _ rhs: Mat4x4f) -> Mat4x4f {
     #if FRB_MATH_USE_SIMD
     return Mat4x4f(storage: simd_mul(lhs.storage, rhs.storage))
     #else
+    let c00: Float = lhs[0] * rhs[0] + lhs[4] * rhs[1] + lhs[8] * rhs[2] + lhs[12] * rhs[3]
+    let c01: Float = lhs[1] * rhs[0] + lhs[5] * rhs[1] + lhs[9] * rhs[2] + lhs[13] * rhs[3]
+    let c02: Float = lhs[2] * rhs[0] + lhs[6] * rhs[1] + lhs[10] * rhs[2] + lhs[14] * rhs[3]
+    let c03: Float = lhs[3] * rhs[0] + lhs[7] * rhs[1] + lhs[11] * rhs[2] + lhs[15] * rhs[3]
+
+    let c10: Float = lhs[0] * rhs[4] + lhs[4] * rhs[5] + lhs[8] * rhs[6] + lhs[12] * rhs[7]
+    let c11: Float = lhs[1] * rhs[4] + lhs[5] * rhs[5] + lhs[9] * rhs[6] + lhs[13] * rhs[7]
+    let c12: Float = lhs[2] * rhs[4] + lhs[6] * rhs[5] + lhs[10] * rhs[6] + lhs[14] * rhs[7]
+    let c13: Float = lhs[3] * rhs[4] + lhs[7] * rhs[5] + lhs[11] * rhs[6] + lhs[15] * rhs[7]
+
+    let c20: Float = lhs[0] * rhs[8] + lhs[4] * rhs[9] + lhs[8] * rhs[10] + lhs[12] * rhs[11]
+    let c21: Float = lhs[1] * rhs[8] + lhs[5] * rhs[9] + lhs[9] * rhs[10] + lhs[13] * rhs[11]
+    let c22: Float = lhs[2] * rhs[8] + lhs[6] * rhs[9] + lhs[10] * rhs[10] + lhs[14] * rhs[11]
+    let c23: Float = lhs[3] * rhs[8] + lhs[7] * rhs[9] + lhs[11] * rhs[10] + lhs[15] * rhs[11]
+
+    let c30: Float = lhs[0] * rhs[12] + lhs[4] * rhs[13] + lhs[8] * rhs[14] + lhs[12] * rhs[15]
+    let c31: Float = lhs[1] * rhs[12] + lhs[5] * rhs[13] + lhs[9] * rhs[14] + lhs[13] * rhs[15]
+    let c32: Float = lhs[2] * rhs[12] + lhs[6] * rhs[13] + lhs[10] * rhs[14] + lhs[14] * rhs[15]
+    let c33: Float = lhs[3] * rhs[12] + lhs[7] * rhs[13] + lhs[11] * rhs[14] + lhs[15] * rhs[15]
+
     return Mat4x4f(
-        Vec4f(
-            lhs[0] * rhs[0] + lhs[4] * rhs[1] + lhs[8] * rhs[2] + lhs[12] * rhs[3],
-            lhs[1] * rhs[0] + lhs[5] * rhs[1] + lhs[9] * rhs[2] + lhs[13] * rhs[3],
-            lhs[2] * rhs[0] + lhs[6] * rhs[1] + lhs[10] * rhs[2] + lhs[14] * rhs[3],
-            lhs[3] * rhs[0] + lhs[7] * rhs[1] + lhs[11] * rhs[2] + lhs[15] * rhs[3]
-        ),
-        Vec4f(
-            lhs[0] * rhs[4] + lhs[4] * rhs[5] + lhs[8] * rhs[6] + lhs[12] * rhs[7],
-            lhs[1] * rhs[4] + lhs[5] * rhs[5] + lhs[9] * rhs[6] + lhs[13] * rhs[7],
-            lhs[2] * rhs[4] + lhs[6] * rhs[5] + lhs[10] * rhs[6] + lhs[14] * rhs[7],
-            lhs[3] * rhs[4] + lhs[7] * rhs[5] + lhs[11] * rhs[6] + lhs[15] * rhs[7]
-        ),
-        Vec4f(
-            lhs[0] * rhs[8] + lhs[4] * rhs[9] + lhs[8] * rhs[10] + lhs[12] * rhs[11],
-            lhs[1] * rhs[8] + lhs[5] * rhs[9] + lhs[9] * rhs[10] + lhs[13] * rhs[11],
-            lhs[2] * rhs[8] + lhs[6] * rhs[9] + lhs[10] * rhs[10] + lhs[14] * rhs[11],
-            lhs[3] * rhs[8] + lhs[7] * rhs[9] + lhs[11] * rhs[10] + lhs[15] * rhs[11]
-        ),
-        Vec4f(
-            lhs[0] * rhs[12] + lhs[4] * rhs[13] + lhs[8] * rhs[14] + lhs[12] * rhs[15],
-            lhs[1] * rhs[12] + lhs[5] * rhs[13] + lhs[9] * rhs[14] + lhs[13] * rhs[15],
-            lhs[2] * rhs[12] + lhs[6] * rhs[13] + lhs[10] * rhs[14] + lhs[14] * rhs[15],
-            lhs[3] * rhs[12] + lhs[7] * rhs[13] + lhs[11] * rhs[14] + lhs[15] * rhs[15]
-        )
+        Vec4f(c00, c01, c02, c03),
+        Vec4f(c10, c11, c12, c13),
+        Vec4f(c20, c21, c22, c23),
+        Vec4f(c30, c31, c32, c33)
     )
     #endif
 }
@@ -204,22 +204,22 @@ public func multiply(_ lhs: Mat3x3d, _ rhs: Mat3x3d) -> Mat3x3d {
     #if FRB_MATH_USE_SIMD
     return Mat3x3d(storage: simd_mul(lhs.storage, rhs.storage))
     #else
+    let c00: Double = lhs[0, 0] * rhs[0, 0] + lhs[1, 0] * rhs[0, 1] + lhs[2, 0] * rhs[0, 2]
+    let c01: Double = lhs[0, 1] * rhs[0, 0] + lhs[1, 1] * rhs[0, 1] + lhs[2, 1] * rhs[0, 2]
+    let c02: Double = lhs[0, 2] * rhs[0, 0] + lhs[1, 2] * rhs[0, 1] + lhs[2, 2] * rhs[0, 2]
+
+    let c10: Double = lhs[0, 0] * rhs[1, 0] + lhs[1, 0] * rhs[1, 1] + lhs[2, 0] * rhs[1, 2]
+    let c11: Double = lhs[0, 1] * rhs[1, 0] + lhs[1, 1] * rhs[1, 1] + lhs[2, 1] * rhs[1, 2]
+    let c12: Double = lhs[0, 2] * rhs[1, 0] + lhs[1, 2] * rhs[1, 1] + lhs[2, 2] * rhs[1, 2]
+
+    let c20: Double = lhs[0, 0] * rhs[2, 0] + lhs[1, 0] * rhs[2, 1] + lhs[2, 0] * rhs[2, 2]
+    let c21: Double = lhs[0, 1] * rhs[2, 0] + lhs[1, 1] * rhs[2, 1] + lhs[2, 1] * rhs[2, 2]
+    let c22: Double = lhs[0, 2] * rhs[2, 0] + lhs[1, 2] * rhs[2, 1] + lhs[2, 2] * rhs[2, 2]
+
     return Mat3x3d(
-        Vec3d(
-            lhs[0, 0] * rhs[0, 0] + lhs[1, 0] * rhs[0, 1] + lhs[2, 0] * rhs[0, 2],
-            lhs[0, 1] * rhs[0, 0] + lhs[1, 1] * rhs[0, 1] + lhs[2, 1] * rhs[0, 2],
-            lhs[0, 2] * rhs[0, 0] + lhs[1, 2] * rhs[0, 1] + lhs[2, 2] * rhs[0, 2]
-        ),
-        Vec3d(
-            lhs[0, 0] * rhs[1, 0] + lhs[1, 0] * rhs[1, 1] + lhs[2, 0] * rhs[1, 2],
-            lhs[0, 1] * rhs[1, 0] + lhs[1, 1] * rhs[1, 1] + lhs[2, 1] * rhs[1, 2],
-            lhs[0, 2] * rhs[1, 0] + lhs[1, 2] * rhs[1, 1] + lhs[2, 2] * rhs[1, 2]
-        ),
-        Vec3d(
-            lhs[0, 0] * rhs[2, 0] + lhs[1, 0] * rhs[2, 1] + lhs[2, 0] * rhs[2, 2],
-            lhs[0, 1] * rhs[2, 0] + lhs[1, 1] * rhs[2, 1] + lhs[2, 1] * rhs[2, 2],
-            lhs[0, 2] * rhs[2, 0] + lhs[1, 2] * rhs[2, 1] + lhs[2, 2] * rhs[2, 2]
-        )
+        Vec3d(c00, c01, c02),
+        Vec3d(c10, c11, c12),
+        Vec3d(c20, c21, c22)
     )
     #endif
 }
@@ -287,22 +287,22 @@ public func multiply(_ lhs: Mat3x3f, _ rhs: Mat3x3f) -> Mat3x3f {
     #if FRB_MATH_USE_SIMD
     return Mat3x3f(storage: simd_mul(lhs.storage, rhs.storage))
     #else
+    let c00: Float = lhs[0, 0] * rhs[0, 0] + lhs[1, 0] * rhs[0, 1] + lhs[2, 0] * rhs[0, 2]
+    let c01: Float = lhs[0, 1] * rhs[0, 0] + lhs[1, 1] * rhs[0, 1] + lhs[2, 1] * rhs[0, 2]
+    let c02: Float = lhs[0, 2] * rhs[0, 0] + lhs[1, 2] * rhs[0, 1] + lhs[2, 2] * rhs[0, 2]
+
+    let c10: Float = lhs[0, 0] * rhs[1, 0] + lhs[1, 0] * rhs[1, 1] + lhs[2, 0] * rhs[1, 2]
+    let c11: Float = lhs[0, 1] * rhs[1, 0] + lhs[1, 1] * rhs[1, 1] + lhs[2, 1] * rhs[1, 2]
+    let c12: Float = lhs[0, 2] * rhs[1, 0] + lhs[1, 2] * rhs[1, 1] + lhs[2, 2] * rhs[1, 2]
+
+    let c20: Float = lhs[0, 0] * rhs[2, 0] + lhs[1, 0] * rhs[2, 1] + lhs[2, 0] * rhs[2, 2]
+    let c21: Float = lhs[0, 1] * rhs[2, 0] + lhs[1, 1] * rhs[2, 1] + lhs[2, 1] * rhs[2, 2]
+    let c22: Float = lhs[0, 2] * rhs[2, 0] + lhs[1, 2] * rhs[2, 1] + lhs[2, 2] * rhs[2, 2]
+
     return Mat3x3f(
-        Vec3f(
-            lhs[0, 0] * rhs[0, 0] + lhs[1, 0] * rhs[0, 1] + lhs[2, 0] * rhs[0, 2],
-            lhs[0, 1] * rhs[0, 0] + lhs[1, 1] * rhs[0, 1] + lhs[2, 1] * rhs[0, 2],
-            lhs[0, 2] * rhs[0, 0] + lhs[1, 2] * rhs[0, 1] + lhs[2, 2] * rhs[0, 2]
-        ),
-        Vec3f(
-            lhs[0, 0] * rhs[1, 0] + lhs[1, 0] * rhs[1, 1] + lhs[2, 0] * rhs[1, 2],
-            lhs[0, 1] * rhs[1, 0] + lhs[1, 1] * rhs[1, 1] + lhs[2, 1] * rhs[1, 2],
-            lhs[0, 2] * rhs[1, 0] + lhs[1, 2] * rhs[1, 1] + lhs[2, 2] * rhs[1, 2]
-        ),
-        Vec3f(
-            lhs[0, 0] * rhs[2, 0] + lhs[1, 0] * rhs[2, 1] + lhs[2, 0] * rhs[2, 2],
-            lhs[0, 1] * rhs[2, 0] + lhs[1, 1] * rhs[2, 1] + lhs[2, 1] * rhs[2, 2],
-            lhs[0, 2] * rhs[2, 0] + lhs[1, 2] * rhs[2, 1] + lhs[2, 2] * rhs[2, 2]
-        )
+        Vec3f(c00, c01, c02),
+        Vec3f(c10, c11, c12),
+        Vec3f(c20, c21, c22)
     )
     #endif
 }
@@ -370,15 +370,15 @@ public func multiply(_ lhs: Mat2x2d, _ rhs: Mat2x2d) -> Mat2x2d {
     #if FRB_MATH_USE_SIMD
     return Mat2x2d(storage: simd_mul(lhs.storage, rhs.storage))
     #else
+    let c00: Double = lhs[0, 0] * rhs[0, 0] + lhs[1, 0] * rhs[0, 1]
+    let c01: Double = lhs[0, 1] * rhs[0, 0] + lhs[1, 1] * rhs[0, 1]
+
+    let c10: Double = lhs[0, 0] * rhs[1, 0] + lhs[1, 0] * rhs[1, 1]
+    let c11: Double = lhs[0, 1] * rhs[1, 0] + lhs[1, 1] * rhs[1, 1]
+
     return Mat2x2d(
-        Vec2d(
-            lhs[0, 0] * rhs[0, 0] + lhs[1, 0] * rhs[0, 1],
-            lhs[0, 1] * rhs[0, 0] + lhs[1, 1] * rhs[0, 1]
-        ),
-        Vec2d(
-            lhs[0, 0] * rhs[1, 0] + lhs[1, 0] * rhs[1, 1],
-            lhs[0, 1] * rhs[1, 0] + lhs[1, 1] * rhs[1, 1]
-        )
+        Vec2d(c00, c01),
+        Vec2d(c10, c11)
     )
     #endif
 }
@@ -443,15 +443,15 @@ public func multiply(_ lhs: Mat2x2f, _ rhs: Mat2x2f) -> Mat2x2f {
     #if FRB_MATH_USE_SIMD
     return Mat2x2f(storage: simd_mul(lhs.storage, rhs.storage))
     #else
+    let c00: Float = lhs[0, 0] * rhs[0, 0] + lhs[1, 0] * rhs[0, 1]
+    let c01: Float = lhs[0, 1] * rhs[0, 0] + lhs[1, 1] * rhs[0, 1]
+
+    let c10: Float = lhs[0, 0] * rhs[1, 0] + lhs[1, 0] * rhs[1, 1]
+    let c11: Float = lhs[0, 1] * rhs[1, 0] + lhs[1, 1] * rhs[1, 1]
+
     return Mat2x2f(
-        Vec2f(
-            lhs[0, 0] * rhs[0, 0] + lhs[1, 0] * rhs[0, 1],
-            lhs[0, 1] * rhs[0, 0] + lhs[1, 1] * rhs[0, 1]
-        ),
-        Vec2f(
-            lhs[0, 0] * rhs[1, 0] + lhs[1, 0] * rhs[1, 1],
-            lhs[0, 1] * rhs[1, 0] + lhs[1, 1] * rhs[1, 1]
-        )
+        Vec2f(c00, c01),
+        Vec2f(c10, c11)
     )
     #endif
 }
