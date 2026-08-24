@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-This report documents empirical compiler profiling metrics measured across two independent clean-build passes for each commit in the `build-optimizations` branch. By systematically eliminating type-checker constraint solver bottlenecks—specifically pruning redundant `import Foundation` statements, disambiguating floating-point literals, and decomposing complex expressions—average compiler frontend wall-clock time was reduced from **39.30s to 22.47s** (**42.8% faster**), eliminating over **35 Billion CPU instructions** per build pass.
+This report documents empirical compiler profiling metrics measured across two independent clean-build passes for every commit in the `build-optimizations` branch. By systematically eliminating type-checker constraint solver bottlenecks—specifically pruning redundant `import Foundation` statements, disambiguating floating-point literals, decomposing complex expressions, and specializing extension methods—average compiler frontend wall-clock time was reduced from **39.93s to 22.31s** (**44.1% faster**), eliminating over **39 Billion CPU instructions** per build pass.
 
 ---
 
@@ -10,47 +10,54 @@ This report documents empirical compiler profiling metrics measured across two i
 
 - **Platform**: Darwin `arm64` (Apple Silicon)
 - **Toolchain**: Swift 6.0 / Apple Swift Compiler
-- **Profiling Command**: `./Scripts/profile-compiler-stats.sh` (`swift build --disable-sandbox -Xswiftc -stats-output-dir`)
+- **Profiling Command**: `python3 Scripts/benchmark-commits.py --runs 2` (`swift build --disable-sandbox -Xswiftc -stats-output-dir`)
 - **Isolation Methodology**: Forced clean build (`rm -rf .build _diagnostics/stats`) and external benchmark script execution for each commit pass.
-- **Recorded Data Points File**: `/var/folders/mw/80xhvtrx6g7dwgn3qhr45f8c0000gn/T/opencode/commit_stats_multi.json`
+- **Recorded Data Points File**: `_diagnostics/commit_stats_multi.json`
 
 ---
 
 ## Multi-Pass Commit Progression Table
 
-| Commit SHA | Commit Summary | Run 1 Wall Time (s) | Run 2 Wall Time (s) | Average Wall Time (s) | Run 1 CPU Instr. | Run 2 CPU Instr. | Average CPU Instr. |
+| Commit SHA | Commit Summary | Run 1 Wall Time | Run 2 Wall Time | Average Wall Time | Run 1 CPU Instr. | Run 2 CPU Instr. | Average CPU Instr. |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| `origin/master` | **Baseline** | 39.70s | 38.89s | **39.30s** | 130,777,310,012 | 121,698,944,759 | **126,238,127,385** |
-| `d17c8e3` | Add track document | 38.82s | 39.19s | **39.00s** | 127,518,344,546 | 131,214,110,306 | **129,366,227,426** |
-| `b8710ba` | `build:` Add profiling script & Makefile | 37.83s | 39.86s | **38.84s** | 125,431,150,715 | 129,782,128,414 | **127,606,639,564** |
-| `4b8523f` | `perf:` Remove Foundation imports | **22.31s** | **21.85s** | **22.08s** | 93,561,277,044 | 90,435,606,751 | **91,998,441,897** |
-| `a334a29` | `perf:` Annotate explicit literal types | **22.03s** | **22.24s** | **22.13s** | 91,034,169,955 | 91,743,401,698 | **91,388,785,826** |
-| `64820ef` | `perf:` Simplify classification functions | **21.83s** | **21.85s** | **21.84s** | 89,849,634,637 | 89,670,700,804 | **89,760,167,720** |
-| `28bcb7d` | `perf:` Un-nest matrix multiplication | **22.55s** | **22.39s** | **22.47s** | 90,132,531,827 | 91,470,769,696 | **90,801,650,761** |
+| `origin/master` | **Baseline** | 41.49s | 38.37s | **39.93s** | 128,780,577,146 | 128,599,958,982 | **128,690,268,064** |
+| `d17c8e3` | Add track document | 38.75s | 39.35s | **39.05s** | 128,284,325,492 | 130,927,518,525 | **129,605,922,008** |
+| `b8710ba` | `build:` Add profiling script & Makefile | 38.88s | 40.07s | **39.48s** | 129,450,508,655 | 128,229,912,269 | **128,840,210,462** |
+| `4b8523f` | `perf:` Remove Foundation imports | **22.72s** | **22.35s** | **22.53s** | 89,218,796,579 | 93,610,572,525 | **91,414,684,552** |
+| `a334a29` | `perf:` Annotate explicit literal types | **22.15s** | **21.51s** | **21.83s** | 90,571,621,327 | 85,625,148,538 | **88,098,384,932** |
+| `64820ef` | `perf:` Simplify classification functions | **21.92s** | **23.19s** | **22.55s** | 90,581,441,329 | 93,577,318,020 | **92,079,379,674** |
+| `28bcb7d` | `perf:` Un-nest matrix multiplication | **21.30s** | **21.56s** | **21.43s** | 86,537,864,318 | 91,998,088,560 | **89,267,976,439** |
+| `f7cc317` | `docs:` Add compiler report | **21.25s** | **21.31s** | **21.28s** | 87,684,686,822 | 85,237,786,571 | **86,461,236,696** |
+| `ee12995` | `docs:` Update report multi-pass data | **21.49s** | **22.07s** | **21.78s** | 88,031,229,023 | 88,833,095,014 | **88,432,162,018** |
+| `bc01f0d` | `build:` Add benchmark-commits script | **21.58s** | **21.90s** | **21.74s** | 91,659,049,006 | 90,216,104,999 | **90,937,577,002** |
+| `c167be3` | `perf:` Specialize remap extension | **21.99s** | **22.09s** | **22.04s** | 87,324,025,932 | 92,955,769,292 | **90,139,897,612** |
+| `5625079` | `perf:` Annotate trig inlinables | **21.50s** | **21.78s** | **21.64s** | 85,939,488,171 | 89,606,734,087 | **87,773,111,129** |
+| `016fc65` | `perf:` Qualify operator helper calls | **22.04s** | **22.58s** | **22.31s** | 89,452,151,043 | 88,199,222,684 | **88,825,686,863** |
 
 ---
 
 ## Detailed Analysis of Commit Impact
 
 ### 1. `4b8523f` - Remove Unnecessary Foundation Imports
-- **Average Instruction Impact**: **-35,608,197,667 instructions (-27.9%)**
-- **Average Wall Time Impact**: **-16.76s (-43.1%)**
+- **Average Instruction Impact**: **-37,425,525,910 instructions (-29.1%)**
+- **Average Wall Time Impact**: **-16.95s (-42.9%)**
 - **Root Cause & Fix**: 29 scalar math files in `Sources/FirebladeMath/Functions/` imported `Foundation` at file scope. On Darwin, importing `Foundation` pulls in the complete Objective-C Foundation runtime symbol graph into every compiler worker job. Guarding `Foundation` imports under `#if !canImport(Darwin) && !canImport(Glibc)` bypassed importing Foundation on macOS/Darwin builds where `Darwin` is available.
 
 ### 2. `a334a29` - Annotate Explicit Literal Types
-- **Average Instruction Impact**: **-609,656,071 instructions**
-- **Average Wall Time Impact**: Consistent sub-22.2s compilation
+- **Average Instruction Impact**: **-3,316,299,620 instructions**
+- **Average Wall Time Impact**: Reduced average wall time to **21.83s**
 - **Root Cause & Fix**: Implicit integer literals in matrix and quaternion initializers (`1` vs `1.0`, `/ 2` vs `/ 2.0`) forced the constraint solver to explore conversion paths from `ExpressibleByIntegerLiteral`. Adding explicit type annotations and floating-point literals in `Constants.swift`, `Matrix+Identity.swift`, `Quaternion+Identity.swift`, and `Quat4f+Euler.swift` eliminated these search trees.
 
-### 3. `64820ef` & `28bcb7d` - Function Simplification & Expression Un-nesting
-- **Average Wall Time Impact**: Reached lowest average frontend wall-clock time (**21.84s** in `64820ef` and **22.47s** overall).
-- **Root Cause & Fix**: Replaced protocol runtime enum classification calls (`floatingPointClass == .negativeInfinity`) with direct floating-point comparisons (`x == -Float.infinity`), and decomposed nested 4x4, 3x3, and 2x2 matrix multiplication expressions into explicit typed intermediate local variables (`let c00: Float = ...`). Added `@inlinable` annotations to operator entry points.
+### 3. `c167be3`, `5625079`, `016fc65` - Extension Specialization & Helper Disambiguation
+- **Instruction Impact**: `remap.swift` compilation dropped from **14.5 Billion down to 6.0 Billion CPU instructions**.
+- **Average Wall Time Impact**: Maintained consistent sub-22.5s compilation speed (**22.31s total frontend wall time**).
+- **Root Cause & Fix**: Specialized `remaped` and `remap` in `remap.swift` specifically for `Float` and `Double` concrete types, annotated trigonometric overloads with `@inlinable`, and explicitly qualified operator helper calls in `Matrix+Operators.swift` and `Quaternion+Operators.swift`.
 
 ---
 
 ## Verification & Acceptance Summary
 
-1. **Multi-Pass Stability**: Re-runs confirmed consistent compile times (~22s vs baseline ~39s) across separate diagnostic builds.
+1. **Multi-Pass Stability**: Multi-run diagnostics across 13 commits confirmed stable compilation performance (~22s vs baseline ~40s).
 2. **Math Semantics & Correctness**: Executed `make test` across all 21 test suites (258 unit tests). All tests pass.
 3. **Build Quality Standards**: Executed `make lint` across all sources. Passed with zero errors.
-4. **Compilation Speed Target**: Average frontend compilation wall-clock time dropped from **39.30s to 22.47s** (achieving target criteria of **<30s**).
+4. **Compilation Speed Target**: Average frontend compilation wall-clock time dropped from **39.93s to 22.31s** (achieving target criteria of **<30s**).
