@@ -3,7 +3,7 @@
 /// - Returns: true if the value is positive infinity, false otherwise.
 @inlinable
 public func isPositiveInfinity(_ x: Float) -> Bool {
-    x == Float.infinity
+    x.isInfinite && x.sign == FloatingPointSign.plus
 }
 
 /// Returns true if the value is positive infinity.
@@ -11,5 +11,5 @@ public func isPositiveInfinity(_ x: Float) -> Bool {
 /// - Returns: true if the value is positive infinity, false otherwise.
 @inlinable
 public func isPositiveInfinity(_ x: Double) -> Bool {
-    x == Double.infinity
+    x.isInfinite && x.sign == FloatingPointSign.plus
 }
