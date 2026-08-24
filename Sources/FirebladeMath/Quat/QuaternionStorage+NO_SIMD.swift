@@ -14,23 +14,23 @@ public struct QuaternionStorage<Value: StorageScalar>: QuaternionStorageProtocol
     }
 
     @inlinable public var x: Value {
-        set { storage.x = newValue }
         get { storage.x }
+        set { storage.x = newValue }
     }
 
     @inlinable public var y: Value {
-        set { storage.y = newValue }
         get { storage.y }
+        set { storage.y = newValue }
     }
 
     @inlinable public var z: Value {
-        set { storage.z = newValue }
         get { storage.z }
+        set { storage.z = newValue }
     }
 
     @inlinable public var w: Value {
-        set { storage.w = newValue }
         get { storage.w }
+        set { storage.w = newValue }
     }
 
     public func makeIterator() -> SIMDScalarIterator<SIMD4<Value>> {

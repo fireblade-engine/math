@@ -12,13 +12,13 @@ extension Quat4f {
     //      return Quat4f(q1, q2, q3, q4)
     //  }
 
-    public static func fromEulerAngles_123(_ e: Vec3f) -> Quat4f {
-        let c1 = cos(e.x / 2.0)
-        let s1 = sin(e.x / 2.0)
-        let c2 = cos(e.y / 2.0)
-        let s2 = sin(e.y / 2.0)
-        let c3 = cos(e.z / 2.0)
-        let s3 = sin(e.z / 2.0)
+    public static func fromEulerAngles_123(_ euler: Vec3f) -> Quat4f {
+        let c1 = cos(euler.x / 2.0)
+        let s1 = sin(euler.x / 2.0)
+        let c2 = cos(euler.y / 2.0)
+        let s2 = sin(euler.y / 2.0)
+        let c3 = cos(euler.z / 2.0)
+        let s3 = sin(euler.z / 2.0)
 
         let q4 = c1 * c2 * c3 - s1 * s2 * s3
         let q3 = s1 * c2 * c3 + c1 * s2 * s3
@@ -41,13 +41,13 @@ extension Quat4f {
     //     return Quat4f(q1, q2, q3, q4)
     // }
 
-    public static func fromEulerAngles_132(_ e: Vec3f) -> Quat4f {
-        let c1 = cos(e.x / 2.0)
-        let s1 = sin(e.x / 2.0)
-        let c2 = cos(e.y / 2.0)
-        let s2 = sin(e.y / 2.0)
-        let c3 = cos(e.z / 2.0)
-        let s3 = sin(e.z / 2.0)
+    public static func fromEulerAngles_132(_ euler: Vec3f) -> Quat4f {
+        let c1 = cos(euler.x / 2.0)
+        let s1 = sin(euler.x / 2.0)
+        let c2 = cos(euler.y / 2.0)
+        let s2 = sin(euler.y / 2.0)
+        let c3 = cos(euler.z / 2.0)
+        let s3 = sin(euler.z / 2.0)
 
         let q4 = c1 * c2 * c3 + s1 * s2 * s3
         let q3 = s1 * c2 * c3 - c1 * s2 * s3
@@ -70,13 +70,13 @@ extension Quat4f {
     //      return Quat4f(q1, q2, q3, q4)
     //  }
 
-    public static func fromEulerAngles_213(_ e: Vec3f) -> Quat4f {
-        let c1 = cos(e.x / 2.0)
-        let s1 = sin(e.x / 2.0)
-        let c2 = cos(e.y / 2.0)
-        let s2 = sin(e.y / 2.0)
-        let c3 = cos(e.z / 2.0)
-        let s3 = sin(e.z / 2.0)
+    public static func fromEulerAngles_213(_ euler: Vec3f) -> Quat4f {
+        let c1 = cos(euler.x / 2.0)
+        let s1 = sin(euler.x / 2.0)
+        let c2 = cos(euler.y / 2.0)
+        let s2 = sin(euler.y / 2.0)
+        let c3 = cos(euler.z / 2.0)
+        let s3 = sin(euler.z / 2.0)
 
         let q4 = c1 * c2 * c3 + s1 * s2 * s3
         let q3 = c1 * s2 * c3 + s1 * c2 * s3
@@ -86,13 +86,13 @@ extension Quat4f {
         return Quat4f(q1, q2, q3, q4)
     }
 
-    public static func fromEulerAngles_231(_ e: Vec3f) -> Quat4f {
-        let c1 = cos(e.x / 2.0)
-        let s1 = sin(e.x / 2.0)
-        let c2 = cos(e.y / 2.0)
-        let s2 = sin(e.y / 2.0)
-        let c3 = cos(e.z / 2.0)
-        let s3 = sin(e.z / 2.0)
+    public static func fromEulerAngles_231(_ euler: Vec3f) -> Quat4f {
+        let c1 = cos(euler.x / 2.0)
+        let s1 = sin(euler.x / 2.0)
+        let c2 = cos(euler.y / 2.0)
+        let s2 = sin(euler.y / 2.0)
+        let c3 = cos(euler.z / 2.0)
+        let s3 = sin(euler.z / 2.0)
 
         let q4 = c1 * c2 * c3 - s1 * s2 * s3
         let q3 = c1 * c2 * s3 + s1 * s2 * c3
@@ -115,13 +115,13 @@ extension Quat4f {
     //     return Quat4f(q1, q2, q3, q4)
     // }
 
-    public static func fromEulerAngles_312(_ e: Vec3f) -> Quat4f {
-        let c1 = cos(e.x / 2.0)
-        let s1 = sin(e.x / 2.0)
-        let c2 = cos(e.y / 2.0)
-        let s2 = sin(e.y / 2.0)
-        let c3 = cos(e.z / 2.0)
-        let s3 = sin(e.z / 2.0)
+    public static func fromEulerAngles_312(_ euler: Vec3f) -> Quat4f {
+        let c1 = cos(euler.x / 2.0)
+        let s1 = sin(euler.x / 2.0)
+        let c2 = cos(euler.y / 2.0)
+        let s2 = sin(euler.y / 2.0)
+        let c3 = cos(euler.z / 2.0)
+        let s3 = sin(euler.z / 2.0)
 
         let q4 = c1 * c2 * c3 - s1 * s2 * s3
         let q3 = c1 * s2 * c3 - s1 * c2 * s3
@@ -144,13 +144,13 @@ extension Quat4f {
     //     return Quat4f(q1, q2, q3, q4)
     // }
 
-    public static func fromEulerAngles_321(_ e: Vec3f) -> Quat4f {
-        let c1 = cos(e.x / 2.0)
-        let s1 = sin(e.x / 2.0)
-        let c2 = cos(e.y / 2.0)
-        let s2 = sin(e.y / 2.0)
-        let c3 = cos(e.z / 2.0)
-        let s3 = sin(e.z / 2.0)
+    public static func fromEulerAngles_321(_ euler: Vec3f) -> Quat4f {
+        let c1 = cos(euler.x / 2.0)
+        let s1 = sin(euler.x / 2.0)
+        let c2 = cos(euler.y / 2.0)
+        let s2 = sin(euler.y / 2.0)
+        let c3 = cos(euler.z / 2.0)
+        let s3 = sin(euler.z / 2.0)
 
         let q4 = c1 * c2 * c3 + s1 * s2 * s3
         let q3 = c1 * c2 * s3 - s1 * s2 * c3
@@ -165,23 +165,19 @@ extension Quat4f {
         self = Quat4f.fromEulerAngles_321(Vec3f(pitch, yaw, roll))
     }
 
-    @inlinable
-    public var eulerAngles: Vec3f {
+    @inlinable public var eulerAngles: Vec3f {
         quaternionToEulerAngles_321(self)
     }
 
-    @inlinable
-    public var pitch: Float {
+    @inlinable public var pitch: Float {
         eulerAngles.x
     }
 
-    @inlinable
-    public var yaw: Float {
+    @inlinable public var yaw: Float {
         eulerAngles.y
     }
 
-    @inlinable
-    public var roll: Float {
+    @inlinable public var roll: Float {
         eulerAngles.z
     }
 
@@ -212,11 +208,11 @@ extension Quat4f {
 //    return Vec3f(e1, e2, e3)
 // }
 
-public func quaternionToEulerAngles_123(_ q: Quat4f) -> Vec3f {
-    let q0 = q.w
-    let q1 = q.z
-    let q2 = q.y
-    let q3 = q.x
+public func quaternionToEulerAngles_123(_ quat: Quat4f) -> Vec3f {
+    let q0 = quat.w
+    let q1 = quat.z
+    let q2 = quat.y
+    let q3 = quat.x
 
     let e1 = atan2(-2.0 * (q2 * q3 - q0 * q1), q0 * q0 - q1 * q1 - q2 * q2 + q3 * q3)
     let e2 = asin(2.0 * (q1 * q3 + q0 * q2))
@@ -235,11 +231,11 @@ public func quaternionToEulerAngles_123(_ q: Quat4f) -> Vec3f {
 //    return Vec3f(e1, e2, e3)
 // }
 
-public func quaternionToEulerAngles_132(_ q: Quat4f) -> Vec3f {
-    let q0 = q.w
-    let q1 = q.z
-    let q2 = q.y
-    let q3 = q.x
+public func quaternionToEulerAngles_132(_ quat: Quat4f) -> Vec3f {
+    let q0 = quat.w
+    let q1 = quat.z
+    let q2 = quat.y
+    let q3 = quat.x
 
     let e1 = atan2(2.0 * (q2 * q3 + q0 * q1), q0 * q0 - q1 * q1 + q2 * q2 - q3 * q3)
     let e2 = asin(-2.0 * (q1 * q2 - q0 * q3))
@@ -259,11 +255,11 @@ public func quaternionToEulerAngles_132(_ q: Quat4f) -> Vec3f {
 //    return Vec3f(e1, e2, e3)
 // }
 
-public func quaternionToEulerAngles_213(_ q: Quat4f) -> Vec3f {
-    let q0 = q.w
-    let q1 = q.z
-    let q2 = q.y
-    let q3 = q.x
+public func quaternionToEulerAngles_213(_ quat: Quat4f) -> Vec3f {
+    let q0 = quat.w
+    let q1 = quat.z
+    let q2 = quat.y
+    let q3 = quat.x
 
     let e1 = atan2(2.0 * (q1 * q3 + q0 * q2), q0 * q0 - q1 * q1 - q2 * q2 + q3 * q3)
     let e2 = asin(-2.0 * (q2 * q3 - q0 * q1))
@@ -272,11 +268,11 @@ public func quaternionToEulerAngles_213(_ q: Quat4f) -> Vec3f {
     return Vec3f(e1, e2, e3)
 }
 
-public func quaternionToEulerAngles_231(_ q: Quat4f) -> Vec3f {
-    let q0 = q.w
-    let q1 = q.z
-    let q2 = q.y
-    let q3 = q.x
+public func quaternionToEulerAngles_231(_ quat: Quat4f) -> Vec3f {
+    let q0 = quat.w
+    let q1 = quat.z
+    let q2 = quat.y
+    let q3 = quat.x
 
     let e1 = atan2(-2.0 * (q1 * q3 - q0 * q2), q0 * q0 + q1 * q1 - q2 * q2 - q3 * q3)
     let e2 = asin(2.0 * (q1 * q2 + q0 * q3))
@@ -296,11 +292,11 @@ public func quaternionToEulerAngles_231(_ q: Quat4f) -> Vec3f {
 //    return Vec3f(e1, e2, e3)
 // }
 
-public func quaternionToEulerAngles_312(_ q: Quat4f) -> Vec3f {
-    let q0 = q.w
-    let q1 = q.z
-    let q2 = q.y
-    let q3 = q.x
+public func quaternionToEulerAngles_312(_ quat: Quat4f) -> Vec3f {
+    let q0 = quat.w
+    let q1 = quat.z
+    let q2 = quat.y
+    let q3 = quat.x
 
     let e1 = atan2(-2.0 * (q1 * q2 - q0 * q3), q0 * q0 - q1 * q1 + q2 * q2 - q3 * q3)
     let e2 = asin(2.0 * (q2 * q3 + q0 * q1))
@@ -320,11 +316,11 @@ public func quaternionToEulerAngles_312(_ q: Quat4f) -> Vec3f {
 //    return Vec3f(e1, e2, e3)
 // }
 
-public func quaternionToEulerAngles_321(_ q: Quat4f) -> Vec3f {
-    let q0 = q.w
-    let q1 = q.z
-    let q2 = q.y
-    let q3 = q.x
+public func quaternionToEulerAngles_321(_ quat: Quat4f) -> Vec3f {
+    let q0 = quat.w
+    let q1 = quat.z
+    let q2 = quat.y
+    let q3 = quat.x
 
     let e1 = atan2(2.0 * (q1 * q2 + q0 * q3), q0 * q0 + q1 * q1 - q2 * q2 - q3 * q3)
     let e2 = asin(-2.0 * (q1 * q3 - q0 * q2))

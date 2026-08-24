@@ -9,7 +9,7 @@ public func sign(_ x: Double) -> Double {
     #if FRB_MATH_USE_SIMD
     return simd_sign(x)
     #else
-    return (x == 0 || x != x) ? 0 : copysign(1, x)
+    return (x == 0 || x.isNaN) ? 0 : copysign(1, x)
     #endif
 }
 
@@ -20,6 +20,6 @@ public func sign(_ x: Float) -> Float {
     #if FRB_MATH_USE_SIMD
     return simd_sign(x)
     #else
-    return (x == 0 || x != x) ? 0 : copysign(1, x)
+    return (x == 0 || x.isNaN) ? 0 : copysign(1, x)
     #endif
 }

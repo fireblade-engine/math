@@ -66,7 +66,7 @@ extension Mat4x4f {
     ///   - zNear: The distance to the near clipping plane.
     ///   - zFar: The distance to the far clipping plane.
     /// - Returns: The orthographic projection matrix.
-    public static func orthographicRH(left: Float, right: Float, top: Float, bottom: Float, zNear: Float, zFar: Float) -> Self {
+    public static func orthographicRH(left: Float, right: Float, top: Float, bottom: Float, zNear: Float, zFar: Float) -> Self { // swiftlint:disable:this function_parameter_count
         let m00: Float = 2.0 / (right - left)
         let m03: Float = (left + right) / (left - right)
         let m11: Float = 2.0 / (top - bottom)
@@ -92,7 +92,7 @@ extension Mat4x4f {
     ///   - zNear: The distance to the near clipping plane.
     ///   - zFar: The distance to the far clipping plane.
     /// - Returns: The orthographic projection matrix.
-    public static func orthographicLH(left: Float, right: Float, top: Float, bottom: Float, zNear: Float, zFar: Float) -> Self {
+    public static func orthographicLH(left: Float, right: Float, top: Float, bottom: Float, zNear: Float, zFar: Float) -> Self { // swiftlint:disable:this function_parameter_count
         let m00: Float = 2.0 / (right - left)
         let m03: Float = (left + right) / (left - right)
         let m11: Float = 2.0 / (top - bottom)
@@ -174,7 +174,7 @@ extension Mat4x4d {
     ///   - zNear: The distance to the near clipping plane.
     ///   - zFar: The distance to the far clipping plane.
     /// - Returns: The orthographic projection matrix.
-    public static func orthographicRH(left: Double, right: Double, top: Double, bottom: Double, zNear: Double, zFar: Double) -> Self {
+    public static func orthographicRH(left: Double, right: Double, top: Double, bottom: Double, zNear: Double, zFar: Double) -> Self { // swiftlint:disable:this function_parameter_count
         let m00: Double = 2.0 / (right - left)
         let m03: Double = (left + right) / (left - right)
         let m11: Double = 2.0 / (top - bottom)
@@ -200,7 +200,7 @@ extension Mat4x4d {
     ///   - zNear: The distance to the near clipping plane.
     ///   - zFar: The distance to the far clipping plane.
     /// - Returns: The orthographic projection matrix.
-    public static func orthographicLH(left: Double, right: Double, top: Double, bottom: Double, zNear: Double, zFar: Double) -> Self {
+    public static func orthographicLH(left: Double, right: Double, top: Double, bottom: Double, zNear: Double, zFar: Double) -> Self { // swiftlint:disable:this function_parameter_count
         let m00: Double = 2.0 / (right - left)
         let m03: Double = (left + right) / (left - right)
         let m11: Double = 2.0 / (top - bottom)

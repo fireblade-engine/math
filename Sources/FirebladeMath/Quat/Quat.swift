@@ -5,6 +5,7 @@
 public struct Quaternion<Storage: QuaternionStorageProtocol>: Sendable {
     /// The scalar type used in the quaternion.
     public typealias Value = Storage.Value
+
     @usableFromInline var storage: Storage
 
     /// Creates a quaternion from a storage object.

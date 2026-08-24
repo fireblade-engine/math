@@ -40,10 +40,10 @@ public func determinant(_ mat: Mat3x3f) -> Float {
     #if FRB_MATH_USE_SIMD
     return simd.simd_determinant(mat.storage)
     #else
-    let a = mat[0, 0] * (mat[1, 1] * mat[2, 2] - mat[1, 2] * mat[2, 1])
-    let b = mat[0, 1] * (mat[1, 0] * mat[2, 2] - mat[1, 2] * mat[2, 0])
-    let c = mat[0, 2] * (mat[1, 0] * mat[2, 1] - mat[1, 1] * mat[2, 0])
-    return a - b + c
+    let termA = mat[0, 0] * (mat[1, 1] * mat[2, 2] - mat[1, 2] * mat[2, 1])
+    let termB = mat[0, 1] * (mat[1, 0] * mat[2, 2] - mat[1, 2] * mat[2, 0])
+    let termC = mat[0, 2] * (mat[1, 0] * mat[2, 1] - mat[1, 1] * mat[2, 0])
+    return termA - termB + termC
     #endif
 }
 
@@ -85,9 +85,9 @@ public func determinant(_ mat: Mat3x3d) -> Double {
     #if FRB_MATH_USE_SIMD
     return simd.simd_determinant(mat.storage)
     #else
-    let a = mat[0, 0] * (mat[1, 1] * mat[2, 2] - mat[1, 2] * mat[2, 1])
-    let b = mat[0, 1] * (mat[1, 0] * mat[2, 2] - mat[1, 2] * mat[2, 0])
-    let c = mat[0, 2] * (mat[1, 0] * mat[2, 1] - mat[1, 1] * mat[2, 0])
-    return a - b + c
+    let termA = mat[0, 0] * (mat[1, 1] * mat[2, 2] - mat[1, 2] * mat[2, 1])
+    let termB = mat[0, 1] * (mat[1, 0] * mat[2, 2] - mat[1, 2] * mat[2, 0])
+    let termC = mat[0, 2] * (mat[1, 0] * mat[2, 1] - mat[1, 1] * mat[2, 0])
+    return termA - termB + termC
     #endif
 }

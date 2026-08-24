@@ -33,13 +33,13 @@ public struct Matrix3x3<Storage: Storage3x3Protocol>: RandomAccessCollection, Mu
         storage.index(before: i)
     }
 
-    @usableFromInline init(storage: Storage) {
+    @usableFromInline
+    init(storage: Storage) {
         self.storage = storage
     }
 
     /// The 3x3 identity matrix.
-    @inlinable
-    public static var identity: Matrix3x3<Storage> {
+    @inlinable public static var identity: Matrix3x3<Storage> {
         Matrix3x3(diagonal: Vector(repeating: 1))
     }
 
@@ -101,7 +101,7 @@ public struct Matrix3x3<Storage: Storage3x3Protocol>: RandomAccessCollection, Mu
     }
 
     /// The column vectors of the matrix.
-    @inlinable public var columns: (Vector, Vector, Vector) {
+    @inlinable public var columns: (Vector, Vector, Vector) { // swiftlint:disable:this large_tuple
         storage.columns
     }
 
@@ -111,7 +111,8 @@ public struct Matrix3x3<Storage: Storage3x3Protocol>: RandomAccessCollection, Mu
     }
 
     /// Provides access to the underlying memory as a contiguous buffer.
-    @inlinable public func withForcedContiguousStorage<R>(_ body: (UnsafeBufferPointer<Element>) -> R) throws -> R? {
+    @inlinable
+    public func withForcedContiguousStorage<R>(_ body: (UnsafeBufferPointer<Element>) -> R) throws -> R? {
         // https://forums.swift.org/t/se-0256-introduce-mutable-contiguouscollection-protocol/22569/7
         if let result = withContiguousStorageIfAvailable(body) {
             return result
@@ -121,7 +122,8 @@ public struct Matrix3x3<Storage: Storage3x3Protocol>: RandomAccessCollection, Mu
     }
 
     /// Provides mutable access to the underlying memory as a contiguous buffer.
-    @inlinable public mutating func withForcedContiguousMutableStorage<R>(_ body: (inout UnsafeMutableBufferPointer<Element>) -> R) throws -> R? {
+    @inlinable
+    public mutating func withForcedContiguousMutableStorage<R>(_ body: (inout UnsafeMutableBufferPointer<Element>) -> R) throws -> R? {
         // https://forums.swift.org/t/se-0256-introduce-mutable-contiguouscollection-protocol/22569/7
         if let result = withContiguousMutableStorageIfAvailable(body) {
             return result

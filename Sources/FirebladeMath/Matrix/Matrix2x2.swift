@@ -33,13 +33,13 @@ public struct Matrix2x2<Storage: Storage2x2Protocol>: RandomAccessCollection, Mu
         storage.index(before: i)
     }
 
-    @usableFromInline init(storage: Storage) {
+    @usableFromInline
+    init(storage: Storage) {
         self.storage = storage
     }
 
     /// The 2x2 identity matrix.
-    @inlinable
-    public static var identity: Matrix2x2<Storage> {
+    @inlinable public static var identity: Matrix2x2<Storage> {
         Matrix2x2(diagonal: Vector(repeating: 1))
     }
 
@@ -109,7 +109,8 @@ public struct Matrix2x2<Storage: Storage2x2Protocol>: RandomAccessCollection, Mu
     }
 
     /// Provides access to the underlying memory as a contiguous buffer.
-    @inlinable public func withForcedContiguousStorage<R>(_ body: (UnsafeBufferPointer<Element>) -> R) throws -> R? {
+    @inlinable
+    public func withForcedContiguousStorage<R>(_ body: (UnsafeBufferPointer<Element>) -> R) throws -> R? {
         // https://forums.swift.org/t/se-0256-introduce-mutable-contiguouscollection-protocol/22569/7
         if let result = withContiguousStorageIfAvailable(body) {
             return result
@@ -119,7 +120,8 @@ public struct Matrix2x2<Storage: Storage2x2Protocol>: RandomAccessCollection, Mu
     }
 
     /// Provides mutable access to the underlying memory as a contiguous buffer.
-    @inlinable public mutating func withForcedContiguousMutableStorage<R>(_ body: (inout UnsafeMutableBufferPointer<Element>) -> R) throws -> R? {
+    @inlinable
+    public mutating func withForcedContiguousMutableStorage<R>(_ body: (inout UnsafeMutableBufferPointer<Element>) -> R) throws -> R? {
         // https://forums.swift.org/t/se-0256-introduce-mutable-contiguouscollection-protocol/22569/7
         if let result = withContiguousMutableStorageIfAvailable(body) {
             return result

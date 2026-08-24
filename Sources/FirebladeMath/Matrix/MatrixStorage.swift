@@ -11,9 +11,8 @@ public protocol Storage4x4Protocol: RandomAccessCollection, MutableCollection, R
     /// Creates a new storage with the specified diagonal values.
     init(diagonal: Column)
 
-    // swiftlint:disable large_tuple
     /// The column vectors of the matrix.
-    var columns: (Column, Column, Column, Column) { get }
+    var columns: (Column, Column, Column, Column) { get } // swiftlint:disable:this large_tuple
 
     /// Accesses the value at the specified column and row.
     subscript(column: Int, row: Int) -> Value { get set }
@@ -65,7 +64,7 @@ public protocol Storage3x3Protocol: RandomAccessCollection, MutableCollection, R
     init(diagonal: Column)
 
     /// The column vectors of the matrix.
-    var columns: (Column, Column, Column) { get }
+    var columns: (Column, Column, Column) { get } // swiftlint:disable:this large_tuple
 
     /// Accesses the value at the specified column and row.
     subscript(column: Int, row: Int) -> Value { get set }

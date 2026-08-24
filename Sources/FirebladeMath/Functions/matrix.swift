@@ -56,15 +56,24 @@ public func matrix4x4(from quat: Quat4f) -> Mat4x4f {
     #else
     let v = Vec4f(quat)
     return Mat4x4f(
-        Vec4f(1 - 2 * (v.y * v.y + v.z * v.z),
-              2 * (v.x * v.y + v.z * v.w),
-              2 * (v.x * v.z - v.y * v.w), 0),
-        Vec4f(2 * (v.x * v.y - v.z * v.w),
-              1 - 2 * (v.z * v.z + v.x * v.x),
-              2 * (v.y * v.z + v.x * v.w), 0),
-        Vec4f(2 * (v.z * v.x + v.y * v.w),
-              2 * (v.y * v.z - v.x * v.w),
-              1 - 2 * (v.y * v.y + v.x * v.x), 0),
+        Vec4f(
+            1 - 2 * (v.y * v.y + v.z * v.z),
+            2 * (v.x * v.y + v.z * v.w),
+            2 * (v.x * v.z - v.y * v.w),
+            0
+        ),
+        Vec4f(
+            2 * (v.x * v.y - v.z * v.w),
+            1 - 2 * (v.z * v.z + v.x * v.x),
+            2 * (v.y * v.z + v.x * v.w),
+            0
+        ),
+        Vec4f(
+            2 * (v.z * v.x + v.y * v.w),
+            2 * (v.y * v.z - v.x * v.w),
+            1 - 2 * (v.y * v.y + v.x * v.x),
+            0
+        ),
         Vec4f(0, 0, 0, 1)
     )
     #endif
@@ -79,15 +88,24 @@ public func matrix4x4(from quat: Quat4d) -> Mat4x4d {
     #else
     let v = Vec4d(quat)
     return Mat4x4d(
-        Vec4d(1 - 2 * (v.y * v.y + v.z * v.z),
-              2 * (v.x * v.y + v.z * v.w),
-              2 * (v.x * v.z - v.y * v.w), 0),
-        Vec4d(2 * (v.x * v.y - v.z * v.w),
-              1 - 2 * (v.z * v.z + v.x * v.x),
-              2 * (v.y * v.z + v.x * v.w), 0),
-        Vec4d(2 * (v.z * v.x + v.y * v.w),
-              2 * (v.y * v.z - v.x * v.w),
-              1 - 2 * (v.y * v.y + v.x * v.x), 0),
+        Vec4d(
+            1 - 2 * (v.y * v.y + v.z * v.z),
+            2 * (v.x * v.y + v.z * v.w),
+            2 * (v.x * v.z - v.y * v.w),
+            0
+        ),
+        Vec4d(
+            2 * (v.x * v.y - v.z * v.w),
+            1 - 2 * (v.z * v.z + v.x * v.x),
+            2 * (v.y * v.z + v.x * v.w),
+            0
+        ),
+        Vec4d(
+            2 * (v.z * v.x + v.y * v.w),
+            2 * (v.y * v.z - v.x * v.w),
+            1 - 2 * (v.y * v.y + v.x * v.x),
+            0
+        ),
         Vec4d(0, 0, 0, 1)
     )
     #endif

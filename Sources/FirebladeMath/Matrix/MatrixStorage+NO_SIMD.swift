@@ -97,6 +97,7 @@ public struct Storage3x3<Value: StorageScalar>: Storage3x3Protocol {
     @usableFromInline var column1: Column
     @usableFromInline var column2: Column
 
+    // swiftlint:disable:next large_tuple
     @inlinable public var columns: (Column, Column, Column) {
         (column0, column1, column2)
     }
@@ -189,14 +190,14 @@ public struct Storage4x4<Value: StorageScalar>: Storage4x4Protocol {
     public typealias Storage2x2Ref = Storage2x2<Value>
     public typealias Storage3x3Ref = Storage3x3<Value>
 
-    // TODO: we could use SIMD16<Value> here
+    // NOTE: we could use SIMD16<Value> here
 
     @usableFromInline var column0: Column
     @usableFromInline var column1: Column
     @usableFromInline var column2: Column
     @usableFromInline var column3: Column
 
-    // swiftlint:disable large_tuple
+    // swiftlint:disable:next large_tuple
     @inlinable public var columns: (Column, Column, Column, Column) {
         (column0, column1, column2, column3)
     }
