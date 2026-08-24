@@ -64,7 +64,7 @@ public func + (lhs: Quat4f, rhs: Quat4f) -> Quat4f {
 /// - Returns: The difference of the two quaternions.
 @inlinable
 public func - (lhs: Quat4f, rhs: Quat4f) -> Quat4f {
-    FirebladeMath.subtrFirebladeMath.act(lhs, rhs)
+    FirebladeMath.subtract(lhs, rhs)
 }
 
 /// Multiplies a scalar by a quaternion.
@@ -133,5 +133,5 @@ public func + (lhs: Quat4d, rhs: Quat4d) -> Quat4d {
 /// - Returns: The difference of the two quaternions.
 @inlinable
 public func - (lhs: Quat4d, rhs: Quat4d) -> Quat4d {
-    FirebladeMath.subtrFirebladeMath.act(lhs, rhs)
+    FirebladeMath.subtract(lhs, rhs)
 }
