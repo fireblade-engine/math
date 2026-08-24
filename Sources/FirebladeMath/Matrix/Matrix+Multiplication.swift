@@ -1,4 +1,4 @@
-// swiftlint:disable:next file_length
+// swiftlint:disable file_length
 #if FRB_MATH_USE_SIMD
 import func simd.simd_mul
 #endif

@@ -101,8 +101,7 @@ public struct Matrix3x3<Storage: Storage3x3Protocol>: RandomAccessCollection, Mu
     }
 
     /// The column vectors of the matrix.
-    // swiftlint:disable:next large_tuple
-    @inlinable public var columns: (Vector, Vector, Vector) {
+    @inlinable public var columns: (Vector, Vector, Vector) { // swiftlint:disable:this large_tuple
         storage.columns
     }
 
