@@ -59,14 +59,12 @@ extension Mat4x4f {
 
     /// Orthographic projection matrix in right-handed coordinates.
     /// - Parameters:
-    ///   - left: The left boundary.
-    ///   - right: The right boundary.
-    ///   - top: The top boundary.
-    ///   - bottom: The bottom boundary.
+    ///   - bounds: Tuple containing left, right, top, and bottom boundaries.
     ///   - zNear: The distance to the near clipping plane.
     ///   - zFar: The distance to the far clipping plane.
     /// - Returns: The orthographic projection matrix.
-    public static func orthographicRH(left: Float, right: Float, top: Float, bottom: Float, zNear: Float, zFar: Float) -> Self {
+    public static func orthographicRH(bounds: (left: Float, right: Float, top: Float, bottom: Float), zNear: Float, zFar: Float) -> Self {
+        let (left, right, top, bottom) = bounds
         let m00: Float = 2.0 / (right - left)
         let m03: Float = (left + right) / (left - right)
         let m11: Float = 2.0 / (top - bottom)
@@ -85,14 +83,12 @@ extension Mat4x4f {
 
     /// Orthographic projection matrix in left-handed coordinates.
     /// - Parameters:
-    ///   - left: The left boundary.
-    ///   - right: The right boundary.
-    ///   - top: The top boundary.
-    ///   - bottom: The bottom boundary.
+    ///   - bounds: Tuple containing left, right, top, and bottom boundaries.
     ///   - zNear: The distance to the near clipping plane.
     ///   - zFar: The distance to the far clipping plane.
     /// - Returns: The orthographic projection matrix.
-    public static func orthographicLH(left: Float, right: Float, top: Float, bottom: Float, zNear: Float, zFar: Float) -> Self {
+    public static func orthographicLH(bounds: (left: Float, right: Float, top: Float, bottom: Float), zNear: Float, zFar: Float) -> Self {
+        let (left, right, top, bottom) = bounds
         let m00: Float = 2.0 / (right - left)
         let m03: Float = (left + right) / (left - right)
         let m11: Float = 2.0 / (top - bottom)
@@ -167,14 +163,12 @@ extension Mat4x4d {
 
     /// Orthographic projection matrix in right-handed coordinates.
     /// - Parameters:
-    ///   - left: The left boundary.
-    ///   - right: The right boundary.
-    ///   - top: The top boundary.
-    ///   - bottom: The bottom boundary.
+    ///   - bounds: Tuple containing left, right, top, and bottom boundaries.
     ///   - zNear: The distance to the near clipping plane.
     ///   - zFar: The distance to the far clipping plane.
     /// - Returns: The orthographic projection matrix.
-    public static func orthographicRH(left: Double, right: Double, top: Double, bottom: Double, zNear: Double, zFar: Double) -> Self {
+    public static func orthographicRH(bounds: (left: Double, right: Double, top: Double, bottom: Double), zNear: Double, zFar: Double) -> Self {
+        let (left, right, top, bottom) = bounds
         let m00: Double = 2.0 / (right - left)
         let m03: Double = (left + right) / (left - right)
         let m11: Double = 2.0 / (top - bottom)
@@ -193,14 +187,12 @@ extension Mat4x4d {
 
     /// Orthographic projection matrix in left-handed coordinates.
     /// - Parameters:
-    ///   - left: The left boundary.
-    ///   - right: The right boundary.
-    ///   - top: The top boundary.
-    ///   - bottom: The bottom boundary.
+    ///   - bounds: Tuple containing left, right, top, and bottom boundaries.
     ///   - zNear: The distance to the near clipping plane.
     ///   - zFar: The distance to the far clipping plane.
     /// - Returns: The orthographic projection matrix.
-    public static func orthographicLH(left: Double, right: Double, top: Double, bottom: Double, zNear: Double, zFar: Double) -> Self {
+    public static func orthographicLH(bounds: (left: Double, right: Double, top: Double, bottom: Double), zNear: Double, zFar: Double) -> Self {
+        let (left, right, top, bottom) = bounds
         let m00: Double = 2.0 / (right - left)
         let m03: Double = (left + right) / (left - right)
         let m11: Double = 2.0 / (top - bottom)

@@ -337,10 +337,7 @@ struct Mat4x4fTests {
             -0.000_000, -0.000_000, -1.0000101e-05, 1.000_000
         ]
 
-        let mat = Mat4x4f.orthographicRH(left: -width / 2.0,
-                                         right: width / 2.0,
-                                         top: height / 2.0,
-                                         bottom: -height / 2.0,
+        let mat = Mat4x4f.orthographicRH(bounds: (-width / 2.0, width / 2.0, height / 2.0, -height / 2.0),
                                          zNear: 0.001,
                                          zFar: 100.0)
 
