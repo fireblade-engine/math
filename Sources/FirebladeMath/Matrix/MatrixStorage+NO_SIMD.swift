@@ -97,6 +97,7 @@ public struct Storage3x3<Value: StorageScalar>: Storage3x3Protocol {
     @usableFromInline var column1: Column
     @usableFromInline var column2: Column
 
+    // swiftlint:disable:next large_tuple
     @inlinable public var columns: (Column, Column, Column) {
         (column0, column1, column2)
     }

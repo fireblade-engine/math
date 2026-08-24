@@ -45,8 +45,8 @@ Total Violations: **113** across 101 files.
 - [x] `Sources/FirebladeMath/Functions/sign.swift` (2 violations)
 
 ### 10. Large Tuples (`large_tuple`) - 2 violations
-- [ ] `Sources/FirebladeMath/Matrix/Matrix3x3.swift` (1 violation)
-- [ ] `Sources/FirebladeMath/Matrix/MatrixStorage+NO_SIMD.swift` (1 violation)
+- [x] `Sources/FirebladeMath/Matrix/Matrix3x3.swift` (1 violation)
+- [x] `Sources/FirebladeMath/Matrix/MatrixStorage+NO_SIMD.swift` (1 violation)
 
 ### 11. Variable Whitespace (`let_var_whitespace`) - 1 violation
 - [x] `Sources/FirebladeMath/Quat/Quat.swift` (1 violation)
