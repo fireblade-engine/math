@@ -31,7 +31,7 @@ Total Violations: **113** across 101 files.
 - [ ] `Sources/FirebladeMath/Functions/matrix.swift` (6 violations)
 
 ### 6. Computed Accessors Order (`computed_accessors_order`) - 4 violations
-- [ ] `Sources/FirebladeMath/Quat/QuaternionStorage+NO_SIMD.swift` (4 violations)
+- [x] `Sources/FirebladeMath/Quat/QuaternionStorage+NO_SIMD.swift` (4 violations)
 
 ### 7. Function Parameter Count (`function_parameter_count`) - 4 violations
 - [ ] `Sources/FirebladeMath/Matrix/Matrix4x4+Projections.swift` (4 violations)
