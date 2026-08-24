@@ -25,7 +25,7 @@ Total Violations: **113** across 101 files.
 - [ ] `Sources/FirebladeMath/Matrix/Mat4x4f.swift` (1 violation)
 
 ### 4. Opening Brace Spacing (`opening_brace`) - 6 violations
-- [ ] `Sources/FirebladeMath/Matrix/MatrixStorage+SIMD.swift` (6 violations)
+- [x] `Sources/FirebladeMath/Matrix/MatrixStorage+SIMD.swift` (6 violations)
 
 ### 5. Multiline Arguments (`multiline_arguments`) - 6 violations
 - [ ] `Sources/FirebladeMath/Functions/matrix.swift` (6 violations)

@@ -11,8 +11,7 @@ import struct simd.matrix.simd_float4x4
 /// Conformance to matrix storage protocols.
 extension simd_float2x2: Storage2x2Protocol, @retroactive @unchecked Sendable, @retroactive RandomAccessCollection, @retroactive MutableCollection, @retroactive RangeReplaceableCollection,
     @retroactive BidirectionalCollection, @retroactive Collection,
-    @retroactive Sequence
-{
+    @retroactive Sequence {
     /// The element type of the matrix storage.
     public typealias Element = Float
     /// The column vector type of the matrix.
@@ -59,8 +58,7 @@ extension simd_float2x2: Storage2x2Protocol, @retroactive @unchecked Sendable, @
 /// Conformance to matrix storage protocols.
 extension simd_double2x2: Storage2x2Protocol, @retroactive @unchecked Sendable, @retroactive RandomAccessCollection, @retroactive MutableCollection, @retroactive RangeReplaceableCollection,
     @retroactive BidirectionalCollection, @retroactive Collection,
-    @retroactive Sequence
-{
+    @retroactive Sequence {
     /// The element type of the matrix storage.
     public typealias Element = Double
     /// The column vector type of the matrix.
@@ -109,8 +107,7 @@ extension simd_double2x2: Storage2x2Protocol, @retroactive @unchecked Sendable, 
 /// Conformance to matrix storage protocols.
 extension simd_float3x3: Storage3x3Protocol, @retroactive @unchecked Sendable, @retroactive RandomAccessCollection, @retroactive MutableCollection, @retroactive RangeReplaceableCollection,
     @retroactive BidirectionalCollection, @retroactive Collection,
-    @retroactive Sequence
-{
+    @retroactive Sequence {
     /// The element type of the matrix storage.
     public typealias Element = Float
     /// The column vector type of the matrix.
@@ -163,8 +160,7 @@ extension simd_float3x3: Storage3x3Protocol, @retroactive @unchecked Sendable, @
 /// Conformance to matrix storage protocols.
 extension simd_double3x3: Storage3x3Protocol, @retroactive @unchecked Sendable, @retroactive RandomAccessCollection, @retroactive MutableCollection, @retroactive RangeReplaceableCollection,
     @retroactive BidirectionalCollection, @retroactive Collection,
-    @retroactive Sequence
-{
+    @retroactive Sequence {
     /// The element type of the matrix storage.
     public typealias Element = Double
     /// The column vector type of the matrix.
@@ -219,8 +215,7 @@ extension simd_double3x3: Storage3x3Protocol, @retroactive @unchecked Sendable, 
 /// Conformance to matrix storage protocols.
 extension simd_float4x4: Storage4x4Protocol, @retroactive @unchecked Sendable, @retroactive RandomAccessCollection, @retroactive MutableCollection, @retroactive RangeReplaceableCollection,
     @retroactive BidirectionalCollection, @retroactive Collection,
-    @retroactive Sequence
-{
+    @retroactive Sequence {
     /// The element type of the matrix storage.
     public typealias Element = Float
     /// The column vector type of the matrix.
@@ -279,8 +274,7 @@ extension simd_float4x4: Storage4x4Protocol, @retroactive @unchecked Sendable, @
 /// Conformance to matrix storage protocols.
 extension simd_double4x4: Storage4x4Protocol, @retroactive @unchecked Sendable, @retroactive RandomAccessCollection, @retroactive MutableCollection, @retroactive RangeReplaceableCollection,
     @retroactive BidirectionalCollection, @retroactive Collection,
-    @retroactive Sequence
-{
+    @retroactive Sequence {
     /// The element type of the matrix storage.
     public typealias Element = Double
     /// The column vector type of the matrix.
