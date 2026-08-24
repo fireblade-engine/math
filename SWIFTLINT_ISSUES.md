@@ -55,4 +55,4 @@ Total Violations: **113** across 101 files.
 - [ ] `Sources/FirebladeMath/Matrix/Matrix+Multiplication.swift` (1 violation)
 
 ### 13. TODO Comment (`todo`) - 1 violation
-- [ ] `Sources/FirebladeMath/Matrix/MatrixStorage+NO_SIMD.swift` (1 violation)
+- [x] `Sources/FirebladeMath/Matrix/MatrixStorage+NO_SIMD.swift` (1 violation)

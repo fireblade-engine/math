@@ -189,7 +189,7 @@ public struct Storage4x4<Value: StorageScalar>: Storage4x4Protocol {
     public typealias Storage2x2Ref = Storage2x2<Value>
     public typealias Storage3x3Ref = Storage3x3<Value>
 
-    // TODO: we could use SIMD16<Value> here
+    // NOTE: we could use SIMD16<Value> here
 
     @usableFromInline var column0: Column
     @usableFromInline var column1: Column
