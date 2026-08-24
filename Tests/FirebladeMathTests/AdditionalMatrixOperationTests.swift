@@ -192,10 +192,10 @@ import Testing
         _ = Mat4x4d.perspectiveLH(fovy: 1.0, aspect: 1.0, zNear: 0.1, zFar: 10.0)
 
         // Ortho
-        _ = Mat4x4f.orthographicRH(bounds: (-1, 1, 1, -1), zNear: 0.1, zFar: 10.0)
-        _ = Mat4x4d.orthographicRH(bounds: (-1, 1, 1, -1), zNear: 0.1, zFar: 10.0)
-        _ = Mat4x4f.orthographicLH(bounds: (-1, 1, 1, -1), zNear: 0.1, zFar: 10.0)
-        _ = Mat4x4d.orthographicLH(bounds: (-1, 1, 1, -1), zNear: 0.1, zFar: 10.0)
+        _ = Mat4x4f.orthographicRH(left: -1, right: 1, top: 1, bottom: -1, zNear: 0.1, zFar: 10.0)
+        _ = Mat4x4d.orthographicRH(left: -1, right: 1, top: 1, bottom: -1, zNear: 0.1, zFar: 10.0)
+        _ = Mat4x4f.orthographicLH(left: -1, right: 1, top: 1, bottom: -1, zNear: 0.1, zFar: 10.0)
+        _ = Mat4x4d.orthographicLH(left: -1, right: 1, top: 1, bottom: -1, zNear: 0.1, zFar: 10.0)
 
         // LookAt
         _ = Mat4x4f.look(from: [0, 0, 1], at: [0, 0, 0], up: [0, 1, 0])
