@@ -3,6 +3,7 @@
 ///   - lhs: The scalar value.
 ///   - rhs: The quaternion.
 /// - Returns: The scaled quaternion.
+@inlinable
 public func * (lhs: Float, rhs: Quat4f) -> Quat4f {
     multiply(lhs, rhs)
 }
@@ -12,6 +13,7 @@ public func * (lhs: Float, rhs: Quat4f) -> Quat4f {
 ///   - lhs: The quaternion.
 ///   - rhs: The scalar value.
 /// - Returns: The scaled quaternion.
+@inlinable
 public func * (lhs: Quat4f, rhs: Float) -> Quat4f {
     multiply(lhs, rhs)
 }
@@ -21,6 +23,7 @@ public func * (lhs: Quat4f, rhs: Float) -> Quat4f {
 ///   - lhs: The left-hand side quaternion.
 ///   - rhs: The right-hand side quaternion.
 /// - Returns: The product of the two quaternions.
+@inlinable
 public func * (lhs: Quat4f, rhs: Quat4f) -> Quat4f {
     multiply(lhs, rhs)
 }
@@ -30,6 +33,7 @@ public func * (lhs: Quat4f, rhs: Quat4f) -> Quat4f {
 ///   - lhs: The quaternion.
 ///   - rhs: The vector to rotate.
 /// - Returns: The rotated vector.
+@inlinable
 public func * (lhs: Quat4f, rhs: Vec3f) -> Vec3f {
     act(lhs, rhs)
 }
@@ -38,6 +42,7 @@ public func * (lhs: Quat4f, rhs: Vec3f) -> Vec3f {
 /// - Parameters:
 ///   - lhs: The left-hand side quaternion to be modified.
 ///   - rhs: The right-hand side quaternion.
+@inlinable
 public func *= (lhs: inout Quat4f, rhs: Quat4f) {
     lhs = multiply(lhs, rhs)
 }
@@ -47,6 +52,7 @@ public func *= (lhs: inout Quat4f, rhs: Quat4f) {
 ///   - lhs: The left-hand side quaternion.
 ///   - rhs: The right-hand side quaternion.
 /// - Returns: The sum of the two quaternions.
+@inlinable
 public func + (lhs: Quat4f, rhs: Quat4f) -> Quat4f {
     add(lhs, rhs)
 }
@@ -56,6 +62,7 @@ public func + (lhs: Quat4f, rhs: Quat4f) -> Quat4f {
 ///   - lhs: The left-hand side quaternion.
 ///   - rhs: The right-hand side quaternion.
 /// - Returns: The difference of the two quaternions.
+@inlinable
 public func - (lhs: Quat4f, rhs: Quat4f) -> Quat4f {
     subtract(lhs, rhs)
 }
@@ -65,6 +72,7 @@ public func - (lhs: Quat4f, rhs: Quat4f) -> Quat4f {
 ///   - lhs: The scalar value.
 ///   - rhs: The quaternion.
 /// - Returns: The scaled quaternion.
+@inlinable
 public func * (lhs: Double, rhs: Quat4d) -> Quat4d {
     multiply(lhs, rhs)
 }
@@ -74,6 +82,7 @@ public func * (lhs: Double, rhs: Quat4d) -> Quat4d {
 ///   - lhs: The quaternion.
 ///   - rhs: The scalar value.
 /// - Returns: The scaled quaternion.
+@inlinable
 public func * (lhs: Quat4d, rhs: Double) -> Quat4d {
     multiply(lhs, rhs)
 }
@@ -83,6 +92,7 @@ public func * (lhs: Quat4d, rhs: Double) -> Quat4d {
 ///   - lhs: The left-hand side quaternion.
 ///   - rhs: The right-hand side quaternion.
 /// - Returns: The product of the two quaternions.
+@inlinable
 public func * (lhs: Quat4d, rhs: Quat4d) -> Quat4d {
     multiply(lhs, rhs)
 }
@@ -92,6 +102,7 @@ public func * (lhs: Quat4d, rhs: Quat4d) -> Quat4d {
 ///   - lhs: The quaternion.
 ///   - rhs: The vector to rotate.
 /// - Returns: The rotated vector.
+@inlinable
 public func * (lhs: Quat4d, rhs: Vec3d) -> Vec3d {
     act(lhs, rhs)
 }
@@ -100,6 +111,7 @@ public func * (lhs: Quat4d, rhs: Vec3d) -> Vec3d {
 /// - Parameters:
 ///   - lhs: The left-hand side quaternion to be modified.
 ///   - rhs: The right-hand side quaternion.
+@inlinable
 public func *= (lhs: inout Quat4d, rhs: Quat4d) {
     lhs = multiply(lhs, rhs)
 }
@@ -109,6 +121,7 @@ public func *= (lhs: inout Quat4d, rhs: Quat4d) {
 ///   - lhs: The left-hand side quaternion.
 ///   - rhs: The right-hand side quaternion.
 /// - Returns: The sum of the two quaternions.
+@inlinable
 public func + (lhs: Quat4d, rhs: Quat4d) -> Quat4d {
     add(lhs, rhs)
 }
@@ -118,6 +131,7 @@ public func + (lhs: Quat4d, rhs: Quat4d) -> Quat4d {
 ///   - lhs: The left-hand side quaternion.
 ///   - rhs: The right-hand side quaternion.
 /// - Returns: The difference of the two quaternions.
+@inlinable
 public func - (lhs: Quat4d, rhs: Quat4d) -> Quat4d {
     subtract(lhs, rhs)
 }
