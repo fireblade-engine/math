@@ -3,12 +3,8 @@
 *.DS_Store
 build*/
 _diagnostics/
-CompilerOptimizationReport.md
-CompilerStatsAndOptimizationTrack.md
-ScalarMaxMinAnalysis.md
 # conductor/
 gha-creds-*.json
-offsetof
 xcuserdata/
 contents.xcworkspacedata
 conductor
