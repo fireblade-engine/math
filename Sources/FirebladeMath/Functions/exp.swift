@@ -1,9 +1,9 @@
-import Foundation
-
 #if canImport(Darwin)
 import Darwin
 #elseif canImport(Glibc)
 import Glibc
+#else
+import Foundation
 #endif
 
 ///  Computes the e (Euler's number, 2.7182818) raised to the given power arg.
