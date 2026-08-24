@@ -12,6 +12,7 @@ import Foundation
 /// - Returns: If no errors occur, the tangent of arg (tan(arg)) is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
+@inlinable
 public func tan(_ angleRad: Float) -> Float {
     #if canImport(Darwin)
     return Darwin.tanf(angleRad)
@@ -28,6 +29,7 @@ public func tan(_ angleRad: Float) -> Float {
 /// - Returns: If no errors occur, the tangent of arg (tan(arg)) is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
+@inlinable
 public func tan(_ angleRad: Double) -> Double {
     #if canImport(Darwin)
     return Darwin.tan(angleRad)
