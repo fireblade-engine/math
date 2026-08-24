@@ -34,7 +34,7 @@ Total Violations: **113** across 101 files.
 - [x] `Sources/FirebladeMath/Quat/QuaternionStorage+NO_SIMD.swift` (4 violations)
 
 ### 7. Function Parameter Count (`function_parameter_count`) - 4 violations
-- [ ] `Sources/FirebladeMath/Matrix/Matrix4x4+Projections.swift` (4 violations)
+- [x] `Sources/FirebladeMath/Matrix/Matrix4x4+Projections.swift` (4 violations)
 
 ### 8. Blanket Disable Commands (`blanket_disable_command`) - 3 violations
 - [x] `Sources/FirebladeMath/Matrix/MatrixStorage.swift` (1 violation)
