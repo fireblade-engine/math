@@ -12,6 +12,9 @@ extension Quat4f {
     //      return Quat4f(q1, q2, q3, q4)
     //  }
 
+    /// Creates a quaternion from Euler angles using 1-2-3 (X-Y-Z) rotation sequence.
+    /// - Parameter euler: Euler angles in radians.
+    /// - Returns: A quaternion representing the rotation.
     public static func fromEulerAngles_123(_ euler: Vec3f) -> Quat4f {
         let c1 = cos(euler.x / 2.0)
         let s1 = sin(euler.x / 2.0)
@@ -41,6 +44,9 @@ extension Quat4f {
     //     return Quat4f(q1, q2, q3, q4)
     // }
 
+    /// Creates a quaternion from Euler angles using 1-3-2 (X-Z-Y) rotation sequence.
+    /// - Parameter euler: Euler angles in radians.
+    /// - Returns: A quaternion representing the rotation.
     public static func fromEulerAngles_132(_ euler: Vec3f) -> Quat4f {
         let c1 = cos(euler.x / 2.0)
         let s1 = sin(euler.x / 2.0)
@@ -70,6 +76,9 @@ extension Quat4f {
     //      return Quat4f(q1, q2, q3, q4)
     //  }
 
+    /// Creates a quaternion from Euler angles using 2-1-3 (Y-X-Z) rotation sequence.
+    /// - Parameter euler: Euler angles in radians.
+    /// - Returns: A quaternion representing the rotation.
     public static func fromEulerAngles_213(_ euler: Vec3f) -> Quat4f {
         let c1 = cos(euler.x / 2.0)
         let s1 = sin(euler.x / 2.0)
@@ -86,6 +95,9 @@ extension Quat4f {
         return Quat4f(q1, q2, q3, q4)
     }
 
+    /// Creates a quaternion from Euler angles using 2-3-1 (Y-Z-X) rotation sequence.
+    /// - Parameter euler: Euler angles in radians.
+    /// - Returns: A quaternion representing the rotation.
     public static func fromEulerAngles_231(_ euler: Vec3f) -> Quat4f {
         let c1 = cos(euler.x / 2.0)
         let s1 = sin(euler.x / 2.0)
@@ -115,6 +127,9 @@ extension Quat4f {
     //     return Quat4f(q1, q2, q3, q4)
     // }
 
+    /// Creates a quaternion from Euler angles using 3-1-2 (Z-X-Y) rotation sequence.
+    /// - Parameter euler: Euler angles in radians.
+    /// - Returns: A quaternion representing the rotation.
     public static func fromEulerAngles_312(_ euler: Vec3f) -> Quat4f {
         let c1 = cos(euler.x / 2.0)
         let s1 = sin(euler.x / 2.0)
@@ -144,6 +159,9 @@ extension Quat4f {
     //     return Quat4f(q1, q2, q3, q4)
     // }
 
+    /// Creates a quaternion from Euler angles using 3-2-1 (Z-Y-X) rotation sequence.
+    /// - Parameter euler: Euler angles in radians.
+    /// - Returns: A quaternion representing the rotation.
     public static func fromEulerAngles_321(_ euler: Vec3f) -> Quat4f {
         let c1 = cos(euler.x / 2.0)
         let s1 = sin(euler.x / 2.0)
@@ -160,23 +178,32 @@ extension Quat4f {
         return Quat4f(q1, q2, q3, q4)
     }
 
+    /// Creates a quaternion from pitch, yaw, and roll angles in radians.
+    /// - Parameters:
+    ///   - pitch: Rotation around the X axis in radians.
+    ///   - yaw: Rotation around the Y axis in radians.
+    ///   - roll: Rotation around the Z axis in radians.
     @inlinable
     public init(pitch: Float, yaw: Float, roll: Float) {
         self = Quat4f.fromEulerAngles_321(Vec3f(pitch, yaw, roll))
     }
 
+    /// The Euler angles (pitch, yaw, roll) in radians.
     @inlinable public var eulerAngles: Vec3f {
         quaternionToEulerAngles_321(self)
     }
 
+    /// The pitch angle in radians (rotation around the X axis).
     @inlinable public var pitch: Float {
         eulerAngles.x
     }
 
+    /// The yaw angle in radians (rotation around the Y axis).
     @inlinable public var yaw: Float {
         eulerAngles.y
     }
 
+    /// The roll angle in radians (rotation around the Z axis).
     @inlinable public var roll: Float {
         eulerAngles.z
     }
@@ -208,6 +235,9 @@ extension Quat4f {
 //    return Vec3f(e1, e2, e3)
 // }
 
+/// Converts a quaternion to Euler angles using 1-2-3 (X-Y-Z) rotation sequence.
+/// - Parameter quat: The input quaternion.
+/// - Returns: The Euler angles in radians.
 public func quaternionToEulerAngles_123(_ quat: Quat4f) -> Vec3f {
     let q0 = quat.w
     let q1 = quat.z
@@ -231,6 +261,9 @@ public func quaternionToEulerAngles_123(_ quat: Quat4f) -> Vec3f {
 //    return Vec3f(e1, e2, e3)
 // }
 
+/// Converts a quaternion to Euler angles using 1-3-2 (X-Z-Y) rotation sequence.
+/// - Parameter quat: The input quaternion.
+/// - Returns: The Euler angles in radians.
 public func quaternionToEulerAngles_132(_ quat: Quat4f) -> Vec3f {
     let q0 = quat.w
     let q1 = quat.z
@@ -255,6 +288,9 @@ public func quaternionToEulerAngles_132(_ quat: Quat4f) -> Vec3f {
 //    return Vec3f(e1, e2, e3)
 // }
 
+/// Converts a quaternion to Euler angles using 2-1-3 (Y-X-Z) rotation sequence.
+/// - Parameter quat: The input quaternion.
+/// - Returns: The Euler angles in radians.
 public func quaternionToEulerAngles_213(_ quat: Quat4f) -> Vec3f {
     let q0 = quat.w
     let q1 = quat.z
@@ -268,6 +304,9 @@ public func quaternionToEulerAngles_213(_ quat: Quat4f) -> Vec3f {
     return Vec3f(e1, e2, e3)
 }
 
+/// Converts a quaternion to Euler angles using 2-3-1 (Y-Z-X) rotation sequence.
+/// - Parameter quat: The input quaternion.
+/// - Returns: The Euler angles in radians.
 public func quaternionToEulerAngles_231(_ quat: Quat4f) -> Vec3f {
     let q0 = quat.w
     let q1 = quat.z
@@ -292,6 +331,9 @@ public func quaternionToEulerAngles_231(_ quat: Quat4f) -> Vec3f {
 //    return Vec3f(e1, e2, e3)
 // }
 
+/// Converts a quaternion to Euler angles using 3-1-2 (Z-X-Y) rotation sequence.
+/// - Parameter quat: The input quaternion.
+/// - Returns: The Euler angles in radians.
 public func quaternionToEulerAngles_312(_ quat: Quat4f) -> Vec3f {
     let q0 = quat.w
     let q1 = quat.z
@@ -316,6 +358,9 @@ public func quaternionToEulerAngles_312(_ quat: Quat4f) -> Vec3f {
 //    return Vec3f(e1, e2, e3)
 // }
 
+/// Converts a quaternion to Euler angles using 3-2-1 (Z-Y-X) rotation sequence.
+/// - Parameter quat: The input quaternion.
+/// - Returns: The Euler angles in radians.
 public func quaternionToEulerAngles_321(_ quat: Quat4f) -> Vec3f {
     let q0 = quat.w
     let q1 = quat.z
