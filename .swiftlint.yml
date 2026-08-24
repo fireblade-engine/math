@@ -17,7 +17,7 @@ opt_in_rules:
   #- file_name
   #- file_types_order
   #- indentation_width
-  #- missing_docs
+  - missing_docs
   #- multiline_arguments_brackets
   #- multiline_literal_brackets
   #- multiline_parameters_brackets

@@ -14,6 +14,10 @@ public func radians(_ degrees: Double) -> Double {
     degrees * kDegreeToRadians64
 }
 
+/// Converts degress to radians.
+///
+/// - Parameter degrees: an angle vector (in degrees)
+/// - Returns: the argument converted to radians.
 @inline(__always)
 public func radians(_ degrees: Vec3f) -> Vec3f {
     Vec3f(x: FirebladeMath.radians(degrees.x),
