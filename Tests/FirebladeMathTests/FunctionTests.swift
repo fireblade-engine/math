@@ -9,7 +9,9 @@ import FirebladeMath
 import Testing
 
 struct FunctionTests {
-    @Test func absFunc() {
+    @Test
+    @available(*, deprecated, message: "Testing deprecated API")
+    func absFunc() {
         #expect(FirebladeMath.abs(Double(-123)) == 123)
         #expect(FirebladeMath.abs(Float(-123)) == 123)
     }
@@ -139,11 +141,15 @@ struct FunctionTests {
         #expect(FirebladeMath.log10(Double(123)) == 2.089905111439398)
         #expect(FirebladeMath.log10(Float(123)) == 2.089905)
     }
-    @Test func maxFunc() {
+    @Test
+    @available(*, deprecated, message: "Testing deprecated API")
+    func maxFunc() {
         #expect(FirebladeMath.max(Double(123), Double(534)) == 534)
         #expect(FirebladeMath.max(Float(123), Float(33)) == 123)
     }
-    @Test func minFunc() {
+    @Test
+    @available(*, deprecated, message: "Testing deprecated API")
+    func minFunc() {
         #expect(FirebladeMath.min(Double(123), Double(22)) == 22)
         #expect(FirebladeMath.min(Float(123), Float(66)) == 66)
     }

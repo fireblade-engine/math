@@ -26,7 +26,7 @@ public func clamp(_ x: Double, _ minVal: Double, _ maxVal: Double) -> Double {
     #if FRB_MATH_USE_SIMD
     return simd_clamp(x, minVal, maxVal)
     #else
-    return FirebladeMath.min(FirebladeMath.max(x, minVal), maxVal)
+    return Swift.min(Swift.max(x, minVal), maxVal)
     #endif
 }
 
@@ -42,7 +42,7 @@ public func clamp(_ x: Float, _ minVal: Float, _ maxVal: Float) -> Float {
     #if FRB_MATH_USE_SIMD
     return simd_clamp(x, minVal, maxVal)
     #else
-    return FirebladeMath.min(FirebladeMath.max(x, minVal), maxVal)
+    return Swift.min(Swift.max(x, minVal), maxVal)
     #endif
 }
 

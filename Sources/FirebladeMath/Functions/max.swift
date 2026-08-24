@@ -13,6 +13,8 @@ import Foundation
 ///   - y: floating point value
 /// - Returns: If successful, returns the larger of two floating point values. The value returned is exact and does not depend on any rounding modes.
 @inlinable
+@_disfavoredOverload
+@available(*, deprecated, message: "Use Swift.max(_:_:) instead.", renamed: "Swift.max")
 public func max(_ x: Float, _ y: Float) -> Float {
     #if canImport(Darwin)
     return Darwin.fmaxf(x, y)
@@ -30,6 +32,8 @@ public func max(_ x: Float, _ y: Float) -> Float {
 ///   - y: floating point value
 /// - Returns: If successful, returns the larger of two floating point values. The value returned is exact and does not depend on any rounding modes.
 @inlinable
+@_disfavoredOverload
+@available(*, deprecated, message: "Use Swift.max(_:_:) instead.", renamed: "Swift.max")
 public func max(_ x: Double, _ y: Double) -> Double {
     #if canImport(Darwin)
     return Darwin.fmax(x, y)
