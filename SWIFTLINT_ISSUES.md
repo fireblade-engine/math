@@ -42,7 +42,7 @@ Total Violations: **113** across 101 files.
 - [ ] `Sources/FirebladeMath/Matrix/MatrixStorage+NO_SIMD.swift` (1 violation)
 
 ### 9. Identical Operands (`identical_operands`) - 2 violations
-- [ ] `Sources/FirebladeMath/Functions/sign.swift` (2 violations)
+- [x] `Sources/FirebladeMath/Functions/sign.swift` (2 violations)
 
 ### 10. Large Tuples (`large_tuple`) - 2 violations
 - [ ] `Sources/FirebladeMath/Matrix/Matrix3x3.swift` (1 violation)
