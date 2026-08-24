@@ -11,9 +11,9 @@ Total Violations: **113** across 101 files.
 - [ ] `Sources/FirebladeMath/Quat/Quaternion+Operators.swift` (13 violations)
 
 ### 2. Identifier Names (`identifier_name`) - 21 violations
-- [ ] `Sources/FirebladeMath/Quat/Quat4f+Euler.swift` (12 violations: `e`, `q`)
-- [ ] `Sources/FirebladeMath/Functions/determinant.swift` (6 violations: `a`, `b`, `c`)
-- [ ] `Sources/FirebladeMath/Functions/adjugate.swift` (2 violations: `m`)
+- [x] `Sources/FirebladeMath/Quat/Quat4f+Euler.swift` (12 violations: `e`, `q`)
+- [x] `Sources/FirebladeMath/Functions/determinant.swift` (6 violations: `a`, `b`, `c`)
+- [x] `Sources/FirebladeMath/Functions/adjugate.swift` (2 violations: `m`)
 
 ### 3. Attribute Formatting (`attributes`) - 19 violations
 - [x] `Sources/FirebladeMath/Quat/Quat4f+Euler.swift` (4 violations)
