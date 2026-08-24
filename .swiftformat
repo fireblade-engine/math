@@ -3,6 +3,8 @@
 --commas inline
 --disable opaqueGenericParameters
 --disable preferKeyPath
+--disable redundantType
+--disable wrapMultilineStatementBraces
 --exclude .build,.github,.swiftpm,Scripts
 --extensionacl on-declarations
 --header strip
