@@ -1,10 +1,4 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#else
-import Foundation
-#endif
+import FirebladeMathLibC
 
 /// Computes the principal value of the arc cosine of x.
 ///
@@ -14,13 +8,7 @@ import Foundation
 ///                If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @_disfavoredOverload
 public func acos(_ x: Float) -> Float {
-    #if canImport(Darwin)
-    return Darwin.acosf(x)
-    #elseif canImport(Glibc)
-    return Glibc.acosf(x)
-    #else
-    return Foundation.acosf(x)
-    #endif
+    FirebladeMathLibC.acosf(x)
 }
 
 /// Computes the principal value of the arc cosine of x.
@@ -31,11 +19,5 @@ public func acos(_ x: Float) -> Float {
 ///                If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @_disfavoredOverload
 public func acos(_ x: Double) -> Double {
-    #if canImport(Darwin)
-    return Darwin.acos(x)
-    #elseif canImport(Glibc)
-    return Glibc.acos(x)
-    #else
-    return Foundation.acos(x)
-    #endif
+    FirebladeMathLibC.acos(x)
 }

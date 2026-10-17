@@ -1,10 +1,4 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#else
-import Foundation
-#endif
+import FirebladeMathLibC
 
 /// Computes the inverse hyperbolic sine of x.
 ///
@@ -13,13 +7,7 @@ import Foundation
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @_disfavoredOverload
 public func asinh(_ x: Double) -> Double {
-    #if canImport(Darwin)
-    return Darwin.asinh(x)
-    #elseif canImport(Glibc)
-    return Glibc.asinh(x)
-    #else
-    return Foundation.asinh(x)
-    #endif
+    FirebladeMathLibC.asinh(x)
 }
 
 /// Computes the inverse hyperbolic sine of x.
@@ -29,11 +17,5 @@ public func asinh(_ x: Double) -> Double {
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @_disfavoredOverload
 public func asinh(_ x: Float) -> Float {
-    #if canImport(Darwin)
-    return Darwin.asinhf(x)
-    #elseif canImport(Glibc)
-    return Glibc.asinhf(x)
-    #else
-    return Foundation.asinhf(x)
-    #endif
+    FirebladeMathLibC.asinhf(x)
 }

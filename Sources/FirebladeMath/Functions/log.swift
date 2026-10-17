@@ -1,10 +1,4 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#else
-import Foundation
-#endif
+import FirebladeMathLibC
 
 /// Computes the natural (base e) logarithm of x.
 ///
@@ -14,13 +8,7 @@ import Foundation
 /// If a pole error occurs, -HUGE_VAL, -HUGE_VALF, or -HUGE_VALL is returned.
 @_disfavoredOverload
 public func log(_ x: Float) -> Float {
-    #if canImport(Darwin)
-    return Darwin.logf(x)
-    #elseif canImport(Glibc)
-    return Glibc.logf(x)
-    #else
-    return Foundation.logf(x)
-    #endif
+    FirebladeMathLibC.logf(x)
 }
 
 /// Computes the natural (base e) logarithm of x.
@@ -31,11 +19,5 @@ public func log(_ x: Float) -> Float {
 /// If a pole error occurs, -HUGE_VAL, -HUGE_VALF, or -HUGE_VALL is returned.
 @_disfavoredOverload
 public func log(_ x: Double) -> Double {
-    #if canImport(Darwin)
-    return Darwin.log(x)
-    #elseif canImport(Glibc)
-    return Glibc.log(x)
-    #else
-    return Foundation.log(x)
-    #endif
+    FirebladeMathLibC.log(x)
 }

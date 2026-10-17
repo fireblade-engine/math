@@ -1,10 +1,4 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#else
-import Foundation
-#endif
+import FirebladeMathLibC
 
 /// Computes the hyperbolic tangent of x.
 ///
@@ -13,13 +7,7 @@ import Foundation
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @_disfavoredOverload
 public func tanh(_ x: Float) -> Float {
-    #if canImport(Darwin)
-    return Darwin.tanhf(x)
-    #elseif canImport(Glibc)
-    return Glibc.tanhf(x)
-    #else
-    return Foundation.tanhf(x)
-    #endif
+    FirebladeMathLibC.tanhf(x)
 }
 
 /// Computes the hyperbolic tangent of x.
@@ -29,11 +17,5 @@ public func tanh(_ x: Float) -> Float {
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @_disfavoredOverload
 public func tanh(_ x: Double) -> Double {
-    #if canImport(Darwin)
-    return Darwin.tanh(x)
-    #elseif canImport(Glibc)
-    return Glibc.tanh(x)
-    #else
-    return Foundation.tanh(x)
-    #endif
+    FirebladeMathLibC.tanh(x)
 }

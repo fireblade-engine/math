@@ -1,10 +1,4 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#else
-import Foundation
-#endif
+import FirebladeMathLibC
 
 /// Computes the hyperbolic cosine of x.
 ///
@@ -13,13 +7,7 @@ import Foundation
 /// If a range error due to overflow occurs, +HUGE_VAL, +HUGE_VALF, or +HUGE_VALL is returned.
 @_disfavoredOverload
 public func cosh(_ x: Float) -> Float {
-    #if canImport(Darwin)
-    return Darwin.coshf(x)
-    #elseif canImport(Glibc)
-    return Glibc.coshf(x)
-    #else
-    return Foundation.coshf(x)
-    #endif
+    FirebladeMathLibC.coshf(x)
 }
 
 /// Computes the hyperbolic cosine of x.
@@ -29,11 +17,5 @@ public func cosh(_ x: Float) -> Float {
 /// If a range error due to overflow occurs, +HUGE_VAL, +HUGE_VALF, or +HUGE_VALL is returned.
 @_disfavoredOverload
 public func cosh(_ x: Double) -> Double {
-    #if canImport(Darwin)
-    return Darwin.cosh(x)
-    #elseif canImport(Glibc)
-    return Glibc.cosh(x)
-    #else
-    return Foundation.cosh(x)
-    #endif
+    FirebladeMathLibC.cosh(x)
 }

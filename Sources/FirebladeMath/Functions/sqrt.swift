@@ -1,10 +1,4 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#else
-import Foundation
-#endif
+import FirebladeMathLibC
 
 /// Computes square root of x.
 ///
@@ -14,13 +8,7 @@ import Foundation
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @_disfavoredOverload
 public func sqrt(_ x: Float) -> Float {
-    #if canImport(Darwin)
-    return Darwin.sqrtf(x)
-    #elseif canImport(Glibc)
-    return Glibc.sqrtf(x)
-    #else
-    return Foundation.sqrtf(x)
-    #endif
+    FirebladeMathLibC.sqrtf(x)
 }
 
 /// Computes square root of x.
@@ -31,11 +19,5 @@ public func sqrt(_ x: Float) -> Float {
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @_disfavoredOverload
 public func sqrt(_ x: Double) -> Double {
-    #if canImport(Darwin)
-    return Darwin.sqrt(x)
-    #elseif canImport(Glibc)
-    return Glibc.sqrt(x)
-    #else
-    return Foundation.sqrt(x)
-    #endif
+    FirebladeMathLibC.sqrt(x)
 }

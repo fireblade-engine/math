@@ -1,10 +1,4 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#else
-import Foundation
-#endif
+import FirebladeMathLibC
 
 /// Computes the tangent of arg (measured in radians).
 ///
@@ -15,13 +9,7 @@ import Foundation
 @inlinable
 @_disfavoredOverload
 public func tan(_ angleRad: Float) -> Float {
-    #if canImport(Darwin)
-    return Darwin.tanf(angleRad)
-    #elseif canImport(Glibc)
-    return Glibc.tanf(angleRad)
-    #else
-    return Foundation.tanf(angleRad)
-    #endif
+    FirebladeMathLibC.tanf(angleRad)
 }
 
 /// Computes the tangent of arg (measured in radians).
@@ -33,11 +21,5 @@ public func tan(_ angleRad: Float) -> Float {
 @inlinable
 @_disfavoredOverload
 public func tan(_ angleRad: Double) -> Double {
-    #if canImport(Darwin)
-    return Darwin.tan(angleRad)
-    #elseif canImport(Glibc)
-    return Glibc.tan(angleRad)
-    #else
-    return Foundation.tan(angleRad)
-    #endif
+    FirebladeMathLibC.tan(angleRad)
 }

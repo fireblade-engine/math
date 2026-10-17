@@ -1,0 +1,79 @@
+name: Cross-Compile
+
+# Exercises the platform C-library resolution in FirebladeMathLibC on targets
+# that are not covered by the native Linux/macOS/Windows jobs.
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+  workflow_dispatch:
+
+env:
+  SWIFT_VERSION: "6.3.3"
+
+jobs:
+  musl:
+    name: Static Linux (Musl)
+    runs-on: ubuntu-latest
+    container: swift:6.3.3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Install Static Linux SDK
+        run: |
+          swift sdk install \
+            "https://download.swift.org/swift-${SWIFT_VERSION}-release/static-sdk/swift-${SWIFT_VERSION}-RELEASE/swift-${SWIFT_VERSION}-RELEASE_static-linux-0.1.0.artifactbundle.tar.gz" \
+            --checksum 87c3eaf908e67c0e13a84367119e12273cec1d2cd3d81f7d74bb36722d6b607b
+
+      - name: Run Tests
+        run: swift test --swift-sdk x86_64-swift-linux-musl -Xswiftc -warnings-as-errors
+
+  wasm:
+    name: WebAssembly (WASI)
+    runs-on: ubuntu-latest
+    container: swift:6.3.3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Install Wasm SDK
+        run: |
+          swift sdk install \
+            "https://download.swift.org/swift-${SWIFT_VERSION}-release/wasm-sdk/swift-${SWIFT_VERSION}-RELEASE/swift-${SWIFT_VERSION}-RELEASE_wasm.artifactbundle.tar.gz" \
+            --checksum cabfa08b73bb8ac783927ecd15fa386e99d0c139c5f232445067bcf58379cae7
+
+      - name: Build (including tests)
+        run: swift build --swift-sdk "swift-${SWIFT_VERSION}-RELEASE_wasm" --build-tests -Xswiftc -warnings-as-errors
+
+  android:
+    name: Android
+    runs-on: ubuntu-latest
+    container: swift:6.3.3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Install Android SDK
+        run: |
+          swift sdk install \
+            "https://download.swift.org/swift-${SWIFT_VERSION}-release/android-sdk/swift-${SWIFT_VERSION}-RELEASE/swift-${SWIFT_VERSION}-RELEASE_android.artifactbundle.tar.gz" \
+            --checksum d160cc3206dd1886dae3fef2337af5e25ec034692cd0ec225721c56cc69da7f5
+
+      - name: Install Android NDK
+        run: |
+          apt-get update -q && apt-get install -yq unzip curl
+          curl -fsSL -o ndk.zip https://dl.google.com/android/repository/android-ndk-r27d-linux.zip
+          unzip -q ndk.zip -d "$HOME"
+          echo "ANDROID_NDK_HOME=$HOME/android-ndk-r27d" >> "$GITHUB_ENV"
+
+      - name: Link NDK into Swift SDK
+        run: |
+          SETUP=$(find "$HOME/.swiftpm" "$HOME/.config/swiftpm" -name setup-android-sdk.sh 2>/dev/null | head -n 1)
+          test -n "$SETUP"
+          bash "$SETUP"
+
+      - name: Build (including tests)
+        run: swift build --swift-sdk aarch64-unknown-linux-android28 --build-tests -Xswiftc -warnings-as-errors

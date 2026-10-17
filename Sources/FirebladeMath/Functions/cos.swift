@@ -1,10 +1,4 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#else
-import Foundation
-#endif
+import FirebladeMathLibC
 
 /// Computes the cosine of arg (measured in radians).
 ///
@@ -15,13 +9,7 @@ import Foundation
 @inlinable
 @_disfavoredOverload
 public func cos(_ angleRad: Float) -> Float {
-    #if canImport(Darwin)
-    return Darwin.cosf(angleRad)
-    #elseif canImport(Glibc)
-    return Glibc.cosf(angleRad)
-    #else
-    return Foundation.cosf(angleRad)
-    #endif
+    FirebladeMathLibC.cosf(angleRad)
 }
 
 /// Computes the cosine of arg (measured in radians).
@@ -33,11 +21,5 @@ public func cos(_ angleRad: Float) -> Float {
 @inlinable
 @_disfavoredOverload
 public func cos(_ angleRad: Double) -> Double {
-    #if canImport(Darwin)
-    return Darwin.cos(angleRad)
-    #elseif canImport(Glibc)
-    return Glibc.cos(angleRad)
-    #else
-    return Foundation.cos(angleRad)
-    #endif
+    FirebladeMathLibC.cos(angleRad)
 }
