@@ -20,7 +20,9 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 REGISTRY = ROOT / "Tests" / "FirebladeMathTests" / "ReferenceValues" / "ReferenceFunctions.swift"
 
-# Reuse the declaration parsing of the differential coverage check.
+# Reuse the declaration parsing of the differential coverage check (without leaving
+# __pycache__ behind).
+sys.dont_write_bytecode = True
 _spec = importlib.util.spec_from_file_location("simd_coverage", ROOT / "Scripts" / "check-simd-differential-coverage.py")
 simd_coverage = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(simd_coverage)
