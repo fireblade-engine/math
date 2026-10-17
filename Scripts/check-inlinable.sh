@@ -27,11 +27,13 @@ import re
 import sys
 
 # Members the compiler synthesizes (Hashable/Codable); they cannot be marked @inlinable.
+# Newer compilers print module selectors (`Swift::Hasher`), older ones `Swift.Hasher`.
+SWIFT = r"Swift(?:::|\.)"
 ALLOWED = (
-    re.compile(r"\bfunc hash\(into hasher: inout Swift::Hasher\)"),
-    re.compile(r"\bfunc encode\(to encoder: any Swift::Encoder\) throws"),
-    re.compile(r"\binit\(from decoder: any Swift::Decoder\) throws"),
-    re.compile(r"\bvar hashValue: Swift::Int"),
+    re.compile(rf"\bfunc hash\(into hasher: inout {SWIFT}Hasher\)"),
+    re.compile(rf"\bfunc encode\(to encoder: any {SWIFT}Encoder\) throws"),
+    re.compile(rf"\binit\(from decoder: any {SWIFT}Decoder\) throws"),
+    re.compile(rf"\bvar hashValue: {SWIFT}Int"),
 )
 DECL = re.compile(r"^\s*(?:@\S+\s+)*public\s+(?:(?:static|mutating|nonmutating|prefix|postfix|final)\s+)*(func|init|subscript|var)\b")
 
