@@ -1,10 +1,4 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#else
-import Foundation
-#endif
+import FirebladeMathLibC
 
 /// Computes the sine of arg (measured in radians).
 ///
@@ -15,13 +9,7 @@ import Foundation
 @inlinable
 @_disfavoredOverload
 public func sin(_ angleRad: Float) -> Float {
-    #if canImport(Darwin)
-    return Darwin.sinf(angleRad)
-    #elseif canImport(Glibc)
-    return Glibc.sinf(angleRad)
-    #else
-    return Foundation.sinf(angleRad)
-    #endif
+    FirebladeMathLibC.sinf(angleRad)
 }
 
 /// Computes the sine of arg (measured in radians).
@@ -33,11 +21,5 @@ public func sin(_ angleRad: Float) -> Float {
 @inlinable
 @_disfavoredOverload
 public func sin(_ angleRad: Double) -> Double {
-    #if canImport(Darwin)
-    return Darwin.sin(angleRad)
-    #elseif canImport(Glibc)
-    return Glibc.sin(angleRad)
-    #else
-    return Foundation.sin(angleRad)
-    #endif
+    FirebladeMathLibC.sin(angleRad)
 }

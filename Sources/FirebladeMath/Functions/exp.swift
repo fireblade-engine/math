@@ -1,10 +1,4 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#else
-import Foundation
-#endif
+import FirebladeMathLibC
 
 ///  Computes the e (Euler's number, 2.7182818) raised to the given power arg.
 ///
@@ -14,13 +8,7 @@ import Foundation
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @_disfavoredOverload
 public func exp(_ power: Float) -> Float {
-    #if canImport(Darwin)
-    return Darwin.expf(power)
-    #elseif canImport(Glibc)
-    return Glibc.expf(power)
-    #else
-    return Foundation.expf(power)
-    #endif
+    FirebladeMathLibC.expf(power)
 }
 
 ///  Computes the e (Euler's number, 2.7182818) raised to the given power arg.
@@ -31,11 +19,5 @@ public func exp(_ power: Float) -> Float {
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @_disfavoredOverload
 public func exp(_ power: Double) -> Double {
-    #if canImport(Darwin)
-    return Darwin.exp(power)
-    #elseif canImport(Glibc)
-    return Glibc.exp(power)
-    #else
-    return Foundation.exp(power)
-    #endif
+    FirebladeMathLibC.exp(power)
 }

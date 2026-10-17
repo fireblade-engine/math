@@ -1,10 +1,4 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#else
-import Foundation
-#endif
+import FirebladeMathLibC
 
 /// Computes the absolute value of a floating point value x.
 ///
@@ -13,13 +7,7 @@ import Foundation
 @_disfavoredOverload
 @available(*, deprecated, message: "Use Swift.abs(_:) or x.magnitude instead.", renamed: "Swift.abs")
 public func abs(_ x: Float) -> Float {
-    #if canImport(Darwin)
-    return Darwin.fabsf(x)
-    #elseif canImport(Glibc)
-    return Glibc.fabsf(x)
-    #else
-    return Foundation.fabsf(x)
-    #endif
+    FirebladeMathLibC.fabsf(x)
 }
 
 /// Computes the absolute value of a floating point value x.
@@ -29,11 +17,5 @@ public func abs(_ x: Float) -> Float {
 @_disfavoredOverload
 @available(*, deprecated, message: "Use Swift.abs(_:) or x.magnitude instead.", renamed: "Swift.abs")
 public func abs(_ x: Double) -> Double {
-    #if canImport(Darwin)
-    return Darwin.fabs(x)
-    #elseif canImport(Glibc)
-    return Glibc.fabs(x)
-    #else
-    return Foundation.fabs(x)
-    #endif
+    FirebladeMathLibC.fabs(x)
 }

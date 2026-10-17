@@ -1,10 +1,4 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#else
-import Foundation
-#endif
+import FirebladeMathLibC
 
 /// Computes the inverse hyperbolic tangent of x.
 ///
@@ -15,13 +9,7 @@ import Foundation
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @_disfavoredOverload
 public func atanh(_ x: Float) -> Float {
-    #if canImport(Darwin)
-    return Darwin.atanhf(x)
-    #elseif canImport(Glibc)
-    return Glibc.atanhf(x)
-    #else
-    return Foundation.atanhf(x)
-    #endif
+    FirebladeMathLibC.atanhf(x)
 }
 
 /// Computes the inverse hyperbolic tangent of x.
@@ -33,11 +21,5 @@ public func atanh(_ x: Float) -> Float {
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @_disfavoredOverload
 public func atanh(_ x: Double) -> Double {
-    #if canImport(Darwin)
-    return Darwin.atanh(x)
-    #elseif canImport(Glibc)
-    return Glibc.atanh(x)
-    #else
-    return Foundation.atanh(x)
-    #endif
+    FirebladeMathLibC.atanh(x)
 }

@@ -1,10 +1,4 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#else
-import Foundation
-#endif
+import FirebladeMathLibC
 
 /// Computes the principal values of the arc sine of x.
 ///
@@ -14,13 +8,7 @@ import Foundation
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @_disfavoredOverload
 public func asin(_ x: Double) -> Double {
-    #if canImport(Darwin)
-    return Darwin.asin(x)
-    #elseif canImport(Glibc)
-    return Glibc.asin(x)
-    #else
-    return Foundation.asin(x)
-    #endif
+    FirebladeMathLibC.asin(x)
 }
 
 /// Computes the principal values of the arc sine of x.
@@ -31,11 +19,5 @@ public func asin(_ x: Double) -> Double {
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @_disfavoredOverload
 public func asin(_ x: Float) -> Float {
-    #if canImport(Darwin)
-    return Darwin.asinf(x)
-    #elseif canImport(Glibc)
-    return Glibc.asinf(x)
-    #else
-    return Foundation.asinf(x)
-    #endif
+    FirebladeMathLibC.asinf(x)
 }

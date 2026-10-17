@@ -1,10 +1,4 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#else
-import Foundation
-#endif
+import FirebladeMathLibC
 
 /// Computes the principal value of the arc tangent of x.
 ///
@@ -14,13 +8,7 @@ import Foundation
 @inlinable
 @_disfavoredOverload
 public func atan(_ x: Double) -> Double {
-    #if canImport(Darwin)
-    return Darwin.atan(x)
-    #elseif canImport(Glibc)
-    return Glibc.atan(x)
-    #else
-    return Foundation.atan(x)
-    #endif
+    FirebladeMathLibC.atan(x)
 }
 
 /// Computes the principal value of the arc tangent of x.
@@ -31,11 +19,5 @@ public func atan(_ x: Double) -> Double {
 @inlinable
 @_disfavoredOverload
 public func atan(_ x: Float) -> Float {
-    #if canImport(Darwin)
-    return Darwin.atanf(x)
-    #elseif canImport(Glibc)
-    return Glibc.atanf(x)
-    #else
-    return Foundation.atanf(x)
-    #endif
+    FirebladeMathLibC.atanf(x)
 }

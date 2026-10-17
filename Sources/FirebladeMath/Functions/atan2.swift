@@ -1,10 +1,4 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#else
-import Foundation
-#endif
+import FirebladeMathLibC
 
 ///  The atan2() function computes the principal value of the arc tangent of y/x,
 ///  using the signs of both arguments to determine the quadrant of the return value.
@@ -13,13 +7,7 @@ import Foundation
 /// - Returns: The arc tangent of y/x in radians.
 @_disfavoredOverload
 public func atan2(_ y: Double, _ x: Double) -> Double {
-    #if canImport(Darwin)
-    return Darwin.atan2(y, x)
-    #elseif canImport(Glibc)
-    return Glibc.atan2(y, x)
-    #else
-    return Foundation.atan2(y, x)
-    #endif
+    FirebladeMathLibC.atan2(y, x)
 }
 
 ///  The atan2() function computes the principal value of the arc tangent of y/x,
@@ -29,11 +17,5 @@ public func atan2(_ y: Double, _ x: Double) -> Double {
 /// - Returns: The arc tangent of y/x in radians.
 @_disfavoredOverload
 public func atan2(_ y: Float, _ x: Float) -> Float {
-    #if canImport(Darwin)
-    return Darwin.atan2f(y, x)
-    #elseif canImport(Glibc)
-    return Glibc.atan2f(y, x)
-    #else
-    return Foundation.atan2f(y, x)
-    #endif
+    FirebladeMathLibC.atan2f(y, x)
 }

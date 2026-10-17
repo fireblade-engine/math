@@ -1,10 +1,4 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#else
-import Foundation
-#endif
+import FirebladeMathLibC
 
 ///  Computes the inverse hyperbolic cosine of x.
 ///
@@ -14,13 +8,7 @@ import Foundation
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 @_disfavoredOverload
 public func acosh(_ x: Double) -> Double {
-    #if canImport(Darwin)
-    return Darwin.acosh(x)
-    #elseif canImport(Glibc)
-    return Glibc.acosh(x)
-    #else
-    return Foundation.acosh(x)
-    #endif
+    FirebladeMathLibC.acosh(x)
 }
 
 ///  Computes the inverse hyperbolic cosine of x.
@@ -31,11 +19,5 @@ public func acosh(_ x: Double) -> Double {
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 @_disfavoredOverload
 public func acosh(_ x: Float) -> Float {
-    #if canImport(Darwin)
-    return Darwin.acoshf(x)
-    #elseif canImport(Glibc)
-    return Glibc.acoshf(x)
-    #else
-    return Foundation.acoshf(x)
-    #endif
+    FirebladeMathLibC.acoshf(x)
 }

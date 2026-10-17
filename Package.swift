@@ -29,8 +29,10 @@ let package = Package(
     ],
     targets: [
         .target(
+            name: "FirebladeMathLibC"),
+        .target(
             name: "FirebladeMath",
-            dependencies: [],
+            dependencies: ["FirebladeMathLibC"],
             swiftSettings: swiftSettings),
         .testTarget(
             name: "FirebladeMathTests",
