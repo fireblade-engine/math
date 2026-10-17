@@ -88,28 +88,40 @@ public func normalize(_ x: SIMD4<Float>) -> SIMD4<Float> {
 
 /// Returns a normalized copy of the quaternion.
 /// - Parameter x: The quaternion to normalize.
-/// - Returns: A quaternion with the same orientation as x but with a length of 1.0.
+/// - Returns: A quaternion with the same orientation as x but with a length of 1.0,
+///   or the identity quaternion if x has zero length.
 @inlinable
 @_disfavoredOverload
 public func normalize(_ x: Quat4f) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd.simd_normalize(x.storage))
     #else
-    let scale: Float = 1.0 / length(x)
+    // Like Apple's simd, a quaternion whose squared length is zero normalizes to the identity.
+    let lengthSquared: Float = x.x * x.x + x.y * x.y + x.z * x.z + x.w * x.w
+    guard lengthSquared != 0 else {
+        return Quat4f()
+    }
+    let scale: Float = 1.0 / lengthSquared.squareRoot()
     return Quat4f(x.x * scale, x.y * scale, x.z * scale, x.w * scale)
     #endif
 }
 
 /// Returns a normalized copy of the quaternion.
 /// - Parameter x: The quaternion to normalize.
-/// - Returns: A quaternion with the same orientation as x but with a length of 1.0.
+/// - Returns: A quaternion with the same orientation as x but with a length of 1.0,
+///   or the identity quaternion if x has zero length.
 @inlinable
 @_disfavoredOverload
 public func normalize(_ x: Quat4d) -> Quat4d {
     #if FRB_MATH_USE_SIMD
     return Quat4d(storage: simd.simd_normalize(x.storage))
     #else
-    let scale = 1.0 / length(x)
+    // Like Apple's simd, a quaternion whose squared length is zero normalizes to the identity.
+    let lengthSquared: Double = x.x * x.x + x.y * x.y + x.z * x.z + x.w * x.w
+    guard lengthSquared != 0 else {
+        return Quat4d()
+    }
+    let scale: Double = 1.0 / lengthSquared.squareRoot()
     return Quat4d(x.x * scale, x.y * scale, x.z * scale, x.w * scale)
     #endif
 }

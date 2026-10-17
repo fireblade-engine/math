@@ -15,7 +15,8 @@ public func fract(_ value: Double) -> Double {
     #if FRB_MATH_USE_SIMD
     return simd_fract(value)
     #else
-    return Swift.min(value - floor(value), Double(0x1.FFFFFFFFFFFFFp-1))
+    // IEEE minNum like simd_fract: NaN and infinities yield the largest value below 1.
+    return Double.minimum(value - floor(value), Double(0x1.FFFFFFFFFFFFFp-1))
     #endif
 }
 
@@ -32,6 +33,7 @@ public func fract(_ value: Float) -> Float {
     #if FRB_MATH_USE_SIMD
     return simd_fract(value)
     #else
-    return Swift.min(value - floor(value), Float(0x1.FFFFFEp-1))
+    // IEEE minNum like simd_fract: NaN and infinities yield the largest value below 1.
+    return Float.minimum(value - floor(value), Float(0x1.FFFFFEp-1))
     #endif
 }

@@ -47,10 +47,37 @@ public func quaternion(from: SIMD3<Float>, to: SIMD3<Float>) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd.simd_quaternion(from, to))
     #else
-    let half = normalize(from + to)
-    let img = cross(from, half)
-    let real = dot(from, half)
-    return Quat4f(img.x, img.y, img.z, real)
+    // Mirrors Apple's simd_quaternion(from:to:), so every platform returns the same rotation.
+    func reduced(_ from: SIMD3<Float>, _ to: SIMD3<Float>) -> Quat4f {
+        // Accurate while `from` and `to` are less than 90 degrees apart.
+        let half: SIMD3<Float> = normalize(from + to)
+        let imaginary: SIMD3<Float> = cross(from, half)
+        return Quat4f(imaginary.x, imaginary.y, imaginary.z, dot(from, half))
+    }
+
+    if dot(from, to) >= 0 {
+        return reduced(from, to)
+    }
+
+    let sum: SIMD3<Float> = normalize(from) + normalize(to)
+    if dot(sum, sum) <= 0x1p-46 {
+        // Nearly opposite: the axis is underspecified, so pick one orthogonal to `from`
+        // the same way simd does, and rotate by pi.
+        let absolute = SIMD3<Float>(Swift.abs(from.x), Swift.abs(from.y), Swift.abs(from.z))
+        let reference: SIMD3<Float> = if absolute.x <= absolute.y, absolute.x <= absolute.z {
+            SIMD3<Float>(1, 0, 0)
+        } else if absolute.y <= absolute.z {
+            SIMD3<Float>(0, 1, 0)
+        } else {
+            SIMD3<Float>(0, 0, 1)
+        }
+        let axis: SIMD3<Float> = normalize(cross(from, reference))
+        return Quat4f(axis.x, axis.y, axis.z, 0)
+    }
+
+    // More than 90 degrees apart: rotate in two steps through the halfway vector.
+    let half: SIMD3<Float> = normalize(sum)
+    return multiply(reduced(from, half), reduced(half, to))
     #endif
 }
 
@@ -69,10 +96,37 @@ public func quaternion(from: SIMD3<Double>, to: SIMD3<Double>) -> Quat4d {
     #if FRB_MATH_USE_SIMD
     return Quat4d(storage: simd.simd_quaternion(from, to))
     #else
-    let half = normalize(from + to)
-    let img = cross(from, half)
-    let real = dot(from, half)
-    return Quat4d(img.x, img.y, img.z, real)
+    // Mirrors Apple's simd_quaternion(from:to:), so every platform returns the same rotation.
+    func reduced(_ from: SIMD3<Double>, _ to: SIMD3<Double>) -> Quat4d {
+        // Accurate while `from` and `to` are less than 90 degrees apart.
+        let half: SIMD3<Double> = normalize(from + to)
+        let imaginary: SIMD3<Double> = cross(from, half)
+        return Quat4d(imaginary.x, imaginary.y, imaginary.z, dot(from, half))
+    }
+
+    if dot(from, to) >= 0 {
+        return reduced(from, to)
+    }
+
+    let sum: SIMD3<Double> = normalize(from) + normalize(to)
+    if dot(sum, sum) <= 0x1p-104 {
+        // Nearly opposite: the axis is underspecified, so pick one orthogonal to `from`
+        // the same way simd does, and rotate by pi.
+        let absolute = SIMD3<Double>(Swift.abs(from.x), Swift.abs(from.y), Swift.abs(from.z))
+        let reference: SIMD3<Double> = if absolute.x <= absolute.y, absolute.x <= absolute.z {
+            SIMD3<Double>(1, 0, 0)
+        } else if absolute.y <= absolute.z {
+            SIMD3<Double>(0, 1, 0)
+        } else {
+            SIMD3<Double>(0, 0, 1)
+        }
+        let axis: SIMD3<Double> = normalize(cross(from, reference))
+        return Quat4d(axis.x, axis.y, axis.z, 0)
+    }
+
+    // More than 90 degrees apart: rotate in two steps through the halfway vector.
+    let half: SIMD3<Double> = normalize(sum)
+    return multiply(reduced(from, half), reduced(half, to))
     #endif
 }
 
