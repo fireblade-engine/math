@@ -28,7 +28,7 @@ extension simd_float2x2: Storage2x2Protocol, @retroactive @unchecked Sendable, @
     @inlinable
     public subscript(index: Int) -> Float {
         get {
-            let (col, row) = columnRow(index: index, width: 2)
+            let (col, row) = columnMajorPosition(of: index, rows: 2)
             switch col {
             case 0:
                 return columns.0[row]
@@ -41,7 +41,7 @@ extension simd_float2x2: Storage2x2Protocol, @retroactive @unchecked Sendable, @
             }
         }
         set {
-            let (col, row) = columnRow(index: index, width: 2)
+            let (col, row) = columnMajorPosition(of: index, rows: 2)
             switch col {
             case 0:
                 columns.0[row] = newValue
@@ -76,7 +76,7 @@ extension simd_double2x2: Storage2x2Protocol, @retroactive @unchecked Sendable, 
     @inlinable
     public subscript(index: Int) -> Double {
         get {
-            let (col, row) = columnRow(index: index, width: 2)
+            let (col, row) = columnMajorPosition(of: index, rows: 2)
             switch col {
             case 0:
                 return columns.0[row]
@@ -89,7 +89,7 @@ extension simd_double2x2: Storage2x2Protocol, @retroactive @unchecked Sendable, 
             }
         }
         set {
-            let (col, row) = columnRow(index: index, width: 2)
+            let (col, row) = columnMajorPosition(of: index, rows: 2)
             switch col {
             case 0:
                 columns.0[row] = newValue
@@ -126,7 +126,7 @@ extension simd_float3x3: Storage3x3Protocol, @retroactive @unchecked Sendable, @
     @inlinable
     public subscript(index: Int) -> Float {
         get {
-            let (col, row) = columnRow(index: index, width: 3)
+            let (col, row) = columnMajorPosition(of: index, rows: 3)
             switch col {
             case 0:
                 return columns.0[row]
@@ -142,7 +142,7 @@ extension simd_float3x3: Storage3x3Protocol, @retroactive @unchecked Sendable, @
             }
         }
         set {
-            let (col, row) = columnRow(index: index, width: 3)
+            let (col, row) = columnMajorPosition(of: index, rows: 3)
             switch col {
             case 0:
                 columns.0[row] = newValue
@@ -180,7 +180,7 @@ extension simd_double3x3: Storage3x3Protocol, @retroactive @unchecked Sendable, 
     @inlinable
     public subscript(index: Int) -> Double {
         get {
-            let (col, row) = columnRow(index: index, width: 3)
+            let (col, row) = columnMajorPosition(of: index, rows: 3)
             switch col {
             case 0:
                 return columns.0[row]
@@ -196,7 +196,7 @@ extension simd_double3x3: Storage3x3Protocol, @retroactive @unchecked Sendable, 
             }
         }
         set {
-            let (col, row) = columnRow(index: index, width: 3)
+            let (col, row) = columnMajorPosition(of: index, rows: 3)
             switch col {
             case 0:
                 columns.0[row] = newValue
@@ -236,7 +236,7 @@ extension simd_float4x4: Storage4x4Protocol, @retroactive @unchecked Sendable, @
     @inlinable
     public subscript(index: Int) -> Float {
         get {
-            let (col, row) = columnRow(index: index, width: 4)
+            let (col, row) = columnMajorPosition(of: index, rows: 4)
             switch col {
             case 0:
                 return columns.0[row]
@@ -255,7 +255,7 @@ extension simd_float4x4: Storage4x4Protocol, @retroactive @unchecked Sendable, @
             }
         }
         set {
-            let (col, row) = columnRow(index: index, width: 4)
+            let (col, row) = columnMajorPosition(of: index, rows: 4)
             switch col {
             case 0:
                 columns.0[row] = newValue
@@ -296,7 +296,7 @@ extension simd_double4x4: Storage4x4Protocol, @retroactive @unchecked Sendable, 
     @inlinable
     public subscript(index: Int) -> Double {
         get {
-            let (col, row) = columnRow(index: index, width: 4)
+            let (col, row) = columnMajorPosition(of: index, rows: 4)
             switch col {
             case 0:
                 return columns.0[row]
@@ -315,7 +315,7 @@ extension simd_double4x4: Storage4x4Protocol, @retroactive @unchecked Sendable, 
             }
         }
         set {
-            let (col, row) = columnRow(index: index, width: 4)
+            let (col, row) = columnMajorPosition(of: index, rows: 4)
             switch col {
             case 0:
                 columns.0[row] = newValue

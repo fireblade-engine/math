@@ -43,6 +43,9 @@ public typealias Mat2x2d = Matrix2x2<Storage2x2<Double>>
 ///   - row: The row (zero based).
 ///   - width: The width of a column.
 /// - Returns: The flat index into the matrix storage.
+/// - Important: This computes a **row-major** index, which does not match the column-major
+///   storage of FirebladeMath matrices (see ``columnRow(index:width:)``).
+@available(*, deprecated, message: "Computes a row-major index that does not match FirebladeMath's column-major storage. Use the matrix's subscript(column:row:) instead.")
 @inlinable
 public func index(column: Int, row: Int, width: Int) -> Int {
     (row * width) + column
@@ -53,9 +56,19 @@ public func index(column: Int, row: Int, width: Int) -> Int {
 ///   - index: The index into the matrix.
 ///   - width: The width of a column.
 /// - Returns: A tuple containing the column and row indices.
+@available(*, deprecated, message: "Implementation detail of matrix storage. Use the matrix's subscript(column:row:) or subscript(index:) instead.")
 @inlinable
 public func columnRow(index: Int, width: Int) -> (column: Int, row: Int) {
-    let row: Int = index % width
-    let column: Int = index / width
-    return (column, row)
+    columnMajorPosition(of: index, rows: width)
+}
+
+/// Splits a flat column-major index into its column and row.
+/// - Parameters:
+///   - index: The flat index into the matrix storage.
+///   - rows: The number of rows, i.e. the length of a column.
+/// - Returns: A tuple containing the column and row indices.
+@inlinable
+@inline(__always)
+func columnMajorPosition(of index: Int, rows: Int) -> (column: Int, row: Int) { // swiftlint:disable:this explicit_top_level_acl
+    (index / rows, index % rows)
 }

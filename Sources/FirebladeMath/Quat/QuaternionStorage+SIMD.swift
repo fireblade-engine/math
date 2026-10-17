@@ -50,8 +50,8 @@ extension simd_quatf: QuaternionStorageProtocol, @retroactive Sequence {
     /// Creates an iterator over the components of the quaternion.
     @inlinable
     @inline(__always)
-    public func makeIterator() -> IndexingIterator<[Float]> {
-        [x, y, z, w].makeIterator()
+    public func makeIterator() -> SIMDScalarIterator<SIMD4<Float>> {
+        SIMDScalarIterator(vector)
     }
 }
 
@@ -102,8 +102,8 @@ extension simd_quatd: QuaternionStorageProtocol, @retroactive Sequence {
     /// Creates an iterator over the components of the quaternion.
     @inlinable
     @inline(__always)
-    public func makeIterator() -> IndexingIterator<[Double]> {
-        [x, y, z, w].makeIterator()
+    public func makeIterator() -> SIMDScalarIterator<SIMD4<Double>> {
+        SIMDScalarIterator(vector)
     }
 }
 

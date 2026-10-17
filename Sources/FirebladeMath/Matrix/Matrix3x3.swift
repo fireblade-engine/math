@@ -65,7 +65,7 @@ public struct Matrix3x3<Storage: Storage3x3Protocol>: RandomAccessCollection, Mu
     @inlinable
     public init(_ columns: [Vector]) {
         precondition(columns.count == 3, "Matrix needs exactly 3 Vector vectors")
-        storage = Storage(columns)
+        self.init(columns[0], columns[1], columns[2])
     }
 
     /// Creates a new 3x3 matrix from three column vectors.
@@ -75,7 +75,7 @@ public struct Matrix3x3<Storage: Storage3x3Protocol>: RandomAccessCollection, Mu
     ///   - column2: The third column vector.
     @inlinable
     public init(_ column0: Vector, _ column1: Vector, _ column2: Vector) {
-        self.init([column0, column1, column2])
+        storage = Storage(column0, column1, column2)
     }
 
     /// Creates a new 3x3 matrix from an array of values in column-major order.
@@ -83,9 +83,11 @@ public struct Matrix3x3<Storage: Storage3x3Protocol>: RandomAccessCollection, Mu
     @inlinable
     public init(_ values: [Storage.Value]) {
         precondition(values.count == 9, "Matrix needs exactly 9 values")
-        self.init([Vector(values[0...2]),
-                   Vector(values[3...5]),
-                   Vector(values[6...8])])
+        self.init(
+            Vector(values[0], values[1], values[2]),
+            Vector(values[3], values[4], values[5]),
+            Vector(values[6], values[7], values[8])
+        )
     }
 
     /// Accesses the value at the specified flat index in column-major order.
@@ -119,7 +121,7 @@ public struct Matrix3x3<Storage: Storage3x3Protocol>: RandomAccessCollection, Mu
 
     /// An array containing the elements of the matrix in column-major order.
     @inlinable public var elements: [Value] {
-        [Value](AnyIterator(storage.makeIterator()))
+        Array(storage)
     }
 
     /// Provides access to the underlying memory as a contiguous buffer.

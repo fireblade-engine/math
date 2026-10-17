@@ -8,6 +8,13 @@ public protocol Storage4x4Protocol: RandomAccessCollection, MutableCollection, R
 
     /// Creates a new storage from an array of column vectors.
     init(_ columns: [Column])
+    /// Creates a new storage from 4 column vectors.
+    /// - Parameters:
+    ///   - column0: The first column vector.
+    ///   - column1: The second column vector.
+    ///   - column2: The third column vector.
+    ///   - column3: The fourth column vector.
+    init(_ column0: Column, _ column1: Column, _ column2: Column, _ column3: Column)
     /// Creates a new storage with the specified diagonal values.
     init(diagonal: Column)
 
@@ -63,6 +70,12 @@ public protocol Storage3x3Protocol: RandomAccessCollection, MutableCollection, R
 
     /// Creates a new storage from an array of column vectors.
     init(_ columns: [Column])
+    /// Creates a new storage from 3 column vectors.
+    /// - Parameters:
+    ///   - column0: The first column vector.
+    ///   - column1: The second column vector.
+    ///   - column2: The third column vector.
+    init(_ column0: Column, _ column1: Column, _ column2: Column)
     /// Creates a new storage with the specified diagonal values.
     init(diagonal: Column)
 
@@ -118,6 +131,11 @@ public protocol Storage2x2Protocol: RandomAccessCollection, MutableCollection, R
 
     /// Creates a new storage from an array of column vectors.
     init(_ columns: [Column])
+    /// Creates a new storage from 2 column vectors.
+    /// - Parameters:
+    ///   - column0: The first column vector.
+    ///   - column1: The second column vector.
+    init(_ column0: Column, _ column1: Column)
     /// Creates a new storage with the specified diagonal values.
     init(diagonal: Column)
 
