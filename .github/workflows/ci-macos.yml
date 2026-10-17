@@ -41,5 +41,8 @@ jobs:
       - name: Check Differential Test Coverage
         run: python3 Scripts/check-simd-differential-coverage.py
 
+      - name: Check Reference Value Coverage
+        run: python3 Scripts/check-reference-coverage.py
+
       - name: Check @inlinable Coverage
         run: Scripts/check-inlinable.sh

@@ -44,10 +44,11 @@ jobs:
           apt-get update -q && apt-get install -yq jq curl
           Scripts/install-swift-sdk.sh wasm
 
-      - name: Build (including tests)
+      # Runs the tests (including the cross-platform reference values) under WasmKit.
+      - name: Run Tests
         run: |
           SDK=$(swift sdk list | grep -E '_wasm$' | head -n 1)
-          swift build --swift-sdk "$SDK" --build-tests -Xswiftc -warnings-as-errors
+          swift test --swift-sdk "$SDK" -Xswiftc -warnings-as-errors
 
   android:
     name: Android
