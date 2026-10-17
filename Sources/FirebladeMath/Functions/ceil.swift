@@ -10,6 +10,7 @@ import Foundation
 ///
 /// - Parameter x:     floating point value
 /// - Returns: If no errors occur, the smallest integer value not less than x, that is ⌈x⌉, is returned.
+@_disfavoredOverload
 public func ceil(_ x: Float) -> Float {
     #if canImport(Darwin)
     return Darwin.ceilf(x)
@@ -24,6 +25,7 @@ public func ceil(_ x: Float) -> Float {
 ///
 /// - Parameter x:     floating point value
 /// - Returns: If no errors occur, the smallest integer value not less than x, that is ⌈x⌉, is returned.
+@_disfavoredOverload
 public func ceil(_ x: Double) -> Double {
     #if canImport(Darwin)
     return Darwin.ceil(x)

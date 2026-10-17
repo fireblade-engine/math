@@ -13,6 +13,7 @@ import Foundation
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a pole error occurs, ±HUGE_VAL, ±HUGE_VALF, or ±HUGE_VALL is returned (with the correct sign).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
+@_disfavoredOverload
 public func atanh(_ x: Float) -> Float {
     #if canImport(Darwin)
     return Darwin.atanhf(x)
@@ -30,6 +31,7 @@ public func atanh(_ x: Float) -> Float {
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a pole error occurs, ±HUGE_VAL, ±HUGE_VALF, or ±HUGE_VALL is returned (with the correct sign).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
+@_disfavoredOverload
 public func atanh(_ x: Double) -> Double {
     #if canImport(Darwin)
     return Darwin.atanh(x)

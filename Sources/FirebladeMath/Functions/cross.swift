@@ -9,6 +9,7 @@ import func simd.simd_cross
 ///   - y: The second vector.
 /// - Returns: The cross product.
 @inlinable
+@_disfavoredOverload
 public func cross(_ x: SIMD2<Double>, _ y: SIMD2<Double>) -> SIMD3<Double> {
     #if FRB_MATH_USE_SIMD
     return simd.simd_cross(x, y)
@@ -24,6 +25,7 @@ public func cross(_ x: SIMD2<Double>, _ y: SIMD2<Double>) -> SIMD3<Double> {
 ///   - y: The second vector.
 /// - Returns: The cross product.
 @inlinable
+@_disfavoredOverload
 public func cross(_ x: SIMD2<Float>, _ y: SIMD2<Float>) -> SIMD3<Float> {
     #if FRB_MATH_USE_SIMD
     return simd.simd_cross(x, y)
@@ -38,6 +40,7 @@ public func cross(_ x: SIMD2<Float>, _ y: SIMD2<Float>) -> SIMD3<Float> {
 ///   - y: The second vector.
 /// - Returns: The cross product.
 @inlinable
+@_disfavoredOverload
 public func cross(_ x: SIMD3<Double>, _ y: SIMD3<Double>) -> SIMD3<Double> {
     #if FRB_MATH_USE_SIMD
     return simd.simd_cross(x, y)
@@ -54,6 +57,7 @@ public func cross(_ x: SIMD3<Double>, _ y: SIMD3<Double>) -> SIMD3<Double> {
 ///   - y: The second vector.
 /// - Returns: The cross product.
 @inlinable
+@_disfavoredOverload
 public func cross(_ x: SIMD3<Float>, _ y: SIMD3<Float>) -> SIMD3<Float> {
     #if FRB_MATH_USE_SIMD
     return simd.simd_cross(x, y)

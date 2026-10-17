@@ -6,6 +6,7 @@ import func simd.simd_rsqrt
 ///
 /// - Parameter x: floating point value
 /// - Returns: 1 / sqrt(arg)
+@_disfavoredOverload
 public func rsqrt(_ x: Double) -> Double {
     #if FRB_MATH_USE_SIMD
     return simd.simd_rsqrt(x)
@@ -18,6 +19,7 @@ public func rsqrt(_ x: Double) -> Double {
 ///
 /// - Parameter x: floating point value
 /// - Returns: 1 / sqrt(arg)
+@_disfavoredOverload
 public func rsqrt(_ x: Float) -> Float {
     #if FRB_MATH_USE_SIMD
     return simd.simd_rsqrt(x)

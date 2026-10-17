@@ -11,6 +11,7 @@ import Foundation
 /// - Parameter x: floating point value representing the area of a hyperbolic sector
 /// - Returns: If no errors occur, the inverse hyperbolic sine of x (sinh^-1(x), or arsinh(x)), is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
+@_disfavoredOverload
 public func asinh(_ x: Double) -> Double {
     #if canImport(Darwin)
     return Darwin.asinh(x)
@@ -26,6 +27,7 @@ public func asinh(_ x: Double) -> Double {
 /// - Parameter x: floating point value representing the area of a hyperbolic sector
 /// - Returns: If no errors occur, the inverse hyperbolic sine of x (sinh^-1(x), or arsinh(x)), is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
+@_disfavoredOverload
 public func asinh(_ x: Float) -> Float {
     #if canImport(Darwin)
     return Darwin.asinhf(x)

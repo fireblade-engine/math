@@ -11,6 +11,7 @@ import Foundation
 /// - Parameter x:     floating point value representing a hyperbolic angle
 /// - Returns: If no errors occur, the hyperbolic tangent of x (tanh(x), or (e^x*-e^-x)/(e^x*+e^-x)) is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
+@_disfavoredOverload
 public func tanh(_ x: Float) -> Float {
     #if canImport(Darwin)
     return Darwin.tanhf(x)
@@ -26,6 +27,7 @@ public func tanh(_ x: Float) -> Float {
 /// - Parameter x:     floating point value representing a hyperbolic angle
 /// - Returns: If no errors occur, the hyperbolic tangent of x (tanh(x), or (e^x*-e^-x)/(e^x*+e^-x)) is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
+@_disfavoredOverload
 public func tanh(_ x: Double) -> Double {
     #if canImport(Darwin)
     return Darwin.tanh(x)

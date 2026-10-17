@@ -15,6 +15,7 @@ import Foundation
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a pole error or a range error due to overflow occurs, ±HUGE_VAL, ±HUGE_VALF, or ±HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
+@_disfavoredOverload
 public func pow(_ base: Float, _ exponent: Float) -> Float {
     #if canImport(Darwin)
     return Darwin.powf(base, exponent)
@@ -34,6 +35,7 @@ public func pow(_ base: Float, _ exponent: Float) -> Float {
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a pole error or a range error due to overflow occurs, ±HUGE_VAL, ±HUGE_VALF, or ±HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
+@_disfavoredOverload
 public func pow(_ base: Double, _ exponent: Double) -> Double {
     #if canImport(Darwin)
     return Darwin.pow(base, exponent)

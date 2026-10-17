@@ -10,6 +10,7 @@ import Foundation
 ///
 /// - Parameter x: floating point value
 /// - Returns: If no errors occur, the largest integer value not greater than x, that is ⌊x⌋, is returned.
+@_disfavoredOverload
 public func floor(_ x: Float) -> Float {
     #if canImport(Darwin)
     return Darwin.floorf(x)
@@ -24,6 +25,7 @@ public func floor(_ x: Float) -> Float {
 ///
 /// - Parameter x: floating point value
 /// - Returns: If no errors occur, the largest integer value not greater than x, that is ⌊x⌋, is returned.
+@_disfavoredOverload
 public func floor(_ x: Double) -> Double {
     #if canImport(Darwin)
     return Darwin.floor(x)
