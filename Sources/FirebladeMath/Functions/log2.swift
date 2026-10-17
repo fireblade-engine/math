@@ -1,10 +1,4 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#else
-import Foundation
-#endif
+import FirebladeMathLibC
 
 ///  Computes the base 2 logarithm of x.
 ///
@@ -14,13 +8,7 @@ import Foundation
 /// If a pole error occurs, -HUGE_VAL, -HUGE_VALF, or -HUGE_VALL is returned.
 @_disfavoredOverload
 public func log2(_ x: Float) -> Float {
-    #if canImport(Darwin)
-    return Darwin.log2f(x)
-    #elseif canImport(Glibc)
-    return Glibc.log2f(x)
-    #else
-    return Foundation.log2f(x)
-    #endif
+    FirebladeMathLibC.log2f(x)
 }
 
 ///  Computes the base 2 logarithm of x.
@@ -31,11 +19,5 @@ public func log2(_ x: Float) -> Float {
 /// If a pole error occurs, -HUGE_VAL, -HUGE_VALF, or -HUGE_VALL is returned.
 @_disfavoredOverload
 public func log2(_ x: Double) -> Double {
-    #if canImport(Darwin)
-    return Darwin.log2(x)
-    #elseif canImport(Glibc)
-    return Glibc.log2(x)
-    #else
-    return Foundation.log2(x)
-    #endif
+    FirebladeMathLibC.log2(x)
 }

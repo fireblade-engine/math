@@ -1,10 +1,4 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#else
-import Foundation
-#endif
+import FirebladeMathLibC
 
 /// Computes the value of base raised to the power exponent.
 ///
@@ -17,13 +11,7 @@ import Foundation
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @_disfavoredOverload
 public func pow(_ base: Float, _ exponent: Float) -> Float {
-    #if canImport(Darwin)
-    return Darwin.powf(base, exponent)
-    #elseif canImport(Glibc)
-    return Glibc.powf(base, exponent)
-    #else
-    return Foundation.powf(base, exponent)
-    #endif
+    FirebladeMathLibC.powf(base, exponent)
 }
 
 /// Computes the value of base raised to the power exponent.
@@ -37,11 +25,5 @@ public func pow(_ base: Float, _ exponent: Float) -> Float {
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @_disfavoredOverload
 public func pow(_ base: Double, _ exponent: Double) -> Double {
-    #if canImport(Darwin)
-    return Darwin.pow(base, exponent)
-    #elseif canImport(Glibc)
-    return Glibc.pow(base, exponent)
-    #else
-    return Foundation.pow(base, exponent)
-    #endif
+    FirebladeMathLibC.pow(base, exponent)
 }

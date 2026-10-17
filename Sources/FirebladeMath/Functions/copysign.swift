@@ -1,10 +1,4 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#else
-import Foundation
-#endif
+import FirebladeMathLibC
 
 /// Composes a floating point value with the magnitude of x and the sign of y.
 ///
@@ -17,13 +11,7 @@ import Foundation
 ///            arithmetic operations.
 @_disfavoredOverload
 public func copysign(_ x: Double, _ y: Double) -> Double {
-    #if canImport(Darwin)
-    return Darwin.copysign(x, y)
-    #elseif canImport(Glibc)
-    return Glibc.copysign(x, y)
-    #else
-    return Foundation.copysign(x, y)
-    #endif
+    FirebladeMathLibC.copysign(x, y)
 }
 
 /// Composes a floating point value with the magnitude of x and the sign of y.
@@ -37,11 +25,5 @@ public func copysign(_ x: Double, _ y: Double) -> Double {
 ///            arithmetic operations.
 @_disfavoredOverload
 public func copysign(_ x: Float, _ y: Float) -> Float {
-    #if canImport(Darwin)
-    return Darwin.copysignf(x, y)
-    #elseif canImport(Glibc)
-    return Glibc.copysignf(x, y)
-    #else
-    return Foundation.copysignf(x, y)
-    #endif
+    FirebladeMathLibC.copysignf(x, y)
 }

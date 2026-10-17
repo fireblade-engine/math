@@ -1,10 +1,4 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#else
-import Foundation
-#endif
+import FirebladeMathLibC
 
 /// Returns the smaller of two floating point arguments, treating NaNs as missing data (between a NaN and a numeric value, the numeric value is chosen).
 ///
@@ -16,13 +10,7 @@ import Foundation
 @_disfavoredOverload
 @available(*, deprecated, message: "Use Swift.min(_:_:) instead.", renamed: "Swift.min")
 public func min(_ x: Float, _ y: Float) -> Float {
-    #if canImport(Darwin)
-    return Darwin.fminf(x, y)
-    #elseif canImport(Glibc)
-    return Glibc.fminf(x, y)
-    #else
-    return Foundation.fminf(x, y)
-    #endif
+    FirebladeMathLibC.fminf(x, y)
 }
 
 /// Returns the smaller of two floating point arguments, treating NaNs as missing data (between a NaN and a numeric value, the numeric value is chosen).
@@ -35,11 +23,5 @@ public func min(_ x: Float, _ y: Float) -> Float {
 @_disfavoredOverload
 @available(*, deprecated, message: "Use Swift.min(_:_:) instead.", renamed: "Swift.min")
 public func min(_ x: Double, _ y: Double) -> Double {
-    #if canImport(Darwin)
-    return Darwin.fmin(x, y)
-    #elseif canImport(Glibc)
-    return Glibc.fmin(x, y)
-    #else
-    return Foundation.fmin(x, y)
-    #endif
+    FirebladeMathLibC.fmin(x, y)
 }

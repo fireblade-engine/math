@@ -1,10 +1,4 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#else
-import Foundation
-#endif
+import FirebladeMathLibC
 
 /// Computes the smallest integer value not less than x.
 ///
@@ -12,13 +6,7 @@ import Foundation
 /// - Returns: If no errors occur, the smallest integer value not less than x, that is ⌈x⌉, is returned.
 @_disfavoredOverload
 public func ceil(_ x: Float) -> Float {
-    #if canImport(Darwin)
-    return Darwin.ceilf(x)
-    #elseif canImport(Glibc)
-    return Glibc.ceilf(x)
-    #else
-    return Foundation.ceilf(x)
-    #endif
+    FirebladeMathLibC.ceilf(x)
 }
 
 /// Computes the smallest integer value not less than x.
@@ -27,11 +15,5 @@ public func ceil(_ x: Float) -> Float {
 /// - Returns: If no errors occur, the smallest integer value not less than x, that is ⌈x⌉, is returned.
 @_disfavoredOverload
 public func ceil(_ x: Double) -> Double {
-    #if canImport(Darwin)
-    return Darwin.ceil(x)
-    #elseif canImport(Glibc)
-    return Glibc.ceil(x)
-    #else
-    return Foundation.ceil(x)
-    #endif
+    FirebladeMathLibC.ceil(x)
 }

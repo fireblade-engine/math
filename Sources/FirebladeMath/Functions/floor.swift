@@ -1,10 +1,4 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#else
-import Foundation
-#endif
+import FirebladeMathLibC
 
 /// Computes the largest integer value not greater than x.
 ///
@@ -12,13 +6,7 @@ import Foundation
 /// - Returns: If no errors occur, the largest integer value not greater than x, that is ⌊x⌋, is returned.
 @_disfavoredOverload
 public func floor(_ x: Float) -> Float {
-    #if canImport(Darwin)
-    return Darwin.floorf(x)
-    #elseif canImport(Glibc)
-    return Glibc.floorf(x)
-    #else
-    return Foundation.floorf(x)
-    #endif
+    FirebladeMathLibC.floorf(x)
 }
 
 /// Computes the largest integer value not greater than x.
@@ -27,11 +15,5 @@ public func floor(_ x: Float) -> Float {
 /// - Returns: If no errors occur, the largest integer value not greater than x, that is ⌊x⌋, is returned.
 @_disfavoredOverload
 public func floor(_ x: Double) -> Double {
-    #if canImport(Darwin)
-    return Darwin.floor(x)
-    #elseif canImport(Glibc)
-    return Glibc.floor(x)
-    #else
-    return Foundation.floor(x)
-    #endif
+    FirebladeMathLibC.floor(x)
 }

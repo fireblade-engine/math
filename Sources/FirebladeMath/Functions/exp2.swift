@@ -1,10 +1,4 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#else
-import Foundation
-#endif
+import FirebladeMathLibC
 
 /// Computes 2 raised to the given power n.
 ///
@@ -14,13 +8,7 @@ import Foundation
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @_disfavoredOverload
 public func exp2(_ power: Float) -> Float {
-    #if canImport(Darwin)
-    return Darwin.exp2f(power)
-    #elseif canImport(Glibc)
-    return Glibc.exp2f(power)
-    #else
-    return Foundation.exp2f(power)
-    #endif
+    FirebladeMathLibC.exp2f(power)
 }
 
 /// Computes 2 raised to the given power n.
@@ -31,11 +19,5 @@ public func exp2(_ power: Float) -> Float {
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @_disfavoredOverload
 public func exp2(_ power: Double) -> Double {
-    #if canImport(Darwin)
-    return Darwin.exp2(power)
-    #elseif canImport(Glibc)
-    return Glibc.exp2(power)
-    #else
-    return Foundation.exp2(power)
-    #endif
+    FirebladeMathLibC.exp2(power)
 }

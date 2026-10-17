@@ -1,10 +1,4 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#else
-import Foundation
-#endif
+import FirebladeMathLibC
 
 /// Returns the larger of two floating point arguments, treating NaNs as missing data (between a NaN and a numeric value, the numeric value is chosen).
 ///
@@ -16,13 +10,7 @@ import Foundation
 @_disfavoredOverload
 @available(*, deprecated, message: "Use Swift.max(_:_:) instead.", renamed: "Swift.max")
 public func max(_ x: Float, _ y: Float) -> Float {
-    #if canImport(Darwin)
-    return Darwin.fmaxf(x, y)
-    #elseif canImport(Glibc)
-    return Glibc.fmaxf(x, y)
-    #else
-    return Foundation.fmaxf(x, y)
-    #endif
+    FirebladeMathLibC.fmaxf(x, y)
 }
 
 /// Returns the larger of two floating point arguments, treating NaNs as missing data (between a NaN and a numeric value, the numeric value is chosen).
@@ -35,11 +23,5 @@ public func max(_ x: Float, _ y: Float) -> Float {
 @_disfavoredOverload
 @available(*, deprecated, message: "Use Swift.max(_:_:) instead.", renamed: "Swift.max")
 public func max(_ x: Double, _ y: Double) -> Double {
-    #if canImport(Darwin)
-    return Darwin.fmax(x, y)
-    #elseif canImport(Glibc)
-    return Glibc.fmax(x, y)
-    #else
-    return Foundation.fmax(x, y)
-    #endif
+    FirebladeMathLibC.fmax(x, y)
 }
