@@ -15,7 +15,7 @@ struct QuaternionMultiplicationTests {
         var state: UInt64 = 0xD1B5_4A32_D192_ED03
         func next() -> Double {
             state = state &* 6_364_136_223_846_793_005 &+ 1_442_695_040_888_963_407
-            return Double(state >> 11) / Double(1 << 53) * 4 - 2
+            return Double(state >> 11) * 0x1p-53 * 4 - 2
         }
         return (0..<64).map { _ in ((0..<4).map { _ in next() }, (0..<4).map { _ in next() }) }
     }()

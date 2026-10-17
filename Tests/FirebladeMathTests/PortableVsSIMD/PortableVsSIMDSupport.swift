@@ -31,7 +31,7 @@ struct SplitMix {
         z = (z ^ (z >> 30)) &* 0xBF58_476D_1CE4_E5B9
         z = (z ^ (z >> 27)) &* 0x94D0_49BB_1331_11EB
         z ^= z >> 31
-        let unit = Double(z >> 11) / Double(1 << 53)
+        let unit = Double(z >> 11) * 0x1p-53 // no `1 << 53`: Int is 32-bit on wasm32
         return range.lowerBound + unit * (range.upperBound - range.lowerBound)
     }
 

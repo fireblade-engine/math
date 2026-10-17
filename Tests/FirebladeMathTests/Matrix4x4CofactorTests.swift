@@ -15,7 +15,7 @@ struct Matrix4x4CofactorTests {
         var state: UInt64 = 0x9E37_79B9_7F4A_7C15
         func next() -> Double {
             state = state &* 6_364_136_223_846_793_005 &+ 1_442_695_040_888_963_407
-            return Double(state >> 11) / Double(1 << 53) * 4 - 2
+            return Double(state >> 11) * 0x1p-53 * 4 - 2
         }
         var result: [[Double]] = []
         for _ in 0..<32 {
