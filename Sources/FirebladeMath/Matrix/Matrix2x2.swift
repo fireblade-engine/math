@@ -65,7 +65,7 @@ public struct Matrix2x2<Storage: Storage2x2Protocol>: RandomAccessCollection, Mu
     @inlinable
     public init(_ columns: [Vector]) {
         precondition(columns.count == 2, "Matrix needs exactly 2 Vector vectors")
-        storage = Storage(columns)
+        self.init(columns[0], columns[1])
     }
 
     /// Creates a new 2x2 matrix from two column vectors.
@@ -74,7 +74,7 @@ public struct Matrix2x2<Storage: Storage2x2Protocol>: RandomAccessCollection, Mu
     ///   - column1: The second column vector.
     @inlinable
     public init(_ column0: Vector, _ column1: Vector) {
-        self.init([column0, column1])
+        storage = Storage(column0, column1)
     }
 
     /// Creates a new 2x2 matrix from an array of values in column-major order.
@@ -82,8 +82,10 @@ public struct Matrix2x2<Storage: Storage2x2Protocol>: RandomAccessCollection, Mu
     @inlinable
     public init(_ values: [Storage.Value]) {
         precondition(values.count == 4, "Matrix needs exactly 4 values")
-        self.init([Vector(values[0...1]),
-                   Vector(values[2...3])])
+        self.init(
+            Vector(values[0], values[1]),
+            Vector(values[2], values[3])
+        )
     }
 
     /// Accesses the value at the specified flat index in column-major order.
@@ -117,7 +119,7 @@ public struct Matrix2x2<Storage: Storage2x2Protocol>: RandomAccessCollection, Mu
 
     /// An array containing the elements of the matrix in column-major order.
     @inlinable public var elements: [Value] {
-        [Value](AnyIterator(storage.makeIterator()))
+        Array(storage)
     }
 
     /// Provides access to the underlying memory as a contiguous buffer.

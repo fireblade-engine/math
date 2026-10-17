@@ -10,7 +10,7 @@ extension SIMD {
 
     /// An array containing the scalar components of the vector.
     @inlinable public var elements: [Scalar] {
-        Array(AnyIterator(makeIterator()))
+        indices.map { self[$0] }
     }
 }
 

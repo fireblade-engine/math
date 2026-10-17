@@ -18,8 +18,13 @@ public struct Storage2x2<Value: StorageScalar>: Storage2x2Protocol {
     @inlinable
     public init(_ columns: [Column]) {
         precondition(columns.count == 2, "Storage needs exactly 2 column vectors")
-        column0 = columns[0]
-        column1 = columns[1]
+        self.init(columns[0], columns[1])
+    }
+
+    @inlinable
+    public init(_ column0: Column, _ column1: Column) {
+        self.column0 = column0
+        self.column1 = column1
     }
 
     @inlinable
@@ -33,12 +38,6 @@ public struct Storage2x2<Value: StorageScalar>: Storage2x2Protocol {
     public init() {
         let zero = Value.zero
         self.init(diagonal: Column(zero, zero))
-    }
-
-    @inlinable
-    @inline(__always)
-    public func makeIterator() -> IndexingIterator<[Value]> {
-        [column0, column1].flatMap { $0 }.makeIterator()
     }
 
     @inlinable
@@ -113,9 +112,14 @@ public struct Storage3x3<Value: StorageScalar>: Storage3x3Protocol {
     @inlinable
     public init(_ columns: [Column]) {
         precondition(columns.count == 3, "Storage needs exactly 3 column vectors")
-        column0 = columns[0]
-        column1 = columns[1]
-        column2 = columns[2]
+        self.init(columns[0], columns[1], columns[2])
+    }
+
+    @inlinable
+    public init(_ column0: Column, _ column1: Column, _ column2: Column) {
+        self.column0 = column0
+        self.column1 = column1
+        self.column2 = column2
     }
 
     @inlinable
@@ -130,12 +134,6 @@ public struct Storage3x3<Value: StorageScalar>: Storage3x3Protocol {
     public init() {
         let zero = Value.zero
         self.init(diagonal: Column(zero, zero, zero))
-    }
-
-    @inlinable
-    @inline(__always)
-    public func makeIterator() -> IndexingIterator<[Value]> {
-        [column0, column1, column2].flatMap { $0 }.makeIterator()
     }
 
     @inlinable
@@ -220,10 +218,15 @@ public struct Storage4x4<Value: StorageScalar>: Storage4x4Protocol {
     @inlinable
     public init(_ columns: [Column]) {
         precondition(columns.count == 4, "Storage needs exactly 4 column vectors")
-        column0 = columns[0]
-        column1 = columns[1]
-        column2 = columns[2]
-        column3 = columns[3]
+        self.init(columns[0], columns[1], columns[2], columns[3])
+    }
+
+    @inlinable
+    public init(_ column0: Column, _ column1: Column, _ column2: Column, _ column3: Column) {
+        self.column0 = column0
+        self.column1 = column1
+        self.column2 = column2
+        self.column3 = column3
     }
 
     @inlinable
@@ -239,12 +242,6 @@ public struct Storage4x4<Value: StorageScalar>: Storage4x4Protocol {
     public init() {
         let zero = Value.zero
         self.init(diagonal: Column(zero, zero, zero, zero))
-    }
-
-    @inlinable
-    @inline(__always)
-    public func makeIterator() -> IndexingIterator<[Value]> {
-        [column0, column1, column2, column3].flatMap { $0 }.makeIterator()
     }
 
     @inlinable

@@ -65,7 +65,7 @@ public struct Matrix4x4<Storage: Storage4x4Protocol>: RandomAccessCollection, Mu
     @inlinable
     public init(_ columns: [Vector]) {
         precondition(columns.count == 4, "Matrix needs exactly 4 Column vectors")
-        storage = Storage(columns)
+        self.init(columns[0], columns[1], columns[2], columns[3])
     }
 
     /// Creates a new 4x4 matrix from four column vectors.
@@ -76,7 +76,7 @@ public struct Matrix4x4<Storage: Storage4x4Protocol>: RandomAccessCollection, Mu
     ///   - column3: The fourth column vector.
     @inlinable
     public init(_ column0: Vector, _ column1: Vector, _ column2: Vector, _ column3: Vector) {
-        self.init([column0, column1, column2, column3])
+        storage = Storage(column0, column1, column2, column3)
     }
 
     /// Creates a new 4x4 matrix from an array of values in column-major order.
@@ -84,10 +84,12 @@ public struct Matrix4x4<Storage: Storage4x4Protocol>: RandomAccessCollection, Mu
     @inlinable
     public init(_ values: [Value]) {
         precondition(values.count == 16, "Matrix needs exactly 16 values")
-        self.init([Vector(values[0...3]),
-                   Vector(values[4...7]),
-                   Vector(values[8...11]),
-                   Vector(values[12...15])])
+        self.init(
+            Vector(values[0], values[1], values[2], values[3]),
+            Vector(values[4], values[5], values[6], values[7]),
+            Vector(values[8], values[9], values[10], values[11]),
+            Vector(values[12], values[13], values[14], values[15])
+        )
     }
 
     /// Accesses the value at the specified flat index in column-major order.
@@ -121,7 +123,7 @@ public struct Matrix4x4<Storage: Storage4x4Protocol>: RandomAccessCollection, Mu
 
     /// An array containing the elements of the matrix in column-major order.
     @inlinable public var elements: [Value] {
-        [Value](AnyIterator(storage.makeIterator()))
+        Array(storage)
     }
 
     /// Provides access to the underlying memory as a contiguous buffer.
