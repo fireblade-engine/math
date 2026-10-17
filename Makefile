@@ -11,7 +11,7 @@ DOCS_VERSION_PATH ?= main
 HOSTING_BASE_PATH ?= $(REPO_NAME)/$(DOCS_VERSION_PATH)
 
 # Targets
-.PHONY: setup lint lint-fix check-inlinable test test-coverage clean pre-commit docs docs-preview docs-generate docs-coverage profile-stats benchmark-commits
+.PHONY: setup lint lint-fix check-inlinable test test-coverage clean pre-commit docs docs-preview docs-generate docs-coverage profile-stats benchmark-commits benchmark benchmark-thresholds-check benchmark-thresholds-update
 
 setup:
 	@echo "Detected Package Swift Version: $(PACKAGE_SWIFT_VERSION)"
@@ -87,3 +87,12 @@ benchmark-commits:
 	chmod +x Scripts/profile-compiler-stats.sh
 	chmod +x Scripts/benchmark-commits.py
 	python3 Scripts/benchmark-commits.py
+
+benchmark:
+	cd Benchmarks && swift package benchmark
+
+benchmark-thresholds-check:
+	cd Benchmarks && swift package benchmark thresholds check --metric mallocCountTotal
+
+benchmark-thresholds-update:
+	cd Benchmarks && swift package --allow-writing-to-package-directory benchmark thresholds update --metric mallocCountTotal
