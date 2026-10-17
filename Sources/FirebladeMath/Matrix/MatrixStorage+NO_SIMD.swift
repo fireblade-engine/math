@@ -71,11 +71,11 @@ public struct Storage2x2<Value: StorageScalar>: Storage2x2Protocol {
     @inlinable
     public subscript(index: Int) -> Value {
         get {
-            let (column, row) = columnRow(index: index, width: 2)
+            let (column, row) = columnMajorPosition(of: index, rows: 2)
             return self[column, row]
         }
         set {
-            let (column, row) = columnRow(index: index, width: 2)
+            let (column, row) = columnMajorPosition(of: index, rows: 2)
             self[column, row] = newValue
         }
     }
@@ -173,11 +173,11 @@ public struct Storage3x3<Value: StorageScalar>: Storage3x3Protocol {
     @inlinable
     public subscript(index: Int) -> Value {
         get {
-            let (column, row) = columnRow(index: index, width: 3)
+            let (column, row) = columnMajorPosition(of: index, rows: 3)
             return self[column, row]
         }
         set {
-            let (column, row) = columnRow(index: index, width: 3)
+            let (column, row) = columnMajorPosition(of: index, rows: 3)
             self[column, row] = newValue
         }
     }
@@ -287,11 +287,11 @@ public struct Storage4x4<Value: StorageScalar>: Storage4x4Protocol {
     @inlinable
     public subscript(index: Int) -> Value {
         get {
-            let (column, row) = columnRow(index: index, width: 4)
+            let (column, row) = columnMajorPosition(of: index, rows: 4)
             return self[column, row]
         }
         set {
-            let (column, row) = columnRow(index: index, width: 4)
+            let (column, row) = columnMajorPosition(of: index, rows: 4)
             self[column, row] = newValue
         }
     }
