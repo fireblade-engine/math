@@ -7,6 +7,7 @@ import func simd.simd_length
 /// - Parameter x: x
 /// - Returns: the distance between the argument and the origin.
 @inlinable
+@_disfavoredOverload
 public func length(_ x: SIMD2<Double>) -> Double {
     #if FRB_MATH_USE_SIMD
     return simd_length(x)
@@ -21,6 +22,7 @@ public func length(_ x: SIMD2<Double>) -> Double {
 /// - Parameter x: x
 /// - Returns: the distance between the argument and the origin.
 @inlinable
+@_disfavoredOverload
 public func length(_ x: SIMD2<Float>) -> Float {
     #if FRB_MATH_USE_SIMD
     return simd_length(x)
@@ -35,6 +37,7 @@ public func length(_ x: SIMD2<Float>) -> Float {
 /// - Parameter x: x
 /// - Returns: the distance between the argument and the origin.
 @inlinable
+@_disfavoredOverload
 public func length(_ x: SIMD3<Double>) -> Double {
     #if FRB_MATH_USE_SIMD
     return simd_length(x)
@@ -49,6 +52,7 @@ public func length(_ x: SIMD3<Double>) -> Double {
 /// - Parameter x: x
 /// - Returns: the distance between the argument and the origin.
 @inlinable
+@_disfavoredOverload
 public func length(_ x: SIMD3<Float>) -> Float {
     #if FRB_MATH_USE_SIMD
     return simd_length(x)
@@ -63,6 +67,7 @@ public func length(_ x: SIMD3<Float>) -> Float {
 /// - Parameter x: x
 /// - Returns: the distance between the argument and the origin.
 @inlinable
+@_disfavoredOverload
 public func length(_ x: SIMD4<Double>) -> Double {
     #if FRB_MATH_USE_SIMD
     return simd_length(x)
@@ -77,6 +82,7 @@ public func length(_ x: SIMD4<Double>) -> Double {
 /// - Parameter x: x
 /// - Returns: the distance between the argument and the origin.
 @inlinable
+@_disfavoredOverload
 public func length(_ x: SIMD4<Float>) -> Float {
     #if FRB_MATH_USE_SIMD
     return simd_length(x)
@@ -91,6 +97,7 @@ public func length(_ x: SIMD4<Float>) -> Float {
 /// - Parameter x: x
 /// - Returns: the distance between the argument and the origin.
 @inlinable
+@_disfavoredOverload
 public func length(_ x: Quat4f) -> Float {
     #if FRB_MATH_USE_SIMD
     return simd_length(x.storage)
@@ -105,6 +112,7 @@ public func length(_ x: Quat4f) -> Float {
 /// - Parameter x: x
 /// - Returns: the distance between the argument and the origin.
 @inlinable
+@_disfavoredOverload
 public func length(_ x: Quat4d) -> Double {
     #if FRB_MATH_USE_SIMD
     return simd_length(x.storage)

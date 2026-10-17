@@ -13,6 +13,7 @@ import Foundation
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @inlinable
+@_disfavoredOverload
 public func cos(_ angleRad: Float) -> Float {
     #if canImport(Darwin)
     return Darwin.cosf(angleRad)
@@ -30,6 +31,7 @@ public func cos(_ angleRad: Float) -> Float {
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @inlinable
+@_disfavoredOverload
 public func cos(_ angleRad: Double) -> Double {
     #if canImport(Darwin)
     return Darwin.cos(angleRad)

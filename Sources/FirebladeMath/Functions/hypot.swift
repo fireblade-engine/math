@@ -9,6 +9,7 @@ import Foundation
 /// Returns the hypotenuse of a right-angled triangle whose legs are x and y.
 /// - Parameter x: x
 /// - Parameter y: y
+@_disfavoredOverload
 public func hypot(_ x: Float, _ y: Float) -> Float {
     #if canImport(Darwin)
     return Darwin.hypotf(x, y)
@@ -22,6 +23,7 @@ public func hypot(_ x: Float, _ y: Float) -> Float {
 /// Returns the hypotenuse of a right-angled triangle whose legs are x and y.
 /// - Parameter x: x
 /// - Parameter y: y
+@_disfavoredOverload
 public func hypot(_ x: Double, _ y: Double) -> Double {
     #if canImport(Darwin)
     return Darwin.hypot(x, y)

@@ -11,6 +11,7 @@ import Foundation
 /// - Parameter y: The y coordinate.
 /// - Parameter x: The x coordinate.
 /// - Returns: The arc tangent of y/x in radians.
+@_disfavoredOverload
 public func atan2(_ y: Double, _ x: Double) -> Double {
     #if canImport(Darwin)
     return Darwin.atan2(y, x)
@@ -26,6 +27,7 @@ public func atan2(_ y: Double, _ x: Double) -> Double {
 /// - Parameter y: The y coordinate.
 /// - Parameter x: The x coordinate.
 /// - Returns: The arc tangent of y/x in radians.
+@_disfavoredOverload
 public func atan2(_ y: Float, _ x: Float) -> Float {
     #if canImport(Darwin)
     return Darwin.atan2f(y, x)
