@@ -33,5 +33,10 @@ jobs:
       - name: Run Tests (Release)
         run: swift test -c release --parallel -Xswiftc -warnings-as-errors
 
+      # Without the simd trait, FirebladeMath uses its portable implementations while Apple's
+      # simd is still importable, so PortableVsSIMDTests compares the two.
+      - name: Run Tests (Release, portable path vs Apple simd)
+        run: swift test -c release --disable-default-traits --parallel -Xswiftc -warnings-as-errors
+
       - name: Check @inlinable Coverage
         run: Scripts/check-inlinable.sh
