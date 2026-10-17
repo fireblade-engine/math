@@ -8,3 +8,6 @@ gha-creds-*.json
 xcuserdata/
 contents.xcworkspacedata
 conductor
+
+# graft's local graph cache — regenerable, not committed (run `graft build`).
+/graft/
