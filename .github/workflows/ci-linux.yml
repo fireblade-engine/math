@@ -11,6 +11,8 @@ jobs:
   linux:
     name: Linux (Swift ${{ matrix.swift }})
     runs-on: ubuntu-latest
+    # Official Swift images instead of swift-actions/setup-swift, whose v3 fails on Linux (#57).
+    container: swift:${{ matrix.swift }}
     strategy:
       fail-fast: false
       matrix:
@@ -20,13 +22,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Setup Swift
-        uses: swift-actions/setup-swift@v2
-        with:
-          swift-version: ${{ matrix.swift }}
-
       - name: Run Tests (Release)
         run: swift test -c release --parallel -Xswiftc -warnings-as-errors
 
       - name: Check @inlinable Coverage
-        run: Scripts/check-inlinable.sh
+        run: |
+          command -v python3 >/dev/null || { apt-get update -q && apt-get install -yq python3; }
+          Scripts/check-inlinable.sh
