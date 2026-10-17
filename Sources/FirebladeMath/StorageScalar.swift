@@ -6,14 +6,14 @@ public protocol StorageScalar: SIMDScalar, BinaryFloatingPoint, Sendable, Codabl
 
 extension Float: StorageScalar {
     /// The value 1.0.
-    public static var one: Float {
+    @inlinable public static var one: Float {
         1.0
     }
 }
 
 extension Double: StorageScalar {
     /// The value 1.0.
-    public static var one: Double {
+    @inlinable public static var one: Double {
         1.0
     }
 }

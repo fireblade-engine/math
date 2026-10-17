@@ -7,6 +7,8 @@ import FirebladeMathLibC
 /// If a range error due to overflow occurs, ±HUGE_VAL, ±HUGE_VALF, or ±HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @_disfavoredOverload
+@inlinable
+@inline(__always)
 public func sinh(_ x: Float) -> Float {
     FirebladeMathLibC.sinhf(x)
 }
@@ -18,6 +20,8 @@ public func sinh(_ x: Float) -> Float {
 /// If a range error due to overflow occurs, ±HUGE_VAL, ±HUGE_VALF, or ±HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @_disfavoredOverload
+@inlinable
+@inline(__always)
 public func sinh(_ x: Double) -> Double {
     FirebladeMathLibC.sinh(x)
 }

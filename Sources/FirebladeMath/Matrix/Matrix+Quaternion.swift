@@ -2,6 +2,7 @@ extension Mat4x4f {
     /// Creates a new matrix from the specified quaternion.
     /// Quaternion will be normalized.
     /// - Parameter quaternion: The orientation quaternion.
+    @inlinable
     public init(orientation quaternion: Quat4f) {
         self = matrix4x4(from: quaternion.normalized)
     }

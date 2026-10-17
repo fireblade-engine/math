@@ -25,6 +25,7 @@ extension simd_float2x2: Storage2x2Protocol, @retroactive @unchecked Sendable, @
 
     /// Accesses the value at the specified flat index in column-major order.
     /// - Parameter index: The flat index.
+    @inlinable
     public subscript(index: Int) -> Float {
         get {
             let (col, row) = columnRow(index: index, width: 2)
@@ -72,6 +73,7 @@ extension simd_double2x2: Storage2x2Protocol, @retroactive @unchecked Sendable, 
 
     /// Accesses the value at the specified flat index in column-major order.
     /// - Parameter index: The flat index.
+    @inlinable
     public subscript(index: Int) -> Double {
         get {
             let (col, row) = columnRow(index: index, width: 2)
@@ -121,6 +123,7 @@ extension simd_float3x3: Storage3x3Protocol, @retroactive @unchecked Sendable, @
 
     /// Accesses the value at the specified flat index in column-major order.
     /// - Parameter index: The flat index.
+    @inlinable
     public subscript(index: Int) -> Float {
         get {
             let (col, row) = columnRow(index: index, width: 3)
@@ -174,6 +177,7 @@ extension simd_double3x3: Storage3x3Protocol, @retroactive @unchecked Sendable, 
 
     /// Accesses the value at the specified flat index in column-major order.
     /// - Parameter index: The flat index.
+    @inlinable
     public subscript(index: Int) -> Double {
         get {
             let (col, row) = columnRow(index: index, width: 3)
@@ -229,6 +233,7 @@ extension simd_float4x4: Storage4x4Protocol, @retroactive @unchecked Sendable, @
 
     /// Accesses the value at the specified flat index in column-major order.
     /// - Parameter index: The flat index.
+    @inlinable
     public subscript(index: Int) -> Float {
         get {
             let (col, row) = columnRow(index: index, width: 4)
@@ -288,6 +293,7 @@ extension simd_double4x4: Storage4x4Protocol, @retroactive @unchecked Sendable, 
 
     /// Accesses the value at the specified flat index in column-major order.
     /// - Parameter index: The flat index.
+    @inlinable
     public subscript(index: Int) -> Double {
         get {
             let (col, row) = columnRow(index: index, width: 4)

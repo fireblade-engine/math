@@ -14,21 +14,25 @@ public struct Matrix4x4<Storage: Storage4x4Protocol>: RandomAccessCollection, Mu
     @usableFromInline var storage: Storage
 
     /// The start index of the matrix (0).
-    public var startIndex: Index {
+    @inlinable public var startIndex: Index {
         storage.startIndex
     }
 
     /// The end index of the matrix (16).
-    public var endIndex: Index {
+    @inlinable public var endIndex: Index {
         storage.endIndex
     }
 
     /// Returns the index after the given index.
+    @inlinable
+    @inline(__always)
     public func index(after i: Index) -> Index {
         storage.index(after: i)
     }
 
     /// Returns the index before the given index.
+    @inlinable
+    @inline(__always)
     public func index(before i: Index) -> Index {
         storage.index(before: i)
     }
@@ -51,12 +55,14 @@ public struct Matrix4x4<Storage: Storage4x4Protocol>: RandomAccessCollection, Mu
 
     /// Creates a new 4x4 matrix with the specified diagonal values.
     /// - Parameter diagonal: The values to place on the diagonal.
+    @inlinable
     public init(diagonal: Vector) {
         storage = Storage(diagonal: diagonal)
     }
 
     /// Creates a new 4x4 matrix from an array of column vectors.
     /// - Parameter columns: An array of 4 column vectors.
+    @inlinable
     public init(_ columns: [Vector]) {
         precondition(columns.count == 4, "Matrix needs exactly 4 Column vectors")
         storage = Storage(columns)
@@ -68,12 +74,14 @@ public struct Matrix4x4<Storage: Storage4x4Protocol>: RandomAccessCollection, Mu
     ///   - column1: The second column vector.
     ///   - column2: The third column vector.
     ///   - column3: The fourth column vector.
+    @inlinable
     public init(_ column0: Vector, _ column1: Vector, _ column2: Vector, _ column3: Vector) {
         self.init([column0, column1, column2, column3])
     }
 
     /// Creates a new 4x4 matrix from an array of values in column-major order.
     /// - Parameter values: An array of 16 values.
+    @inlinable
     public init(_ values: [Value]) {
         precondition(values.count == 16, "Matrix needs exactly 16 values")
         self.init([Vector(values[0...3]),
@@ -83,6 +91,7 @@ public struct Matrix4x4<Storage: Storage4x4Protocol>: RandomAccessCollection, Mu
     }
 
     /// Accesses the value at the specified flat index in column-major order.
+    @inlinable
     public subscript(index: Index) -> Element {
         get { storage[index] }
         set { storage[index] = newValue }
@@ -92,12 +101,15 @@ public struct Matrix4x4<Storage: Storage4x4Protocol>: RandomAccessCollection, Mu
     /// - Parameters:
     ///   - column: The column index (0-3).
     ///   - row: The row index (0-3).
+    @inlinable
     public subscript(column: Int, row: Int) -> Value {
         get { storage[column, row] }
         set { storage[column, row] = newValue }
     }
 
     /// Replaces the specified subrange of elements with the given collection.
+    @inlinable
+    @inline(__always)
     public mutating func replaceSubrange<C: Collection>(_ subrange: Range<Int>, with newElements: C) where Value == C.Element {
         storage.replaceSubrange(subrange, with: newElements)
     }
@@ -142,6 +154,7 @@ public struct Matrix4x4<Storage: Storage4x4Protocol>: RandomAccessCollection, Mu
 
 extension Matrix4x4: ExpressibleByArrayLiteral {
     /// Creates a 4x4 matrix from an array literal in column-major order.
+    @inlinable
     public init(arrayLiteral elements: Value...) {
         self.init(elements)
     }
@@ -149,6 +162,8 @@ extension Matrix4x4: ExpressibleByArrayLiteral {
 
 extension Matrix4x4: Equatable {
     /// Returns a Boolean value indicating whether two matrices are equal.
+    @inlinable
+    @inline(__always)
     public static func == (lhs: Matrix4x4<Storage>, rhs: Matrix4x4<Storage>) -> Bool {
         lhs.storage == rhs.storage
     }

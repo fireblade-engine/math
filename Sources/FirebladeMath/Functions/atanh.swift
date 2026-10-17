@@ -8,6 +8,8 @@ import FirebladeMathLibC
 /// If a pole error occurs, ±HUGE_VAL, ±HUGE_VALF, or ±HUGE_VALL is returned (with the correct sign).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @_disfavoredOverload
+@inlinable
+@inline(__always)
 public func atanh(_ x: Float) -> Float {
     FirebladeMathLibC.atanhf(x)
 }
@@ -20,6 +22,8 @@ public func atanh(_ x: Float) -> Float {
 /// If a pole error occurs, ±HUGE_VAL, ±HUGE_VALF, or ±HUGE_VALL is returned (with the correct sign).
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @_disfavoredOverload
+@inlinable
+@inline(__always)
 public func atanh(_ x: Double) -> Double {
     FirebladeMathLibC.atanh(x)
 }

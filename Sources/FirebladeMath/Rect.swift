@@ -7,25 +7,25 @@ public struct Rect<Value: Numeric> {
     public var size: Size<Value>
 
     /// The x-coordinate of the rectangle's origin.
-    public var x: Value {
+    @inlinable public var x: Value {
         get { origin.x }
         set { origin.x = newValue }
     }
 
     /// The y-coordinate of the rectangle's origin.
-    public var y: Value {
+    @inlinable public var y: Value {
         get { origin.y }
         set { origin.y = newValue }
     }
 
     /// The width of the rectangle.
-    public var width: Value {
+    @inlinable public var width: Value {
         get { size.width }
         set { size.width = newValue }
     }
 
     /// The height of the rectangle.
-    public var height: Value {
+    @inlinable public var height: Value {
         get { size.height }
         set { size.height = newValue }
     }
@@ -34,6 +34,7 @@ public struct Rect<Value: Numeric> {
     /// - Parameters:
     ///   - origin: The origin point.
     ///   - size: The dimensions.
+    @inlinable
     public init(origin: Point<Value>, size: Size<Value>) {
         self.origin = origin
         self.size = size
@@ -47,6 +48,7 @@ extension Rect {
     ///   - y: The y-coordinate.
     ///   - width: The width.
     ///   - height: The height.
+    @inlinable
     public init(x: Value, y: Value, width: Value, height: Value) {
         self.init(origin: Point(x: x, y: y),
                   size: Size(width: width, height: height))
@@ -58,66 +60,74 @@ extension Rect {
     ///   - y: The y-coordinate.
     ///   - width: The width.
     ///   - height: The height.
+    @inlinable
     public init(_ x: Value, _ y: Value, _ width: Value, _ height: Value) {
         self.init(x: x, y: y, width: width, height: height)
     }
 }
 
-extension Rect: Equatable where Value: Equatable {}
+extension Rect: Equatable where Value: Equatable {
+    /// Returns a Boolean value indicating whether two values are equal.
+    @inlinable
+    public static func == (lhs: Rect<Value>, rhs: Rect<Value>) -> Bool {
+        lhs.origin == rhs.origin && lhs.size == rhs.size
+    }
+}
+
 extension Rect: Hashable where Value: Hashable {}
 extension Rect: Codable where Value: Codable {}
 extension Rect: Sendable where Value: Sendable {}
 
 extension Rect {
     /// The minimum x-coordinate of the rectangle.
-    public var minX: Value {
+    @inlinable public var minX: Value {
         origin.x
     }
 
     /// The minimum y-coordinate of the rectangle.
-    public var minY: Value {
+    @inlinable public var minY: Value {
         origin.y
     }
 
     /// The maximum x-coordinate of the rectangle.
-    public var maxX: Value {
+    @inlinable public var maxX: Value {
         origin.x + size.width
     }
 
     /// The maximum y-coordinate of the rectangle.
-    public var maxY: Value {
+    @inlinable public var maxY: Value {
         origin.y + size.height
     }
 
     /// The top-left corner of the rectangle.
-    public var topLeft: Point<Value> {
+    @inlinable public var topLeft: Point<Value> {
         Point(minX, maxY)
     }
 
     /// The top-right corner of the rectangle.
-    public var topRight: Point<Value> {
+    @inlinable public var topRight: Point<Value> {
         Point(maxX, maxY)
     }
 
     /// The bottom-left corner of the rectangle.
-    public var bottomLeft: Point<Value> {
+    @inlinable public var bottomLeft: Point<Value> {
         Point(minX, minY)
     }
 
     /// The bottom-right corner of the rectangle.
-    public var bottomRight: Point<Value> {
+    @inlinable public var bottomRight: Point<Value> {
         Point(maxX, minY)
     }
 }
 
 extension Rect where Value: FloatingPoint {
     /// The x-coordinate of the rectangle's center.
-    public var midX: Value {
+    @inlinable public var midX: Value {
         origin.x + size.width / Value(2)
     }
 
     /// The y-coordinate of the rectangle's center.
-    public var midY: Value {
+    @inlinable public var midY: Value {
         origin.y + size.height / Value(2)
     }
 }

@@ -10,6 +10,8 @@ import FirebladeMathLibC
 ///            If y is -0, the result is only negative if the implementation supports the signed zero consistently in
 ///            arithmetic operations.
 @_disfavoredOverload
+@inlinable
+@inline(__always)
 public func copysign(_ x: Double, _ y: Double) -> Double {
     FirebladeMathLibC.copysign(x, y)
 }
@@ -24,6 +26,8 @@ public func copysign(_ x: Double, _ y: Double) -> Double {
 ///            If y is -0, the result is only negative if the implementation supports the signed zero consistently in
 ///            arithmetic operations.
 @_disfavoredOverload
+@inlinable
+@inline(__always)
 public func copysign(_ x: Float, _ y: Float) -> Float {
     FirebladeMathLibC.copysignf(x, y)
 }

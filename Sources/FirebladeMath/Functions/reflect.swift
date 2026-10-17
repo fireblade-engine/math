@@ -5,6 +5,8 @@
 ///   - i: the incident vector.
 ///   - n: the normal, must be normalized to achieve the desired result.
 /// - Returns: the reflection vector.
+@inlinable
+@inline(__always)
 public func reflect(_ i: Float, _ n: Float) -> Float {
     i - 2 * (n * i) * n
 }
@@ -16,6 +18,8 @@ public func reflect(_ i: Float, _ n: Float) -> Float {
 ///   - i: the incident vector.
 ///   - n: the normal, must be normalized to achieve the desired result.
 /// - Returns: the reflection vector.
+@inlinable
+@inline(__always)
 public func reflect(_ i: Double, _ n: Double) -> Double {
     i - 2 * (n * i) * n
 }

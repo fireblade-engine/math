@@ -7,6 +7,7 @@ import func simd.simd_quaternion
 extension simd_quatf: QuaternionStorageProtocol, @retroactive Sequence {
     /// Creates a new quaternion from a 4D vector.
     /// - Parameter vector: The vector [x, y, z, w].
+    @inlinable
     public init(_ vector: SIMD4<Float>) {
         self = simd_quaternion(vector)
     }
@@ -17,6 +18,7 @@ extension simd_quatf: QuaternionStorageProtocol, @retroactive Sequence {
     ///   - y: The y component of the imaginary part.
     ///   - z: The z component of the imaginary part.
     ///   - w: The real component.
+    @inlinable
     public init(_ x: Float, _ y: Float, _ z: Float, _ w: Float) {
         self.init(ix: x, iy: y, iz: z, r: w)
     }
@@ -46,6 +48,8 @@ extension simd_quatf: QuaternionStorageProtocol, @retroactive Sequence {
     }
 
     /// Creates an iterator over the components of the quaternion.
+    @inlinable
+    @inline(__always)
     public func makeIterator() -> IndexingIterator<[Float]> {
         [x, y, z, w].makeIterator()
     }
@@ -55,6 +59,7 @@ extension simd_quatf: QuaternionStorageProtocol, @retroactive Sequence {
 extension simd_quatd: QuaternionStorageProtocol, @retroactive Sequence {
     /// Creates a new quaternion from a 4D vector.
     /// - Parameter vector: The vector [x, y, z, w].
+    @inlinable
     public init(_ vector: SIMD4<Double>) {
         self = simd_quaternion(vector)
     }
@@ -65,6 +70,7 @@ extension simd_quatd: QuaternionStorageProtocol, @retroactive Sequence {
     ///   - y: The y component of the imaginary part.
     ///   - z: The z component of the imaginary part.
     ///   - w: The real component.
+    @inlinable
     public init(_ x: Double, _ y: Double, _ z: Double, _ w: Double) {
         self.init(ix: x, iy: y, iz: z, r: w)
     }
@@ -94,6 +100,8 @@ extension simd_quatd: QuaternionStorageProtocol, @retroactive Sequence {
     }
 
     /// Creates an iterator over the components of the quaternion.
+    @inlinable
+    @inline(__always)
     public func makeIterator() -> IndexingIterator<[Double]> {
         [x, y, z, w].makeIterator()
     }

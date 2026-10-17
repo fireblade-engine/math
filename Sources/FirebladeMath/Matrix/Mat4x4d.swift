@@ -7,6 +7,7 @@ extension Mat4x4d {
     /// - Parameters:
     ///   - angleRadians: The angle of rotation in radians.
     ///   - axis: The axis of rotation.
+    @inlinable
     public init(rotation angleRadians: Double, axis: SIMD3<Double>) {
         let v = normalize(axis)
         let icos = cos(angleRadians)
@@ -40,6 +41,7 @@ extension Mat4x4d {
 
     /// Creates a 4x4 matrix from a 3x3 upper-left matrix.
     /// - Parameter matrix3x3: The 3x3 matrix.
+    @inlinable
     public init(upperLeft matrix3x3: Mat3x3d) {
         self.init(Vector(matrix3x3.columns.0, 0),
                   Vector(matrix3x3.columns.1, 0),
@@ -71,6 +73,7 @@ extension Mat4x4d {
     /// - Parameters:
     ///   - tVec: The translation vector.
     ///   - sVec: The scale vector.
+    @inlinable
     public init(translation tVec: SIMD3<Double> = .zero, scale sVec: SIMD3<Double> = .one) {
         self.init(diagonal: Vector(sVec.x, sVec.y, sVec.z, 1.0))
         translation = tVec
@@ -174,8 +177,7 @@ extension Mat4x4d {
 
     /// Returns the Euler angles (pitch, yaw, roll) for this matrix in radians.
     /// - Returns: A 3D vector where x is pitch, y is yaw, and z is roll.
-    @inline(__always)
-    public var eulerAnglesXYZ: Vec3d {
+    @inlinable public var eulerAnglesXYZ: Vec3d {
         let thetaX: Double
         let thetaY: Double
         let thetaZ: Double

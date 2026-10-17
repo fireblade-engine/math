@@ -7,6 +7,7 @@ extension Mat3x3d {
     /// - Parameters:
     ///   - angleRadians: The angle of rotation in radians.
     ///   - axis: The axis of rotation.
+    @inlinable
     public init(rotation angleRadians: Double, axis: SIMD3<Double>) {
         let v = normalize(axis)
         let icos = cos(angleRadians)

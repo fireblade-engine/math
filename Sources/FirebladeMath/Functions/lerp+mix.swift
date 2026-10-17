@@ -8,6 +8,8 @@ import func simd.simd_mix
 ///   - v1: The end value.
 ///   - t: The interpolant.
 /// - Returns: The interpolated value.
+@inlinable
+@inline(__always)
 public func interpolate<Value: FloatingPoint>(_ v0: Value, _ v1: Value, _ t: Value) -> Value {
     lerp(v0, v1, t)
 }
@@ -20,6 +22,8 @@ public func interpolate<Value: FloatingPoint>(_ v0: Value, _ v1: Value, _ t: Val
 /// - parameter t: interpolant
 ///
 /// - returns: v0 value interpolated from v0 to v1
+@inlinable
+@inline(__always)
 public func lerpPrecise<Value: FloatingPoint>(_ v0: Value, _ v1: Value, _ t: Value) -> Value {
     (1 - t) * v0 + t * v1
 }
@@ -30,6 +34,8 @@ public func lerpPrecise<Value: FloatingPoint>(_ v0: Value, _ v1: Value, _ t: Val
 ///   - v1: The end value.
 ///   - t: The interpolant.
 /// - Returns: The interpolated value.
+@inlinable
+@inline(__always)
 public func lerp<Value: FloatingPoint>(_ v0: Value, _ v1: Value, _ t: Value) -> Value {
     v0 + t * (v1 - v0)
 }
@@ -40,6 +46,8 @@ public func lerp<Value: FloatingPoint>(_ v0: Value, _ v1: Value, _ t: Value) -> 
 ///   - v1: The end value.
 ///   - t: The interpolant.
 /// - Returns: The interpolated value.
+@inlinable
+@inline(__always)
 public func mix(_ v0: Double, _ v1: Double, _ t: Double) -> Double {
     #if FRB_MATH_USE_SIMD
     return simd_mix(v0, v1, t)
@@ -54,6 +62,8 @@ public func mix(_ v0: Double, _ v1: Double, _ t: Double) -> Double {
 ///   - v1: The end value.
 ///   - t: The interpolant.
 /// - Returns: The interpolated value.
+@inlinable
+@inline(__always)
 public func mix(_ v0: Float, _ v1: Float, _ t: Float) -> Float {
     #if FRB_MATH_USE_SIMD
     return simd_mix(v0, v1, t)

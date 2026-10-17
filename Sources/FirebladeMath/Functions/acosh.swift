@@ -7,6 +7,8 @@ import FirebladeMathLibC
 ///    (x), or arcosh(x)) on the interval [0, +∞], is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 @_disfavoredOverload
+@inlinable
+@inline(__always)
 public func acosh(_ x: Double) -> Double {
     FirebladeMathLibC.acosh(x)
 }
@@ -18,6 +20,8 @@ public func acosh(_ x: Double) -> Double {
 ///    (x), or arcosh(x)) on the interval [0, +∞], is returned.
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 @_disfavoredOverload
+@inlinable
+@inline(__always)
 public func acosh(_ x: Float) -> Float {
     FirebladeMathLibC.acoshf(x)
 }

@@ -9,6 +9,8 @@ import func simd.simd_fract
 /// - Parameters:
 ///     - value: floating point value
 /// - Returns: The "fractional part" of x
+@inlinable
+@inline(__always)
 public func fract(_ value: Double) -> Double {
     #if FRB_MATH_USE_SIMD
     return simd_fract(value)
@@ -24,6 +26,8 @@ public func fract(_ value: Double) -> Double {
 /// - Parameters:
 ///     - value: floating point value
 /// - Returns: The "fractional part" of x
+@inlinable
+@inline(__always)
 public func fract(_ value: Float) -> Float {
     #if FRB_MATH_USE_SIMD
     return simd_fract(value)

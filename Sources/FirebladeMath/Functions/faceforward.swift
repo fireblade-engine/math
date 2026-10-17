@@ -7,6 +7,7 @@
 /// - Returns: one of the following:
 ///  ''n'' if dot(''i'', ''nref'') < 0.
 ///  ''-n'' otherwise.
+@inlinable
 public func faceforward(n: Float, i: Float, nref: Float) -> Float {
     let dot: Float = i * nref
     if dot < 0.0 {
@@ -27,6 +28,7 @@ public func faceforward(n: Float, i: Float, nref: Float) -> Float {
 /// - Returns: one of the following:
 ///  ''n'' if dot(''i'', ''nref'') < 0.
 ///  ''-n'' otherwise.
+@inlinable
 public func faceforward(n: Double, i: Double, nref: Double) -> Double {
     let dot: Double = i * nref
     if dot < 0.0 {

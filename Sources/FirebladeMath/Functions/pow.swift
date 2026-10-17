@@ -10,6 +10,8 @@ import FirebladeMathLibC
 /// If a pole error or a range error due to overflow occurs, ±HUGE_VAL, ±HUGE_VALF, or ±HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @_disfavoredOverload
+@inlinable
+@inline(__always)
 public func pow(_ base: Float, _ exponent: Float) -> Float {
     FirebladeMathLibC.powf(base, exponent)
 }
@@ -24,6 +26,8 @@ public func pow(_ base: Float, _ exponent: Float) -> Float {
 /// If a pole error or a range error due to overflow occurs, ±HUGE_VAL, ±HUGE_VALF, or ±HUGE_VALL is returned.
 /// If a range error occurs due to underflow, the correct result (after rounding) is returned.
 @_disfavoredOverload
+@inlinable
+@inline(__always)
 public func pow(_ base: Double, _ exponent: Double) -> Double {
     FirebladeMathLibC.pow(base, exponent)
 }

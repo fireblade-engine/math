@@ -2,6 +2,8 @@
 ///
 /// - Parameter degrees: an angle (in degrees)
 /// - Returns: the argument converted to radians.
+@inlinable
+@inline(__always)
 public func radians(_ degrees: Float) -> Float {
     degrees * kDegreeToRadians32
 }
@@ -10,6 +12,8 @@ public func radians(_ degrees: Float) -> Float {
 ///
 /// - Parameter degrees: an angle (in degrees)
 /// - Returns: the argument converted to radians.
+@inlinable
+@inline(__always)
 public func radians(_ degrees: Double) -> Double {
     degrees * kDegreeToRadians64
 }
@@ -18,6 +22,7 @@ public func radians(_ degrees: Double) -> Double {
 ///
 /// - Parameter degrees: an angle vector (in degrees)
 /// - Returns: the argument converted to radians.
+@inlinable
 @inline(__always)
 public func radians(_ degrees: Vec3f) -> Vec3f {
     Vec3f(x: FirebladeMath.radians(degrees.x),

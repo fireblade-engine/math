@@ -27,3 +27,6 @@ jobs:
 
       - name: Run Tests (Release)
         run: swift test -c release --parallel -Xswiftc -warnings-as-errors
+
+      - name: Check @inlinable Coverage
+        run: Scripts/check-inlinable.sh

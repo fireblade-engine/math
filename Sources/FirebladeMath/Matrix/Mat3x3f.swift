@@ -1,8 +1,13 @@
+#if FRB_MATH_USE_SIMD
+import struct simd.simd_float3x3
+#endif
+
 extension Mat3x3f {
     /// Creates a 3x3 rotation matrix.
     /// - Parameters:
     ///   - angleRadians: The angle of rotation in radians.
     ///   - axis: The axis of rotation.
+    @inlinable
     public init(rotation angleRadians: Float, axis: SIMD3<Float>) {
         // see: <GLKit.framework/.../Headers/GLKMatrix4.h>
         let v = normalize(axis)
