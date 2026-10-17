@@ -11,7 +11,7 @@ DOCS_VERSION_PATH ?= main
 HOSTING_BASE_PATH ?= $(REPO_NAME)/$(DOCS_VERSION_PATH)
 
 # Targets
-.PHONY: setup lint lint-fix check-inlinable check-simd-coverage test-portable test test-coverage clean pre-commit docs docs-preview docs-generate docs-coverage profile-stats benchmark-commits benchmark benchmark-thresholds-check benchmark-thresholds-update
+.PHONY: setup lint lint-fix check-inlinable check-simd-coverage check-reference-coverage reference-values test-portable test test-coverage clean pre-commit docs docs-preview docs-generate docs-coverage profile-stats benchmark-commits benchmark benchmark-thresholds-check benchmark-thresholds-update
 
 setup:
 	@echo "Detected Package Swift Version: $(PACKAGE_SWIFT_VERSION)"
@@ -54,6 +54,14 @@ check-inlinable:
 
 check-simd-coverage:
 	python3 Scripts/check-simd-differential-coverage.py
+
+check-reference-coverage:
+	python3 Scripts/check-reference-coverage.py
+
+# Regenerates the cross-platform reference values. Run on macOS with the default traits.
+reference-values:
+	FRB_MATH_REFERENCE_OUTPUT=$(CURDIR)/Tests/FirebladeMathTests/ReferenceValues/ReferenceData.swift \
+		swift test $(SWIFT_FLAGS) -c release --filter ReferenceValueTests
 
 # Portable implementations compared against Apple's simd (Apple platforms only).
 test-portable:

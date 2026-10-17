@@ -20,28 +20,28 @@ struct FunctionTests {
         #expect(abs(FirebladeMath.acos(Float(0.5)) - 1.0471975) <= 1e-6)
     }
     @Test func acoshFunc() {
-        #expect(FirebladeMath.acosh(Double(123)) == 5.505315010967267)
-        #expect(FirebladeMath.acosh(Float(123)) == 5.505315)
+        #expect(isWithinULPs(FirebladeMath.acosh(Double(123)), 5.505315010967267))
+        #expect(isWithinULPs(FirebladeMath.acosh(Float(123)), 5.505315))
     }
     @Test func asinFunc() {
         #expect(abs(FirebladeMath.asin(Double(0.5)) - 0.5235987755982988) <= 1e-14)
-        #expect(FirebladeMath.asin(Float(0.5)) == 0.5235988)
+        #expect(isWithinULPs(FirebladeMath.asin(Float(0.5)), 0.5235988))
     }
     @Test func asinhFunc() {
         #expect(abs(FirebladeMath.asinh(Double(123)) - 5.505348060078276) <= 1e-14)
-        #expect(FirebladeMath.asinh(Float(123)) == 5.505348)
+        #expect(isWithinULPs(FirebladeMath.asinh(Float(123)), 5.505348))
     }
     @Test func atanFunc() {
-        #expect(FirebladeMath.atan(Double(123)) == 1.5626664246149526)
-        #expect(FirebladeMath.atan(Float(123)) == 1.5626664)
+        #expect(isWithinULPs(FirebladeMath.atan(Double(123)), 1.5626664246149526))
+        #expect(isWithinULPs(FirebladeMath.atan(Float(123)), 1.5626664))
     }
     @Test func atan2Func() {
-        #expect(FirebladeMath.atan2(Double(123), Double(123)) == 0.7853981633974483)
-        #expect(FirebladeMath.atan2(Float(123), Float(123)) == 0.7853982)
+        #expect(isWithinULPs(FirebladeMath.atan2(Double(123), Double(123)), 0.7853981633974483))
+        #expect(isWithinULPs(FirebladeMath.atan2(Float(123), Float(123)), 0.7853982))
     }
     @Test func atanhFunc() {
         #expect(abs(FirebladeMath.atanh(Double(0.5)) - 0.5493061443340549) <= 1e-14)
-        #expect(FirebladeMath.atanh(Float(0.5)) == 0.54930615)
+        #expect(isWithinULPs(FirebladeMath.atanh(Float(0.5)), 0.54930615))
     }
     @Test func ceilFunc() {
         #expect(FirebladeMath.ceil(Double(123.78)) == 124)
@@ -52,8 +52,8 @@ struct FunctionTests {
         #expect(FirebladeMath.clamp(Float(123), Float(1), Float(50)) == 50)
     }
     @Test func cosFunc() {
-        #expect(FirebladeMath.cos(Double(123)) == -0.8879689066918555)
-        #expect(FirebladeMath.cos(Float(123)) == -0.8879689)
+        #expect(isWithinULPs(FirebladeMath.cos(Double(123)), -0.8879689066918555))
+        #expect(isWithinULPs(FirebladeMath.cos(Float(123)), -0.8879689))
     }
     @Test func coshFunc() {
         #expect(FirebladeMath.cosh(Double.pi) == 11.591953275521519)
@@ -77,12 +77,12 @@ struct FunctionTests {
         #expect(FirebladeMath.dot(SIMD4<Float>(1, 2, 3, 4), SIMD4<Float>(5, 6, 7, 8)) == 70.0)
     }
     @Test func expFunc() {
-        #expect(FirebladeMath.exp(Double(13)) == 442413.3920089205)
-        #expect(FirebladeMath.exp(Float(13)) == 442413.4)
+        #expect(isWithinULPs(FirebladeMath.exp(Double(13)), 442413.3920089205))
+        #expect(isWithinULPs(FirebladeMath.exp(Float(13)), 442413.4))
     }
     @Test func exp2Func() {
-        #expect(FirebladeMath.exp2(Double(9)) == 512.0)
-        #expect(FirebladeMath.exp2(Float(9)) == 512.0)
+        #expect(isWithinULPs(FirebladeMath.exp2(Double(9)), 512.0))
+        #expect(isWithinULPs(FirebladeMath.exp2(Float(9)), 512.0))
     }
     @Test func faceforwardFunc() {
         #expect(FirebladeMath.faceforward(n: Double(1), i: Double(2), nref: Double(3)) == -1)
@@ -97,8 +97,8 @@ struct FunctionTests {
         #expect(FirebladeMath.fract(Float(123.56)) == 0.55999756)
     }
     @Test func hypotFunc() {
-        #expect(FirebladeMath.hypot(Double(1), Double(2)) == 2.23606797749979)
-        #expect(FirebladeMath.hypot(Float(1), Float(2)) == 2.236068)
+        #expect(isWithinULPs(FirebladeMath.hypot(Double(1), Double(2)), 2.23606797749979))
+        #expect(isWithinULPs(FirebladeMath.hypot(Float(1), Float(2)), 2.236068))
     }
     @Test func isInfiniteFunc() {
         #expect(FirebladeMath.isInfinite(Double(123)) == false)
@@ -130,16 +130,16 @@ struct FunctionTests {
         #expect(FirebladeMath.length(SIMD4<Float>(1, 2, 3, 4)) == 5.477226)
     }
     @Test func logFunc() {
-        #expect(FirebladeMath.log(Double(123)) == 4.812184355372417)
-        #expect(FirebladeMath.log(Float(123)) == 4.8121843)
+        #expect(isWithinULPs(FirebladeMath.log(Double(123)), 4.812184355372417))
+        #expect(isWithinULPs(FirebladeMath.log(Float(123)), 4.8121843))
     }
     @Test func log2Func() {
-        #expect(FirebladeMath.log2(Double(123)) == 6.94251450533924)
-        #expect(FirebladeMath.log2(Float(123)) == 6.9425144)
+        #expect(isWithinULPs(FirebladeMath.log2(Double(123)), 6.94251450533924))
+        #expect(isWithinULPs(FirebladeMath.log2(Float(123)), 6.9425144))
     }
     @Test func log10Func() {
-        #expect(FirebladeMath.log10(Double(123)) == 2.089905111439398)
-        #expect(FirebladeMath.log10(Float(123)) == 2.089905)
+        #expect(isWithinULPs(FirebladeMath.log10(Double(123)), 2.089905111439398))
+        #expect(isWithinULPs(FirebladeMath.log10(Float(123)), 2.089905))
     }
     @Test
     @available(*, deprecated, message: "Testing deprecated API")
@@ -175,12 +175,12 @@ struct FunctionTests {
         #endif
     }
     @Test func powFunc() {
-        #expect(FirebladeMath.pow(Double(123), Double(2)) == 15129.0)
-        #expect(FirebladeMath.pow(Float(123), Float(2)) == 15129.0)
+        #expect(isWithinULPs(FirebladeMath.pow(Double(123), Double(2)), 15129.0))
+        #expect(isWithinULPs(FirebladeMath.pow(Float(123), Float(2)), 15129.0))
     }
     @Test func pow2Func() {
-        #expect(FirebladeMath.pow2(Double(123)) == 1.0633823966279327e+37)
-        #expect(FirebladeMath.pow2(Float(123)) == 1.0633824e+37)
+        #expect(isWithinULPs(FirebladeMath.pow2(Double(123)), 1.0633823966279327e+37))
+        #expect(isWithinULPs(FirebladeMath.pow2(Float(123)), 1.0633824e+37))
     }
     @Test func radiansFunc() {
         #expect(FirebladeMath.radians(Double(123)) == 2.1467549799530254)
@@ -203,12 +203,12 @@ struct FunctionTests {
         #expect(FirebladeMath.sign(Float(-123)) == -1.0)
     }
     @Test func sinFunc() {
-        #expect(FirebladeMath.sin(Double(123)) == -0.45990349068959124)
+        #expect(isWithinULPs(FirebladeMath.sin(Double(123)), -0.45990349068959124))
         #expect(abs(FirebladeMath.sin(Float(123)) - (-0.45990348)) <= 1e-7)
     }
     @Test func sinhFunc() {
-        #expect(FirebladeMath.sinh(Double(0.5)) == 0.5210953054937474)
-        #expect(FirebladeMath.sinh(Float(0.5)) == 0.5210953)
+        #expect(isWithinULPs(FirebladeMath.sinh(Double(0.5)), 0.5210953054937474))
+        #expect(isWithinULPs(FirebladeMath.sinh(Float(0.5)), 0.5210953))
     }
     @Test func smoothstepFunc() {
         #expect(FirebladeMath.smoothstep(Double(12), Double(24), Double(13)) == 0.019675925925925927)
@@ -224,11 +224,11 @@ struct FunctionTests {
     }
     @Test func tanFunc() {
         #expect(abs(FirebladeMath.tan(Double(123)) - 0.5179274715856551) <= 1e-14)
-        #expect(FirebladeMath.tan(Float(123)) == 0.51792747)
+        #expect(isWithinULPs(FirebladeMath.tan(Float(123)), 0.51792747))
     }
     @Test func tanhFunc() {
-        #expect(FirebladeMath.tanh(Double(0.5)) == 0.46211715726000974)
-        #expect(FirebladeMath.tanh(Float(0.5)) == 0.46211717)
+        #expect(isWithinULPs(FirebladeMath.tanh(Double(0.5)), 0.46211715726000974))
+        #expect(isWithinULPs(FirebladeMath.tanh(Float(0.5)), 0.46211717))
     }
     @Test func remapFunc() {
         #expect(Double(5).remaped(clampingIn: 0...10, to: 0...100) == 50.0)
@@ -305,4 +305,10 @@ private func expectEqualElements<T, S>(_ expression1: @autoclosure () throws -> 
     } catch {
         Issue.record(error, Comment(stringLiteral: "Error thrown during element comparison"), sourceLocation: sourceLocation)
     }
+}
+
+/// C math library results may differ by a few ulp between platforms (Apple libm, glibc,
+/// ucrt, musl/WASI); FirebladeMath only guarantees identical results up to rounding.
+private func isWithinULPs<T: BinaryFloatingPoint>(_ value: T, _ expected: T, _ ulps: T = 4) -> Bool {
+    Swift.abs(value - expected) <= ulps * expected.ulp
 }
