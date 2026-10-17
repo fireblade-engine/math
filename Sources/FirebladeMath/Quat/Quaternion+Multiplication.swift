@@ -33,11 +33,14 @@ public func multiply(_ lhs: Quat4f, _ rhs: Quat4f) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd.simd_mul(lhs.storage, rhs.storage))
     #else
-    let n0 = lhs.w * rhs.w - lhs.x * rhs.x - lhs.y * rhs.y - lhs.z * rhs.z
-    let n1 = lhs.w * rhs.x + lhs.x * rhs.w + lhs.y * rhs.z - lhs.z * rhs.y
-    let n2 = lhs.w * rhs.y - lhs.x * rhs.z + lhs.y * rhs.w + lhs.z * rhs.x
-    let n3 = lhs.w * rhs.z + lhs.x * rhs.y - lhs.y * rhs.x + lhs.z * rhs.w
-    return Quat4f(n1, n2, n3, n0)
+    // Hamilton product as four 4-wide multiply-adds over the [x, y, z, w] lanes.
+    let l = lhs.storage.storage
+    let r = rhs.storage.storage
+    let product = Vec4f(repeating: l.w) * r
+        + Vec4f(l.x, l.y, l.z, l.x) * Vec4f(r.w, r.w, r.w, -r.x)
+        + Vec4f(l.y, l.z, l.x, l.y) * Vec4f(r.z, r.x, r.y, -r.y)
+        - Vec4f(l.z, l.x, l.y, l.z) * Vec4f(r.y, r.z, r.x, r.z)
+    return Quat4f(product)
     #endif
 }
 
@@ -135,11 +138,14 @@ public func multiply(_ lhs: Quat4d, _ rhs: Quat4d) -> Quat4d {
     #if FRB_MATH_USE_SIMD
     return Quat4d(storage: simd.simd_mul(lhs.storage, rhs.storage))
     #else
-    let n0 = lhs.w * rhs.w - lhs.x * rhs.x - lhs.y * rhs.y - lhs.z * rhs.z
-    let n1 = lhs.w * rhs.x + lhs.x * rhs.w + lhs.y * rhs.z - lhs.z * rhs.y
-    let n2 = lhs.w * rhs.y - lhs.x * rhs.z + lhs.y * rhs.w + lhs.z * rhs.x
-    let n3 = lhs.w * rhs.z + lhs.x * rhs.y - lhs.y * rhs.x + lhs.z * rhs.w
-    return Quat4d(n1, n2, n3, n0)
+    // Hamilton product as four 4-wide multiply-adds over the [x, y, z, w] lanes.
+    let l = lhs.storage.storage
+    let r = rhs.storage.storage
+    let product = Vec4d(repeating: l.w) * r
+        + Vec4d(l.x, l.y, l.z, l.x) * Vec4d(r.w, r.w, r.w, -r.x)
+        + Vec4d(l.y, l.z, l.x, l.y) * Vec4d(r.z, r.x, r.y, -r.y)
+        - Vec4d(l.z, l.x, l.y, l.z) * Vec4d(r.y, r.z, r.x, r.z)
+    return Quat4d(product)
     #endif
 }
 

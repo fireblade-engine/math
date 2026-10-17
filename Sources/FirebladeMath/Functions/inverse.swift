@@ -38,8 +38,7 @@ public func inverse(_ matrix: Mat4x4f) -> Mat4x4f {
     #if FRB_MATH_USE_SIMD
     return Mat4x4f(storage: simd.simd_inverse(matrix.storage))
     #else
-    let adj: Mat4x4f = adjugate(matrix)
-    let det: Float = determinant(matrix)
+    let (adj, det) = adjugateAndDeterminant(matrix)
     return multiply(1.0 / det, adj)
     #endif
 }
@@ -52,8 +51,7 @@ public func inverse(_ matrix: Mat4x4d) -> Mat4x4d {
     #if FRB_MATH_USE_SIMD
     return Mat4x4d(storage: simd.simd_inverse(matrix.storage))
     #else
-    let adj: Mat4x4d = adjugate(matrix)
-    let det: Double = determinant(matrix)
+    let (adj, det) = adjugateAndDeterminant(matrix)
     return multiply(1.0 / det, adj)
     #endif
 }
