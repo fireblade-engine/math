@@ -79,5 +79,10 @@ jobs:
 
       - name: Build (including tests)
         run: |
-          SDK=$(swift sdk list | grep -E '^aarch64-unknown-linux-android' | head -n 1)
+          # `swift sdk list` shows bundle names, so read the aarch64 target triples from the bundle
+          # and build for the lowest Android API level it supports.
+          SDK=$(find / -path '*android.artifactbundle*' -name swift-sdk.json 2>/dev/null \
+            | xargs jq -r '.targetTriples | keys[]' | grep '^aarch64-' | sort -V | head -n 1)
+          echo "Using Swift SDK $SDK"
+          test -n "$SDK"
           swift build --swift-sdk "$SDK" --build-tests -Xswiftc -warnings-as-errors
