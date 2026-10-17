@@ -38,5 +38,8 @@ jobs:
       - name: Run Tests (Release, portable path vs Apple simd)
         run: swift test -c release --disable-default-traits --parallel -Xswiftc -warnings-as-errors
 
+      - name: Check Differential Test Coverage
+        run: python3 Scripts/check-simd-differential-coverage.py
+
       - name: Check @inlinable Coverage
         run: Scripts/check-inlinable.sh

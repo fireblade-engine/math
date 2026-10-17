@@ -11,7 +11,7 @@ DOCS_VERSION_PATH ?= main
 HOSTING_BASE_PATH ?= $(REPO_NAME)/$(DOCS_VERSION_PATH)
 
 # Targets
-.PHONY: setup lint lint-fix check-inlinable test test-coverage clean pre-commit docs docs-preview docs-generate docs-coverage profile-stats benchmark-commits benchmark benchmark-thresholds-check benchmark-thresholds-update
+.PHONY: setup lint lint-fix check-inlinable check-simd-coverage test-portable test test-coverage clean pre-commit docs docs-preview docs-generate docs-coverage profile-stats benchmark-commits benchmark benchmark-thresholds-check benchmark-thresholds-update
 
 setup:
 	@echo "Detected Package Swift Version: $(PACKAGE_SWIFT_VERSION)"
@@ -51,6 +51,13 @@ lint-fix:
 
 check-inlinable:
 	./Scripts/check-inlinable.sh
+
+check-simd-coverage:
+	python3 Scripts/check-simd-differential-coverage.py
+
+# Portable implementations compared against Apple's simd (Apple platforms only).
+test-portable:
+	swift test $(SWIFT_FLAGS) --disable-default-traits --parallel -Xswiftc -warnings-as-errors
 
 test:
 	swift test $(SWIFT_FLAGS) --parallel --enable-code-coverage -Xswiftc -warnings-as-errors

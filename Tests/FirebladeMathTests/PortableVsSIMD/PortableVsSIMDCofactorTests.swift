@@ -1,16 +1,10 @@
 //
-//  PortableVsSIMDTests.swift
+//  PortableVsSIMDCofactorTests.swift
 //  FirebladeMathTests
 //
 
-// Differential tests: FirebladeMath's portable (non-simd) implementations against Apple's
-// simd library, which is exactly what FirebladeMath forwards to when the `simd` trait is on.
-//
-// Only compiled when Apple's simd is available but the `simd` trait is disabled, i.e.
-// `swift test --disable-default-traits` on Apple platforms (see the macOS CI workflow).
-//
-// Covers the functions with portable implementations changed in #76:
-// 4x4 inverse, determinant and adjugate, and quaternion multiplication.
+// Differential tests for the 4x4 inverse, determinant, adjugate and quaternion multiplication
+// against Apple's simd. See PortableVsSIMDSupport.swift.
 //
 // Tolerances are about 10x the worst deviation measured over all inputs; both sides differ
 // only by floating-point rounding.
@@ -20,7 +14,7 @@ import FirebladeMath
 import simd
 import Testing
 
-struct PortableVsSIMDTests {
+struct PortableVsSIMDCofactorTests {
     // MARK: - Inputs
 
     /// Column-major 4x4 element lists: pseudo-random matrices plus structured cases.
@@ -62,34 +56,38 @@ struct PortableVsSIMDTests {
 
     // MARK: - 4x4 determinant
 
+    // covers: determinant(Mat4x4d)
     @Test(arguments: matrices + singularMatrices)
     func determinantDouble(_ values: [Double]) {
         let portable = FirebladeMath.determinant(Mat4x4d(values))
-        let reference = simd_determinant(simd_double4x4(values))
+        let reference = simd_determinant(simd_double4x4(elements: values))
         #expect(isClose(portable, reference, scale: magnitude(values) ^^ 4, tolerance: 1e-14))
     }
 
+    // covers: determinant(Mat4x4f)
     @Test(arguments: matrices + singularMatrices)
     func determinantFloat(_ values: [Double]) {
         let floats = values.map(Float.init)
         let portable = FirebladeMath.determinant(Mat4x4f(floats))
-        let reference = simd_determinant(simd_float4x4(floats))
+        let reference = simd_determinant(simd_float4x4(elements: floats))
         #expect(isClose(Double(portable), Double(reference), scale: magnitude(values) ^^ 4, tolerance: 3e-6))
     }
 
     // MARK: - 4x4 inverse
 
+    // covers: inverse(Mat4x4d)
     @Test(arguments: matrices)
     func inverseDouble(_ values: [Double]) {
-        let reference = simd_inverse(simd_double4x4(values))
+        let reference = simd_inverse(simd_double4x4(elements: values))
         let portable = FirebladeMath.inverse(Mat4x4d(values))
         #expect(isClose(portable.elements, reference.elements, tolerance: 5e-13))
     }
 
+    // covers: inverse(Mat4x4f)
     @Test(arguments: matrices)
     func inverseFloat(_ values: [Double]) {
         let floats = values.map(Float.init)
-        let reference = simd_inverse(simd_float4x4(floats))
+        let reference = simd_inverse(simd_float4x4(elements: floats))
         let portable = FirebladeMath.inverse(Mat4x4f(floats))
         #expect(isClose(portable.elements.map(Double.init), reference.elements.map(Double.init), tolerance: 2e-4))
     }
@@ -98,7 +96,7 @@ struct PortableVsSIMDTests {
 
     @Test(arguments: matrices)
     func adjugateDouble(_ values: [Double]) {
-        let matrix = simd_double4x4(values)
+        let matrix = simd_double4x4(elements: values)
         let reference = simd_inverse(matrix) * simd_determinant(matrix)
         let portable = FirebladeMath.adjugate(Mat4x4d(values))
         #expect(isClose(portable.elements, reference.elements, tolerance: 5e-13))
@@ -107,7 +105,7 @@ struct PortableVsSIMDTests {
     @Test(arguments: matrices)
     func adjugateFloat(_ values: [Double]) {
         let floats = values.map(Float.init)
-        let matrix = simd_float4x4(floats)
+        let matrix = simd_float4x4(elements: floats)
         let reference = simd_inverse(matrix) * simd_determinant(matrix)
         let portable = FirebladeMath.adjugate(Mat4x4f(floats))
         #expect(isClose(portable.elements.map(Double.init), reference.elements.map(Double.init), tolerance: 2e-4))
@@ -115,6 +113,7 @@ struct PortableVsSIMDTests {
 
     // MARK: - Quaternion multiplication
 
+    // covers: multiply(Quat4d, Quat4d)
     @Test(arguments: quaternionPairs)
     func quaternionMultiplyDouble(_ pair: ([Double], [Double])) {
         let (lhs, rhs) = pair
@@ -123,6 +122,7 @@ struct PortableVsSIMDTests {
         #expect(isClose(portable.elements, Array(reference), tolerance: 1e-14))
     }
 
+    // covers: multiply(Quat4f, Quat4f)
     @Test(arguments: quaternionPairs)
     func quaternionMultiplyFloat(_ pair: ([Double], [Double])) {
         let (lhs, rhs) = pair
@@ -136,22 +136,6 @@ struct PortableVsSIMDTests {
 
 // MARK: - Helpers
 
-private struct SplitMix {
-    var state: UInt64
-
-    init(seed: UInt64) { state = seed }
-
-    mutating func next(in range: ClosedRange<Double>) -> Double {
-        state &+= 0x9E37_79B9_7F4A_7C15
-        var z = state
-        z = (z ^ (z >> 30)) &* 0xBF58_476D_1CE4_E5B9
-        z = (z ^ (z >> 27)) &* 0x94D0_49BB_1331_11EB
-        z ^= z >> 31
-        let unit = Double(z >> 11) / Double(1 << 53)
-        return range.lowerBound + unit * (range.upperBound - range.lowerBound)
-    }
-}
-
 private func rotationAndTranslation(angle: Double, axis: (Double, Double, Double), translation: (Double, Double, Double)) -> [Double] {
     let rotation = simd_matrix4x4(simd_quatd(angle: angle, axis: simd_normalize(SIMD3(axis.0, axis.1, axis.2))))
     var values = rotation.elements
@@ -159,26 +143,6 @@ private func rotationAndTranslation(angle: Double, axis: (Double, Double, Double
     values[13] = translation.1
     values[14] = translation.2
     return values
-}
-
-private extension simd_double4x4 {
-    init(_ values: [Double]) {
-        self.init(SIMD4(values[0..<4]), SIMD4(values[4..<8]), SIMD4(values[8..<12]), SIMD4(values[12..<16]))
-    }
-
-    var elements: [Double] {
-        [columns.0, columns.1, columns.2, columns.3].flatMap { [$0.x, $0.y, $0.z, $0.w] }
-    }
-}
-
-private extension simd_float4x4 {
-    init(_ values: [Float]) {
-        self.init(SIMD4(values[0..<4]), SIMD4(values[4..<8]), SIMD4(values[8..<12]), SIMD4(values[12..<16]))
-    }
-
-    var elements: [Float] {
-        [columns.0, columns.1, columns.2, columns.3].flatMap { [$0.x, $0.y, $0.z, $0.w] }
-    }
 }
 
 private func magnitude(_ values: [Double]) -> Double {
