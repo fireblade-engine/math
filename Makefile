@@ -11,7 +11,7 @@ DOCS_VERSION_PATH ?= main
 HOSTING_BASE_PATH ?= $(REPO_NAME)/$(DOCS_VERSION_PATH)
 
 # Targets
-.PHONY: setup lint lint-fix test test-coverage clean pre-commit docs docs-preview docs-generate docs-coverage profile-stats benchmark-commits
+.PHONY: setup lint lint-fix check-inlinable test test-coverage clean pre-commit docs docs-preview docs-generate docs-coverage profile-stats benchmark-commits
 
 setup:
 	@echo "Detected Package Swift Version: $(PACKAGE_SWIFT_VERSION)"
@@ -48,6 +48,9 @@ lint:
 lint-fix:
 	mint run swiftformat --swiftversion $(PACKAGE_SWIFT_VERSION) --config .swiftformat Sources/ Tests/
 	mint run swiftlint --fix --config .swiftlint.yml Sources/ Tests/
+
+check-inlinable:
+	./Scripts/check-inlinable.sh
 
 test:
 	swift test $(SWIFT_FLAGS) --parallel --enable-code-coverage -Xswiftc -warnings-as-errors

@@ -45,18 +45,21 @@ extension Quat4d {
     /// - Parameters:
     ///   - angleRadians: The angle of rotation in radians.
     ///   - axis: The axis of rotation.
+    @inlinable
     public init(angle angleRadians: Double, axis: SIMD3<Double>) {
         self = quaternion(angle: angleRadians, axis: axis)
     }
 
     /// Creates a quaternion from a 3x3 rotation matrix.
     /// - Parameter matrix: The 3x3 rotation matrix.
+    @inlinable
     public init(rotation matrix: Mat3x3d) {
         self = quaternion(matrix: matrix)
     }
 
     /// Creates a quaternion from a 4x4 rotation matrix.
     /// - Parameter matrix: The 4x4 rotation matrix.
+    @inlinable
     public init(rotation matrix: Mat4x4d) {
         self = quaternion(matrix: matrix)
     }
@@ -65,6 +68,7 @@ extension Quat4d {
     /// - Parameters:
     ///   - from: The starting vector.
     ///   - to: The target vector.
+    @inlinable
     public init(from: SIMD3<Double>, to: SIMD3<Double>) {
         self = quaternion(from: from, to: to)
     }
@@ -74,6 +78,7 @@ extension Quat4d {
     ///   - pitch: The pitch angle in radians.
     ///   - yaw: The yaw angle in radians.
     ///   - roll: The roll angle in radians.
+    @inlinable
     public init(pitch: Double, yaw: Double, roll: Double) {
         let c1 = cos(pitch / 2)
         let s1 = sin(pitch / 2)

@@ -7,6 +7,8 @@ import FirebladeMathLibC
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a pole error occurs, -HUGE_VAL, -HUGE_VALF, or -HUGE_VALL is returned.
 @_disfavoredOverload
+@inlinable
+@inline(__always)
 public func log(_ x: Float) -> Float {
     FirebladeMathLibC.logf(x)
 }
@@ -18,6 +20,8 @@ public func log(_ x: Float) -> Float {
 /// If a domain error occurs, an implementation-defined value is returned (NaN where supported).
 /// If a pole error occurs, -HUGE_VAL, -HUGE_VALF, or -HUGE_VALL is returned.
 @_disfavoredOverload
+@inlinable
+@inline(__always)
 public func log(_ x: Double) -> Double {
     FirebladeMathLibC.log(x)
 }

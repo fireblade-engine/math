@@ -38,18 +38,21 @@ extension Quat4f {
     /// - Parameters:
     ///   - angleRadians: The angle of rotation in radians.
     ///   - axis: The axis of rotation.
+    @inlinable
     public init(angle angleRadians: Float, axis: SIMD3<Float>) {
         self = quaternion(angle: angleRadians, axis: axis)
     }
 
     /// Creates a quaternion from a 3x3 rotation matrix.
     /// - Parameter matrix: The 3x3 rotation matrix.
+    @inlinable
     public init(rotation matrix: Mat3x3f) {
         self = quaternion(matrix: matrix)
     }
 
     /// Creates a quaternion from a 4x4 rotation matrix.
     /// - Parameter matrix: The 4x4 rotation matrix.
+    @inlinable
     public init(rotation matrix: Mat4x4f) {
         self = quaternion(matrix: matrix)
     }
@@ -58,6 +61,7 @@ extension Quat4f {
     /// - Parameters:
     ///   - from: The starting vector.
     ///   - to: The target vector.
+    @inlinable
     public init(from: SIMD3<Float>, to: SIMD3<Float>) {
         self = quaternion(from: from, to: to)
     }

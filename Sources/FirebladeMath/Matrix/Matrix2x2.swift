@@ -14,21 +14,25 @@ public struct Matrix2x2<Storage: Storage2x2Protocol>: RandomAccessCollection, Mu
     @usableFromInline var storage: Storage
 
     /// The start index of the matrix (0).
-    public var startIndex: Index {
+    @inlinable public var startIndex: Index {
         storage.startIndex
     }
 
     /// The end index of the matrix (4).
-    public var endIndex: Index {
+    @inlinable public var endIndex: Index {
         storage.endIndex
     }
 
     /// Returns the index after the given index.
+    @inlinable
+    @inline(__always)
     public func index(after i: Index) -> Index {
         storage.index(after: i)
     }
 
     /// Returns the index before the given index.
+    @inlinable
+    @inline(__always)
     public func index(before i: Index) -> Index {
         storage.index(before: i)
     }
@@ -51,12 +55,14 @@ public struct Matrix2x2<Storage: Storage2x2Protocol>: RandomAccessCollection, Mu
 
     /// Creates a new 2x2 matrix with the specified diagonal values.
     /// - Parameter diagonal: The values to place on the diagonal.
+    @inlinable
     public init(diagonal: Vector) {
         storage = Storage(diagonal: diagonal)
     }
 
     /// Creates a new 2x2 matrix from an array of column vectors.
     /// - Parameter columns: An array of 2 column vectors.
+    @inlinable
     public init(_ columns: [Vector]) {
         precondition(columns.count == 2, "Matrix needs exactly 2 Vector vectors")
         storage = Storage(columns)
@@ -66,12 +72,14 @@ public struct Matrix2x2<Storage: Storage2x2Protocol>: RandomAccessCollection, Mu
     /// - Parameters:
     ///   - column0: The first column vector.
     ///   - column1: The second column vector.
+    @inlinable
     public init(_ column0: Vector, _ column1: Vector) {
         self.init([column0, column1])
     }
 
     /// Creates a new 2x2 matrix from an array of values in column-major order.
     /// - Parameter values: An array of 4 values.
+    @inlinable
     public init(_ values: [Storage.Value]) {
         precondition(values.count == 4, "Matrix needs exactly 4 values")
         self.init([Vector(values[0...1]),
@@ -79,6 +87,7 @@ public struct Matrix2x2<Storage: Storage2x2Protocol>: RandomAccessCollection, Mu
     }
 
     /// Accesses the value at the specified flat index in column-major order.
+    @inlinable
     public subscript(index: Index) -> Element {
         get { storage[index] }
         set { storage[index] = newValue }
@@ -88,12 +97,15 @@ public struct Matrix2x2<Storage: Storage2x2Protocol>: RandomAccessCollection, Mu
     /// - Parameters:
     ///   - column: The column index (0-1).
     ///   - row: The row index (0-1).
+    @inlinable
     public subscript(column: Int, row: Int) -> Value {
         get { storage[column, row] }
         set { storage[column, row] = newValue }
     }
 
     /// Replaces the specified subrange of elements with the given collection.
+    @inlinable
+    @inline(__always)
     public mutating func replaceSubrange<C: Collection>(_ subrange: Range<Int>, with newElements: C) where Value == C.Element {
         storage.replaceSubrange(subrange, with: newElements)
     }
@@ -138,6 +150,7 @@ public struct Matrix2x2<Storage: Storage2x2Protocol>: RandomAccessCollection, Mu
 
 extension Matrix2x2: ExpressibleByArrayLiteral {
     /// Creates a 2x2 matrix from an array literal in column-major order.
+    @inlinable
     public init(arrayLiteral elements: Value...) {
         self.init(elements)
     }
@@ -145,6 +158,8 @@ extension Matrix2x2: ExpressibleByArrayLiteral {
 
 extension Matrix2x2: Equatable {
     /// Returns a Boolean value indicating whether two matrices are equal.
+    @inlinable
+    @inline(__always)
     public static func == (lhs: Matrix2x2<Storage>, rhs: Matrix2x2<Storage>) -> Bool {
         lhs.storage == rhs.storage
     }

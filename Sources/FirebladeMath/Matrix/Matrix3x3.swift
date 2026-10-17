@@ -14,21 +14,25 @@ public struct Matrix3x3<Storage: Storage3x3Protocol>: RandomAccessCollection, Mu
     @usableFromInline var storage: Storage
 
     /// The start index of the matrix (0).
-    public var startIndex: Index {
+    @inlinable public var startIndex: Index {
         storage.startIndex
     }
 
     /// The end index of the matrix (9).
-    public var endIndex: Index {
+    @inlinable public var endIndex: Index {
         storage.endIndex
     }
 
     /// Returns the index after the given index.
+    @inlinable
+    @inline(__always)
     public func index(after i: Index) -> Index {
         storage.index(after: i)
     }
 
     /// Returns the index before the given index.
+    @inlinable
+    @inline(__always)
     public func index(before i: Index) -> Index {
         storage.index(before: i)
     }
@@ -51,12 +55,14 @@ public struct Matrix3x3<Storage: Storage3x3Protocol>: RandomAccessCollection, Mu
 
     /// Creates a new 3x3 matrix with the specified diagonal values.
     /// - Parameter diagonal: The values to place on the diagonal.
+    @inlinable
     public init(diagonal: Vector) {
         storage = Storage(diagonal: diagonal)
     }
 
     /// Creates a new 3x3 matrix from an array of column vectors.
     /// - Parameter columns: An array of 3 column vectors.
+    @inlinable
     public init(_ columns: [Vector]) {
         precondition(columns.count == 3, "Matrix needs exactly 3 Vector vectors")
         storage = Storage(columns)
@@ -67,12 +73,14 @@ public struct Matrix3x3<Storage: Storage3x3Protocol>: RandomAccessCollection, Mu
     ///   - column0: The first column vector.
     ///   - column1: The second column vector.
     ///   - column2: The third column vector.
+    @inlinable
     public init(_ column0: Vector, _ column1: Vector, _ column2: Vector) {
         self.init([column0, column1, column2])
     }
 
     /// Creates a new 3x3 matrix from an array of values in column-major order.
     /// - Parameter values: An array of 9 values.
+    @inlinable
     public init(_ values: [Storage.Value]) {
         precondition(values.count == 9, "Matrix needs exactly 9 values")
         self.init([Vector(values[0...2]),
@@ -81,6 +89,7 @@ public struct Matrix3x3<Storage: Storage3x3Protocol>: RandomAccessCollection, Mu
     }
 
     /// Accesses the value at the specified flat index in column-major order.
+    @inlinable
     public subscript(index: Index) -> Element {
         get { storage[index] }
         set { storage[index] = newValue }
@@ -90,12 +99,15 @@ public struct Matrix3x3<Storage: Storage3x3Protocol>: RandomAccessCollection, Mu
     /// - Parameters:
     ///   - column: The column index (0-2).
     ///   - row: The row index (0-2).
+    @inlinable
     public subscript(column: Int, row: Int) -> Value {
         get { storage[column, row] }
         set { storage[column, row] = newValue }
     }
 
     /// Replaces the specified subrange of elements with the given collection.
+    @inlinable
+    @inline(__always)
     public mutating func replaceSubrange<C: Collection>(_ subrange: Range<Int>, with newElements: C) where Value == C.Element {
         storage.replaceSubrange(subrange, with: newElements)
     }
@@ -140,6 +152,7 @@ public struct Matrix3x3<Storage: Storage3x3Protocol>: RandomAccessCollection, Mu
 
 extension Matrix3x3: ExpressibleByArrayLiteral {
     /// Creates a 3x3 matrix from an array literal in column-major order.
+    @inlinable
     public init(arrayLiteral elements: Value...) {
         self.init(elements)
     }
@@ -147,6 +160,8 @@ extension Matrix3x3: ExpressibleByArrayLiteral {
 
 extension Matrix3x3: Equatable {
     /// Returns a Boolean value indicating whether two matrices are equal.
+    @inlinable
+    @inline(__always)
     public static func == (lhs: Matrix3x3<Storage>, rhs: Matrix3x3<Storage>) -> Bool {
         lhs.storage == rhs.storage
     }

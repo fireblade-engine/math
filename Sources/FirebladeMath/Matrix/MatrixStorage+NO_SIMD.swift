@@ -2,6 +2,7 @@
 
 // MARK: - Storage2x2
 
+@frozen
 public struct Storage2x2<Value: StorageScalar>: Storage2x2Protocol {
     public typealias Column = SIMD2<Value>
     public typealias Storage3x3Ref = Storage3x3<Value>
@@ -28,11 +29,14 @@ public struct Storage2x2<Value: StorageScalar>: Storage2x2Protocol {
         column1 = Column(zero, diagonal.y)
     }
 
+    @inlinable
     public init() {
         let zero = Value.zero
         self.init(diagonal: Column(zero, zero))
     }
 
+    @inlinable
+    @inline(__always)
     public func makeIterator() -> IndexingIterator<[Value]> {
         [column0, column1].flatMap { $0 }.makeIterator()
     }
@@ -65,6 +69,7 @@ public struct Storage2x2<Value: StorageScalar>: Storage2x2Protocol {
         }
     }
 
+    @inlinable
     public subscript(index: Int) -> Value {
         get {
             let (column, row) = columnRow(index: index, width: 2)
@@ -78,6 +83,8 @@ public struct Storage2x2<Value: StorageScalar>: Storage2x2Protocol {
 }
 
 extension Storage2x2: Equatable {
+    @inlinable
+    @inline(__always)
     public static func == (lhs: Storage2x2<Value>, rhs: Storage2x2<Value>) -> Bool {
         lhs.column0 == rhs.column0 &&
             lhs.column1 == rhs.column1
@@ -88,6 +95,7 @@ extension Storage2x2: @unchecked Sendable where Value: Sendable {}
 
 // MARK: - Storage3x3
 
+@frozen
 public struct Storage3x3<Value: StorageScalar>: Storage3x3Protocol {
     public typealias Column = SIMD3<Value>
     public typealias Storage2x2Ref = Storage2x2<Value>
@@ -118,11 +126,14 @@ public struct Storage3x3<Value: StorageScalar>: Storage3x3Protocol {
         column2 = Column(zero, zero, diagonal.z)
     }
 
+    @inlinable
     public init() {
         let zero = Value.zero
         self.init(diagonal: Column(zero, zero, zero))
     }
 
+    @inlinable
+    @inline(__always)
     public func makeIterator() -> IndexingIterator<[Value]> {
         [column0, column1, column2].flatMap { $0 }.makeIterator()
     }
@@ -161,6 +172,7 @@ public struct Storage3x3<Value: StorageScalar>: Storage3x3Protocol {
         }
     }
 
+    @inlinable
     public subscript(index: Int) -> Value {
         get {
             let (column, row) = columnRow(index: index, width: 3)
@@ -174,6 +186,8 @@ public struct Storage3x3<Value: StorageScalar>: Storage3x3Protocol {
 }
 
 extension Storage3x3: Equatable {
+    @inlinable
+    @inline(__always)
     public static func == (lhs: Storage3x3<Value>, rhs: Storage3x3<Value>) -> Bool {
         lhs.column0 == rhs.column0 &&
             lhs.column1 == rhs.column1 &&
@@ -185,6 +199,7 @@ extension Storage3x3: @unchecked Sendable where Value: Sendable {}
 
 // MARK: - Storage4x4Ref
 
+@frozen
 public struct Storage4x4<Value: StorageScalar>: Storage4x4Protocol {
     public typealias Column = SIMD4<Value>
     public typealias Storage2x2Ref = Storage2x2<Value>
@@ -220,15 +235,19 @@ public struct Storage4x4<Value: StorageScalar>: Storage4x4Protocol {
         column3 = Column(zero, zero, zero, diagonal.w)
     }
 
+    @inlinable
     public init() {
         let zero = Value.zero
         self.init(diagonal: Column(zero, zero, zero, zero))
     }
 
+    @inlinable
+    @inline(__always)
     public func makeIterator() -> IndexingIterator<[Value]> {
         [column0, column1, column2, column3].flatMap { $0 }.makeIterator()
     }
 
+    @inlinable
     public subscript(column: Int, row: Int) -> Value {
         get {
             switch column {
@@ -268,6 +287,7 @@ public struct Storage4x4<Value: StorageScalar>: Storage4x4Protocol {
         }
     }
 
+    @inlinable
     public subscript(index: Int) -> Value {
         get {
             let (column, row) = columnRow(index: index, width: 4)
@@ -281,6 +301,8 @@ public struct Storage4x4<Value: StorageScalar>: Storage4x4Protocol {
 }
 
 extension Storage4x4: Equatable {
+    @inlinable
+    @inline(__always)
     public static func == (lhs: Storage4x4<Value>, rhs: Storage4x4<Value>) -> Bool {
         lhs.column0 == rhs.column0 &&
             lhs.column1 == rhs.column1 &&

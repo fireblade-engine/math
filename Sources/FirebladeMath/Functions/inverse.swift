@@ -5,6 +5,7 @@ import func simd.simd_inverse
 /// Computes the inverse of a 3x3 matrix.
 /// - Parameter matrix: The matrix to invert.
 /// - Returns: The inverse matrix.
+@inlinable
 public func inverse(_ matrix: Mat3x3f) -> Mat3x3f {
     #if FRB_MATH_USE_SIMD
     return Mat3x3f(storage: simd.simd_inverse(matrix.storage))
@@ -18,6 +19,7 @@ public func inverse(_ matrix: Mat3x3f) -> Mat3x3f {
 /// Computes the inverse of a 3x3 matrix.
 /// - Parameter matrix: The matrix to invert.
 /// - Returns: The inverse matrix.
+@inlinable
 public func inverse(_ matrix: Mat3x3d) -> Mat3x3d {
     #if FRB_MATH_USE_SIMD
     return Mat3x3d(storage: simd.simd_inverse(matrix.storage))
@@ -31,6 +33,7 @@ public func inverse(_ matrix: Mat3x3d) -> Mat3x3d {
 /// Computes the inverse of a 4x4 matrix.
 /// - Parameter matrix: The matrix to invert.
 /// - Returns: The inverse matrix.
+@inlinable
 public func inverse(_ matrix: Mat4x4f) -> Mat4x4f {
     #if FRB_MATH_USE_SIMD
     return Mat4x4f(storage: simd.simd_inverse(matrix.storage))
@@ -44,6 +47,7 @@ public func inverse(_ matrix: Mat4x4f) -> Mat4x4f {
 /// Computes the inverse of a 4x4 matrix.
 /// - Parameter matrix: The matrix to invert.
 /// - Returns: The inverse matrix.
+@inlinable
 public func inverse(_ matrix: Mat4x4d) -> Mat4x4d {
     #if FRB_MATH_USE_SIMD
     return Mat4x4d(storage: simd.simd_inverse(matrix.storage))
@@ -57,6 +61,8 @@ public func inverse(_ matrix: Mat4x4d) -> Mat4x4d {
 /// Computes the inverse of a quaternion.
 /// - Parameter quat: The quaternion.
 /// - Returns: The inverse quaternion.
+@inlinable
+@inline(__always)
 public func inverse(_ quat: Quat4f) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd_inverse(quat.storage))
@@ -68,6 +74,8 @@ public func inverse(_ quat: Quat4f) -> Quat4f {
 /// Computes the inverse of a quaternion.
 /// - Parameter quat: The quaternion.
 /// - Returns: The inverse quaternion.
+@inlinable
+@inline(__always)
 public func inverse(_ quat: Quat4d) -> Quat4d {
     #if FRB_MATH_USE_SIMD
     return Quat4d(storage: simd_inverse(quat.storage))

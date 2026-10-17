@@ -22,16 +22,18 @@ public protocol Storage4x4Protocol: RandomAccessCollection, MutableCollection, R
 
 extension Storage4x4Protocol where Element == Value, Index == Int {
     /// The start index (0).
-    public var startIndex: Int {
+    @inlinable public var startIndex: Int {
         0
     }
 
     /// The end index (16).
-    public var endIndex: Int {
+    @inlinable public var endIndex: Int {
         16
     }
 
     /// Returns the index after the given index.
+    @inlinable
+    @inline(__always)
     public func index(after i: Int) -> Int {
         i + 1
     }
@@ -41,6 +43,7 @@ extension Storage4x4Protocol {
     /// Replaces a subrange of the matrix's underlying storage.
     /// - Precondition: `subrange` and `newElements` must be the same length because if they don't
     ///   that doesn't make any sense in relation to matrices.
+    @inlinable
     public mutating func replaceSubrange<C: Collection>(_ subrange: Range<Int>, with newElements: C) where Value == C.Element {
         precondition(subrange.count == newElements.count, "newElements must be the same length as subrange")
 
@@ -74,16 +77,18 @@ public protocol Storage3x3Protocol: RandomAccessCollection, MutableCollection, R
 
 extension Storage3x3Protocol where Element == Value, Index == Int {
     /// The start index (0).
-    public var startIndex: Int {
+    @inlinable public var startIndex: Int {
         0
     }
 
     /// The end index (9).
-    public var endIndex: Int {
+    @inlinable public var endIndex: Int {
         9
     }
 
     /// Returns the index after the given index.
+    @inlinable
+    @inline(__always)
     public func index(after i: Int) -> Int {
         i + 1
     }
@@ -93,6 +98,7 @@ extension Storage3x3Protocol {
     /// Replaces a subrange of the matrix's underlying storage.
     /// - Precondition: `subrange` and `newElements` must be the same length because if they don't
     ///   that doesn't make any sense in relation to matrices.
+    @inlinable
     public mutating func replaceSubrange<C: Collection>(_ subrange: Range<Int>, with newElements: C) where Value == C.Element {
         precondition(subrange.count == newElements.count, "newElements must be the same length as subrange")
 
@@ -126,16 +132,18 @@ public protocol Storage2x2Protocol: RandomAccessCollection, MutableCollection, R
 
 extension Storage2x2Protocol where Element == Value, Index == Int {
     /// The start index (0).
-    public var startIndex: Int {
+    @inlinable public var startIndex: Int {
         0
     }
 
     /// The end index (4).
-    public var endIndex: Int {
+    @inlinable public var endIndex: Int {
         4
     }
 
     /// Returns the index after the given index.
+    @inlinable
+    @inline(__always)
     public func index(after i: Int) -> Int {
         i + 1
     }
@@ -145,6 +153,7 @@ extension Storage2x2Protocol {
     /// Replaces a subrange of the matrix's underlying storage.
     /// - Precondition: `subrange` and `newElements` must be the same length because if they don't
     ///   that doesn't make any sense in relation to matrices.
+    @inlinable
     public mutating func replaceSubrange<C: Collection>(_ subrange: Range<Int>, with newElements: C) where Value == C.Element {
         precondition(subrange.count == newElements.count, "newElements must be the same length as subrange")
 

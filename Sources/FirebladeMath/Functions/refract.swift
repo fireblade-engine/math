@@ -6,6 +6,7 @@
 ///   - n: the normal, must be normalized to achieve the desired result.
 ///   - eta: the ratio of indices of refration.
 /// - Returns: the refraction vector.
+@inlinable
 public func refract(_ i: Float, _ n: Float, _ eta: Float) -> Float {
     let nTi: Float = n * i
     let frac: Float = 1 - eta * eta * (1 - nTi * nTi)
@@ -24,6 +25,7 @@ public func refract(_ i: Float, _ n: Float, _ eta: Float) -> Float {
 ///   - n: the normal, must be normalized to achieve the desired result.
 ///   - eta: the ratio of indices of refration.
 /// - Returns: the refraction vector.
+@inlinable
 public func refract(_ i: Double, _ n: Double, _ eta: Double) -> Double {
     let nTi: Double = n * i
     let frac: Double = 1 - eta * eta * (1 - nTi * nTi)

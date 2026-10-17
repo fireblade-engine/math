@@ -4,6 +4,8 @@ import FirebladeMathLibC
 /// - Parameter x: x
 /// - Parameter y: y
 @_disfavoredOverload
+@inlinable
+@inline(__always)
 public func hypot(_ x: Float, _ y: Float) -> Float {
     FirebladeMathLibC.hypotf(x, y)
 }
@@ -12,6 +14,8 @@ public func hypot(_ x: Float, _ y: Float) -> Float {
 /// - Parameter x: x
 /// - Parameter y: y
 @_disfavoredOverload
+@inlinable
+@inline(__always)
 public func hypot(_ x: Double, _ y: Double) -> Double {
     FirebladeMathLibC.hypot(x, y)
 }

@@ -6,6 +6,8 @@ import FirebladeMathLibC
 /// - Parameter x: The x coordinate.
 /// - Returns: The arc tangent of y/x in radians.
 @_disfavoredOverload
+@inlinable
+@inline(__always)
 public func atan2(_ y: Double, _ x: Double) -> Double {
     FirebladeMathLibC.atan2(y, x)
 }
@@ -16,6 +18,8 @@ public func atan2(_ y: Double, _ x: Double) -> Double {
 /// - Parameter x: The x coordinate.
 /// - Returns: The arc tangent of y/x in radians.
 @_disfavoredOverload
+@inlinable
+@inline(__always)
 public func atan2(_ y: Float, _ x: Float) -> Float {
     FirebladeMathLibC.atan2f(y, x)
 }

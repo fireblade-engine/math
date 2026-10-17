@@ -6,6 +6,8 @@ import func simd.simd_sign
 /// - Parameter x: floating point value
 /// - Returns: The sign of x.
 @_disfavoredOverload
+@inlinable
+@inline(__always)
 public func sign(_ x: Double) -> Double {
     #if FRB_MATH_USE_SIMD
     return simd_sign(x)
@@ -18,6 +20,8 @@ public func sign(_ x: Double) -> Double {
 /// - Parameter x: floating point value
 /// - Returns: The sign of x.
 @_disfavoredOverload
+@inlinable
+@inline(__always)
 public func sign(_ x: Float) -> Float {
     #if FRB_MATH_USE_SIMD
     return simd_sign(x)

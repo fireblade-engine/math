@@ -7,6 +7,8 @@ import func simd.simd_quaternion
 ///   - angle: The angle of rotation in radians.
 ///   - axis: The axis of rotation.
 /// - Returns: The quaternion.
+@inlinable
+@inline(__always)
 public func quaternion(angle: Float, axis: SIMD3<Float>) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd_quaternion(angle, axis))
@@ -20,6 +22,8 @@ public func quaternion(angle: Float, axis: SIMD3<Float>) -> Quat4f {
 ///   - angle: The angle of rotation in radians.
 ///   - axis: The axis of rotation.
 /// - Returns: The quaternion.
+@inlinable
+@inline(__always)
 public func quaternion(angle: Double, axis: SIMD3<Double>) -> Quat4d {
     #if FRB_MATH_USE_SIMD
     return Quat4d(storage: simd_quaternion(angle, axis))
@@ -38,6 +42,7 @@ public func quaternion(angle: Double, axis: SIMD3<Double>) -> Quat4d {
 ///   - from: A normalized three-element vector.
 ///   - to: A normalized three-element vector.
 /// - Returns: The quaternion.
+@inlinable
 public func quaternion(from: SIMD3<Float>, to: SIMD3<Float>) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd.simd_quaternion(from, to))
@@ -59,6 +64,7 @@ public func quaternion(from: SIMD3<Float>, to: SIMD3<Float>) -> Quat4f {
 ///   - from: A normalized three-element vector.
 ///   - to: A normalized three-element vector.
 /// - Returns: The quaternion.
+@inlinable
 public func quaternion(from: SIMD3<Double>, to: SIMD3<Double>) -> Quat4d {
     #if FRB_MATH_USE_SIMD
     return Quat4d(storage: simd.simd_quaternion(from, to))
@@ -73,6 +79,7 @@ public func quaternion(from: SIMD3<Double>, to: SIMD3<Double>) -> Quat4d {
 /// Creates a quaternion from a 3x3 rotation matrix.
 /// - Parameter mat: The 3x3 rotation matrix.
 /// - Returns: The quaternion.
+@inlinable
 public func quaternion(matrix mat: Mat3x3f) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd_quaternion(mat.storage))
@@ -113,6 +120,7 @@ public func quaternion(matrix mat: Mat3x3f) -> Quat4f {
 /// Creates a quaternion from a 3x3 rotation matrix.
 /// - Parameter mat: The 3x3 rotation matrix.
 /// - Returns: The quaternion.
+@inlinable
 public func quaternion(matrix mat: Mat3x3d) -> Quat4d {
     #if FRB_MATH_USE_SIMD
     return Quat4d(storage: simd_quaternion(mat.storage))
@@ -153,6 +161,7 @@ public func quaternion(matrix mat: Mat3x3d) -> Quat4d {
 /// Creates a quaternion from a 4x4 rotation matrix.
 /// - Parameter mat: The 4x4 rotation matrix.
 /// - Returns: The quaternion.
+@inlinable
 public func quaternion(matrix mat: Mat4x4f) -> Quat4f {
     #if FRB_MATH_USE_SIMD
     return Quat4f(storage: simd_quaternion(mat.storage))
@@ -194,6 +203,7 @@ public func quaternion(matrix mat: Mat4x4f) -> Quat4f {
 /// Creates a quaternion from a 4x4 rotation matrix.
 /// - Parameter mat: The 4x4 rotation matrix.
 /// - Returns: The quaternion.
+@inlinable
 public func quaternion(matrix mat: Mat4x4d) -> Quat4d {
     #if FRB_MATH_USE_SIMD
     return Quat4d(storage: simd_quaternion(mat.storage))

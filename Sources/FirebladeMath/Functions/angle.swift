@@ -5,6 +5,7 @@ import func simd.simd_angle
 /// Returns the angle by which a quaternion rotates.
 /// - Parameter quat: The quaternion.
 /// - Returns: The angle in radians.
+@inlinable
 public func angle(_ quat: Quat4f) -> Float {
     #if FRB_MATH_USE_SIMD
     return simd.simd_angle(quat.storage)
@@ -17,6 +18,7 @@ public func angle(_ quat: Quat4f) -> Float {
 /// Returns the angle by which a quaternion rotates.
 /// - Parameter quat: The quaternion.
 /// - Returns: The angle in radians.
+@inlinable
 public func angle(_ quat: Quat4d) -> Double {
     #if FRB_MATH_USE_SIMD
     return simd.simd_angle(quat.storage)

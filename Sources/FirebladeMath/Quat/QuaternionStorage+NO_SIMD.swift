@@ -1,14 +1,17 @@
 #if !FRB_MATH_USE_SIMD
 
+@frozen
 public struct QuaternionStorage<Value: StorageScalar>: QuaternionStorageProtocol {
     public typealias Element = Value
 
     @usableFromInline var storage: SIMD4<Value>
 
+    @inlinable
     public init(_ x: Value, _ y: Value, _ z: Value, _ w: Value) {
         self.init(SIMD4<Value>(x, y, z, w))
     }
 
+    @inlinable
     public init(_ vector: SIMD4<Value>) {
         storage = vector
     }
@@ -33,12 +36,16 @@ public struct QuaternionStorage<Value: StorageScalar>: QuaternionStorageProtocol
         set { storage.w = newValue }
     }
 
+    @inlinable
+    @inline(__always)
     public func makeIterator() -> SIMDScalarIterator<SIMD4<Value>> {
         storage.makeIterator()
     }
 }
 
 extension QuaternionStorage: Equatable {
+    @inlinable
+    @inline(__always)
     public static func == (lhs: QuaternionStorage<Value>, rhs: QuaternionStorage<Value>) -> Bool {
         lhs.storage == rhs.storage
     }

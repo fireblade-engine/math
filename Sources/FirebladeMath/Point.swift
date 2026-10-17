@@ -10,6 +10,7 @@ public struct Point<Value: Numeric> {
     /// - Parameters:
     ///   - x: The x-coordinate.
     ///   - y: The y-coordinate.
+    @inlinable
     public init(x: Value, y: Value) {
         self.x = x
         self.y = y
@@ -21,12 +22,20 @@ extension Point {
     /// - Parameters:
     ///   - x: The x-coordinate.
     ///   - y: The y-coordinate.
+    @inlinable
     public init(_ x: Value, _ y: Value) {
         self.init(x: x, y: y)
     }
 }
 
-extension Point: Equatable where Value: Equatable {}
+extension Point: Equatable where Value: Equatable {
+    /// Returns a Boolean value indicating whether two values are equal.
+    @inlinable
+    public static func == (lhs: Point<Value>, rhs: Point<Value>) -> Bool {
+        lhs.x == rhs.x && lhs.y == rhs.y
+    }
+}
+
 extension Point: Hashable where Value: Hashable {}
 extension Point: Codable where Value: Codable {}
 extension Point: Sendable where Value: Sendable {}
@@ -34,6 +43,7 @@ extension Point: Sendable where Value: Sendable {}
 extension Point where Value == Float {
     /// Creates a point from a 2D float vector.
     /// - Parameter vector: The vector containing the x and y coordinates.
+    @inlinable
     public init(_ vector: Vec2f) {
         self.init(x: vector.x, y: vector.y)
     }
@@ -42,6 +52,7 @@ extension Point where Value == Float {
 extension Vec2f {
     /// Creates a 2D float vector from a point.
     /// - Parameter point: The point containing the x and y coordinates.
+    @inlinable
     public init(_ point: Point<Float>) {
         self.init(x: point.x, y: point.y)
     }
@@ -50,6 +61,7 @@ extension Vec2f {
 extension Point where Value == Int {
     /// Creates a point from a 2D integer vector.
     /// - Parameter vector: The vector containing the x and y coordinates.
+    @inlinable
     public init(_ vector: Vec2i) {
         self.init(x: vector.x, y: vector.y)
     }
@@ -58,6 +70,7 @@ extension Point where Value == Int {
 extension Vec2i {
     /// Creates a 2D integer vector from a point.
     /// - Parameter point: The point containing the x and y coordinates.
+    @inlinable
     public init(_ point: Point<Int>) {
         self.init(x: point.x, y: point.y)
     }
@@ -66,6 +79,7 @@ extension Vec2i {
 extension Point where Value == Double {
     /// Creates a point from a 2D double vector.
     /// - Parameter vector: The vector containing the x and y coordinates.
+    @inlinable
     public init(_ vector: Vec2d) {
         self.init(x: vector.x, y: vector.y)
     }
@@ -74,6 +88,7 @@ extension Point where Value == Double {
 extension Vec2d {
     /// Creates a 2D double vector from a point.
     /// - Parameter point: The point containing the x and y coordinates.
+    @inlinable
     public init(_ point: Point<Double>) {
         self.init(x: point.x, y: point.y)
     }
@@ -82,6 +97,7 @@ extension Vec2d {
 extension Point where Value == UInt {
     /// Creates a point from a 2D unsigned integer vector.
     /// - Parameter vector: The vector containing the x and y coordinates.
+    @inlinable
     public init(_ vector: Vec2u) {
         self.init(x: vector.x, y: vector.y)
     }
@@ -90,6 +106,7 @@ extension Point where Value == UInt {
 extension Vec2u {
     /// Creates a 2D unsigned integer vector from a point.
     /// - Parameter point: The point containing the x and y coordinates.
+    @inlinable
     public init(_ point: Point<UInt>) {
         self.init(x: point.x, y: point.y)
     }
