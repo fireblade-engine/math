@@ -16,7 +16,9 @@ A dependency-free, lightweight, fast math library for 2D and 3D vectors, quatern
 - **Quaternions:** `Quat4f` and `Quat4d`.
 - **Geometric Types:** `Point`, `Size`, `Rect`.
 - **Math Functions:** A comprehensive set of functions including `sin`, `cos`, `tan`, `asin`, `acos`, `atan2`, `dot`, `cross`, `normalize`, `reflect`, `refract`, and many more.
-- **SIMD Support:** Leveraging hardware acceleration where available, with a fallback implementation when SIMD is not supported.
+- **One import, every platform:** `import FirebladeMath` is all you need, including the scalar functions (`sin`, `sqrt`, `pow`, ...). FirebladeMath resolves the platform's C library (Darwin, Glibc, Musl, Bionic, WASILibc, ucrt) itself, so the API is the same on macOS, iOS, Linux, Windows, WebAssembly, and Android.
+- **SIMD Support:** Uses Apple's `simd` where available, with a portable implementation everywhere else.
+- **Identical results up to rounding:** Every public function is checked against reference values recorded on macOS on each platform CI tests on, and the portable implementation is compared against Apple's `simd`.
 - **Swift 6 Ready:** Fully compatible with Swift 6 and `Sendable` conformance.
 
 ## 🚀 Getting Started
@@ -37,7 +39,7 @@ import PackageDescription
 let package = Package(
     name: "YourPackageName",
     dependencies: [
-        .package(url: "https://github.com/fireblade-engine/math.git", from: "1.0.0")
+        .package(url: "https://github.com/fireblade-engine/math.git", from: "1.4.0")
     ],
     targets: [
         .target(
@@ -49,9 +51,15 @@ let package = Package(
 
 For more detailed information and API reference, please refer to the [comprehensive documentation](https://fireblade-engine.github.io/math/documentation/fireblademath/).
 
-### 🛠 SIMD Traits
+### 🛠 SIMD Trait
 
-Starting with version 1.0.0, FirebladeMath uses Swift traits to manage SIMD support. By default, SIMD is enabled on Apple platforms. You can manually control it in your package configuration if needed.
+FirebladeMath uses the Swift package trait `simd` to select its implementation. The trait is enabled by default on Apple platforms, where FirebladeMath builds on Apple's `simd`; on all other platforms the portable implementation is used. Both produce the same results up to rounding.
+
+To use the portable implementation on Apple platforms as well, depend on the package without its default traits:
+
+```swift
+.package(url: "https://github.com/fireblade-engine/math.git", from: "1.4.0", traits: [])
+```
 
 ## 📖 Documentation
 
@@ -103,11 +111,23 @@ If you want to contribute please see the [CONTRIBUTION GUIDE](CONTRIBUTING.md) f
 
 1. `git clone git@github.com:fireblade-engine/math.git`
 2. `cd math`
-3. `make setupEnvironment`
+3. `make setup`
 
 Before committing code please ensure to run:
 
-- `make precommit`
+- `make pre-commit` (formats, lints, and runs the tests)
+
+Further checks, all run in CI:
+
+| Command | Purpose |
+| --- | --- |
+| `make test-portable` | Runs the tests without the `simd` trait; on Apple platforms this compares the portable implementation against Apple's `simd`. |
+| `make check-inlinable` | Verifies that the public API is inlinable across module boundaries. |
+| `make check-simd-coverage` | Verifies that every `simd`-backed function has a portable-vs-`simd` comparison test. |
+| `make check-reference-coverage` | Verifies that every public function has cross-platform reference values. |
+| `make reference-values` | Regenerates the reference values (macOS, default traits) after an intentional change of results. |
+| `make benchmark` | Runs the benchmarks of FirebladeMath's own implementations in [`Benchmarks/`](Benchmarks). |
+| `make benchmark-thresholds-check` | Checks the benchmarks' allocation thresholds (`make benchmark-thresholds-update` records new ones). |
 
 This project is currently maintained by [@ctreffs](https://github.com/ctreffs).   
 See also the list of [contributors](https://github.com/fireblade-engine/math/contributors) who participated in this project.
