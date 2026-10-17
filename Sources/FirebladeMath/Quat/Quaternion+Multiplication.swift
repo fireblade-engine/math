@@ -34,12 +34,14 @@ public func multiply(_ lhs: Quat4f, _ rhs: Quat4f) -> Quat4f {
     return Quat4f(storage: simd.simd_mul(lhs.storage, rhs.storage))
     #else
     // Hamilton product as four 4-wide multiply-adds over the [x, y, z, w] lanes.
-    let lv = lhs.storage.storage
-    let rv = rhs.storage.storage
-    let product = Vec4f(repeating: lv.w) * rv
-        + Vec4f(lv.x, lv.y, lv.z, lv.x) * Vec4f(rv.w, rv.w, rv.w, -rv.x)
-        + Vec4f(lv.y, lv.z, lv.x, lv.y) * Vec4f(rv.z, rv.x, rv.y, -rv.y)
-        - Vec4f(lv.z, lv.x, lv.y, lv.z) * Vec4f(rv.y, rv.z, rv.x, rv.z)
+    // Terms are explicitly typed so older compilers type-check them in reasonable time.
+    let lv: Vec4f = lhs.storage.storage
+    let rv: Vec4f = rhs.storage.storage
+    let term0: Vec4f = Vec4f(repeating: lv.w) * rv
+    let term1: Vec4f = Vec4f(lv.x, lv.y, lv.z, lv.x) * Vec4f(rv.w, rv.w, rv.w, -rv.x)
+    let term2: Vec4f = Vec4f(lv.y, lv.z, lv.x, lv.y) * Vec4f(rv.z, rv.x, rv.y, -rv.y)
+    let term3: Vec4f = Vec4f(lv.z, lv.x, lv.y, lv.z) * Vec4f(rv.y, rv.z, rv.x, rv.z)
+    let product: Vec4f = (term0 + term1) + (term2 - term3)
     return Quat4f(product)
     #endif
 }
@@ -139,12 +141,14 @@ public func multiply(_ lhs: Quat4d, _ rhs: Quat4d) -> Quat4d {
     return Quat4d(storage: simd.simd_mul(lhs.storage, rhs.storage))
     #else
     // Hamilton product as four 4-wide multiply-adds over the [x, y, z, w] lanes.
-    let lv = lhs.storage.storage
-    let rv = rhs.storage.storage
-    let product = Vec4d(repeating: lv.w) * rv
-        + Vec4d(lv.x, lv.y, lv.z, lv.x) * Vec4d(rv.w, rv.w, rv.w, -rv.x)
-        + Vec4d(lv.y, lv.z, lv.x, lv.y) * Vec4d(rv.z, rv.x, rv.y, -rv.y)
-        - Vec4d(lv.z, lv.x, lv.y, lv.z) * Vec4d(rv.y, rv.z, rv.x, rv.z)
+    // Terms are explicitly typed so older compilers type-check them in reasonable time.
+    let lv: Vec4d = lhs.storage.storage
+    let rv: Vec4d = rhs.storage.storage
+    let term0: Vec4d = Vec4d(repeating: lv.w) * rv
+    let term1: Vec4d = Vec4d(lv.x, lv.y, lv.z, lv.x) * Vec4d(rv.w, rv.w, rv.w, -rv.x)
+    let term2: Vec4d = Vec4d(lv.y, lv.z, lv.x, lv.y) * Vec4d(rv.z, rv.x, rv.y, -rv.y)
+    let term3: Vec4d = Vec4d(lv.z, lv.x, lv.y, lv.z) * Vec4d(rv.y, rv.z, rv.x, rv.z)
+    let product: Vec4d = (term0 + term1) + (term2 - term3)
     return Quat4d(product)
     #endif
 }
