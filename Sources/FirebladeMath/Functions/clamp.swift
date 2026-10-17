@@ -26,7 +26,8 @@ public func clamp(_ x: Double, _ minVal: Double, _ maxVal: Double) -> Double {
     #if FRB_MATH_USE_SIMD
     return simd_clamp(x, minVal, maxVal)
     #else
-    return Swift.min(Swift.max(x, minVal), maxVal)
+    // IEEE maxNum/minNum like simd_clamp: a NaN `x` yields `minVal`.
+    return Double.minimum(Double.maximum(x, minVal), maxVal)
     #endif
 }
 
@@ -42,7 +43,8 @@ public func clamp(_ x: Float, _ minVal: Float, _ maxVal: Float) -> Float {
     #if FRB_MATH_USE_SIMD
     return simd_clamp(x, minVal, maxVal)
     #else
-    return Swift.min(Swift.max(x, minVal), maxVal)
+    // IEEE maxNum/minNum like simd_clamp: a NaN `x` yields `minVal`.
+    return Float.minimum(Float.maximum(x, minVal), maxVal)
     #endif
 }
 
