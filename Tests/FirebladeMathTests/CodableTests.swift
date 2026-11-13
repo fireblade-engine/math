@@ -35,6 +35,69 @@ import Foundation
         }
     }
 
+    // MARK: - Precision
+
+    /// 16 values that are not exactly representable as short decimals or sit at the edges of the format.
+    private func edgeValues<Scalar: BinaryFloatingPoint>(_: Scalar.Type) -> [Scalar] {
+        [
+            .pi, -.pi, .ulpOfOne, Scalar(1).nextUp,
+            Scalar(1).nextDown, .leastNonzeroMagnitude, .leastNormalMagnitude, .greatestFiniteMagnitude,
+            -.greatestFiniteMagnitude, -0.0, Scalar(1) / 3, Scalar(2) / 3,
+            Scalar(0.1), Scalar(1e-7), Scalar(12_345.678), -.leastNonzeroMagnitude,
+        ]
+    }
+
+    /// Encodes and decodes `value` and expects every component to come back bit for bit.
+    /// Equal value and equal sign is bit-exact for non-NaN floats (it tells -0.0 from 0.0).
+    private func expectLossless<T: Codable, Scalar: BinaryFloatingPoint>(
+        _ value: T,
+        values: [Scalar],
+        decodedValues: (T) -> [Scalar]
+    ) throws {
+        let decoded = try JSONDecoder().decode(T.self, from: JSONEncoder().encode(value))
+        let actual = decodedValues(decoded)
+        #expect(actual == values)
+        #expect(actual.map(\.sign) == values.map(\.sign))
+    }
+
+    @Test func matricesKeepFullPrecision() throws {
+        let floats = edgeValues(Float.self)
+        let doubles = edgeValues(Double.self)
+        try expectLossless(Mat2x2f(Array(floats.prefix(4))), values: Array(floats.prefix(4))) { $0.elements }
+        try expectLossless(Mat2x2d(Array(doubles.prefix(4))), values: Array(doubles.prefix(4))) { $0.elements }
+        try expectLossless(Mat3x3f(Array(floats.suffix(9))), values: Array(floats.suffix(9))) { $0.elements }
+        try expectLossless(Mat3x3d(Array(doubles.suffix(9))), values: Array(doubles.suffix(9))) { $0.elements }
+        try expectLossless(Mat4x4f(floats), values: floats) { $0.elements }
+        try expectLossless(Mat4x4d(doubles), values: doubles) { $0.elements }
+    }
+
+    @Test func quaternionsKeepFullPrecision() throws {
+        let floats = Array(edgeValues(Float.self).suffix(4))
+        let doubles = Array(edgeValues(Double.self).suffix(4))
+        try expectLossless(Quat4f(floats[0], floats[1], floats[2], floats[3]), values: floats) { $0.elements }
+        try expectLossless(Quat4d(doubles[0], doubles[1], doubles[2], doubles[3]), values: doubles) { $0.elements }
+    }
+
+    @Test func vectorsKeepFullPrecision() throws {
+        let floats = edgeValues(Float.self)
+        let doubles = edgeValues(Double.self)
+        try expectLossless(Vec2f(floats[0], floats[1]), values: Array(floats[0..<2])) { [$0.x, $0.y] }
+        try expectLossless(Vec2d(doubles[0], doubles[1]), values: Array(doubles[0..<2])) { [$0.x, $0.y] }
+        try expectLossless(Vec3f(floats[2], floats[3], floats[4]), values: Array(floats[2..<5])) { [$0.x, $0.y, $0.z] }
+        try expectLossless(Vec3d(doubles[2], doubles[3], doubles[4]), values: Array(doubles[2..<5])) { [$0.x, $0.y, $0.z] }
+        try expectLossless(Vec4f(floats[5], floats[6], floats[7], floats[9]), values: [floats[5], floats[6], floats[7], floats[9]]) { [$0.x, $0.y, $0.z, $0.w] }
+        try expectLossless(Vec4d(doubles[5], doubles[6], doubles[7], doubles[9]), values: [doubles[5], doubles[6], doubles[7], doubles[9]]) { [$0.x, $0.y, $0.z, $0.w] }
+    }
+
+    @Test func geometryKeepsFullPrecision() throws {
+        let floats = edgeValues(Float.self)
+        let doubles = edgeValues(Double.self)
+        try expectLossless(Point<Float>(x: floats[0], y: floats[5]), values: [floats[0], floats[5]]) { [$0.x, $0.y] }
+        try expectLossless(Size<Double>(width: doubles[10], height: doubles[9]), values: [doubles[10], doubles[9]]) { [$0.width, $0.height] }
+        try expectLossless(Rect<Double>(x: doubles[0], y: doubles[4], width: doubles[12], height: doubles[7]),
+                           values: [doubles[0], doubles[4], doubles[12], doubles[7]]) { [$0.x, $0.y, $0.width, $0.height] }
+    }
+
     // MARK: - Matrices
 
     @Test func mat2x2RoundTrip() throws {
