@@ -17,7 +17,7 @@ jobs:
   musl:
     name: Static Linux (Musl)
     runs-on: ubuntu-latest
-    container: swift:6.4.1
+    container: swift:6.4.2
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -34,7 +34,7 @@ jobs:
   wasm:
     name: WebAssembly (WASI)
     runs-on: ubuntu-latest
-    container: swift:6.4.1
+    container: swift:6.4.2
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -53,7 +53,7 @@ jobs:
   android:
     name: Android
     runs-on: ubuntu-latest
-    container: swift:6.4.1
+    container: swift:6.4.2
     steps:
       - name: Checkout
         uses: actions/checkout@v7
