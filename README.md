@@ -20,6 +20,7 @@ A dependency-free, lightweight, fast math library for 2D and 3D vectors, quatern
 - **SIMD Support:** Uses Apple's `simd` where available, with a portable implementation everywhere else.
 - **Identical results up to rounding:** Every public function is checked against reference values recorded on macOS on each platform CI tests on, and the portable implementation is compared against Apple's `simd`.
 - **Swift 6 Ready:** Fully compatible with Swift 6 and `Sendable` conformance.
+- **Codable:** Every public type is `Codable`. Matrices encode as a flat array in column-major order (4, 9 or 16 values), quaternions as `[x, y, z, w]`; decoding a wrong value count throws `DecodingError.dataCorrupted`.
 
 ## 🚀 Getting Started
 
