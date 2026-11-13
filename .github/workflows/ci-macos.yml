@@ -16,7 +16,7 @@ jobs:
       matrix:
         include:
           - swift: "6.1"
-            runner: "macos-14"
+            runner: "macos-15"
           - swift: "6.3"
             runner: "macos-latest"
 
